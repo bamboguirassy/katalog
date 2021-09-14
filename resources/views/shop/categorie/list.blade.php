@@ -16,21 +16,11 @@
         <h2 class="mbr-section-title mbr-fonts-style align-center pb-3 display-2">
             <br>Catégories</h2>
         <h3 class="mbr-section-subtitle mbr-fonts-style align-center pb-2 display-7">
-            Gérez les catégories de produits que vous vendez dans votre boutique.<br>Vous pouvez toujours revenir au
-            catalogue pour gérer les produits en cliquant sur "<em><a href="catalogue-produit.html"
+            Quelles sont les catégories de produits que vous vendez dans votre boutique ? <br>
+            Vous pouvez ajouter les produits juste après avoir créé les catégories de produits en cliquant sur "<em>
+                <a href="{{ route('shop.catalogue',compact('shop')) }}"
                     class="text-primary"><strong>Gérer le catalogue des produits</strong></a></em>".</h3>
         <div class="table-wrapper">
-            <div class="container">
-                <div class="row search">
-                    <div class="col-md-6"></div>
-                    <div class="col-md-6">
-                        <div class="dataTables_filter">
-                            <label class="searchInfo mbr-fonts-style display-7">Search:</label>
-                            <input class="form-control input-sm" disabled="">
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="container scroll">
                 <table class="table isSearch" cellspacing="0" data-empty="No matching records found">
                     <thead>
@@ -57,7 +47,6 @@
                         </td>
                         <td class="body-item mbr-fonts-style display-7">{{ $categorie->description }}</td>
                         <td class="body-item mbr-fonts-style display-7">
-                            {{-- <button class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></button> --}}
                             <form action="{{ route('shop.categorie.destroy',compact('categorie','shop')) }}" method="post">
                             @method('delete')
                             @csrf
@@ -70,20 +59,6 @@
                     @endforeach
                     </tbody>
                 </table>
-            </div>
-            <div class="container">
-                <div class="row info">
-                    <div class="col-md-12">
-                        <div class="dataTables_info mbr-fonts-style display-7">
-                            <span class="infoBefore">Showing</span>
-                            <span class="inactive infoRows"></span>
-                            <span class="infoAfter">entries</span>
-                            <span class="infoFilteredBefore">(filtered from</span>
-                            <span class="inactive infoRows"></span>
-                            <span class="infoFilteredAfter"> total entries)</span>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categorie;
+use App\Models\Panier;
+use App\Models\Paproduit;
+use App\Models\Produit;
 use App\Models\Shop;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategorieController extends Controller
 {
@@ -55,9 +59,30 @@ class CategorieController extends Controller
      * @param  \App\Models\Categorie  $categorie
      * @return \Illuminate\Http\Response
      */
-    public function show(Categorie $categorie)
+    public function show(Shop $shop, Categorie $categorie)
     {
-        //
+        $produits = Produit::where('categorie_id',$categorie->id)
+        ->where('quantite','>',0)
+        ->where('visible',true)
+        ->paginate(9);
+        if(Auth::user()) {
+            $panier = Panier::where('user_id',Auth::user()->id)
+             ->where('shop_id',$shop->id)
+             ->with('produits')
+             ->first();
+             $paproduits = [];
+             if(isset($panier)) {
+                 $paproduits = Paproduit::where('panier_id',$panier->id)
+                 ->get();
+             }
+             $paProduits = [];
+             if(count($paproduits)>0) {
+                 foreach($paproduits as $paproduit) {
+                     $paProduits[] = $paproduit->produit_id;
+                 }
+             }
+        }
+        return view('shop.categorie.show',compact('shop','produits','categorie','paProduits'));
     }
 
     /**

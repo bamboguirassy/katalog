@@ -13,20 +13,20 @@
                     <h6 class="card-title mbr-fonts-style mb-4 display-2"><strong>{{ $produit->nom }}</strong></h6>
                     <p class="mbr-text mbr-fonts-style display-7"><strong>{{ $produit->description }}</strong><br></p>
                     <div class="mbr-section-btn">
-                        <a class="btn btn-lg btn-success display-4"
-                            href="tel:{{ $produit->shop->telephonePrimaire }}"><span
-                                class="mobi-mbri mobi-mbri-phone mbr-iconfont mbr-iconfont-btn"></span>Téléphone</a>
-                        <a class="btn btn-lg btn-info display-4"
-                            href="https://wa.me/{{ $produit->shop->telephonePrimaire }}"><span
-                                class="socicon socicon-whatsapp mbr-iconfont mbr-iconfont-btn"
-                                style="color: rgb(255, 255, 255);"></span>WhatsApp</a></div>
+                        <a class="btn btn-lg btn-secondary display-4" >
+                            AJOUTER AU PANIER
+                        </a>
+
+                    </div>
                 </div>
             </div>
             <div class="col-12 col-lg-5">
                 <div class="image-wrapper">
                     <span class="price-badge">{{ $produit->prixUnitaire }} FCFA</span>
                     <span class="category-badge">{{ $produit->categorie->nom }}</span>
-                    <img style="height: 400px; object-fit: content;" src="{{ asset('storage/produits/images/'.$produit->imageCouverture->nom) }}" alt="Image de couverture">
+                    <img style="height: 400px; object-fit: content;"
+                        src="{{ asset('storage/produits/images/'.$produit->imageCouverture->nom) }}"
+                        alt="Image de couverture">
                 </div>
             </div>
         </div>
@@ -45,13 +45,14 @@
             <div class="col-12 col-md-6 col-lg-3 item gallery-image">
                 <div class="item-wrapper" data-toggle="modal" data-bs-toggle="modal" data-target="#sIw8XBZBnS-modal"
                     data-bs-target="#sIw8XBZBnS-modal">
-                    <img class="w-100" src="{{ asset('storage/produits/images/'.$image->nom) }}" alt="" data-slide-to="0"
-                        data-bs-slide-to="0" data-target="#lb-sIw8XBZBnS" data-bs-target="#lb-sIw8XBZBnS">
+                    <img class="w-100" src="{{ asset('storage/produits/images/'.$image->nom) }}" alt=""
+                        data-slide-to="0" data-bs-slide-to="0" data-target="#lb-sIw8XBZBnS"
+                        data-bs-target="#lb-sIw8XBZBnS">
                     <div class="icon-wrapper">
                         <span class="mobi-mbri mobi-mbri-search mbr-iconfont mbr-iconfont-btn"></span>
                     </div>
                 </div>
-            </div> 
+            </div>
             @endforeach
         </div>
 
@@ -63,10 +64,12 @@
                             <div class="carousel-inner">
                                 @for ($i=0;$i<count($produit->images);$i++)
                                     <div class="carousel-item @if ($i==0) active @endif">
-                                        <img class="d-block w-100" src="{{ asset('storage/produits/images/'.$produit->images[$i]->nom) }}" alt="">
+                                        <img class="d-block w-100"
+                                            src="{{ asset('storage/produits/images/'.$produit->images[$i]->nom) }}"
+                                            alt="">
                                     </div>
                                     <? $i++; ?>
-                                @endfor
+                                    @endfor
                             </div>
                             <ol class="carousel-indicators">
                                 <li data-slide-to="0" data-bs-slide-to="0" class="active" data-target="#lb-sIw8XBZBnS"

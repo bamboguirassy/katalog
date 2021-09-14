@@ -162,20 +162,18 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                             </div>
                             <div class="col-12 col-md">
                                 <div class="card-box">
-                                    <h5 class="card-title mbr-fonts-style m-0 display-5">
-                                        <strong>
-                                            <a href="{{route('shop.home',['shop'=>$shopItem])}}"
-                                                class="text-success">{{ $shopItem->nom }}
-                                            </a>
-                                        </strong>
-                                    </h5>
-                                    <h6 class="card-subtitle mbr-fonts-style mt-2 mb-1 display-4">
-                                        <b class="category-badge">{{$shopItem->categorie->nom}}
-                                        </b>
-                                    </h6>
-                                    <p class="mbr-text mbr-fonts-style display-7">
-                                        {{ \Illuminate\Support\Str::limit($shopItem->description, 200, '...') }}
-                                    </p>
+                                    <a href="{{route('shop.home',['shop'=>$shopItem])}}">
+                                        <h5 class="card-title mbr-fonts-style m-0 display-5">
+                                            <strong>{{ $shopItem->nom }}</strong>
+                                        </h5>
+                                        <h6 class="card-subtitle mbr-fonts-style mt-2 mb-1 display-4">
+                                            <b class="category-badge">{{$shopItem->categorie->nom}}
+                                            </b>
+                                        </h6>
+                                        <p class="mbr-text mbr-fonts-style display-7">
+                                            {{ \Illuminate\Support\Str::limit($shopItem->description, 200, '...') }}
+                                        </p>
+                                    </a>
                                     <div class="social-row display-7">
                                         @isset($shopItem->facebook)
                                         <div class="soc-item">
@@ -220,16 +218,16 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                     <div class="col-md-12 col-lg-4">
                         <div class="mbr-section-btn align-center">
                             @if ($shops->currentPage()!=1)
-                                <a class="btn btn-success display-4" href="{{$shops->nextPage()}}"><span
+                            <a class="btn btn-success display-4" href="{{$shops->nextPage()}}"><span
                                     class="mbri-left mbr-iconfont mbr-iconfont-btn"
                                     style="color: rgb(220, 143, 29);"></span>Previous</a>
                             @endif
                             dd($shops)
                             @if ($shops->currentPage())
-                                <a class="btn btn-success display-4" href="{{ $shops->lastPage() }}"><span
+                            <a class="btn btn-success display-4" href="{{ $shops->lastPage() }}"><span
                                     class="mbri-right mbr-iconfont mbr-iconfont-btn"
                                     style="color: rgb(220, 143, 29);"></span>Next</a></div>
-                            @endif
+                        @endif
                     </div>
                 </div>
             </div>

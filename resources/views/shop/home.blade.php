@@ -6,7 +6,7 @@
 
 @section('body')
 <div class="row">
-    <div class="col-12">
+    <div class="col-12" style="padding: 0px;">
         <section data-bs-version="5.1" class="extHeader cid-sIpKoQ30mN" id="extHeader21-3">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1380px"
                 height="760px" viewBox="0 0  1380 760" preserveAspectRatio="xMidYMid meet">
@@ -127,21 +127,21 @@
         <section data-bs-version="5.1" class="info3 cid-sIvpc3K9D7" id="info3-1o">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="card col-12 col-lg-10">
+                    <div class="card col-12">
                         <div class="card-wrapper">
                             <div class="card-box align-center">
-                                <p class="mbr-text mbr-fonts-style mb-2 display-7">
+                                <p class="mbr-text mbr-fonts-style display-7">
                                     Vous pouvez directement filtrer pour une catégorie de produit spécifique dans la
                                     boutique.</p>
-                                <div class="mbr-section mt-1">
-                                    <ul class="category-list">
-                                        <li class="category-list-item active">Tout</li>
-                                        <li class="category-list-item">Parfum</li>
-                                        <li class="category-list-item">Déo</li>
-                                        <li class="category-list-item">Savon</li>
-                                        <li class="category-list-item">Gel</li>
-                                    </ul>
+                                <div class="mbr-section mt-1 mb-3">
+                                    @foreach ($categories as $categorie)
+                                    <span style="position: initial; white-space: nowrap; border-radius: 25%; padding: 10px 15px; border: 3px solid #1A6C87; margin-left: 10px;">
+                                        <a
+                                            href="{{ route('shop.categorie.show',compact('shop','categorie')) }}">{{ $categorie->nom }}</a>
+                                    </span>
+                                    @endforeach
                                 </div>
+                                <br>
                             </div>
                         </div>
                     </div>
@@ -170,25 +170,27 @@
                                 </a>
                             </div>
                             <div class="item-content">
-                                <h5 title="{{ $produit->nom }}" class="item-title mbr-fonts-style display-5">
-                                    <a
-                                        href="{{ route('shop.produit.display',compact('produit','shop')) }}">{{ \Illuminate\Support\Str::limit($produit->nom, 20, '...') }}</a>
-                                </h5>
-                                <p style="min-height: 100px" class="mbr-text mbr-fonts-style display-7">
-                                    {{ \Illuminate\Support\Str::limit($produit->description, 100, '...') }}</p>
+                                <a href="{{ route('shop.produit.display',compact('produit','shop')) }}">
+                                    <h5 title="{{ $produit->nom }}" class="item-title mbr-fonts-style display-5">
+                                        {{ \Illuminate\Support\Str::limit($produit->nom, 20, '...') }}
+                                    </h5>
+                                    <p style="min-height: 100px" class="mbr-text mbr-fonts-style display-7">
+                                        {{ \Illuminate\Support\Str::limit($produit->description, 100, '...') }}
+                                    </p>
+                                </a>
                             </div>
                             <div class="mbr-section-btn item-footer">
-                                <a href="{{ route('shop.produit.display',compact('produit','shop')) }}"
+                                @if (in_array($produit->id, $paProduits))
+                                    <a style="background: green; color: white;"
+                                        class="btn item-btn display-4">
+                                        Dans le panier <i class="fa fa-check"></i>
+                                    </a>
+                                @else
+                                <a ng-click="initProductToPanier({{$produit}})"
                                     class="btn btn-primary item-btn display-4">
-                                    <i class="fa fa-eye"></i>
+                                    AJOUTER AU PANIER
                                 </a>
-                                <a class="btn btn-md btn-secondary item-btn display-4" href="tel:+221780165026">
-                                    <i class="fa fa-phone"></i>
-                                </a>
-                                <a href="https://wa.me/778224129" style="color: white;"
-                                    class="btn btn-md btn-info item-btn display-4">
-                                    <i class="fa fa-whatsapp"></i>
-                                </a>
+                                @endif
                             </div>
                         </div>
                     </div>

@@ -1,20 +1,11 @@
 @extends('base')
 
-@section('icon')
-{{ asset('assets/images/produits-meta.jpeg') }}
-@endsection
+@section('title',"Nouvelle Boutique");
 
-@section('title',"Nouvelle Boutique - Doroobe Cosmetica");
-
-@section('description',"")
+@section('description',"Créer votre boutique dès aujourd'hui sur ".config('app.name'))
 
 @section('body')
 <section data-bs-version="5.1" class="header3 agencym4_header3 cid-sIqqheaqtl" id="header3-p">
-
-
-
-
-
     <div class="container align-center">
         <div class="row justify-content-center">
             <div class="media-container-column mbr-white col-md-10">
@@ -32,8 +23,6 @@
 </section>
 
 <section class="form cid-sIqqPj8uvi" id="formbuilder-q">
-
-
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto mbr-form">
@@ -198,10 +187,6 @@
 </section>
 
 <section data-bs-version="5.1" class="social1 cid-sIqxxOSjaa" id="share1-r">
-
-
-
-
     <div class="container">
         <div class="media-container-row">
             <div class="col-12">

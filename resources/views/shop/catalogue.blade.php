@@ -37,9 +37,13 @@
         <section data-bs-version="5.1" class="gallery1 cid-sIpMwjCas3" id="gallery1-8">
             <div class="container">
                 <div class="mbr-section-head">
-
                     <h5 class="mbr-section-subtitle mbr-fonts-style align-center mb-0 display-7">
                         Ceci est la liste des produits que vous avez ajouté à votre stock.</h5>
+                        @if (count($produits)<1)
+                            <div style="height: 100px; line-height: 100px; font-size: 25px; background: white; color: #196B86; text-align: center; float: center;">
+                                La boutique est vide pour l'instant !
+                            </div>
+                        @endif
                 </div>
                 <div class="row content-margin">
                     @foreach ($produits as $produit)

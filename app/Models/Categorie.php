@@ -26,4 +26,8 @@ class Categorie extends Model
     {
         return $this->belongsTo(Shop::class);
     }
+
+    public function produits() {
+        return $this->hasMany(Produit::class);
+    }
 }

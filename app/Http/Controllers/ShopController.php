@@ -78,7 +78,7 @@ class ShopController extends Controller
             throw new Error("Une erreur est survenue pendant l'enregistrement !");
         }
         Auth::attempt($request->only(['email','password']));
-        return redirect()->route('shop.catalogue',['shop'=>$shop]);
+        return redirect()->route('shop.categorie.index',['shop'=>$shop]);
     }
 
     /**

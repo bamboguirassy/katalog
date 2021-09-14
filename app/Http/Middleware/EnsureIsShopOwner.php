@@ -21,6 +21,6 @@ class EnsureIsShopOwner
         if(Auth::user()->type=='owner' && Auth::user()->shop->id==$shop->id) {
             return $next($request);
         }
-        return redirect()->back();
+        return redirect()->route('shop.home', ['shop'=>Auth::user()->shop]);
     }
 }

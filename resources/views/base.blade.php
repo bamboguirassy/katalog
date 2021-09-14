@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{config('app.locale')}}">
+<html lang="{{config('app.locale')}}" ng-app="Katalog">
 
 <head>
     <meta charset="UTF-8">
@@ -62,7 +62,13 @@
     <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
 </head>
 
-<body>
+<body ng-controller="MainController">
+    @auth
+    <span ng-init="setCurrentUser({{auth()->user()}})"></span>
+    @endauth
+    @isset($shop)
+    <span ng-init="setCurrentShop({{$shop}})"></span>
+    @endisset
     <section>
         <section data-bs-version="5.1" class="extMenu3 menu cid-sIw8J1nqbg" once="menu" id="extMenu3-1p">
             <nav class="navbar navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm">
@@ -72,7 +78,7 @@
                             <span class="navbar-logo">
                                 @isset($shop)
                                 <a href="{{route('shop.home',compact('shop'))}}">
-                                    <img src="{{ asset('/storage/shops/'.$shop->logo) }}" alt="" style="height: 4rem;">
+                                    <img src="{{ asset('storage/shops/'.$shop->logo) }}" alt="" style="height: 4rem;">
                                 </a>
                                 @else
                                 <a href="{{ route('home') }}">
@@ -99,8 +105,11 @@
                             <span class="widget-icon mbr-iconfont mbri-mobile2"
                                 style="color: rgb(220, 143, 29); fill: rgb(220, 143, 29);"></span>
                             <div class="widget-content display-4">
-                                <p class="widget-title mbr-fonts-style display-4">{{$shop->telephonePrimaire}}</p>
-                                <p class="widget-text mbr-fonts-style display-4">{{ $shop->telephoneSecondaire }}</p>
+                                <p class="widget-title mbr-fonts-style display-4"><a class="mbr-white"
+                                        href="tel:{{$shop->telephonePrimaire}}">{{$shop->telephonePrimaire}}</a></p>
+                                <p class="widget-text mbr-fonts-style display-4"><a class="mbr-white"
+                                        href="tel:{{$shop->telephoneSecondaire}}">{{ $shop->telephoneSecondaire }}</a>
+                                </p>
                             </div>
                         </div>
                         <div class="info-widget">
@@ -116,7 +125,7 @@
                 <div class="menu-bottom">
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav nav-dropdown js-float-line nav-right" data-app-modern-menu="true">
-                            @guest
+                            @if (!isset($shop))
                             <li class="nav-item">
                                 <a class="nav-link link mbr-black text-danger text-primary display-4"
                                     href="{{ route('home') }}">
@@ -124,7 +133,7 @@
                                     {{config('app.name')}}
                                 </a>
                             </li>
-                            @endguest
+                            @endif
                             @isset($shop)
                             <li class="nav-item">
                                 <a class="nav-link link mbr-black text-danger text-primary display-4"
@@ -133,32 +142,44 @@
                                         class="mobi-mbri mobi-mbri-shopping-bag mbr-iconfont mbr-iconfont-btn"></span>Accueil</a>
                             </li>
                             @auth
+                            @if(auth()->user()->type=='owner')
                             <li class="nav-item"><a class="nav-link link mbr-black text-danger text-primary display-4"
                                     href="{{route('shop.catalogue',compact('shop'))}}"><span
-                                        class="mobi-mbri mobi-mbri-bulleted-list mbr-iconfont mbr-iconfont-btn"></span>Les
-                                    produits</a></li>
-                            <li class="nav-item"><a class="nav-link link mbr-black text-danger text-primary display-4"
-                                    href="{{ route('shop.categorie.index',compact('shop')) }}"><span
-                                        class="mobi-mbri mobi-mbri-folder mbr-iconfont mbr-iconfont-btn"></span>Les
-                                    categories</a></li>
-                            <li class="nav-item">
-                                <a class="nav-link link mbr-black text-danger text-primary display-4"
-                                    href="infos-boutique.html"><span
-                                        class="mobi-mbri mobi-mbri-info mbr-iconfont mbr-iconfont-btn"></span>Infos
-                                    boutique</a>
+                                        class="mobi-mbri mobi-mbri-bulleted-list mbr-iconfont mbr-iconfont-btn"></span>Produits</a>
                             </li>
                             <li class="nav-item">
-                                <form method="POST" action="{{route('logout')}}" style="display: inline" class="mt-1">
+                                <a class="nav-link link mbr-black text-danger text-primary display-4"
+                                    href="{{ route('shop.commande.index',compact('shop')) }}"><span
+                                        class="mobi-mbri mobi-mbri-folder mbr-iconfont mbr-iconfont-btn"></span>Commandes</a>
+                            </li>
+                            @endif
+                            @endauth
+                            <li class="nav-item">
+                                <a class="nav-link link mbr-black text-danger text-primary display-4"
+                                    href="{{ route('shop.details', compact('shop')) }}"><span
+                                        class="mobi-mbri mobi-mbri-info mbr-iconfont mbr-iconfont-btn"></span>A
+                                    propos</a>
+                            </li>
+                            @endisset
+                            @auth
+                                @if (auth()->user()->type=='client')
+                                    <li class="nav-item"><a class="nav-link link mbr-black text-danger text-primary display-4"
+                                            href="{{ route('user.commande.list') }}"><span
+                                                class="mobi-mbri mobi-mbri-to-local-drive mbr-iconfont mbr-iconfont-btn"></span>Mes
+                                            commandes</a></li>
+                                @endif
+                            <li class="nav-item">
+                                <form method="POST" action="{{route('logout')}}" style="display: inline"
+                                    class="nav-link link">
                                     @csrf
                                     @method('post')
-                                    <button style="border: none;padding: 0!important;" type="submit"
-                                        class="nav-link link mbr-black text-danger text-primary display-4"><span
-                                            class="mobi-mbri mobi-mbri-info mbr-iconfont mbr-iconfont-btn"></span>
+                                    <button style="border: none;padding: 0!important; display: inline;" type="submit"
+                                        class="mbr-black text-danger text-primary display-4"><span
+                                            class="mobi-mbri mobi-mbri-arrow-down mbr-iconfont mbr-iconfont-btn"></span>
                                         Déconnexion</button>
                                 </form>
                             </li>
                             @endauth
-                            @endisset
                             @guest
                             <li class="nav-item">
                                 <a class="nav-link link mbr-black text-danger text-primary display-4"
@@ -187,8 +208,20 @@
         <section>
             @yield('body')
             @include('user.login')
+            @include('user.register')
+            @include('shop.produit.add-panier-temp')
         </section>
 
+        {{-- panier client --}}
+        @auth
+        @if (auth()->user()->type=='client' && isset($shop))
+        <a href="{{ route('shop.panier.retrieve',compact('shop')) }}" class="btn btn-secondary" style="position: fixed; top: 25%; right: 20px;">
+            <span class="mbr-iconfont mbri-shopping-cart"></span> PANIER
+        </a>
+        @endif
+
+        @endauth
+        {{-- fin panier client --}}
 
 
         <section data-bs-version="5.1" class="footer2 cid-sIpIi9d37Z" once="footers" id="footer02-c">
@@ -251,6 +284,10 @@
     <script src="{{ asset('assets/datatables/vanilla-dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/theme/js/script.js') }}"></script>
     <script src="{{ asset('assets/formoid.min.js') }}"></script>
+    <script src="{{ asset('bower_components/angular/angular.min.js') }}"></script>
+    <script src="{{ asset('bower_components/angular-filter/dist/angular-filter.min.js') }}"></script>
+    <script src="{{ asset('angular/app.js') }}"></script>
+    <script src="{{ asset('angular/controllers/main.controller.js') }}"></script>
 </body>
 
 </html>

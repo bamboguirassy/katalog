@@ -18,8 +18,8 @@
                     <div class="modal-body">
                         <p class="mbr-text mbr-fonts-style display-7">
                             Saisissez vos identifiants de connexion puis cliquez sur "<strong>Se connecter</strong>".
-                            Assurez vous d'avoir déjà une boutique en cliquant sur <a href="nouvelle-boutique.html"
-                                class="text-primary"><strong><em>créer ma boutique</em></strong></a>.</p>
+                            Vous n'avez pas encore de compte ? <a ng-click="displayRegisterModal()"
+                                class="text-primary"><strong><em>Ouvrir un compte ici</em></strong></a>.</p>
 
                         <div>
                             <div class="form-wrapper">

@@ -26,4 +26,16 @@
 	<url>
 		<loc>https://jayma.bambogroup.net/produit-admin-show.html</loc>
 	</url>
+	<url>
+		<loc>https://jayma.bambogroup.net/panier.html</loc>
+	</url>
+	<url>
+		<loc>https://jayma.bambogroup.net/commandes-list-client.html</loc>
+	</url>
+	<url>
+		<loc>https://jayma.bambogroup.net/shop-commande-list.html</loc>
+	</url>
+	<url>
+		<loc>https://jayma.bambogroup.net/commande-details.html</loc>
+	</url>
 </urlset>
