@@ -1,6 +1,6 @@
 @extends('base')
 
-@section('title',$shop->nom);
+@section('title',$shop->nom.' '.$categorie->nom.' Liste produits');
 
 @section('description',$shop->description)
 

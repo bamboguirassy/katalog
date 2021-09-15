@@ -123,6 +123,9 @@
                                 style="color: rgb(220, 143, 29); fill: rgb(220, 143, 29);"></span>
                             <div class="widget-content display-4">
                                 <p class="widget-title mbr-fonts-style display-4">{{ $shop->adresse }}</p>
+                               @auth
+                               <p class="widget-title mbr-fonts-style display-4">{{ auth()->user()->name }} ({{ auth()->user()->type }})</p>
+                               @endauth
                             </div>
                         </div>
                     </div>
@@ -169,10 +172,12 @@
                             @endisset
                             @auth
                             @if (auth()->user()->type=='client')
-                            <li class="nav-item"><a class="nav-link link mbr-black text-danger text-primary display-4"
+                            <li class="nav-item">
+                                <a class="nav-link link mbr-black text-danger text-primary display-4"
                                     href="{{ route('user.commande.list') }}"><span
                                         class="mobi-mbri mobi-mbri-to-local-drive mbr-iconfont mbr-iconfont-btn"></span>Mes
-                                    commandes</a></li>
+                                    commandes</a>
+                                </li>
                             @endif
                             <li class="nav-item">
                                 <form method="POST" action="{{route('logout')}}" style="display: inline"
@@ -223,7 +228,7 @@
         @if (auth()->user()->type=='client' && isset($shop))
         <a href="{{ route('shop.panier.retrieve',compact('shop')) }}" class="btn btn-secondary"
             style="position: fixed; top: 25%; right: 20px;">
-            <span class="mbr-iconfont mbri-shopping-cart"></span> PANIER
+            <span class="mbr-iconfont mbri-shopping-cart"></span> <!--PANIER-->
         </a>
         @endif
 

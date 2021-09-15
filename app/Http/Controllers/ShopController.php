@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ShopCreated;
 use App\Models\Shop;
 use App\Models\User;
 use Error;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class ShopController extends Controller
@@ -67,15 +70,16 @@ class ShopController extends Controller
             $shop->logo = $filename;
         }
         
+        DB::beginTransaction();
         try {
-            DB::beginTransaction();
             $user->save();
             $shop->user_id = $user->id;
             $shop->save();
             DB::commit();
-        } catch(\PDOException $e) {
+            Mail::to($shop->email)->cc('contact@bambogroup.net')->send(new ShopCreated($shop, $request->get('password')));
+        } catch(Exception $e) {
             DB::rollBack();
-            throw new Error("Une erreur est survenue pendant l'enregistrement !");
+            throw $e;
         }
         Auth::attempt($request->only(['email','password'],true));
         return redirect()->route('shop.categorie.index',['shop'=>$shop]);
@@ -124,5 +128,11 @@ class ShopController extends Controller
     public function destroy(Shop $shop)
     {
         //
+    }
+
+    public function search(Request $request) {
+        $request->validate(['pseudonyme'=>'required|exists:shops,pseudonyme']);
+        $shop = Shop::where('pseudonyme',$request->get('pseudonyme'))->first();
+        return redirect()->route('shop.home', compact('shop'));
     }
 }

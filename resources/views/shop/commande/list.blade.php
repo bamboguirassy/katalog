@@ -81,7 +81,8 @@
                                 </a>
                             </div>
                             @endforeach
-                            @if(count($commandes)<1) <h3>Aucune commande pour le moment !</h3>
+                            @if(count($commandes)<1)
+                            <h3>Aucune commande pour le moment !</h3>
                                 @endif
                         </div>
                     </div>

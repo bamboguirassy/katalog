@@ -42,10 +42,10 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 form-group" data-for="category">
                             <label for="category-formbuilder-14"
                                 class="form-control-label mbr-fonts-style display-7">Catégorie de produit</label>
-                            <select value="{{ old('categorie_id') ?? $produit->categorie_id }}}" name="categorie_id" data-form-field="category" class="form-control display-7"
+                                <select value="{{ old('categorie_id') ?? $produit->categorie_id }}}" name="categorie_id" data-form-field="category" class="form-control display-7"
                                 id="category-formbuilder-14">
                                 @foreach ($categories as $categorie)
-                                <option value="{{$categorie->id}}">{{ $categorie->nom }}</option>
+                                <option @if($categorie->id==$produit->categorie_id) selected="selected" @endif value="{{$categorie->id}}">{{ $categorie->nom }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -76,23 +76,23 @@
                                 data-form-field="description" class="form-control display-7" required="required"
                                 id="description-formbuilder-14">{{ old('description') ?? $produit->description }}</textarea>
                         </div>
-                        {{-- <div class="col-lg-12 col-md-12 col-sm-12 form-group" data-for="visible">
+                        <div class="col-lg-12 col-md-12 col-sm-12 form-group" data-for="visible">
                             <div class="form-control-label">
                                 <label for="visible-formbuilder-14" class="mbr-fonts-style display-7">Visible dans la
                                     boutique ?</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input type="radio" name="visible" data-form-field="visible"
-                                    class="form-check-input display-7" value="Oui" checked=""
+                                    class="form-check-input display-7" value="Oui" @if($produit->visible) checked="" @endif
                                     id="visible-formbuilder-14">
                                 <label class="form-check-label display-7">Oui</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" name="visible" data-form-field="visible"
+                                <input type="radio" name="visible" data-form-field="visible"  @if(!$produit->visible) checked="" @endif
                                     class="form-check-input display-7" value="Non" id="visible-formbuilder-14">
                                 <label class="form-check-label display-7">Non</label>
                             </div>
-                        </div> --}}
+                        </div>
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <hr>
                         </div>

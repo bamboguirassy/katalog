@@ -8,6 +8,7 @@ use App\Models\Panier;
 use App\Models\Paproduit;
 use App\Models\Produit;
 use App\Models\Shop;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -112,8 +113,11 @@ class ProduitController extends Controller
             'categorie_id'=>'required',
             'prixUnitaire'=>'integer|required',
             'quantite'=>'integer',
+            'visible'=>'required'
         ]);
-        $produit->update($request->all());
+        $data = $request->all();
+        $data['visible']=($request->get('visible')=='Oui');
+        $produit->update($data);
         return redirect()->route('shop.catalogue',compact('shop'));
     }
 
@@ -149,5 +153,39 @@ class ProduitController extends Controller
              }
         }
         return view('shop.produit.display',compact('produit','shop','paProduits'));
+    }
+
+    public function addImages(Request $request, Shop $shop, Produit $produit) {
+        $request->validate([
+            'photos'=>'required'
+        ]);
+        DB::beginTransaction();
+            foreach($request->file('photos') as $photoFile) {
+                $image = new Image();
+                // Filename To store
+                $image->nom = $shop->pseudonyme.'_'.$produit->nom.'_'.uniqid().'.'.$photoFile->getClientOriginalExtension();
+                $image->produit_id = $produit->id;
+                $photoFile->storeAs('public/produits/images/',$image->nom);
+                $image->save();
+            }
+        DB::commit();
+        return back();
+    }
+
+    public function updateCouvertureImage(Shop $shop, Image $image) {
+        DB::beginTransaction();
+        try {
+            $otherImages = Image::where('produit_id',$image->produit_id)
+            ->where('couverture',true)->get();
+            foreach($otherImages as $otherImage) {
+                $otherImage->update(['couverture'=>false]);
+            }
+            $image->update(['couverture'=>true]);
+            DB::commit();
+        } catch(Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+        return back();
     }
 }

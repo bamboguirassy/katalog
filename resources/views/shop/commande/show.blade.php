@@ -2,7 +2,7 @@
 
 @section('title','Commande '.$commande->numero);
 
-@section('description',"Votre commande dans la boutique ".$shop->nom)
+@section('description',"La commande n° ".$commande->numero." chez ".$shop->nom)
 
 @section('body')
 <div class="row">
@@ -15,8 +15,8 @@
                     </div>
                     <div class="col-12 col-md">
                         <div class="text-wrapper align-left">
-                            <h1 class="mbr-section-title mbr-fonts-style mb-4 display-1"><strong>{{ $shop->nom }} -&gt;
-                                    Commande n° {{ $commande->numero }}</strong></h1>
+                            <h3 class="mbr-section-title mbr-fonts-style mb-4 display-2"><strong>{{ $shop->nom }} -&gt;
+                                    Commande n° {{ $commande->numero }}</strong></h3>
                             <p class="mbr-text mbr-fonts-style mb-4 display-7"></p>
                             <p>Voici les détails de la commande n° <b>{{ $commande->numero }}</b> passée dans la
                                 boutique
@@ -24,7 +24,7 @@
                             </p>
                             <p class="mbr-fonts-style text display-4">
                                 <strong
-                                    style="padding: 5px; border-radius: 15px; border: 2px solid #1C73BA; color: #1C73BA;">Statut
+                                    style="padding: 5px; border-radius: 15px; border-right: 2px solid #1C73BA; color: #1C73BA;">Statut
                                     actuel : {{$commande->etat}}</strong>
                             </p>
                             <p></p>
@@ -34,7 +34,7 @@
                                         <strong>{{ $message }}</strong>
                                     </div>
                                 @endforeach
-                                @if (auth()->user()->type="owner" && auth()->user()->id==$shop->user_id)
+                                @if (auth()->user()->type=="owner" && auth()->user()->id==$shop->user_id)
                                 @if ($commande->etat=='En attente')
                                 <form style="display: inline; float: right; margin-left: 3px;"
                                     action="{{ route('shop.commande.update',compact('shop','commande')) }}"
@@ -64,7 +64,7 @@
                                     @csrf
                                     @method('put')
                                     <input hidden type="text" value="Livrée" name="etat">
-                                    <button class="btn btn-md btn-warning display-4">
+                                    <button class="btn btn-md btn-primary display-4">
                                         <span class="fa fa-check-circle-o mbr-iconfont mbr-iconfont-btn"></span>
                                         Livrer</button>
                                 </form>

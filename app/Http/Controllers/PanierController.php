@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NouvelleCommande;
 use App\Models\Commande;
 use App\Models\Coproduit;
 use App\Models\Panier;
@@ -13,6 +14,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class PanierController extends Controller
 {
@@ -149,12 +151,13 @@ class PanierController extends Controller
                 $coproduit->save();
                 $paproduit->delete();
                 $panier->delete();
+                Mail::to(Auth::user()->email)->cc($shop->email)->send(new NouvelleCommande($commande));
+                DB::commit();
             }
         } catch(Exception $e) {
             DB::rollback();
             throw $e;
         }
-        DB::commit();
         return redirect()->route('shop.commande.show', compact('shop','commande'));
     }
 }

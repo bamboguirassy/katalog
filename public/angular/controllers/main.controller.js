@@ -16,8 +16,12 @@ app.controller('MainController', ($rootScope) => {
         if ($rootScope.user == null) {
             displayLoginModal();
         } else {
-            $rootScope.selectedProduct = produit;
-            $('#mbr-popup-34').modal('toggle');
+            if($rootScope.user.type=='client') {
+                $rootScope.selectedProduct = produit;
+                $('#mbr-popup-34').modal('toggle');
+            } else {
+                alert('Seuls les clients sont sensés ajouter des produits au panier');
+            }
         }
     }
 

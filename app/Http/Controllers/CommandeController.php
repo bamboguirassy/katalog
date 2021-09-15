@@ -100,7 +100,7 @@ class CommandeController extends Controller
     public function getUserCommandes() {
         $commandes = Commande::where('user_id',Auth::user()->id)
         ->orderby('created_at','desc')
-        ->paginate(10);
+        ->paginate(6);
         return view('shop.commande.mes-commandes',compact('commandes'));
     }
 }

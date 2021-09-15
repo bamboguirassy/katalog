@@ -65,6 +65,7 @@ class CategorieController extends Controller
         ->where('quantite','>',0)
         ->where('visible',true)
         ->paginate(9);
+        $paProduits = [];
         if(Auth::user()) {
             $panier = Panier::where('user_id',Auth::user()->id)
              ->where('shop_id',$shop->id)
@@ -75,7 +76,6 @@ class CategorieController extends Controller
                  $paproduits = Paproduit::where('panier_id',$panier->id)
                  ->get();
              }
-             $paProduits = [];
              if(count($paproduits)>0) {
                  foreach($paproduits as $paproduit) {
                      $paProduits[] = $paproduit->produit_id;

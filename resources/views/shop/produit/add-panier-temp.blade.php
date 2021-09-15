@@ -16,7 +16,7 @@
             </div>
             <div class="modal-body">
                 <p class="mbr-text mbr-fonts-style display-7">
-                    Vous vous apprêtez à ajouter "<a href="details-produit.html"
+                    Vous allez ajouter "<a href="details-produit.html"
                         class="text-primary"><strong><em>[[selectedProduct.nom]]</em></strong></a>" à votre panier.</p>
                 <div>
                     <div class="form-wrapper">

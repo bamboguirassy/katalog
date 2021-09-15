@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\Validator;
 */
 
 Route::get('/', function () {
-    $shops = Shop::with(['categorie'])->paginate(10);
+    $shops = Shop::with(['categorie'])->paginate(20);
     return view('home',compact('shops'));
 })->name('home');
 
@@ -71,18 +71,20 @@ Route::resource('user', UserController::class,[
 Route::get('/mes-commandes', 'App\Http\Controllers\CommandeController@getUserCommandes')
 ->name('user.commande.list');
 
+Route::post('/search-shop', 'App\Http\Controllers\ShopController@search')
+->name('shop.search');
+
 Route::group([
     'prefix'     => '/{shop:pseudonyme}',
 ], function () {
     // Tenant routes here
        Route::name('shop.')->group(function() {
-
            Route::get('/',function(Shop $shop) {
                $categories = Categorie::where('shop_id',$shop->id)->has('produits')->orderby('nom')->get();
                $produits = Produit::where('shop_id',$shop->id)
                ->where('visible',true)
                ->where('quantite','>',0)
-               ->paginate(9);
+               ->paginate(15);
                // find user panier if exists
                $paProduits = [];
                if(Auth::user()) {
@@ -110,7 +112,7 @@ Route::group([
    
            Route::get('/catalogue', function(Shop $shop) {
                $produits = Produit::where('shop_id',$shop->id)
-               ->paginate(18);
+               ->paginate(15);
                return view('shop.catalogue',compact('shop','produits'));
            })->middleware('is.owner')->name('catalogue');
 
@@ -132,6 +134,12 @@ Route::group([
 
             Route::get('/produit/{produit}/display', 'App\Http\Controllers\ProduitController@display')
             ->name('produit.display');
+
+            Route::post('/produit/add-image/{produit}', 'App\Http\Controllers\ProduitController@addImages')
+            ->name('produit.add.images');
+
+            Route::post('/produit/change/photo-couverture/{image}', 'App\Http\Controllers\ProduitController@updateCouvertureImage')
+            ->name('produit.update.couverture.photo');
 
             Route::resource('/produit', ProduitController::class,
                 ['except'=>['index']

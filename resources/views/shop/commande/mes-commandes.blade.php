@@ -66,6 +66,14 @@
                                 @endif
                         </div>
                     </div>
+                    <div class="col-12">
+                        @if ($commandes->currentPage()!=1)
+                        <a href="{{ $commandes->previousPageUrl() }}" class="btn btn-secondary pull-left ml-2">Page précédente</a>
+                        @endif
+                        @if ($commandes->currentPage()!=$commandes->lastPage())
+                        <a href="{{ $commandes->nextPageUrl() }}" class="btn btn-secondary pull-right mr-2">Page suivante</a>
+                        @endif
+                    </div>
                 </div>
 			</div>
 		</div>

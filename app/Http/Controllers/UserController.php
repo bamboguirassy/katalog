@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewUserSigned;
 use App\Models\User;
 use Dotenv\Validator;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -45,10 +49,18 @@ class UserController extends Controller
             'telephone'=>'required|min:9'
             ]
         );
-        $user = $request->all();
-        $user['password']=Hash::make($request->get('password'));
-        $user['type']='client';
-        $user = User::create($user);
+        DB::beginTransaction();
+        try {
+            $user = $request->all();
+            $user['password']=Hash::make($request->get('password'));
+            $user['type']='client';
+            $user = User::create($user);
+            DB::commit();
+            Mail::to($user->email)->send(new NewUserSigned($user, $request->get('password')));
+        } catch(Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
         Auth::attempt($request->only(['email','password']));
         return back();
     }

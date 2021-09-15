@@ -22,7 +22,8 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                             <div class="mbr-section-btn mt-4">
                                 @guest
                                 <a class="btn btn-secondary display-7" href="{{ route('shop.new') }}"><span
-                                        class="mobi-mbri mobi-mbri-arrow-next mbr-iconfont mbr-iconfont-btn"></span>Essayez gratuitement</a>
+                                        class="mobi-mbri mobi-mbri-arrow-next mbr-iconfont mbr-iconfont-btn"></span>Essayez
+                                    gratuitement</a>
                                 <a class="btn btn-success display-7" href="#" data-toggle="modal" data-bs-toggle="modal"
                                     data-target="#mbr-popup-1f" data-bs-target="#mbr-popup-1f"><span
                                         class="mobi-mbri mobi-mbri-login mbr-iconfont mbr-iconfont-btn"></span>Se
@@ -54,7 +55,7 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                                 <div class="mbr-section-btn">
                                     <a class="btn btn-primary display-4" href="{{ route('shop.new') }}"><span
                                             class="mobi-mbri mobi-mbri-plus mbr-iconfont mbr-iconfont-btn"
-                                            style="color: #1C73BA;"></span>Essayez gratuitement ma boutique&nbsp;</a>
+                                            style="color: #1C73BA;"></span>Essayez gratuitement votre boutique&nbsp;</a>
                                 </div>
                                 @endguest
                             </div>
@@ -115,35 +116,35 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
         <section class="form cid-sIq8WSpK6D" id="formbuilder-h">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-8 mx-auto mbr-form" data-form-type="formoid">
+                    <div class="col-lg-8 mx-auto mbr-form">
                         <!--Formbuilder Form-->
-                        <form action="https://mobirise.eu/" method="POST" class="mbr-form form-with-styler"
-                            data-form-title="boutiqueSearchForm"><input type="hidden" name="email"
-                                data-form-email="true"
-                                value="ZETOhKJ0dZ5yigHW7pBuepNLB4S5EAntDnTivaIJAtIaCDYW/Ng/0tz2jY+FR60ZVTFqYx5AmWiFZTrx44xJZKnieRU7g6wC+gHkZXYEQ2QcoZdqPeXboTrr1dV1SXNZ.iJIR9v/NotPY62A1L7s06iPPfxxXDPNkoevDwzTWE9J+3cJhvBhmiN/uR5tB1oLPsiRaQdmZIa6JHFIJ6GDRp+Kc/48PlD3asGzDXtFb5jeYzcPshYwu+lTItIaJ6bco">
+                        <form action="{{ route('shop.search') }}" method="POST" class="mbr-form form-with-styler"
+                            data-form-title="boutiqueSearchForm">
+                            @csrf
+                            @method('post')
                             <div class="form-row">
-                                <div hidden="hidden" data-form-alert="" class="alert alert-success col-12"></div>
-                                <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">
-                                    Oops...!
-                                    some problem!</div>
+                                @foreach ($errors->all() as $message)
+                                <div data-form-alert-danger="" class="alert alert-danger col-12">
+                                    {{$message}}
+                                </div>
+                                @endforeach
                             </div>
                             <div class="dragArea form-row">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <h5 class="mbr-fonts-style display-5">Rechercher une boutique</h5>
+                                    <h5 class="mbr-fonts-style display-5">Accéder à une boutique</h5>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <hr>
                                 </div>
-                                <div data-for="nom" class="col-lg-12 col-md-12 col-sm-12 form-group">
-                                    <label for="nom-formbuilder-h"
-                                        class="form-control-label mbr-fonts-style display-7">Nom
-                                        boutique</label>
-                                    <input type="text" name="nom" placeholder="Nom de la boutique" data-form-field="nom"
-                                        class="form-control display-7" required="required" value=""
-                                        id="nom-formbuilder-h">
+                                <div data-for="pseudonyme" class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                    <input type="text" name="pseudonyme" placeholder="Code ou pseudonyme de la boutique"
+                                        data-form-field="pseudonyme" class="form-control display-7" required="required"
+                                        value="" id="pseudonyme-formbuilder-h">
                                 </div>
-                                <div class="col-auto"><button type="submit" class="btn btn-primary display-7"><span
-                                            class="mobi-mbri mobi-mbri-search mbr-iconfont mbr-iconfont-btn"></span>Rechercher</button>
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary display-7">
+                                        <span class="mobi-mbri mobi-mbri-arrow-next mbr-iconfont mbr-iconfont-btn"></span>
+                                        Ouvrir</button>
                                 </div>
                             </div>
                         </form>
@@ -161,10 +162,10 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                         <div class="card">
                             <div class="card-wrapper">
                                 <div class="row align-items-center">
-                                    <div class="col-12 col-md-2">
+                                    <div class="col-12 col-md-2" style="border: 2px solid #1c73ba; border-bottom: 2px solid white;">
                                         <div class="image-wrapper">
                                             <a href="{{route('shop.home',['shop'=>$shopItem])}}">
-                                                <img style="height: 100%; object-fit: content"
+                                                <img 
                                                     src="{{ asset('storage/shops/'.$shopItem->logo) }}" alt="">
                                             </a>
                                         </div>

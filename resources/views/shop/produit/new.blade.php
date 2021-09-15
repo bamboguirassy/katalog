@@ -79,23 +79,6 @@
                                 data-form-field="description" class="form-control display-7" required="required"
                                 id="description-formbuilder-14">{{ old('description') }}</textarea>
                         </div>
-                        {{-- <div class="col-lg-12 col-md-12 col-sm-12 form-group" data-for="visible">
-                            <div class="form-control-label">
-                                <label for="visible-formbuilder-14" class="mbr-fonts-style display-7">Visible dans la
-                                    boutique ?</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input type="radio" name="visible" data-form-field="visible"
-                                    class="form-check-input display-7" value="Oui" checked=""
-                                    id="visible-formbuilder-14">
-                                <label class="form-check-label display-7">Oui</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input type="radio" name="visible" data-form-field="visible"
-                                    class="form-check-input display-7" value="Non" id="visible-formbuilder-14">
-                                <label class="form-check-label display-7">Non</label>
-                            </div>
-                        </div> --}}
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <hr>
                         </div>
