@@ -77,7 +77,7 @@ class ShopController extends Controller
             DB::rollBack();
             throw new Error("Une erreur est survenue pendant l'enregistrement !");
         }
-        Auth::attempt($request->only(['email','password']));
+        Auth::attempt($request->only(['email','password'],true));
         return redirect()->route('shop.categorie.index',['shop'=>$shop]);
     }
 

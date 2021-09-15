@@ -8,7 +8,7 @@
 <div class="row">
     <div class="col-12">
         <section data-bs-version="5.1" class="info3 cid-sIqCr2MrZ5" id="info3-y">
-            <div class="mbr-overlay" style="opacity: 0.6; background-color: rgb(7, 59, 76);">
+            <div class="mbr-overlay" style="opacity: 0.6; background-color: #1C73BA;">
             </div>
             <div class="container">
                 <div class="row justify-content-center">
@@ -20,11 +20,11 @@
                                 <p class="mbr-text mbr-fonts-style mb-4 display-7">
                                     Gérez votre catalogue en y ajoutant vos produits ou en les mettant à jour.</p>
                                 <div class="mbr-section-btn mt-3">
-                                    <a class="btn btn-warning display-4"
+                                    <a class="btn btn-primary display-4"
                                         href="{{ route('shop.produit.create',compact('shop')) }}"><span
-                                            class="mbri-cart-add mbr-iconfont mbr-iconfont-btn"></span>Ajouter un
+                                            class="mbri-plus mbr-iconfont mbr-iconfont-btn"></span>Ajouter un
                                         produit&nbsp;</a>
-                                    <a class="btn btn-warning display-4"
+                                    <a class="btn btn-primary display-4"
                                         href="{{ route('shop.categorie.index',compact('shop')) }}"><span
                                             class="mbri-info mbr-iconfont mbr-iconfont-btn"></span>Gérer les catégories
                                         de produits&nbsp;</a></div>
@@ -67,12 +67,12 @@
                             </div>
                             <div class="mbr-section-btn item-footer">
                                 <a href="{{ route('shop.produit.edit',compact('shop','produit')) }}"
-                                    class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                                    class="btn btn-primary" style="margin-right: 2px;"><i class="fa fa-edit"></i></a>
                                 <form style="display: inline;" method="POST"
                                     action="{{ route('shop.produit.destroy',compact('produit','shop')) }}">
                                     @method('delete')
                                     @csrf
-                                    <button style="display: inline;" class="btn btn-sm btn-danger"><i
+                                    <button style="display: inline;" class="btn btn-danger"><i
                                             class="fa fa-trash"></i></button>
                                 </form>
                             </div>
@@ -97,7 +97,7 @@
                                     class="mobi-mbri mobi-mbri-plus mbr-iconfont mbr-iconfont-btn"></span>Ajouter un
                                 produit</a>
                             @if ($produits->currentPage() != $produits->lastPage())
-                            <a class="btn btn-warning display-4" href="{{ $produits->nextPageUrl() }}"><span
+                            <a class="btn btn-primary display-4" href="{{ $produits->nextPageUrl() }}"><span
                                     class="mbrib-more-horizontal mbr-iconfont mbr-iconfont-btn"></span>Afficher plus de
                                 produit</a>
                             @endif

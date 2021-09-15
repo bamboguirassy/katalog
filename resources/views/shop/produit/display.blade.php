@@ -13,9 +13,15 @@
                     <h6 class="card-title mbr-fonts-style mb-4 display-2"><strong>{{ $produit->nom }}</strong></h6>
                     <p class="mbr-text mbr-fonts-style display-7"><strong>{{ $produit->description }}</strong><br></p>
                     <div class="mbr-section-btn">
-                        <a class="btn btn-lg btn-secondary display-4" >
+                        @if (in_array($produit->id, $paProduits))
+                        <a style="background: green; color: white;" class="btn item-btn display-4">
+                            Dans le panier <i class="fa fa-check"></i>
+                        </a>
+                        @else
+                        <a ng-click="initProductToPanier({{$produit}})" class="btn btn-lg btn-secondary display-4">
                             AJOUTER AU PANIER
                         </a>
+                        @endif
 
                     </div>
                 </div>

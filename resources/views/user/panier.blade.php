@@ -81,14 +81,14 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-12 mt-2">
                         @if(empty($panier->produits))
                         <h3>Votre panier est vide...</h3>
                         @else
                         <form action="{{route('shop.panier.convert', compact('shop','panier'))}}" method="post">
                             @csrf
                             @method('post')
-                            <button class="btn btn-primary">Finaliser la commande</button>
+                            <button class="btn btn-primary">Envoyer la commande</button>
                         </form>
                         @endif
                     </div>

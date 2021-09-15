@@ -5,9 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-    <link rel="shortcut icon"
-        href="@if (isset($shop)){{ asset('storage/shops/'.$shop->logo) }}@else{{ asset('assets/images/bambogroup.jpg') }}@endif"
-        type="image/x-icon">
+    @if (isset($shop))
+    <link rel="shortcut icon" href="{{ asset('storage/shops/'.$shop->logo) }}" type="image/x-icon">
+    @else
+    <link rel="shortcut icon" href="{{ asset('assets/images/bambogroup.jpg') }}" type="image/x-icon">
+    @endif
     <meta name="description" content="@yield('description')">
     <title>@yield('title')</title>
     <link rel="stylesheet" href="{{ asset('assets/web/assets/mobirise-icons2/mobirise2.css') }}">
@@ -59,7 +61,11 @@
         href="{{ asset('assets/images/apple-launch-2048x2732.png') }}">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Katalog">
+    @if (isset($shop))
+    <link rel="apple-touch-icon" href="{{ asset('storage/shops/'.$shop->logo) }}">
+    @else
     <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
+    @endif
 </head>
 
 <body ng-controller="MainController">
@@ -145,7 +151,7 @@
                             @if(auth()->user()->type=='owner')
                             <li class="nav-item"><a class="nav-link link mbr-black text-danger text-primary display-4"
                                     href="{{route('shop.catalogue',compact('shop'))}}"><span
-                                        class="mobi-mbri mobi-mbri-bulleted-list mbr-iconfont mbr-iconfont-btn"></span>Produits</a>
+                                        class="mobi-mbri mobi-mbri-bulleted-list mbr-iconfont mbr-iconfont-btn"></span>Catalogue</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link link mbr-black text-danger text-primary display-4"
@@ -162,12 +168,12 @@
                             </li>
                             @endisset
                             @auth
-                                @if (auth()->user()->type=='client')
-                                    <li class="nav-item"><a class="nav-link link mbr-black text-danger text-primary display-4"
-                                            href="{{ route('user.commande.list') }}"><span
-                                                class="mobi-mbri mobi-mbri-to-local-drive mbr-iconfont mbr-iconfont-btn"></span>Mes
-                                            commandes</a></li>
-                                @endif
+                            @if (auth()->user()->type=='client')
+                            <li class="nav-item"><a class="nav-link link mbr-black text-danger text-primary display-4"
+                                    href="{{ route('user.commande.list') }}"><span
+                                        class="mobi-mbri mobi-mbri-to-local-drive mbr-iconfont mbr-iconfont-btn"></span>Mes
+                                    commandes</a></li>
+                            @endif
                             <li class="nav-item">
                                 <form method="POST" action="{{route('logout')}}" style="display: inline"
                                     class="nav-link link">
@@ -215,7 +221,8 @@
         {{-- panier client --}}
         @auth
         @if (auth()->user()->type=='client' && isset($shop))
-        <a href="{{ route('shop.panier.retrieve',compact('shop')) }}" class="btn btn-secondary" style="position: fixed; top: 25%; right: 20px;">
+        <a href="{{ route('shop.panier.retrieve',compact('shop')) }}" class="btn btn-secondary"
+            style="position: fixed; top: 25%; right: 20px;">
             <span class="mbr-iconfont mbri-shopping-cart"></span> PANIER
         </a>
         @endif
@@ -288,6 +295,7 @@
     <script src="{{ asset('bower_components/angular-filter/dist/angular-filter.min.js') }}"></script>
     <script src="{{ asset('angular/app.js') }}"></script>
     <script src="{{ asset('angular/controllers/main.controller.js') }}"></script>
+    <script src="{{ asset('angular/controllers/shop.new.controller.js') }}"></script>
 </body>
 
 </html>

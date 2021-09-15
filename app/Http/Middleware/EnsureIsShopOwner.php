@@ -17,10 +17,12 @@ class EnsureIsShopOwner
      */
     public function handle(Request $request, Closure $next)
     {
-        $shop = $request->route('shop');
-        if(Auth::user()->type=='owner' && Auth::user()->shop->id==$shop->id) {
-            return $next($request);
+        if(Auth::user() && Auth::user()->type=='owner') {
+            $shop = $request->route('shop');
+            if(Auth::user()->shop->id==$shop->id) {
+                return $next($request);
+            }
         }
-        return redirect()->route('shop.home', ['shop'=>Auth::user()->shop]);
+        return redirect()->route('home');
     }
 }

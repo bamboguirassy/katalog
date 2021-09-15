@@ -80,7 +80,7 @@ class CommandeController extends Controller
     {
         //
         $request->validate([
-            'etat'=>'in:Acceptée,Rejetée,Livrée'
+            'etat'=>'in:Acceptée,Rejetée,Livrée,Annulée'
         ]);
         $commande->update($request->only(['etat']));
         return back();

@@ -9,20 +9,19 @@
     <div class="container align-center">
         <div class="row justify-content-center">
             <div class="media-container-column mbr-white col-md-10">
-                <h3 class="mbr-section-subtitle align-center mbr-light pb-3 mbr-fonts-style display-2">
+                <h3 class="mbr-section-subtitle align-center mbr-light pb-1 mbr-fonts-style display-2">
                     C'est maintenant !</h3>
-                <h1 class="mbr-section-title mbr-bold pb-3 mbr-fonts-style display-1">
+                <h1 class="mbr-section-title mbr-bold pb-1 mbr-fonts-style display-1">
                     Créez votre boutique !</h1>
-                <p class="mbr-text pb-3 mbr-fonts-style display-7">
-                    Et commencez à donner plus de visibilité à vos produits.</p>
-
+                <p class="mbr-text pb-2 mbr-fonts-style display-7">
+                    Et essayez <b>{{ config('app.name') }}</b> gratuitement...</p>
             </div>
         </div>
     </div>
 
 </section>
 
-<section class="form cid-sIqqPj8uvi" id="formbuilder-q">
+<section class="form cid-sIqqPj8uvi" id="formbuilder-q" ng-controller="ShopNewController">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto mbr-form">
@@ -47,13 +46,13 @@
                         <div data-for="nom" class="col-lg-6 col-md-12 col-sm-12 form-group" style="">
                             <label for="nom-formbuilder-q"
                                 class="form-control-label mbr-fonts-style display-7">Nom</label>
-                            <input value="{{old('nom')}}" type="text" name="nom" placeholder="Nom de la boutique" data-form-field="nom"
+                                <input ng-model="nom" ng-change="handleShopNameChange(nom)" value="{{old('nom')}}" type="text" name="nom" placeholder="Nom de la boutique" data-form-field="nom"
                                 class="form-control display-7" required="required" value="" id="nom-formbuilder-q">
                         </div>
                         <div data-for="pseudonyme" class="col-lg-6 col-md-12 col-sm-12 form-group">
                             <label for="pseudonyme-formbuilder-q"
                                 class="form-control-label mbr-fonts-style display-7">Pseudonyme</label>
-                            <input value="{{old('pseudonyme')}}" type="text" name="pseudonyme" placeholder="Pseudonyme de votre boutique"
+                            <input ng-model="pseudonyme" value="{{old('pseudonyme')}}" type="text" name="pseudonyme" placeholder="Pseudonyme de votre boutique"
                                 data-form-field="pseudonyme" class="form-control display-7" required="required" value=""
                                 id="pseudonyme-formbuilder-q">
                         </div>
@@ -175,7 +174,7 @@
                             <hr>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12"><button type="submit"
-                                class="btn btn-warning display-7"><span
+                                class="btn btn-primary display-7"><span
                                     class="mbrib-cart-add mbr-iconfont mbr-iconfont-btn"></span>Créer ma
                                 boutique&nbsp;</button></div>
                     </div>

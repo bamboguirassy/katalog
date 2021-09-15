@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Categorie;
 use App\Models\Image;
+use App\Models\Panier;
+use App\Models\Paproduit;
 use App\Models\Produit;
 use App\Models\Shop;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ProduitController extends Controller
@@ -127,6 +130,24 @@ class ProduitController extends Controller
     }
 
     public function display(Shop $shop, Produit $produit) {
-        return view('shop.produit.display',compact('produit','shop'));
+        // find user panier if exists
+        $paProduits = [];
+        if(Auth::user()) {
+            $panier = Panier::where('user_id',Auth::user()->id)
+             ->where('shop_id',$shop->id)
+             ->with('produits')
+             ->first();
+             $paproduits = [];
+             if(isset($panier)) {
+                 $paproduits = Paproduit::where('panier_id',$panier->id)
+                 ->get();
+             }
+             if(count($paproduits)>0) {
+                 foreach($paproduits as $paproduit) {
+                     $paProduits[] = $paproduit->produit_id;
+                 }
+             }
+        }
+        return view('shop.produit.display',compact('produit','shop','paProduits'));
     }
 }

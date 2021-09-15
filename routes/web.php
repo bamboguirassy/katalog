@@ -37,8 +37,12 @@ Route::get('/', function () {
 Route::post('login', function (Request $request) {
     $validator = Validator::make($request->all(),['password'=>'required',
         'email'=>'email|required']);
-    if(Auth::attempt($request->only(['email','password']))) {
-        return back();
+    if(Auth::attempt($request->only(['email','password'],$request->get('remember')=='Oui'))) {
+        if(Auth::user()->type=='owner') {
+            return redirect()->route('shop.home', ['shop'=>Auth::user()->shop]);
+        } else {
+            return back();
+        }
     }
     $validator->after(function ($validator) {
         $validator->errors()->add('idenfiants',"Vos identifiants de connexion sont incorrects, merci de vérifier !");
@@ -106,7 +110,7 @@ Route::group([
    
            Route::get('/catalogue', function(Shop $shop) {
                $produits = Produit::where('shop_id',$shop->id)
-               ->paginate(9);
+               ->paginate(18);
                return view('shop.catalogue',compact('shop','produits'));
            })->middleware('is.owner')->name('catalogue');
 
@@ -115,11 +119,11 @@ Route::group([
             ])->middleware('is.owner');
 
            Route::resource('/commande', CommandeController::class,
-                ['only'=>['show']
+                ['only'=>['show','update']
             ])->middleware('auth');
 
            Route::resource('/commande', CommandeController::class,
-                ['only'=>['index','update']
+                ['only'=>['index']
             ])->middleware('is.owner');
 
             Route::resource('/categorie', CategorieController::class,

@@ -15,15 +15,19 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                         <div class="text-wrapper align-left">
                             <h1 class="mbr-section-title align-left mbr-fonts-style mb-4 display-1">Katalog</h1>
                             <p class="mbr-text align-left mbr-fonts-style display-5">
-                                Votre plateforme de vente pour les commerçants des réseaux sociaux.</p>
-                            <div class="mbr-section-btn mt-4"><a class="btn btn-secondary display-7"
-                                    href="{{ route('shop.new') }}"><span
-                                        class="mobi-mbri mobi-mbri-arrow-next mbr-iconfont mbr-iconfont-btn"></span>Ouvrir
-                                    une boutique</a> <a class="btn btn-success display-7" href="#" data-toggle="modal"
-                                    data-bs-toggle="modal" data-target="#mbr-popup-1f"
-                                    data-bs-target="#mbr-popup-1f"><span
+                                Votre plateforme de vente pour booster votre commerce et augmenter votre visibilité.
+                                Simplifiez vos statuts WhatsApp,
+                                Instagram, Facebook et gérer votre catalogue et vos commandes en un seul et unique
+                                endroit.</p>
+                            <div class="mbr-section-btn mt-4">
+                                @guest
+                                <a class="btn btn-secondary display-7" href="{{ route('shop.new') }}"><span
+                                        class="mobi-mbri mobi-mbri-arrow-next mbr-iconfont mbr-iconfont-btn"></span>Essayez gratuitement</a>
+                                <a class="btn btn-success display-7" href="#" data-toggle="modal" data-bs-toggle="modal"
+                                    data-target="#mbr-popup-1f" data-bs-target="#mbr-popup-1f"><span
                                         class="mobi-mbri mobi-mbri-login mbr-iconfont mbr-iconfont-btn"></span>Se
                                     connecter</a>
+                                @endguest
                             </div>
                         </div>
                     </div>
@@ -46,11 +50,13 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                                     Votre plateforme d'exposition de produits en ligne pour une meilleure visibilité et
                                     une
                                     meilleure gestion des ventes.</p>
-                                <div class="mbr-section-btn"><a class="btn btn-warning display-4"
-                                        href="{{ route('shop.new') }}"><span
+                                @guest
+                                <div class="mbr-section-btn">
+                                    <a class="btn btn-primary display-4" href="{{ route('shop.new') }}"><span
                                             class="mobi-mbri mobi-mbri-plus mbr-iconfont mbr-iconfont-btn"
-                                            style="color: rgb(255, 255, 255);"></span>Ouvrir votre boutique
-                                        maintenant&nbsp;</a></div>
+                                            style="color: #1C73BA;"></span>Essayez gratuitement ma boutique&nbsp;</a>
+                                </div>
+                                @endguest
                             </div>
                         </div>
                     </div>
@@ -149,67 +155,73 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
 
         <section data-bs-version="5.1" class="team2 cid-sIq8MfDSMW" xmlns="http://www.w3.org/1999/html" id="team2-f">
             <div class="container">
-                @foreach ($shops as $shopItem)
-                <div class="card">
-                    <div class="card-wrapper">
-                        <div class="row align-items-center">
-                            <div class="col-12 col-md-2">
-                                <div class="image-wrapper">
-                                    <a href="{{route('shop.home',['shop'=>$shopItem])}}">
-                                        <img src="{{ asset('storage/shops/'.$shopItem->logo) }}" alt="">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md">
-                                <div class="card-box">
-                                    <a href="{{route('shop.home',['shop'=>$shopItem])}}">
-                                        <h5 class="card-title mbr-fonts-style m-0 display-5">
-                                            <strong>{{ $shopItem->nom }}</strong>
-                                        </h5>
-                                        <h6 class="card-subtitle mbr-fonts-style mt-2 mb-1 display-4">
-                                            <b class="category-badge">{{$shopItem->categorie->nom}}
-                                            </b>
-                                        </h6>
-                                        <p class="mbr-text mbr-fonts-style display-7">
-                                            {{ \Illuminate\Support\Str::limit($shopItem->description, 200, '...') }}
-                                        </p>
-                                    </a>
-                                    <div class="social-row display-7">
-                                        @isset($shopItem->facebook)
-                                        <div class="soc-item">
-                                            <a href="{{ $shopItem->facebook }}" target="_blank">
-                                                <span class="mbr-iconfont socicon socicon-facebook"></span>
+                <div class="row">
+                    @foreach ($shops as $shopItem)
+                    <div class="col-12 col-lg-6 mt-2">
+                        <div class="card">
+                            <div class="card-wrapper">
+                                <div class="row align-items-center">
+                                    <div class="col-12 col-md-2">
+                                        <div class="image-wrapper">
+                                            <a href="{{route('shop.home',['shop'=>$shopItem])}}">
+                                                <img style="height: 100%; object-fit: content"
+                                                    src="{{ asset('storage/shops/'.$shopItem->logo) }}" alt="">
                                             </a>
                                         </div>
-                                        @endisset
-                                        @isset($shopItem->twitter)
-                                        <div class="soc-item">
-                                            <a href="{{ $shopItem->twitter }}" target="_blank">
-                                                <span class="mbr-iconfont socicon socicon-twitter"></span>
+                                    </div>
+                                    <div class="col-12 col-md" style="border-left: 3px solid white;">
+                                        <div class="card-box">
+                                            <a href="{{route('shop.home',['shop'=>$shopItem])}}">
+                                                <h5 class="card-title mbr-fonts-style m-0 display-5">
+                                                    <strong>{{ $shopItem->nom }}</strong>
+                                                </h5>
+                                                <h6 class="card-subtitle mbr-fonts-style mt-2 mb-1 display-4">
+                                                    <b class="category-badge">{{$shopItem->categorie->nom}}
+                                                    </b>
+                                                </h6>
+                                                <p class="mbr-text mbr-fonts-style display-7">
+                                                    {{ \Illuminate\Support\Str::limit($shopItem->description, 120, '...') }}
+                                                </p>
                                             </a>
+                                            <div class="social-row display-7"
+                                                style="border-top: 3px solid white; padding-top: 5px;">
+                                                @isset($shopItem->facebook)
+                                                <div class="soc-item">
+                                                    <a href="{{ $shopItem->facebook }}" target="_blank">
+                                                        <span class="mbr-iconfont socicon socicon-facebook"></span>
+                                                    </a>
+                                                </div>
+                                                @endisset
+                                                @isset($shopItem->twitter)
+                                                <div class="soc-item">
+                                                    <a href="{{ $shopItem->twitter }}" target="_blank">
+                                                        <span class="mbr-iconfont socicon socicon-twitter"></span>
+                                                    </a>
+                                                </div>
+                                                @endisset
+                                                @isset($shopItem->instagram)
+                                                <div class="soc-item">
+                                                    <a href="{{ $shopItem->instagram }}" target="_blank">
+                                                        <span class="mbr-iconfont socicon socicon-instagram"></span>
+                                                    </a>
+                                                </div>
+                                                @endisset
+                                                @isset($shopItem->linkedin)
+                                                <div class="soc-item">
+                                                    <a href="{{ $shopItem->linkedin }}" target="_blank">
+                                                        <span class="mbr-iconfont socicon-linkedin socicon"></span>
+                                                    </a>
+                                                </div>
+                                                @endisset
+                                            </div>
                                         </div>
-                                        @endisset
-                                        @isset($shopItem->instagram)
-                                        <div class="soc-item">
-                                            <a href="{{ $shopItem->instagram }}" target="_blank">
-                                                <span class="mbr-iconfont socicon socicon-instagram"></span>
-                                            </a>
-                                        </div>
-                                        @endisset
-                                        @isset($shopItem->linkedin)
-                                        <div class="soc-item">
-                                            <a href="{{ $shopItem->linkedin }}" target="_blank">
-                                                <span class="mbr-iconfont socicon-linkedin socicon"></span>
-                                            </a>
-                                        </div>
-                                        @endisset
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @endforeach
                 </div>
-                @endforeach
             </div>
         </section>
         <section data-bs-version="5.1" class="content12 cid-sIqcTJYywr" id="content12-l">
@@ -218,15 +230,14 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                     <div class="col-md-12 col-lg-4">
                         <div class="mbr-section-btn align-center">
                             @if ($shops->currentPage()!=1)
-                            <a class="btn btn-success display-4" href="{{$shops->nextPage()}}"><span
+                            <a class="btn btn-success display-4" href="{{$shops->prevPage()}}"><span
                                     class="mbri-left mbr-iconfont mbr-iconfont-btn"
-                                    style="color: rgb(220, 143, 29);"></span>Previous</a>
+                                    style="color: rgb(220, 143, 29);"></span>Précédent</a>
                             @endif
-                            dd($shops)
-                            @if ($shops->currentPage())
-                            <a class="btn btn-success display-4" href="{{ $shops->lastPage() }}"><span
+                            @if ($shops->currentPage()!=$shops->lastPage())
+                            <a class="btn btn-success display-4" href="{{ $shops->nextPage() }}"><span
                                     class="mbri-right mbr-iconfont mbr-iconfont-btn"
-                                    style="color: rgb(220, 143, 29);"></span>Next</a></div>
+                                    style="color: rgb(220, 143, 29);"></span>Suivant</a></div>
                         @endif
                     </div>
                 </div>
@@ -343,4 +354,12 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
         </section>
     </div>
 </div>
+@auth
+@if(auth()->user()->type=='owner')
+<a href="{{route('shop.home',['shop'=>auth()->user()->shop])}}" class="btn btn-secondary"
+    style="position: fixed; top: 25%; right: 50px;">
+    {{auth()->user()->shop->nom}}
+</a>
+@endif
+@endauth
 @endsection

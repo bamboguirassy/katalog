@@ -54,7 +54,7 @@
                                     </div>
                                     <div class="cell text-center text-sm-left border__bot">
                                         <p class="mbr-fonts-style mbr-text display-4 text-primary">
-                                            <div style="padding: 5px; border: 2px solid #1a6c87;">
+                                            <div style="padding: 5px; border: 2px solid #1C73BA;">
                                                 Etat: <strong>{{ $commande->etat }}</strong>
                                             </div>
                                         </p>

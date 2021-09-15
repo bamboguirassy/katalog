@@ -23,52 +23,71 @@
                                 <b>{{ $shop->nom }}</b>.
                             </p>
                             <p class="mbr-fonts-style text display-4">
-                                <strong style="padding: 5px; border-radius: 15px; border: 2px solid #1a6c87; color: #1a6c87;">Statut actuel : {{$commande->etat}}</strong>
+                                <strong
+                                    style="padding: 5px; border-radius: 15px; border: 2px solid #1C73BA; color: #1C73BA;">Statut
+                                    actuel : {{$commande->etat}}</strong>
                             </p>
                             <p></p>
                             <div class="mbr-section-btn mt-3">
-                                
-                                    @if (auth()->user()->type="owner" && auth()->user()->id==$shop->user_id)
-                                    @if ($commande->etat=='En attente')
-                                    <form style="display: inline; float: right; margin-left: 3px;" action="{{ route('shop.commande.update',compact('shop','commande')) }}" method="post">
-                                        @csrf
-                                        @method('put')
-                                        <input hidden type="text" value="Acceptée" name="etat">
-                                        <button class="btn btn-md btn-info display-4 m-0">
-                                            <span class="fa fa-check-circle-o mbr-iconfont mbr-iconfont-btn"></span>
-                                            Accepter</button>
-                                    </form>
-                                    <form style="display: inline; float: right; margin-left: 3px;" action="{{ route('shop.commande.update',compact('shop','commande')) }}" method="post">
-                                        @csrf
-                                        @method('put')
-                                        <input hidden type="text" value="Rejetée" name="etat">
-                                        <button class="btn btn-md btn-danger display-4">
-                                            <span class="mdi-navigation-cancel mbr-iconfont mbr-iconfont-btn"></span>
-                                            Rejeter</button>
-                                    </form>
-                                    @endif
-                                    @if ($commande->etat=='Acceptée')
-                                    <form style="display: inline; float: right; margin-left: 3px;" action="{{ route('shop.commande.update',compact('shop','commande')) }}" method="post">
-                                        @csrf
-                                        @method('put')
-                                        <input hidden type="text" value="Livrée" name="etat">
-                                        <button class="btn btn-md btn-warning display-4">
-                                            <span class="fa fa-check-circle-o mbr-iconfont mbr-iconfont-btn"></span>
-                                            Livrer</button>
-                                    </form>
-                                    @endif
-                                    
-                                    @endif
-                                    @if (auth()->user()->id!=$commande->user_id)
-                                    <a class="btn btn-md btn-secondary display-4"
-                                        href="tel:{{$commande->user->telephone}}">
-                                        <span class="mobi-mbri mobi-mbri-phone mbr-iconfont mbr-iconfont-btn"></span>
-                                        Contacter le client</a>
-                                    @elseif ($commande->etat=='En attente')
-                                    <button class="btn btn-md btn-danger display-4" href="#">
+                                @foreach ($errors->all() as $message)
+                                    <div class="alert alert-danger" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                @endforeach
+                                @if (auth()->user()->type="owner" && auth()->user()->id==$shop->user_id)
+                                @if ($commande->etat=='En attente')
+                                <form style="display: inline; float: right; margin-left: 3px;"
+                                    action="{{ route('shop.commande.update',compact('shop','commande')) }}"
+                                    method="post">
+                                    @csrf
+                                    @method('put')
+                                    <input hidden type="text" value="Acceptée" name="etat">
+                                    <button class="btn btn-md btn-info display-4 m-0">
+                                        <span class="fa fa-check-circle-o mbr-iconfont mbr-iconfont-btn"></span>
+                                        Accepter</button>
+                                </form>
+                                <form style="display: inline; float: right; margin-left: 3px;"
+                                    action="{{ route('shop.commande.update',compact('shop','commande')) }}"
+                                    method="post">
+                                    @csrf
+                                    @method('put')
+                                    <input hidden type="text" value="Rejetée" name="etat">
+                                    <button class="btn btn-md btn-danger display-4">
+                                        <span class="mdi-navigation-cancel mbr-iconfont mbr-iconfont-btn"></span>
+                                        Rejeter</button>
+                                </form>
+                                @endif
+                                @if ($commande->etat=='Acceptée')
+                                <form style="display: inline; float: right; margin-left: 3px;"
+                                    action="{{ route('shop.commande.update',compact('shop','commande')) }}"
+                                    method="post">
+                                    @csrf
+                                    @method('put')
+                                    <input hidden type="text" value="Livrée" name="etat">
+                                    <button class="btn btn-md btn-warning display-4">
+                                        <span class="fa fa-check-circle-o mbr-iconfont mbr-iconfont-btn"></span>
+                                        Livrer</button>
+                                </form>
+                                @endif
+
+                                @endif
+                                @if (auth()->user()->id!=$commande->user_id)
+                                <a class="btn btn-md btn-secondary display-4" href="tel:{{$commande->user->telephone}}">
+                                    <span class="mobi-mbri mobi-mbri-phone mbr-iconfont mbr-iconfont-btn"></span>
+                                    Contacter le client</a>
+                                @elseif ($commande->etat=='En attente')
+                                <form style="display: inline; float: right; margin-left: 3px;"
+                                    action="{{ route('shop.commande.update',['commande'=>$commande,'shop'=>$commande->shop]) }}"
+                                    method="post">
+                                    @csrf
+                                    @method('put')
+                                    <input hidden type="text" value="Annulée" name="etat">
+                                    <button class="btn btn-md btn-danger display-4">
                                         <span class="mbri-close mbr-iconfont mbr-iconfont-btn">
-                                        </span>Annuler</button>
-                                    @endif
+                                        </span>Annuler
+                                    </button>
+                                </form>
+                                @endif
                             </div>
                         </div>
                     </div>

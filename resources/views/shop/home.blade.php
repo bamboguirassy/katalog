@@ -135,7 +135,7 @@
                                     boutique.</p>
                                 <div class="mbr-section mt-1 mb-3">
                                     @foreach ($categories as $categorie)
-                                    <span style="position: initial; white-space: nowrap; border-radius: 25%; padding: 10px 15px; border: 3px solid #1A6C87; margin-left: 10px;">
+                                    <span style="position: initial; white-space: nowrap; border-radius: 25%; padding: 10px 15px; border: 3px solid #1C73BA; margin-left: 10px;">
                                         <a
                                             href="{{ route('shop.categorie.show',compact('shop','categorie')) }}">{{ $categorie->nom }}</a>
                                     </span>
@@ -195,11 +195,16 @@
                         </div>
                     </div>
                     @endforeach
-                    @if ($produits->currentPage()!=$produits->lastPage())
                     <div class="col-12">
-                        <a href="{{ $produits->nextPageUrl() }}" class="btn btn-secondary pull-right mr-2">Voir plus de
-                            produits</a>
+                        @if ($produits->currentPage()!=1)
+                        <a href="{{ $produits->previousPageUrl() }}" class="btn btn-secondary pull-left ml-2">Page précédente</a>
+                        @endif
+                        @if ($produits->currentPage()!=$produits->lastPage())
+                        <a href="{{ $produits->nextPageUrl() }}" class="btn btn-secondary pull-right mr-2">Page suivante</a>
+                        @endif
                     </div>
+                    @if (count($produits)<1)
+                        <h3 class="text-center" style="background: white;">La boutique ne contient aucun produit pour le moment !</h3>
                     @endif
                 </div>
             </div>
