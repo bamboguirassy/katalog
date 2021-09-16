@@ -225,7 +225,7 @@
 
         {{-- panier client --}}
         @auth
-        <a ng-if="panier" href="[[shop.pseudonyme]]/panier/show" class="btn btn-info"
+        <a ng-if="panier" href="/[[shop.pseudonyme]]/panier/show" class="btn btn-info"
             style="position: fixed; top: 25%; right: 20px;">
             <span class="mbr-iconfont mbri-shopping-cart"></span> ([[panier.produits_count]])<!--PANIER-->
         </a>
