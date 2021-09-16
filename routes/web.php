@@ -49,7 +49,7 @@ Route::post('login', function (Request $request) {
     $validator->validate();
 })->name('login');
 
-Route::post('logout', function () {
+Route::get('logout', function () {
     Auth::logout();
     return redirect()->route('home');
 })->name('logout');

@@ -17,7 +17,16 @@ class Produit extends Model
         'quantite',
         'description',
         'visible',
-        'shop_id'
+        'shop_id',
+        'hasColors',
+        'colors',
+        'hasSizes',
+        'sizes'
+    ];
+
+    protected $casts = [
+        'sizes' => 'array',
+        'colors'=>'array'
     ];
 
     /**

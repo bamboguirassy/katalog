@@ -14,7 +14,7 @@ app.controller('MainController', ($rootScope, $http) => {
             if($rootScope.user && $rootScope.user.type=='client') {
                 $rootScope.getPanier();
             }
-        },2000);
+        },1000);
     }
 
     $rootScope.initProductToPanier = (produit) => {

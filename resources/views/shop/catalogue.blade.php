@@ -16,7 +16,7 @@
                         <div class="card-wrapper">
                             <div class="card-box align-center">
                                 <h4 class="card-title mbr-fonts-style align-center mb-4 display-2">
-                                    <b>Gérer</b><br><strong>Mon
+                                    <strong>Mon
                                         catalogue</strong></h4>
                                 <p class="mbr-text mbr-fonts-style mb-4 display-7">
                                     Gérez votre catalogue en y ajoutant vos produits ou en les mettant à jour.</p>

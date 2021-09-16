@@ -95,8 +95,40 @@
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <hr>
                         </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 form-group" data-for="hasColors">
+                            <div class="form-control-label">
+                                <label for="visible-formbuilder-14" class="mbr-fonts-style display-7">Le produit dispose t-il de plusieurs couleurs ?</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" name="hasColors" data-form-field="hasColors"
+                                    class="form-check-input display-7"
+                                    id="visible-formbuilder-14">
+                                <label class="form-check-label display-7">Oui</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input checked type="radio" name="hasColors" data-form-field="hasColors"
+                                    class="form-check-input display-7" value="Non" id="visible-formbuilder-14">
+                                <label class="form-check-label display-7">Non</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 form-group" data-for="hasSizes">
+                            <div class="form-control-label">
+                                <label for="visible-formbuilder-14" class="mbr-fonts-style display-7">La produit a-t-il différentes tailles ?</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" name="hasSizes" data-form-field="hasSizes"
+                                    class="form-check-input display-7" value="Oui"
+                                    id="visible-formbuilder-14">
+                                <label class="form-check-label display-7">Oui</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input checked type="radio" name="hasSizes" data-form-field="hasSizes"
+                                    class="form-check-input display-7" value="Non" id="visible-formbuilder-14">
+                                <label class="form-check-label display-7">Non</label>
+                            </div>
+                        </div>
                         <div class="col">
-                            <button type="submit" class="btn btn-warning display-7"><span
+                            <button type="submit" class="btn btn-primary display-7"><span
                                     class="mobi-mbri mobi-mbri-plus mbr-iconfont mbr-iconfont-btn"></span>Ajouter</button>
                         </div>
                     </div>
