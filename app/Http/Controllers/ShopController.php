@@ -52,7 +52,7 @@ class ShopController extends Controller
             'telephonePrimaire'=>"required",
             'description'=>'required',
             'adresse'=>'required',
-            'email'=>'required|unique:shops,email',
+            'email'=>'required|unique:shops,email|unique:users,email',
             'password'=>'required|min:6|confirmed',
         ]);
         $user = new User();
@@ -66,7 +66,7 @@ class ShopController extends Controller
             Validator::validate($request->only('logo'),['logo'=>'image']);
             // Filename To store
             $filename = $request->get('pseudonyme').'.'.$request->file('logo')->getClientOriginalExtension();
-            $request->file('logo')->storeAs('public/shops', $filename);
+            $request->file('logo')->storeAs('storage/shops', $filename);
             $shop->logo = $filename;
         }
         
@@ -134,5 +134,21 @@ class ShopController extends Controller
         $request->validate(['pseudonyme'=>'required|exists:shops,pseudonyme']);
         $shop = Shop::where('pseudonyme',$request->get('pseudonyme'))->first();
         return redirect()->route('shop.home', compact('shop'));
+    }
+
+    public function uploadLogo(Request $request, Shop $shop) {
+        Validator::validate($request->all(),
+        [
+            'logo'=>'required|image'
+        ]);
+        
+        if($request->hasFile('logo')) {
+            Validator::validate($request->only('logo'),['logo'=>'image']);
+            // Filename To store
+            $filename = $shop->pseudonyme.'.'.$request->file('logo')->getClientOriginalExtension();
+            $request->file('logo')->storeAs('storage/shops', $filename);
+            $shop->update(['logo'=>$filename]);
+        }
+        return back();
     }
 }

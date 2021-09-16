@@ -49,6 +49,13 @@
                         @foreach ($panier->produits as $produit)
                         <div class="row icon first">
                             <div class="col-lg-2">
+                                <form action="{{route('shop.panier.produit.delete',['shop'=>$shop,'paproduit'=>$produit])}}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="btn btn-danger">Enlever</button>
+                                </form>
+                            </div>
+                            <div class="col-lg-2">
                                 <p class="mbr-text mbr-fonts-style display-4">
                                     {{$produit->produit->nom}}</p>
                             </div>
@@ -56,7 +63,7 @@
                                 <p class="mbr-text mbr-fonts-style display-4">
                                     {{$produit->produit->prixUnitaire}} FCFA<br></p>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <p class="mbr-text mbr-fonts-style display-4">
                                     {{$produit->quantite}} unité(s)</p>
                             </div>

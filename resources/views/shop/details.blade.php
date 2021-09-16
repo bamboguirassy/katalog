@@ -18,6 +18,26 @@
                     <img style="max-height: 500px; object-fit: cover;" src="{{ asset('storage/shops/'.$shop->logo) }}"
                         alt="">
                 </div>
+                <form action="{{route('shop.update.shop.logo',compact('shop'))}}" method="POST" class="mbr-form form-with-styler"
+                    data-form-title="boutiqueNewForm" enctype="multipart/form-data" id="shopLogoUpdate">
+                    @method('post')
+                    @csrf
+                    <div class="form-row">
+                        <div hidden="hidden" data-form-alert="" class="alert alert-success col-12"></div>
+                        @foreach ($errors->all() as $message)
+                        <div data-form-alert-danger="" class="alert alert-danger col-12">{{$message}}</div>
+                        @endforeach
+                    </div>
+                    <div class="dragArea form-row">
+                        <div class="col-lg-6 col-md-12 col-sm-12 form-group" style="" data-for="logo">
+                            <label for="logo-formbuilder-q"
+                                class="form-control-label mbr-fonts-style display-7 mbr-white">Changer le logo</label>
+                            <input placeholder="Changer logo" value="{{old('logo')}}" type="file" accept="image/*"
+                                name="logo" data-form-field="logo" class="form-control display-7" value=""
+                                id="logo-formbuilder-q">
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="col-lg-4">
                 <h4 class="card-title mbr-semibold pb-2 align-left mbr-fonts-style display-5"><br>
@@ -93,7 +113,8 @@
                             Téléphone Primaire
                         </h6>
                         <p class="mbr-text mbr-fonts-style display-7">
-                            <a href="tel:{{ $shop->telephonePrimaire }}" class="text-success">{{ $shop->telephonePrimaire }}</a>
+                            <a href="tel:{{ $shop->telephonePrimaire }}"
+                                class="text-success">{{ $shop->telephonePrimaire }}</a>
                         </p>
                     </div>
                 </div>
@@ -139,7 +160,8 @@
                         </h6>
                         <p class="mbr-text mbr-fonts-style display-7">
                             @isset($shop->telephoneSecondaire)
-                            <a href="tel:{{ $shop->telephoneSecondaire }}" class="text-success">{{ $shop->telephoneSecondaire }}</a>
+                            <a href="tel:{{ $shop->telephoneSecondaire }}"
+                                class="text-success">{{ $shop->telephoneSecondaire }}</a>
                             @else
                             Non renseigné
                             @endisset

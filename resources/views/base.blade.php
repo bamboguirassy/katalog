@@ -185,7 +185,7 @@
                                     @csrf
                                     @method('post')
                                     <button style="border: none;padding: 0!important; display: inline;" type="submit"
-                                        class="mbr-black text-danger text-primary display-4"><span
+                                        class="mbr-black text-danger text-primary display-4 mt-1"><span
                                             class="mobi-mbri mobi-mbri-arrow-down mbr-iconfont mbr-iconfont-btn"></span>
                                         Déconnexion</button>
                                 </form>
@@ -225,12 +225,10 @@
 
         {{-- panier client --}}
         @auth
-        @if (auth()->user()->type=='client' && isset($shop))
-        <a href="{{ route('shop.panier.retrieve',compact('shop')) }}" class="btn btn-secondary"
+        <a ng-if="panier" href="[[shop.pseudonyme]]/panier/show" class="btn btn-info"
             style="position: fixed; top: 25%; right: 20px;">
-            <span class="mbr-iconfont mbri-shopping-cart"></span> <!--PANIER-->
+            <span class="mbr-iconfont mbri-shopping-cart"></span> ([[panier.produits_count]])<!--PANIER-->
         </a>
-        @endif
 
         @endauth
         {{-- fin panier client --}}

@@ -19,6 +19,7 @@
             <div class="container align-center">
                 <div class="row">
                     <div class="col-md-12 col-lg-8 py-4 m-auto">
+                        <br>
                         <h1 class="mbr-section-title mbr-regular pb-3 align-left mbr-fonts-style display-1">
                             {{$shop->nom}} -> {{$categorie->nom}}
                         </h1>

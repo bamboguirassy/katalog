@@ -121,7 +121,7 @@ class PanierController extends Controller
         return back();
     }
 
-    public function retrieveUserPanier(Shop $shop)
+    public function showUserPanier(Shop $shop)
     {
         $panier = Panier::where('shop_id',$shop->id)
         ->where('user_id',Auth::user()->id)
@@ -133,6 +133,18 @@ class PanierController extends Controller
             }
         }
         return view('user.panier',compact('shop','panier','montant'));
+    }
+
+    /**
+     * For web service
+     */
+    public function getMyPanier(Shop $shop)
+    {
+        $paniers = Panier::where('shop_id',$shop->id)
+        ->withCount(['produits'])
+        ->where('user_id',Auth::user()->id)
+        ->get();
+        return $paniers;
     }
 
     public function convertToCommande(Shop $shop, Panier $panier) {
@@ -159,5 +171,10 @@ class PanierController extends Controller
             throw $e;
         }
         return redirect()->route('shop.commande.show', compact('shop','commande'));
+    }
+
+    public function supprimerProduitPanier(Shop $shop, Paproduit $paproduit) {
+        $paproduit->delete();
+        return back();
     }
 }

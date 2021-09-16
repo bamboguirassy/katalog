@@ -15,7 +15,7 @@
                     </div>
                     <div class="col-12 col-md">
                         <div class="text-wrapper align-left">
-                            <h3 class="mbr-section-title mbr-fonts-style mb-4 display-2"><strong>{{ $shop->nom }} -&gt;
+                            <h3 class="mbr-section-title mbr-fonts-style mb-4 display-3"><strong>{{ $shop->nom }} -&gt;
                                     Commande n° {{ $commande->numero }}</strong></h3>
                             <p class="mbr-text mbr-fonts-style mb-4 display-7"></p>
                             <p>Voici les détails de la commande n° <b>{{ $commande->numero }}</b> passée dans la

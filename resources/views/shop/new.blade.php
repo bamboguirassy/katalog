@@ -10,7 +10,7 @@
         <div class="row justify-content-center">
             <div class="media-container-column mbr-white col-md-10">
                 <h3 class="mbr-section-subtitle align-center mbr-light pb-1 mbr-fonts-style display-2">
-                    C'est maintenant !</h3>
+                    Booster mon commerce,<br>C'est maintenant !</h3>
                 <h1 class="mbr-section-title mbr-bold pb-1 mbr-fonts-style display-1">
                     Créez votre boutique !</h1>
                 <p class="mbr-text pb-2 mbr-fonts-style display-7">
@@ -91,7 +91,7 @@
                         <div data-for="telephoneSecondaire" class="col form-group">
                             <label for="telephoneSecondaire-formbuilder-q"
                                 class="form-control-label mbr-fonts-style display-7">Téléphone Secondaire</label>
-                            <input value="{{old('telephoneSecondaire')}}" type="text" name="telephoneSecondaire" placeholder="Numéro de téléphone sécondaire"
+                            <input value="{{old('telephoneSecondaire')}}" type="tel" name="telephoneSecondaire" placeholder="Numéro de téléphone sécondaire"
                                 data-form-field="telephoneSecondaire" class="form-control display-7" value=""
                                 id="telephoneSecondaire-formbuilder-q">
                         </div>

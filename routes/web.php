@@ -14,7 +14,6 @@ use App\Models\Shop;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 
@@ -106,6 +105,9 @@ Route::group([
                return view('shop.home',compact('shop', 'produits','categories','paProduits'));
            })->name('home');
 
+           Route::post('/update-shop-photo','App\Http\Controllers\ShopController@uploadLogo')
+           ->name('update.shop.logo')->middleware('is.owner');
+
            Route::get('/infos',function(Shop $shop) {
                 return view('shop.details',compact('shop'));
            })->name('details');
@@ -153,9 +155,19 @@ Route::group([
                 ->middleware('auth')
                 ->name('panier.produit.save');
 
-            Route::get('panier/retrieve','App\Http\Controllers\PanierController@retrieveUserPanier')
+            Route::get('panier/show','App\Http\Controllers\PanierController@showUserPanier')
                 ->middleware('auth')
-                ->name('panier.retrieve');
+                ->name('panier.show');
+
+            Route::delete('panier/produit-delete/{paproduit}','App\Http\Controllers\PanierController@supprimerProduitPanier')
+                ->middleware('auth')
+                ->name('panier.produit.delete');
+
+            /**
+             * For web service
+             */
+            Route::get('user/panier','App\Http\Controllers\PanierController@getMyPanier')
+                ->name('user.panier');
 
             Route::post('panier-convert/{panier}','App\Http\Controllers\PanierController@convertToCommande')
                 ->middleware('auth')

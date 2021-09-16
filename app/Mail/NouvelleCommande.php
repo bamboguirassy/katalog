@@ -30,6 +30,7 @@ class NouvelleCommande extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.commande.new')->subject("Nouvelle commande - ".$this->commande->numero);
+        return $this->markdown('emails.commande.new')->subject("Nouvelle commande - ".$this->commande->numero)
+        ->from($this->commande->shop->email,$this->commande->shop->nom);
     }
 }

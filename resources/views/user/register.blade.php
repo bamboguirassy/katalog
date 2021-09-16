@@ -42,7 +42,7 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 form-group" data-for="telephone">
                                     <label for="telephone-mbr-popup-3a"
                                         class="form-control-label mbr-fonts-style display-7">Téléphone</label>
-                                    <input type="text" name="telephone" placeholder="Téléphone"
+                                    <input type="tel" name="telephone" placeholder="Téléphone"
                                         data-form-field="telephone" required="required" class="form-control display-7"
                                         value="" id="telephone-mbr-popup-3a">
                                 </div>

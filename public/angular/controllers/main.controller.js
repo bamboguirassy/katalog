@@ -1,14 +1,20 @@
-app.controller('MainController', ($rootScope) => {
+app.controller('MainController', ($rootScope, $http) => {
     $rootScope.user = null;
     $rootScope.shop = null;
     $rootScope.selectedProduct = null;
+    $rootScope.panier = null;
 
     $rootScope.setCurrentUser = (user) => {
         $rootScope.user = user;
     }
-
+    
     $rootScope.setCurrentShop = (shop) => {
         $rootScope.shop = shop;
+        setTimeout(()=>{
+            if($rootScope.user && $rootScope.user.type=='client') {
+                $rootScope.getPanier();
+            }
+        },2000);
     }
 
     $rootScope.initProductToPanier = (produit) => {
@@ -16,7 +22,7 @@ app.controller('MainController', ($rootScope) => {
         if ($rootScope.user == null) {
             displayLoginModal();
         } else {
-            if($rootScope.user.type=='client') {
+            if ($rootScope.user.type == 'client') {
                 $rootScope.selectedProduct = produit;
                 $('#mbr-popup-34').modal('toggle');
             } else {
@@ -34,16 +40,17 @@ app.controller('MainController', ($rootScope) => {
         $('#mbr-popup-3a').modal('toggle');
     }
 
-    $rootScope.addProductToPanier = (produit, quantite) => {
-
+    $rootScope.getPanier = () => {
+        $http.get(`/${$rootScope.shop.pseudonyme}/user/panier`)
+        .success((data)=>{
+            if(data) {
+                $rootScope.panier = data[0];
+            }
+        }).error(err=>console.log(err));
     }
 
-    $rootScope.removeProductFromPanier = (item) => {
-
-    }
-
-    $rootScope.changeCommandeStatus = (commande, status) => {
-
-    }
+    $('#logo-formbuilder-q').change(()=>{
+        $('#shopLogoUpdate').submit();
+    });
 
 });

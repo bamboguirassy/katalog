@@ -66,7 +66,7 @@ class ProduitController extends Controller
                 if($i==0) {
                     $image->couverture = true;
                 }
-                $photoFile->storeAs('public/produits/images/',$image->nom);
+                $photoFile->storeAs('storage/produits/images/',$image->nom);
                 $image->save();
                 $i++;
             }
@@ -165,7 +165,7 @@ class ProduitController extends Controller
                 // Filename To store
                 $image->nom = $shop->pseudonyme.'_'.$produit->nom.'_'.uniqid().'.'.$photoFile->getClientOriginalExtension();
                 $image->produit_id = $produit->id;
-                $photoFile->storeAs('public/produits/images/',$image->nom);
+                $photoFile->storeAs('storage/produits/images/',$image->nom);
                 $image->save();
             }
         DB::commit();
