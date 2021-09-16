@@ -51,7 +51,7 @@
             <div class="col-12 col-md-6 col-lg-3 item gallery-image">
                 <div class="item-wrapper" data-toggle="modal" data-bs-toggle="modal" data-target="#sIw8XBZBnS-modal"
                     data-bs-target="#sIw8XBZBnS-modal">
-                    <img class="h-100" src="{{ asset('storage/produits/images/'.$image->nom) }}" alt=""
+                    <img style="height: 300px" src="{{ asset('storage/produits/images/'.$image->nom) }}" alt=""
                         data-slide-to="0" data-bs-slide-to="0" data-target="#lb-sIw8XBZBnS"
                         data-bs-target="#lb-sIw8XBZBnS">
                     <div class="icon-wrapper">
