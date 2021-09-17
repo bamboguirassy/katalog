@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\AttributController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ValeurAttributController;
 use App\Models\Categorie;
 use App\Models\Panier;
 use App\Models\Paproduit;
@@ -162,6 +164,18 @@ Route::group([
             Route::delete('panier/produit-delete/{paproduit}','App\Http\Controllers\PanierController@supprimerProduitPanier')
                 ->middleware('auth')
                 ->name('panier.produit.delete');
+
+            /** Called by web service */
+            Route::get('attribut/find_all', 'App\Http\Controllers\AttributController@findAll')->middleware('is.owner');
+
+            Route::resource('attribut', AttributController::class,[
+                'excepts'=>['show','edit','create']
+            ])->middleware('is.owner');
+
+
+            Route::resource('valeurattribut', ValeurAttributController::class,[
+                'only'=>['store','update','delete']
+            ]);
 
             /**
              * For web service

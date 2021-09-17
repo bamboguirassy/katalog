@@ -149,7 +149,7 @@
                                     <span class="mobi-mbri mobi-mbri-layers mbr-iconfont mbr-iconfont-btn">
                                     </span>Catégories
                                 </a>
-                                <a class="text-primary dropdown-item display-4" href="#" aria-expanded="false">
+                                <a class="text-primary dropdown-item display-4" href="{{ route('shop.attribut.index',compact('shop')) }}" aria-expanded="false">
                                     <span class="mobi-mbri mobi-mbri-features mbr-iconfont mbr-iconfont-btn">
                                     </span>Attributs de produits
                                 </a>
@@ -316,8 +316,10 @@
     <script src="{{ asset('bower_components/angular/angular.min.js') }}"></script>
     <script src="{{ asset('bower_components/angular-filter/dist/angular-filter.min.js') }}"></script>
     <script src="{{ asset('angular/app.js') }}"></script>
+    <script src="{{ asset('angular/services/attribut.service.js') }}"></script>
     <script src="{{ asset('angular/controllers/main.controller.js') }}"></script>
     <script src="{{ asset('angular/controllers/shop.new.controller.js') }}"></script>
+    <script src="{{ asset('angular/controllers/attribut.controller.js') }}"></script>
 </body>
 
 </html>

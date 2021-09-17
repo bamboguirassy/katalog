@@ -83,7 +83,7 @@
                             <div class="item-content">
                                 <a href="{{ route('shop.produit.display',compact('produit','shop')) }}">
                                     <h5 title="{{ $produit->nom }}" class="item-title mbr-fonts-style display-5">
-                                        {{ \Illuminate\Support\Str::limit($produit->nom, 20, '...') }}
+                                        {{ \Illuminate\Support\Str::limit($produit->nom, 16, '...') }}
                                     </h5>
                                     <p style="min-height: 100px" class="mbr-text mbr-fonts-style display-7">
                                         {{ \Illuminate\Support\Str::limit($produit->description, 100, '...') }}
