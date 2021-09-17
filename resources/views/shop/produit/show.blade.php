@@ -37,7 +37,7 @@
                 <div class="image-wrapper">
                     <span class="price-badge">{{ $produit->prixUnitaire }} FCFA</span>
                     <span class="category-badge">{{ $produit->categorie->nom }}</span>
-                    <img
+                    <img style="height: 400px;"
                         src="{{ asset('storage/produits/images/'.$produit->imageCouverture->nom) }}"
                         alt="Image de couverture">
                 </div>
