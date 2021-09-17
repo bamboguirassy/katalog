@@ -320,6 +320,7 @@
     <script src="{{ asset('angular/controllers/main.controller.js') }}"></script>
     <script src="{{ asset('angular/controllers/shop.new.controller.js') }}"></script>
     <script src="{{ asset('angular/controllers/attribut.controller.js') }}"></script>
+    <script src="{{ asset('angular/controllers/produit.new.controller.js') }}"></script>
 </body>
 
 </html>

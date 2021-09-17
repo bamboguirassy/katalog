@@ -104,7 +104,9 @@
                                                         <tbody>
                                                             <tr ng-repeat="valeur in attribut.valeurs">
                                                                 <td scope="row">[[valeur.nom]]</td>
-                                                                <td>[[ valeur.valeur ]]</td>
+                                                                <td>[[ valeur.valeur ]] 
+                                                                    <div ng-if="attribut.type=='couleur'" style="width: 50px; height: 10px; background-color: [[valeur.valeur]]"></div>
+                                                                </td>
                                                             </tr>
                                                         </tbody>
                                                     </table>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attribut;
 use App\Models\Categorie;
 use App\Models\Image;
 use App\Models\Panier;
@@ -33,7 +34,8 @@ class ProduitController extends Controller
     public function create(Shop $shop)
     {
         $categories = Categorie::where('shop_id',$shop->id)->orderby('nom')->get();
-        return view('shop.produit.new',compact('shop','categories'));
+        $attributs = Attribut::where('shop_id',$shop->id)->has('valeurs')->with(['valeurs'])->orderby('nom')->get();
+        return view('shop.produit.new',compact('shop','categories','attributs'));
     }
 
     /**
@@ -52,6 +54,7 @@ class ProduitController extends Controller
             'quantite'=>'integer',
             'photos'=>'required'
         ]);
+        dd($request->all());
         $produit = new Produit($request->all());
         $produit->shop_id = $shop->id;
         $produit->visible = true;
