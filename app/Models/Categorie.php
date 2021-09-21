@@ -17,6 +17,12 @@ class Categorie extends Model
         'active'
     ];
 
+
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
+    
     /**
      * Get the shop that owns the Categorie
      *

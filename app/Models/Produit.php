@@ -18,16 +18,9 @@ class Produit extends Model
         'description',
         'visible',
         'shop_id',
-        'hasColors',
-        'colors',
-        'hasSizes',
-        'sizes'
     ];
 
-    protected $casts = [
-        'sizes' => 'array',
-        'colors'=>'array'
-    ];
+    protected $casts = [];
 
     /**
      * Get the shop that owns the Produit
@@ -57,5 +50,13 @@ class Produit extends Model
         return $this->hasOne(Image::class)->ofMany([], function($query) {
             $query->where('couverture',true);
         });
+    }
+
+    public function attributs() {
+        return $this->hasMany(AttributProduit::class);
+    }
+
+    public function variants() {
+        return $this->hasMany(ProduitVariant::class);
     }
 }

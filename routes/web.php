@@ -1,13 +1,16 @@
 <?php
 
 use App\Http\Controllers\AttributController;
+use App\Http\Controllers\AttributProduitController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProduitController;
+use App\Http\Controllers\ProduitVariantController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ValeurAttributController;
+use App\Http\Controllers\ValeurAttributProduitController;
 use App\Models\Categorie;
 use App\Models\Panier;
 use App\Models\Paproduit;
@@ -134,7 +137,14 @@ Route::group([
 
             Route::resource('/categorie', CategorieController::class,
                 ['only'=>['show']
-            ]);
+            ]); 
+
+            Route::post('/produitvariant/add-images/{produitVariant}', 'App\Http\Controllers\ProduitVariantController@addImages')
+            ->name('produitvariant.add.images')->middleware('is.owner');
+
+            Route::resource('produitvariant', ProduitVariantController::class,[
+                'only'=>['update','destroy']
+            ])->middleware('is.owner');
 
             Route::get('/produit/{produit}/display', 'App\Http\Controllers\ProduitController@display')
             ->name('produit.display');
@@ -144,6 +154,10 @@ Route::group([
 
             Route::post('/produit/change/photo-couverture/{image}', 'App\Http\Controllers\ProduitController@updateCouvertureImage')
             ->name('produit.update.couverture.photo');
+
+            Route::get('/produit/{produit}/refresh', 'App\Http\Controllers\ProduitController@get')->middleware('is.owner');
+            
+            Route::post('/produit/{produit}/create-combination', 'App\Http\Controllers\ProduitController@createCombination')->middleware('is.owner');
 
             Route::resource('/produit', ProduitController::class,
                 ['except'=>['index']
@@ -176,6 +190,20 @@ Route::group([
             Route::resource('valeurattribut', ValeurAttributController::class,[
                 'only'=>['store','update','delete']
             ]);
+           
+            Route::post('attributproduit/{attributProduit}/add-valeurs','App\Http\Controllers\AttributProduitController@addValeursToAttribut')
+            ->middleware('is.owner');
+
+            Route::delete('attributproduit/{attributProduit}/remove','App\Http\Controllers\AttributProduitController@remove')
+            ->middleware('is.owner');
+
+            Route::delete('attributproduit/{valeurAttributProduit}/remove-valeur','App\Http\Controllers\AttributProduitController@removeValeur')
+            ->middleware('is.owner');
+
+            Route::post('attributproduit/{produit}/add-multiple','App\Http\Controllers\AttributProduitController@saveMultiple')
+            ->middleware('is.owner')->name('attributproduit.save.multiple');
+            
+            Route::resource('attributproduit', AttributProduitController::class);
 
             /**
              * For web service

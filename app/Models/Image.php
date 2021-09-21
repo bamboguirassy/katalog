@@ -14,7 +14,13 @@ class Image extends Model
         'nom',
         'active',
         'couverture',
-        'produit_id'
+        'produit_id',
+        'produit_variant_id'
+    ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at'
     ];
 
     /**
@@ -25,5 +31,9 @@ class Image extends Model
     public function produit(): BelongsTo
     {
         return $this->belongsTo(Produit::class);
+    }
+
+    public function produitVariant() {
+        return $this->belongsTo(ProduitVariant::class);
     }
 }

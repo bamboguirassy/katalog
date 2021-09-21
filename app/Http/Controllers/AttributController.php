@@ -54,6 +54,7 @@ class AttributController extends Controller
         //
         $request->validate([
             'nom'=>'required',
+            'changePrice'=>'boolean|required'
         ]);
         $attribut = new Attribut($request->all());
         $attribut->shop_id = $shop->id;
@@ -97,7 +98,8 @@ class AttributController extends Controller
         $request->validate([
             'nom'=>'required',
             'shop_id'=>'required|exists:shops,id',
-            'type'=>'required'
+            'type'=>'required',
+            'changePrice'=>'boolean|required'
         ]);
         if($attribut->update($request->all())) {
             return ['error'=>false,'data'=>$attribut];

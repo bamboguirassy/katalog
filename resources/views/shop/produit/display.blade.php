@@ -5,108 +5,148 @@
 @section('description',$produit->description)
 
 @section('body')
-<section data-bs-version="5.1" class="article5 cid-sIrEzxbcOc" id="article06-1c">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="card col-12 col-lg">
-                <div class="card-wrapper align-left">
-                    <h6 class="card-title mbr-fonts-style mb-4 display-2"><strong>{{ $produit->nom }}</strong></h6>
-                    <p class="mbr-text mbr-fonts-style display-7"><strong>{{ $produit->description }}</strong><br></p>
-                    <div class="mbr-section-btn">
-                        @if (in_array($produit->id, $paProduits))
-                        <a style="background: green; color: white;" class="btn item-btn display-4">
-                            Dans le panier <i class="fa fa-check"></i>
-                        </a>
-                        @else
-                        <a ng-click="initProductToPanier({{$produit}})" class="btn btn-lg btn-secondary display-4">
-                            AJOUTER AU PANIER
-                        </a>
-                        @endif
+<style>
+    .product {
+        background-color: #eee
+    }
 
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-lg-5">
-                <div class="image-wrapper">
-                    <span class="price-badge">{{ $produit->prixUnitaire }} FCFA</span>
-                    <span class="category-badge">{{ $produit->categorie->nom }}</span>
-                    <img style="height: 400px; object-fit: content;"
-                        src="{{ asset('storage/produits/images/'.$produit->imageCouverture->nom) }}"
-                        alt="Image de couverture">
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+    .brand {
+        font-size: 13px
+    }
 
-<section data-bs-version="5.1" class="gallery6 mbr-gallery cid-sIsb7KGEzR" id="gallery6-1n">
-    <div class="container-fluid">
-        <div class="mbr-section-head">
-            <h3 class="mbr-section-title mbr-fonts-style align-center m-0 display-2"><strong>Galerie photo du
-                    produit</strong></h3>
+    .act-price {
+        color: #1c73ba;
+        font-weight: 700
+    }
 
-        </div>
-        <div class="row mbr-gallery mt-4">
-            @foreach ($produit->images as $image)
-            <div class="col-12 col-md-6 col-lg-3 item gallery-image">
-                <div class="item-wrapper" data-toggle="modal" data-bs-toggle="modal" data-target="#sIw8XBZBnS-modal"
-                    data-bs-target="#sIw8XBZBnS-modal">
-                    <img style="height: 300px" src="{{ asset('storage/produits/images/'.$image->nom) }}" alt=""
-                        data-slide-to="0" data-bs-slide-to="0" data-target="#lb-sIw8XBZBnS"
-                        data-bs-target="#lb-sIw8XBZBnS">
-                    <div class="icon-wrapper">
-                        <span class="mobi-mbri mobi-mbri-search mbr-iconfont mbr-iconfont-btn"></span>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
+    .dis-price {
+        text-decoration: line-through;
+    }
 
-        <div class="modal mbr-slider" tabindex="-1" role="dialog" aria-hidden="true" id="sIw8XBZBnS-modal">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="carousel slide" id="lb-sIw8XBZBnS" data-interval="5000" data-bs-interval="5000">
-                            <div class="carousel-inner">
-                                @for ($i=0;$i<count($produit->images);$i++)
-                                    <div class="carousel-item @if ($i==0) active @endif">
-                                        <img class="d-block w-100"
-                                            src="{{ asset('storage/produits/images/'.$produit->images[$i]->nom) }}"
-                                            alt="">
-                                    </div>
-                                    <? $i++; ?>
-                                    @endfor
+    .about {
+        font-size: 14px
+    }
+
+    .color {
+        margin-bottom: 10px
+    }
+
+    label.radio {
+        cursor: pointer
+    }
+
+    label.radio input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        visibility: hidden;
+        pointer-events: none
+    }
+
+    label.radio span {
+        padding: 2px 9px;
+        border: 2px solid #1c73ba;
+        display: inline-block;
+        color: #1c73ba;
+        border-radius: 3px;
+        text-transform: uppercase
+    }
+
+    label.radio input:checked+span {
+        border-color: #1c73ba;
+        border-width: 5px;
+        background-color: #1c73ba;
+        color: #fff
+    }
+
+    .btn-danger {
+        background-color: #ff0000 !important;
+        border-color: #ff0000 !important
+    }
+
+    .btn-danger:hover {
+        background-color: #da0606 !important;
+        border-color: #da0606 !important
+    }
+
+    .btn-danger:focus {
+        box-shadow: none
+    }
+
+    .cart i {
+        margin-right: 10px
+    }
+</style>
+<div class="container mt-5 mb-5" ng-init="produit = {{$produit}}">
+    [[produit.variants]]
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="images">
+                            <div class="text-center p-4">
+                                <img id="main-image"
+                                    src="{{ asset('storage/produits/images/'.$produit->imageCouverture->nom) }}"
+                                    style="height: 400px; object-fit: fill;" />
                             </div>
-                            <ol class="carousel-indicators">
-                                <li data-slide-to="0" data-bs-slide-to="0" class="active" data-target="#lb-sIw8XBZBnS"
-                                    data-bs-target="#lb-sIw8XBZBnS"></li>
-                                <li data-slide-to="1" data-bs-slide-to="1" data-target="#lb-sIw8XBZBnS"
-                                    data-bs-target="#lb-sIw8XBZBnS"></li>
-                                <li data-slide-to="2" data-bs-slide-to="2" data-target="#lb-sIw8XBZBnS"
-                                    data-bs-target="#lb-sIw8XBZBnS"></li>
-                                <li data-slide-to="3" data-bs-slide-to="3" data-target="#lb-sIw8XBZBnS"
-                                    data-bs-target="#lb-sIw8XBZBnS"></li>
-                            </ol>
-                            <a role="button" href="" class="close" data-dismiss="modal" data-bs-dismiss="modal"
-                                aria-label="Close">
-                            </a>
-                            <a class="carousel-control-prev carousel-control" role="button" data-slide="prev"
-                                data-bs-slide="prev" href="#lb-sIw8XBZBnS">
-                                <span class="mobi-mbri mobi-mbri-arrow-prev" aria-hidden="true"></span>
-                                <span class="sr-only visually-hidden">Previous</span>
-                            </a>
-                            <a class="carousel-control-next carousel-control" role="button" data-slide="next"
-                                data-bs-slide="next" href="#lb-sIw8XBZBnS">
-                                <span class="mobi-mbri mobi-mbri-arrow-next" aria-hidden="true"></span>
-                                <span class="sr-only visually-hidden">Next</span>
-                            </a>
+                            <div class="thumbnail">
+                                @foreach ($produit->images as $image)
+                                <img onclick="change_image(this)"
+                                    src="{{ asset('storage/produits/images/'.$image->nom) }}"
+                                    style="width: 70px; display: inline;">
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="product p-4">
+                            <div class="d-flex justify-content-between align-items-center">
+
+                                <i class="fa fa-shopping-cart text-muted"></i>
+                            </div>
+                            <div class="mt-4 mb-3"> <span
+                                    class="text-uppercase text-muted brand">{{ $produit->categorie->nom }}</span>
+                                <h5 class="text-uppercase">{{ $produit->nom }}</h5>
+                                <div class="price d-flex flex-row align-items-center"> <span
+                                        class="act-price">{{ $produit->prixUnitaire }} FCFA</span>
+                                    <div class="ml-2"> <small class="dis-price">$59</small> <span>40% OFF</span> </div>
+                                </div>
+                            </div>
+                            <p class="about">{{ $produit->description }}</p>
+                            @foreach ($produit->attributs as $attributProduit)
+                            <div class="sizes mt-2">
+                                <h6 class="text-uppercase">{{$attributProduit->attribut->nom}}</h6>
+                                @foreach ($attributProduit->valeurs as $attrProdVal)
+                                <label class="radio">
+                                    <input type="radio" name="{{$attributProduit->attribut->nom}}"
+                                        value="{{$attrProdVal->id}}">
+                                    @if ($attributProduit->attribut->type=='couleur')
+                                    <span title="{{ $attrProdVal->valeurAttribut->nom }}"
+                                        style="height: 20px; width: 30px; background-color: {{$attrProdVal->valeurAttribut->valeur}}"></span>
+                                    @else
+                                    <span title="{{ $attrProdVal->valeurAttribut->nom }}">{{ $attrProdVal->valeurAttribut->valeur }}</span>
+                                    @endif
+                                </label>
+                                @endforeach
+                            </div>
+                            @endforeach
+                            <div class="cart mt-4 align-items-center">
+                                @if (in_array($produit->id, $paProduits))
+                                <a style="background: green; color: white;" class="btn item-btn display-4">
+                                    Dans le panier <i class="fa fa-check"></i>
+                                </a>
+                                @else
+                                <button ng-click="initProductToPanier({{$produit}})" class="btn btn-primary text-uppercase mr-2 px-4">Ajouter au panier</button>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
 
 <section data-bs-version="5.1" class="social1 cid-sIrHQR2e1u" id="share1-1d">
     <div class="container">
@@ -140,4 +180,12 @@
         </div>
     </div>
 </section>
+
+<script>
+    function change_image(image){
+        var container = document.getElementById("main-image");
+        container.src = image.src;
+    }
+    document.addEventListener("DOMContentLoaded", function(event) {});
+</script>
 @endsection

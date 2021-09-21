@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attribut;
+use App\Models\AttributProduit;
 use App\Models\Categorie;
 use App\Models\Image;
 use App\Models\Panier;
 use App\Models\Paproduit;
 use App\Models\Produit;
+use App\Models\ProduitVariant;
 use App\Models\Shop;
+use App\Models\ValeurAttributProduit;
+use App\Models\VariantAttributeValue;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +38,11 @@ class ProduitController extends Controller
     public function create(Shop $shop)
     {
         $categories = Categorie::where('shop_id',$shop->id)->orderby('nom')->get();
-        $attributs = Attribut::where('shop_id',$shop->id)->has('valeurs')->with(['valeurs'])->orderby('nom')->get();
+        $attributs = Attribut::where('shop_id',$shop->id)
+        ->has('valeurs')
+        ->with(['valeurs'])
+        ->orderby('nom')
+        ->get();
         return view('shop.produit.new',compact('shop','categories','attributs'));
     }
 
@@ -54,12 +62,29 @@ class ProduitController extends Controller
             'quantite'=>'integer',
             'photos'=>'required'
         ]);
-        dd($request->all());
         $produit = new Produit($request->all());
         $produit->shop_id = $shop->id;
         $produit->visible = true;
         DB::beginTransaction();
+        try {
         $produit->save();
+        if($request->get('hasMoreAttributes')) {
+            foreach ($request->get('selectedAttrs') as $selectedAttr) {
+                $attribut = Attribut::find($selectedAttr);
+                $attributProduit = new AttributProduit();
+                $attributProduit->produit_id = $produit->id;
+                $attributProduit->attribut_id = $selectedAttr;
+                $attributProduit->save();
+                // for each attribut, find values
+                $attributValueIds = $request->get($attribut->nom);
+                foreach ($attributValueIds as $attributValueId) {
+                    $valeurAttributProduit = new ValeurAttributProduit();
+                    $valeurAttributProduit->attribut_produit_id = $attributProduit->id;
+                    $valeurAttributProduit->valeur_attribut_id = $attributValueId;
+                    $valeurAttributProduit->save();
+                }
+            }
+        }
         $i=0;
             foreach($request->file('photos') as $photoFile) {
                 $image = new Image();
@@ -73,8 +98,12 @@ class ProduitController extends Controller
                 $image->save();
                 $i++;
             }
-        DB::commit();
-        return redirect()->route('shop.catalogue',compact('shop'));
+            DB::commit();
+        } catch(Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+        return redirect()->route('shop.produit.show',compact('shop','produit'));
     }
 
     /**
@@ -86,7 +115,16 @@ class ProduitController extends Controller
      */
     public function show(Shop $shop, Produit $produit)
     {
-        return view('shop.produit.show',compact('produit','shop'));
+        $produit = Produit::with(['categorie','attributs.attribut','attributs.valeurs.valeurAttribut','variants.attributValues.valeurAttributProduit.valeurAttribut','variants.images'])->find($produit->id);
+        $attributs = Attribut::where('shop_id',$shop->id)->has('valeurs')->with(['valeurs'])->get();
+        return view('shop.produit.show',compact('produit','shop','attributs'));
+    }
+
+    /** for WS */
+    public function get(Shop $shop, Produit $produit) {
+        $produit = Produit::with(['categorie','attributs.attribut','attributs.valeurs.valeurAttribut','variants.attributValues','variants.attributValues.valeurAttributProduit.valeurAttribut','variants.images'])->find($produit->id);
+        $attributs = Attribut::where('shop_id',$shop->id)->has('valeurs')->with(['valeurs'])->get();
+        return compact('shop','produit','attributs');
     }
 
     /**
@@ -137,6 +175,7 @@ class ProduitController extends Controller
     }
 
     public function display(Shop $shop, Produit $produit) {
+        $produit = Produit::with(['images','variants.images','variants.attributValues.valeurAttributProduit.valeurAttribut'])->find($produit->id);
         // find user panier if exists
         $paProduits = [];
         if(Auth::user()) {
@@ -191,4 +230,56 @@ class ProduitController extends Controller
         }
         return back();
     }
+
+    public function createCombination(Shop $shop, Produit $produit) {
+        $valeurTabs = $this->cartesian($produit->attributs);
+        DB::beginTransaction();
+        try {
+
+            foreach($valeurTabs as $valeurTab) {
+                $produitVariant = new ProduitVariant();
+                $produitVariant->produit_id = $produit->id;
+                $produitVariant->save();
+                foreach($valeurTab as $valeur) {
+                    $variantAttributValue = new VariantAttributeValue();
+                    $variantAttributValue->produit_variant_id = $produitVariant->id;
+                    $variantAttributValue->valeur_attribut_produit_id = $valeur;
+                    $variantAttributValue->save();
+                }
+            }
+            DB::commit();
+        } catch(Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+        return true;
+    }
+
+    function cartesian($attributs) {
+        $result = array(array());
+        foreach ($attributs as $key => $attribut) {
+            $append = array();
+            foreach($result as $product) {
+                foreach($attribut->valeurs as $item) {
+                    $product[$key] = $item->id;
+                    $append[] = $product;
+                }
+            }
+            $result = $append;
+        }
+        return $result;
+    }
+    
+
+    function totalTabSize($tabOfTab,$i,$size) {
+        if($i==count($tabOfTab)) {
+            return $size;
+        }
+        if(is_numeric($i)) {
+            $size = $size*count($tabOfTab[$i]);
+            $i=$i+1;
+            return $this->totalTabSize($tabOfTab,$i,$size);
+        }
+    }
+       
 }

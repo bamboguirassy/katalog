@@ -14,4 +14,13 @@ class ValeurAttribut extends Model
         'valeur',
         'attribut_id'
     ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
+
+    public function attribut() {
+        return $this->belongsTo(Attribut::class);
+    }
 }

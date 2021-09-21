@@ -1,6 +1,6 @@
 app.controller('ProduitNewController', ($scope) => {
     $scope.attributs = [];
-    $scope.hasMoreAttr = 'Non';
+    $scope.hasMoreAttr = 0;
     $scope.selectedAttrs = [];
 
     $scope.toggleAttrSelection = (selected) => {

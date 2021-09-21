@@ -5,16 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Attribut extends Model
+class ValeurAttributProduit extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'nom',
-        'type',
-        'description',
-        'shop_id',
-        'changePrice'
+        'attribut_produit_id',
+        'valeur_attribut_id'
     ];
 
     protected $hidden = [
@@ -22,7 +19,7 @@ class Attribut extends Model
         'updated_at'
     ];
 
-    public function valeurs() {
-        return $this->hasMany(ValeurAttribut::class);
+    public function valeurAttribut() {
+        return $this->belongsTo(ValeurAttribut::class);
     }
 }

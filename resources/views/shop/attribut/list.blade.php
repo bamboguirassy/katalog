@@ -54,6 +54,25 @@
                                             placeholder="Description de l'attribut" data-form-field="description"
                                             class="form-control display-7" id="description-formbuilder-42"></textarea>
                                     </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 form-group" data-for="changePrice">
+                                        <div class="form-control-label">
+                                            <label for="changePrice-formbuilder-14"
+                                                class="mbr-fonts-style display-7">Est-ce que le prix du produit change
+                                                en fonction de cet attribut ?</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input checked type="radio" name="changePrice" data-form-field="changePrice"
+                                                class="form-check-input display-7" value="0"
+                                                id="changePrice-formbuilder-14no">
+                                            <label class="form-check-label display-7">Non</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" name="changePrice" data-form-field="changePrice"
+                                                class="form-check-input display-7" id="changePrice-formbuilder-14yes"
+                                                value="1">
+                                            <label class="form-check-label display-7">Oui</label>
+                                        </div>
+                                    </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <hr>
                                     </div>
@@ -88,7 +107,10 @@
                                             data-parent="#bootstrap-accordion_84" data-bs-parent="#accordion">
                                             <div class="panel-body ">
                                                 <p class="mbr-fonts-style panel-text display-7">
-                                                    [[attribut.description]]
+                                                    [[attribut.description]] 
+                                                    <br>
+                                                    <span ng-if="attribut.changePrice"><b><u>Cet attribut change le prix du produit</u></b></span>
+                                                    <span ng-if="!attribut.changePrice"><b><u>Cet attribut ne change pas le prix du produit</u></b></span>
                                                     <hr>
                                                     <button ng-click="openAttributValueModal(attribut)"
                                                         title="Ajouter valeur"
@@ -104,13 +126,15 @@
                                                         <tbody>
                                                             <tr ng-repeat="valeur in attribut.valeurs">
                                                                 <td scope="row">[[valeur.nom]]</td>
-                                                                <td>[[ valeur.valeur ]] 
-                                                                    <div ng-if="attribut.type=='couleur'" style="width: 50px; height: 10px; background-color: [[valeur.valeur]]"></div>
+                                                                <td>[[ valeur.valeur ]]
+                                                                    <div ng-if="attribut.type=='couleur'"
+                                                                        style="width: 50px; height: 10px; background-color: [[valeur.valeur]]">
+                                                                    </div>
                                                                 </td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
-                                                    
+
                                                 </p>
                                             </div>
                                         </div>
@@ -145,7 +169,7 @@
                     <p class="mbr-text mbr-fonts-style display-7">
                         Ajouter des valeurs à l'attribut (<b> [[currentAttribut.nom]]</b>)</p>
                     <div>
-                        <div class="form-wrapper" data-form-type="formoid">
+                        <div class="form-wrapper">
                             <!--Formbuilder Form-->
                             <form ng-submit="addNewValue()" method="POST" class="mbr-form form-with-styler"
                                 data-form-title="attributValueForm">
@@ -155,13 +179,15 @@
                                     <div class="col-auto form-group" data-for="nom">
                                         <label for="nom-mbr-popup-44"
                                             class="form-control-label mbr-fonts-style display-7">Nom</label>
-                                        <input ng-model="newValue.nom" type="text" name="nom" placeholder="Nom" data-form-field="nom"
-                                            class="form-control display-7" required="required" id="nom-mbr-popup-44">
+                                        <input ng-model="newValue.nom" type="text" name="nom" placeholder="Nom"
+                                            data-form-field="nom" class="form-control display-7" required="required"
+                                            id="nom-mbr-popup-44">
                                     </div>
                                     <div class="col-auto form-group" data-for="valeur">
                                         <label for="valeur-mbr-popup-44"
                                             class="form-control-label mbr-fonts-style display-7">Valeur</label>
-                                        <input ng-model="newValue.valeur" type="[[currentAttribut.type=='couleur'?'color':'texte']]" name="valeur"
+                                        <input ng-model="newValue.valeur"
+                                            type="[[currentAttribut.type=='couleur'?'color':'texte']]" name="valeur"
                                             placeholder="Valeur" data-form-field="valeur" required="required"
                                             class="form-control display-7" id="valeur-mbr-popup-44">
                                     </div>
