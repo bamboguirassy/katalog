@@ -115,7 +115,7 @@
                             </div>
                             <div class="col-12" ng-show="!addAttribut && produit.variants.length<1">
                                 <button ng-click="addAttribut = !addAttribut" type="button"
-                                    class="btn btn-primary">Ajouter des attributs</button>
+                                    class="btn btn-primary">Ajouter d'autres attributs</button>
                             </div>
                             <form method="post"
                                 action="{{ route('shop.attributproduit.save.multiple',compact('shop','produit')) }}">
@@ -177,7 +177,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12" ng-show="produit.variants.length<1">
+                <div class="col-12" ng-show="produit.variants.length<1 && produit.attributs.length>0">
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Générer les combinaisons</h4>
@@ -229,9 +229,9 @@
                                     </div>
                                     <div class="col-12">
                                         <button type="submit"
-                                            class="btn btn-sm btn-primary pull-right ml-3">Enregistrer</button>
+                                            class="btn btn-sm btn-primary pull-right" style="margin-left: 3px;">Enregistrer</button>
                                         <button ng-click="variant.configured=true" type="submit"
-                                            class="btn btn-sm btn-secondary pull-right ml-3">Annuler</button>
+                                            class="btn btn-sm btn-secondary pull-right">Annuler</button>
                                     </div>
                                 </div>
                             </form>
@@ -251,7 +251,7 @@
                                                         des
                                                         photos</label>
                                                     <form name="addVariantImageForm"
-                                                        action="[['/'+shop.pseudonyme+'/produitvariant/add-images/'+variant.id]]"
+                                                        action="[['/'+shop.pseudonyme+'/produit/add-images/'+variant.id]]"
                                                         method="POST" enctype="multipart/form-data">
                                                         @method('post')
                                                         @csrf

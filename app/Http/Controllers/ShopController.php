@@ -151,4 +151,9 @@ class ShopController extends Controller
         }
         return back();
     }
+
+    /** for autocomplete search WS */
+    public function filterAutocomplete() {
+        return Shop::all();
+    }
 }

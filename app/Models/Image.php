@@ -15,7 +15,6 @@ class Image extends Model
         'active',
         'couverture',
         'produit_id',
-        'produit_variant_id'
     ];
 
     protected $hidden = [
@@ -31,9 +30,5 @@ class Image extends Model
     public function produit(): BelongsTo
     {
         return $this->belongsTo(Produit::class);
-    }
-
-    public function produitVariant() {
-        return $this->belongsTo(ProduitVariant::class);
     }
 }

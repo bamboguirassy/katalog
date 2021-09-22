@@ -6,11 +6,9 @@ use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProduitController;
-use App\Http\Controllers\ProduitVariantController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ValeurAttributController;
-use App\Http\Controllers\ValeurAttributProduitController;
 use App\Models\Categorie;
 use App\Models\Panier;
 use App\Models\Paproduit;
@@ -78,6 +76,9 @@ Route::get('/mes-commandes', 'App\Http\Controllers\CommandeController@getUserCom
 Route::post('/search-shop', 'App\Http\Controllers\ShopController@search')
 ->name('shop.search');
 
+/** for ws */
+Route::get('/shop-autocomplete', 'App\Http\Controllers\ShopController@filterAutocomplete');
+
 Route::group([
     'prefix'     => '/{shop:pseudonyme}',
 ], function () {
@@ -88,7 +89,7 @@ Route::group([
                $produits = Produit::where('shop_id',$shop->id)
                ->where('visible',true)
                ->where('quantite','>',0)
-               ->paginate(15);
+               ->paginate(16);
                // find user panier if exists
                $paProduits = [];
                if(Auth::user()) {
@@ -137,19 +138,15 @@ Route::group([
 
             Route::resource('/categorie', CategorieController::class,
                 ['only'=>['show']
-            ]); 
+            ]);
 
-            Route::post('/produitvariant/add-images/{produitVariant}', 'App\Http\Controllers\ProduitVariantController@addImages')
-            ->name('produitvariant.add.images')->middleware('is.owner');
-
-            Route::resource('produitvariant', ProduitVariantController::class,[
-                'only'=>['update','destroy']
-            ])->middleware('is.owner');
+            /** ws */
+            Route::get('/produit-autocomplete', 'App\Http\Controllers\ProduitController@filterAutocomplete');
 
             Route::get('/produit/{produit}/display', 'App\Http\Controllers\ProduitController@display')
             ->name('produit.display');
 
-            Route::post('/produit/add-image/{produit}', 'App\Http\Controllers\ProduitController@addImages')
+            Route::post('/produit/add-images/{produit}', 'App\Http\Controllers\ProduitController@addImages')
             ->name('produit.add.images');
 
             Route::post('/produit/change/photo-couverture/{image}', 'App\Http\Controllers\ProduitController@updateCouvertureImage')
@@ -158,6 +155,10 @@ Route::group([
             Route::get('/produit/{produit}/refresh', 'App\Http\Controllers\ProduitController@get')->middleware('is.owner');
             
             Route::post('/produit/{produit}/create-combination', 'App\Http\Controllers\ProduitController@createCombination')->middleware('is.owner');
+            
+            Route::put('/produit/{produit}/update-variant', 'App\Http\Controllers\ProduitController@updateVariant')->middleware('is.owner');
+            
+            Route::delete('/produit/{produit}/remove-variant', 'App\Http\Controllers\ProduitController@removeVariant')->middleware('is.owner');
 
             Route::resource('/produit', ProduitController::class,
                 ['except'=>['index']

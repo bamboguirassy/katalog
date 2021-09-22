@@ -34,6 +34,7 @@
     </noscript>
     <link rel="preload" as="style" href="{{ asset('assets/mobirise/css/mbr-additional.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/mobirise/css/mbr-additional.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('bower_components/angular-auto-complete/angular-auto-complete.css') }}">
     <meta name="theme-color" content="#196b86">
     <link rel="manifest" href="{{ asset('manifest.json') }}">
     <script src="{{ asset('sw-connect.js') }}"></script>
@@ -77,11 +78,22 @@
     @endisset
     <section data-bs-version="5.1" class="menu menu1 cid-sJc9pEj434" once="menu" id="menu1-3w">
         <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
-            <h3 class="menu-tite mbr-fonts-style display-4 text-white">
-                <strong>
-                    <a href="{{ route('home') }}" class="mbr-white">{{config('app.name')}}</a>
-                </strong>, votre plateforme de proximité pour mieux gérer les
-                ventes.</h3>
+            <div class="menu-tite mbr-fonts-style display-4 text-white">
+                <div>
+                    @isset($shop)
+                    <input ng-model="produitName" auto-complete="produitAutoCompleteOptions" style="max-width: 500px; display: inline;" class="form-control" type="text" name="saerch"
+                        id="searchProduit" placeholder="Rechercher un produit">
+                    @else
+                    <input ng-model="shopName" auto-complete="shopAutoCompleteOptions" style="max-width: 500px; display: inline;" class="form-control" type="text" name="saerch"
+                        id="searchShop" placeholder="Rechercher une boutique">
+                    @endisset
+                </div>
+            </div>
+            {{-- <h3 class="menu-tite mbr-fonts-style display-4 text-white">
+                    <strong>
+                        <a href="{{ route('home') }}" class="mbr-white">{{config('app.name')}}</a>
+            </strong>, votre plateforme de proximité pour mieux gérer les
+            ventes.</h3> --}}
             <div class="container">
 
                 <div class="navbar-brand">
@@ -149,7 +161,8 @@
                                     <span class="mobi-mbri mobi-mbri-layers mbr-iconfont mbr-iconfont-btn">
                                     </span>Catégories
                                 </a>
-                                <a class="text-primary dropdown-item display-4" href="{{ route('shop.attribut.index',compact('shop')) }}" aria-expanded="false">
+                                <a class="text-primary dropdown-item display-4"
+                                    href="{{ route('shop.attribut.index',compact('shop')) }}" aria-expanded="false">
                                     <span class="mobi-mbri mobi-mbri-features mbr-iconfont mbr-iconfont-btn">
                                     </span>Attributs de produits
                                 </a>
@@ -184,8 +197,7 @@
                                 </a>
                                 <a class="text-primary dropdown-item display-4"
                                     href="{{ route('shop.produit.create',compact('shop')) }}" aria-expanded="false">
-                                    <span
-                                        class="mobi-mbri mobi-mbri-plus mbr-iconfont mbr-iconfont-btn"></span>
+                                    <span class="mobi-mbri mobi-mbri-plus mbr-iconfont mbr-iconfont-btn"></span>
                                     Ajouter un produit
                                 </a>
                             </div>
@@ -203,11 +215,19 @@
                                     <span class="mobi-mbri mobi-mbri-user-2 mbr-iconfont mbr-iconfont-btn">
                                     </span>Mon profil
                                 </a>
-                                @if (auth()->user()->type=='client' && isset($shop))
+                                @if (auth()->user()->type=='client')
+                                @isset($shop)
                                 <a class="text-primary dropdown-item display-4"
                                     href="{{ route('shop.panier.show',compact('shop')) }}">
                                     <span class="mobi-mbri mobi-mbri-cart-add mbr-iconfont mbr-iconfont-btn">
                                     </span>Mon panier
+                                </a>
+                                @endisset
+                                <a class="text-primary dropdown-item display-4"
+                                    href="{{ route('user.commande.list') }}">
+                                    <span class="mobi-mbri mobi-mbri-shopping-cart mbr-iconfont mbr-iconfont-btn">
+                                    </span>
+                                    Mes commandes
                                 </a>
                                 @endif
                                 <a class="text-primary dropdown-item display-4" href="{{ route('logout') }}">
@@ -237,7 +257,7 @@
             </div>
         </nav>
     </section>
-    <section>
+    <section ng-cloak>
         <div class="container">
             <div class="col-12">
                 @yield('body')
@@ -251,8 +271,7 @@
     {{-- panier client --}}
     @auth
     @if (auth()->user()->type=='client' && isset($shop))
-    <a href="/[[shop.pseudonyme]]/panier/show" class="btn btn-info"
-        style="position: fixed; top: 25%; right: 2px;">
+    <a href="/[[shop.pseudonyme]]/panier/show" class="btn btn-info" style="position: fixed; top: 25%; right: 2px;">
         <span class="mbr-iconfont mbri-shopping-cart"></span> ([[panier?panier.produits_count:0]])
         <!--PANIER-->
     </a>
@@ -287,6 +306,9 @@
     <script src="{{ asset('assets/theme/js/script.js') }}"></script>
     <script src="{{ asset('assets/formoid.min.js') }}"></script>
     <script src="{{ asset('bower_components/angular/angular.min.js') }}"></script>
+    <script src="{{ asset('bower_components/angular-sanitize/angular-sanitize.min.js') }}"></script>
+    <script src="{{ asset('bower_components/lodash/dist/lodash.min.js') }}"></script>
+    <script src="{{ asset('bower_components/angular-auto-complete/angular-auto-complete.js') }}"></script>
     <script src="{{ asset('bower_components/angular-filter/dist/angular-filter.min.js') }}"></script>
     <script src="{{ asset('angular/app.js') }}"></script>
     <script src="{{ asset('angular/services/attribut.service.js') }}"></script>
@@ -296,7 +318,7 @@
     <script src="{{ asset('angular/controllers/attribut.controller.js') }}"></script>
     <script src="{{ asset('angular/controllers/produit.new.controller.js') }}"></script>
     <script src="{{ asset('angular/controllers/produit.show.controller.js') }}"></script>
-    <script src="{{ asset('angular/controllers/produit.display.controller.js') }}}}"></script>
+    <script src="{{ asset('angular/controllers/produit.display.controller.js') }}"></script>
 </body>
 
 </html>

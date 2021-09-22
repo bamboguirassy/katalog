@@ -13,7 +13,8 @@ class Coproduit extends Model
     protected $fillable = [
         'produit_id',
         'commande_id',
-        'quantite'
+        'quantite',
+        'prixUnitaire'
     ];
 
     /**

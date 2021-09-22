@@ -15,11 +15,11 @@ app.factory('ProduitService',($rootScope, $http) => {
         generateCombination: (produitId) => {
             return $http.post(`/${$rootScope.shop.pseudonyme}/produit/${produitId}/create-combination`);
         },
-        removeVariant: (variantId) => {
-            return $http.delete(`/${$rootScope.shop.pseudonyme}/produitvariant/${variantId}`);
+        remove: (variantId) => {
+            return $http.delete(`/${$rootScope.shop.pseudonyme}/produit/${variantId}/remove-variant`);
         },
-        updateVariant: (variant) => {
-            return $http.put(`/${$rootScope.shop.pseudonyme}/produitvariant/${variant.id}`,variant);
+        update: (variant) => {
+            return $http.put(`/${$rootScope.shop.pseudonyme}/produit/${variant.id}/update-variant`,variant);
         }
     }
 })

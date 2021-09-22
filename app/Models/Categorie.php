@@ -14,7 +14,8 @@ class Categorie extends Model
         'nom',
         'description',
         'shop_id',
-        'active'
+        'active',
+        'categorie_id'
     ];
 
 
@@ -35,5 +36,19 @@ class Categorie extends Model
 
     public function produits() {
         return $this->hasMany(Produit::class);
+    }
+
+    /**
+     * Get the parent that owns the Categorie
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(Categorie::class);
+    }
+
+    public function subs() {
+        return $this->hasMany(Categorie::class);
     }
 }

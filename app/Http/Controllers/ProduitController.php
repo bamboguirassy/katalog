@@ -9,7 +9,6 @@ use App\Models\Image;
 use App\Models\Panier;
 use App\Models\Paproduit;
 use App\Models\Produit;
-use App\Models\ProduitVariant;
 use App\Models\Shop;
 use App\Models\ValeurAttributProduit;
 use App\Models\VariantAttributeValue;
@@ -175,7 +174,7 @@ class ProduitController extends Controller
     }
 
     public function display(Shop $shop, Produit $produit) {
-        $produit = Produit::with(['images','variants.images','variants.attributValues.valeurAttributProduit.valeurAttribut'])->find($produit->id);
+        $produit = Produit::with(['attributs.attribut','attributs.valeurs.valeurAttribut','imageCouverture','images','variants.images','variants.attributValues.valeurAttributProduit.valeurAttribut'])->find($produit->id);
         // find user panier if exists
         $paProduits = [];
         if(Auth::user()) {
@@ -235,17 +234,19 @@ class ProduitController extends Controller
         $valeurTabs = $this->cartesian($produit->attributs);
         DB::beginTransaction();
         try {
-
+            $i=1;
             foreach($valeurTabs as $valeurTab) {
-                $produitVariant = new ProduitVariant();
-                $produitVariant->produit_id = $produit->id;
-                $produitVariant->save();
+                $sousProduit = new Produit();
+                $sousProduit->produit_id = $produit->id;
+                $sousProduit->nom = $produit->nom.'-variant-'.$i;
+                $sousProduit->save();
                 foreach($valeurTab as $valeur) {
                     $variantAttributValue = new VariantAttributeValue();
-                    $variantAttributValue->produit_variant_id = $produitVariant->id;
+                    $variantAttributValue->produit_id = $sousProduit->id;
                     $variantAttributValue->valeur_attribut_produit_id = $valeur;
                     $variantAttributValue->save();
                 }
+                $i=$i+1;
             }
             DB::commit();
         } catch(Exception $e) {
@@ -253,6 +254,27 @@ class ProduitController extends Controller
             throw $e;
         }
         return true;
+    }
+
+    /** WS */
+    public function updateVariant(Request $request, Shop $shop, Produit $produit) {
+        $request->validate([
+            'prixUnitaire'=>'numeric|required',
+            'quantite'=>'numeric|required'
+        ]);
+        $produit->configured = true;
+        if($produit->update($request->only(['prixUnitaire','quantite']))) {
+            return ['error'=>false];
+        }
+        return ['error'=>true,'message'=>"Une erreur est survenue lors de la mise à jour de la variante..."];
+    }
+
+    /** WS */
+    public function removeVariant(Request $request, Shop $shop, Produit $produit) {
+        if($produit->delete()) {
+            return ['error'=>false];
+        }
+        return ['error'=>true,'message'=>"Une erreur est survenue lors de la suppression du produit..."];
     }
 
     function cartesian($attributs) {
@@ -280,6 +302,15 @@ class ProduitController extends Controller
             $i=$i+1;
             return $this->totalTabSize($tabOfTab,$i,$size);
         }
+    }
+
+    /** for autocomplete search WS */
+    public function filterAutocomplete(Shop $shop) {
+        return Produit::where('shop_id',$shop->id)
+        ->where('visible',true)
+        ->where('produit_id',null)
+        ->with(['categorie','imageCouverture'])
+        ->get();
     }
        
 }

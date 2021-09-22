@@ -70,7 +70,7 @@
                 </div>
                 <div class="row content-margin">
                     @foreach ($produits as $produit)
-                    <div class="item features-image сol-12 col-md-6 col-lg-4">
+                    <div class="item features-image сol-12 col-md-6 col-lg-3">
                         <div class="item-wrapper">
                             <div class="item-img">
                                 <span class="category-badge">{{ $produit->categorie->nom }}</span>
@@ -82,7 +82,7 @@
                             </div>
                             <div class="item-content">
                                 <a href="{{ route('shop.produit.display',compact('produit','shop')) }}">
-                                    <h5 title="{{ $produit->nom }}" class="item-title mbr-fonts-style display-5">
+                                    <h5 title="{{ $produit->nom }}" class="item-title mbr-fonts-style display-4">
                                         {{ \Illuminate\Support\Str::limit($produit->nom, 16, '...') }}
                                     </h5>
                                     <p style="min-height: 100px" class="mbr-text mbr-fonts-style display-7">
@@ -90,7 +90,7 @@
                                     </p>
                                 </a>
                             </div>
-                            <div class="mbr-section-btn item-footer">
+                            {{-- <div class="mbr-section-btn item-footer">
                                 @if (in_array($produit->id, $paProduits))
                                     <a style="background: green; color: white;"
                                         class="btn item-btn display-4">
@@ -102,7 +102,7 @@
                                     AJOUTER AU PANIER
                                 </a>
                                 @endif
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     @endforeach

@@ -30,9 +30,9 @@
                             <p></p>
                             <div class="mbr-section-btn mt-3">
                                 @foreach ($errors->all() as $message)
-                                    <div class="alert alert-danger" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </div>
+                                <div class="alert alert-danger" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
                                 @endforeach
                                 @if (auth()->user()->type=="owner" && auth()->user()->id==$shop->user_id)
                                 @if ($commande->etat=='En attente')
@@ -119,14 +119,14 @@
                             <div class="col-lg-12 tables">
                                 <div class="row justify-content-center no-gutters">
                                     @foreach ($commande->produits as $produit)
-                                    <div class="col-sm-4 col-10 column">
+                                    <div class="col-sm-4 col-10 column" style="border: 2px solid gray;">
                                         <div class="table__title text-center text-sm-left border__bot px-3">
                                             <h3 class="title mbr-medium mbr-fonts-style display-7">
                                                 {{$produit->produit->nom}}</h3>
                                         </div>
                                         <div class="cell text-center text-sm-left border__bot">
                                             <p class="mbr-fonts-style mbr-text display-4">
-                                                {{$produit->produit->prixUnitaire}} FCFA</p>
+                                                {{$produit->prixUnitaire}} FCFA</p>
                                         </div>
                                         <div class="cell text-center text-sm-left border__bot">
                                             <p class="mbr-fonts-style mbr-text display-4">{{$produit->quantite}}
@@ -136,6 +136,25 @@
                                             <p class="mbr-fonts-style mbr-text display-4">
                                                 {{$produit->produit->prixUnitaire * $produit->quantite}} FCFA</p>
                                         </div>
+                                        @if (count($produit->produit->attributValues)>0)
+                                        <div class="cell">
+                                            <div class="pb-2">
+                                                @foreach ($produit->produit->attributValues as $attributValue)
+                                                <span>{{$attributValue->valeurAttributProduit->valeurAttribut->attribut->nom}}
+                                                    :</span>
+                                                @if($attributValue->valeurAttributProduit->valeurAttribut->attribut->type=='couleur')
+                                                <span
+                                                    style="border: 2px solid #1C73BA; background-color: {{$attributValue->valeurAttributProduit->valeurAttribut->valeur}}">
+                                                    &nbsp; &nbsp;
+                                                </span>
+                                                @else
+                                                <span
+                                                    style="padding: 2px; border: 2px solid #1C73BA;">{{$attributValue->valeurAttributProduit->valeurAttribut->valeur}}</span>
+                                                @endif
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                        @endif
                                     </div>
                                     @endforeach
                                 </div>

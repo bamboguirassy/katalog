@@ -10,7 +10,7 @@ class VariantAttributeValue extends Model
     use HasFactory;
 
     protected $fillable = [
-        'produit_variant_id',
+        'produit_id',
         'valeur_attribut_produit_id'
     ];
 
@@ -19,8 +19,8 @@ class VariantAttributeValue extends Model
         'updated_at'
     ];
 
-    public function produitVariant() {
-        return $this->belongsTo(ProduitVariant::class);
+    public function produit() {
+        return $this->belongsTo(Produit::class);
     }
 
     public function valeurAttributProduit() {

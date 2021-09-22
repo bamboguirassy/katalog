@@ -76,9 +76,35 @@
     .cart i {
         margin-right: 10px
     }
+
+    .variant-list {
+        margin: auto;
+    }
+
+    .variant-item {
+        border: 3px solid #1c73ba;
+        padding: 5px;
+        margin-top: 2px;
+        color: #1c73ba;
+    }
+
+    .active {
+        border: 3px solid #fff;
+        padding: 5px;
+        margin-top: 2px;
+        color: #fff;
+        background-color: #1c73ba;
+    }
+
+    .variant-item:hover {
+        border: 3px solid #fff;
+        padding: 5px;
+        margin-top: 2px;
+        color: #fff;
+        background-color: #1c73ba;
+    }
 </style>
-<div class="container mt-5 mb-5" ng-init="produit = {{$produit}}">
-    [[produit.variants]]
+<div ng-controller="ProduitDisplayController" class="container mt-5 mb-5" ng-init="init({{$produit}})">
     <div class="row d-flex justify-content-center">
         <div class="col-md-10">
             <div class="card">
@@ -86,16 +112,12 @@
                     <div class="col-md-6">
                         <div class="images">
                             <div class="text-center p-4">
-                                <img id="main-image"
-                                    src="{{ asset('storage/produits/images/'.$produit->imageCouverture->nom) }}"
+                                <img id="main-image" src="/storage/produits/images/[[sProduit.images[0].nom]]"
                                     style="height: 400px; object-fit: fill;" />
                             </div>
                             <div class="thumbnail">
-                                @foreach ($produit->images as $image)
-                                <img onclick="change_image(this)"
-                                    src="{{ asset('storage/produits/images/'.$image->nom) }}"
-                                    style="width: 70px; display: inline;">
-                                @endforeach
+                                <img ng-repeat="image in sProduit.images" onclick="change_image(this)"
+                                    src="/storage/produits/images/[[image.nom]]" style="width: 70px; display: inline;">
                             </div>
                         </div>
                     </div>
@@ -108,36 +130,52 @@
                             <div class="mt-4 mb-3"> <span
                                     class="text-uppercase text-muted brand">{{ $produit->categorie->nom }}</span>
                                 <h5 class="text-uppercase">{{ $produit->nom }}</h5>
-                                <div class="price d-flex flex-row align-items-center"> <span
-                                        class="act-price">{{ $produit->prixUnitaire }} FCFA</span>
-                                    <div class="ml-2"> <small class="dis-price">$59</small> <span>40% OFF</span> </div>
+                                <div class="price d-flex flex-row align-items-center"> <span class="act-price"> [[
+                                        sProduit.prixUnitaire ]] FCFA</span>
+                                    <div class="ml-2">
+                                        <small class="dis-price">$59</small>
+                                        <span>40% OFF</span>
+                                    </div>
                                 </div>
                             </div>
-                            <p class="about">{{ $produit->description }}</p>
-                            @foreach ($produit->attributs as $attributProduit)
-                            <div class="sizes mt-2">
-                                <h6 class="text-uppercase">{{$attributProduit->attribut->nom}}</h6>
-                                @foreach ($attributProduit->valeurs as $attrProdVal)
-                                <label class="radio">
-                                    <input type="radio" name="{{$attributProduit->attribut->nom}}"
-                                        value="{{$attrProdVal->id}}">
-                                    @if ($attributProduit->attribut->type=='couleur')
-                                    <span title="{{ $attrProdVal->valeurAttribut->nom }}"
-                                        style="height: 20px; width: 30px; background-color: {{$attrProdVal->valeurAttribut->valeur}}"></span>
-                                    @else
-                                    <span title="{{ $attrProdVal->valeurAttribut->nom }}">{{ $attrProdVal->valeurAttribut->valeur }}</span>
-                                    @endif
+                            <p class="about display-4">{{ $produit->description }}</p>
+                            <div class="sizes mt-2" ng-repeat="attributProduit in produit.attributs">
+                                <h6 class="text-uppercase">[[ attributProduit.attribut.nom ]]</h6>
+                                <label class="radio" ng-repeat="attrProdVal in attributProduit.valeurs"
+                                    style="margin-right: 3px;">
+                                    <input disabled type="radio" name="[[attributProduit.attribut.nom]]"
+                                        value="[[attrProdVal.id]]">
+                                    <span ng-if="attributProduit.attribut.type=='couleur'"
+                                        title="[[ attrProdVal.valeur_attribut.nom ]]"
+                                        style="height: 20px; width: 30px; background-color: [[ attrProdVal.valeur_attribut.valeur ]]"></span>
+                                    <span ng-if="attributProduit.attribut.type!='couleur'"
+                                        title="[[ attrProdVal.valeur_attribut.nom ]]">[[
+                                        attrProdVal.valeur_attribut.valeur ]]</span>
                                 </label>
-                                @endforeach
                             </div>
-                            @endforeach
-                            <div class="cart mt-4 align-items-center">
+                            <div class="col-12" ng-show="produit.variants.length>0">
+                                <div class="row variant-list">
+                                    <div class="col-12">
+                                        <hr>
+                                        <h3 class="mbr-text display-4">Sélectionner une variante pour commander</h3>
+                                    </div>
+                                    <div ng-click="select(variant)" class="col-12 col-md-10 col-lg-8 variant-item"
+                                        ng-class="{active:variant.id==sProduit.id}"
+                                        ng-repeat="variant in produit.variants">
+                                        <strong>[[
+                                            (variant.attribut_values|map:'valeur_attribut_produit.valeur_attribut.nom')|join:'
+                                            x ' ]]</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cart mt-4 align-items-center" ng-show="produit.variants.length==0 || variantSelected">
                                 @if (in_array($produit->id, $paProduits))
                                 <a style="background: green; color: white;" class="btn item-btn display-4">
                                     Dans le panier <i class="fa fa-check"></i>
                                 </a>
                                 @else
-                                <button ng-click="initProductToPanier({{$produit}})" class="btn btn-primary text-uppercase mr-2 px-4">Ajouter au panier</button>
+                                <button ng-click="initProductToPanier(sProduit)"
+                                    class="btn btn-primary text-uppercase mr-2 px-4">Ajouter au panier</button>
                                 @endif
                             </div>
                         </div>

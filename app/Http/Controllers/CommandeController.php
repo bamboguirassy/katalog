@@ -53,7 +53,7 @@ class CommandeController extends Controller
     {
         $montant = 0;
         foreach($commande->produits as $coproduit) {
-            $montant = $montant + ($coproduit->quantite*$coproduit->produit->prixUnitaire);
+            $montant = $montant + ($coproduit->quantite*$coproduit->prixUnitaire);
         }
         return view('shop.commande.show',compact('shop','commande','montant'));
     }

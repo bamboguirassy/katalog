@@ -18,6 +18,10 @@ class Produit extends Model
         'description',
         'visible',
         'shop_id',
+        'produit_id',
+        'configured',
+        'inPromo',
+        'oldPrice'
     ];
 
     protected $casts = [];
@@ -57,6 +61,14 @@ class Produit extends Model
     }
 
     public function variants() {
-        return $this->hasMany(ProduitVariant::class);
+        return $this->hasMany(Produit::class);
+    }
+
+    public function produit() {
+        return $this->belongsTo(Produit::class);
+    }
+
+    public function attributValues() {
+        return $this->hasMany(VariantAttributeValue::class);
     }
 }

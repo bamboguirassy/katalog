@@ -49,7 +49,9 @@
                         @foreach ($panier->produits as $produit)
                         <div class="row icon first">
                             <div class="col-lg-2">
-                                <form action="{{route('shop.panier.produit.delete',['shop'=>$shop,'paproduit'=>$produit])}}" method="post">
+                                <form
+                                    action="{{route('shop.panier.produit.delete',['shop'=>$shop,'paproduit'=>$produit])}}"
+                                    method="post">
                                     @csrf
                                     @method('delete')
                                     <button class="btn btn-danger">Enlever</button>
@@ -57,7 +59,24 @@
                             </div>
                             <div class="col-lg-2">
                                 <p class="mbr-text mbr-fonts-style display-4">
-                                    {{$produit->produit->nom}}</p>
+                                    {{$produit->produit->nom}}
+                                </p>
+                                @if (count($produit->produit->attributValues)>0)
+                                <div class="pb-2">
+                                    @foreach ($produit->produit->attributValues as $attributValue)
+                                    <span>{{$attributValue->valeurAttributProduit->valeurAttribut->attribut->nom}} :</span>
+                                    @if ($attributValue->valeurAttributProduit->valeurAttribut->attribut->type=='couleur')
+                                     <span
+                                        style="border: 2px solid #1C73BA; background-color: {{$attributValue->valeurAttributProduit->valeurAttribut->valeur}}">
+                                    &nbsp; &nbsp;
+                                    </span>
+                                    @else
+                                    <span
+                                        style="padding: 2px; border: 2px solid #1C73BA;">{{$attributValue->valeurAttributProduit->valeurAttribut->valeur}}</span>
+                                    @endif
+                                    @endforeach
+                                </div>
+                                @endif
                             </div>
                             <div class="col-lg-2">
                                 <p class="mbr-text mbr-fonts-style display-4">

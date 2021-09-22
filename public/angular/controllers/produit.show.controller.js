@@ -69,7 +69,7 @@ app.controller('ProduitShowController', ($scope, ProduitService) => {
 
     $scope.removeVariant = (variant) => {
         if (confirm("Êtes-vous sûrs de vouloir supprimer cette variante ? L'opération est irréversible...")) {
-        ProduitService.removeVariant(variant.id)
+        ProduitService.remove(variant.id)
             .success(data => {
                 if (data.error) {
                     alert(data.message);
@@ -81,7 +81,7 @@ app.controller('ProduitShowController', ($scope, ProduitService) => {
     }
 
     $scope.updateVariant = (variant) => {
-        ProduitService.updateVariant(variant)
+        ProduitService.update(variant)
             .success(data => {
                 if (data.error) {
                     alert(data.message);

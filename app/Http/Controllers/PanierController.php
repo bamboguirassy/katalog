@@ -152,14 +152,15 @@ class PanierController extends Controller
         $commande->shop_id = $panier->shop_id;
         $commande->user_id = $panier->user_id;
         $commande->numero = uniqid("CO-");
-        $commande->save();
         DB::beginTransaction();
+        $commande->save();
         try {
             foreach($panier->produits as $paproduit) {
                 $coproduit = new Coproduit();
                 $coproduit->commande_id = $commande->id;
                 $coproduit->quantite = $paproduit->quantite;
                 $coproduit->produit_id = $paproduit->produit_id;
+                $coproduit->prixUnitaire = $paproduit->produit->prixUnitaire;
                 $coproduit->save();
                 $paproduit->delete();
                 $panier->delete();
