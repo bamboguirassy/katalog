@@ -54,7 +54,7 @@ class AttributController extends Controller
         //
         $request->validate([
             'nom'=>'required',
-            'changePrice'=>'boolean|required'
+            'changePrice'=>'boolean'
         ]);
         $attribut = new Attribut($request->all());
         $attribut->shop_id = $shop->id;

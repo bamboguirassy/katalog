@@ -28,7 +28,7 @@
                     </div>
                     <div class="col-lg-6 col-md-12 align-center">
                         <div class="img-box">
-                            <img style="max-height: 300px" src="{{ asset('storage/shops/'.$shop->logo) }}" alt="">
+                            <img style="max-height: 300px" src="{{ asset('uploads/shops/'.$shop->logo) }}" alt="">
                         </div>
                     </div>
                 </div>
@@ -36,24 +36,103 @@
             </div>
         </section>
 
+        {{-- start main categories products list --}}
+        @if ($produits->currentPage()==1)
+        @foreach ($shop->categories as $categorie)
+        @if (count($categorie->produits)>0)
         <section data-bs-version="5.1" class="info3 cid-sIvpc3K9D7" id="info3-1o">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="card col-12">
                         <div class="card-wrapper">
-                            <div class="card-box align-center">
-                                <p class="mbr-text mbr-fonts-style display-7">
-                                    Vous pouvez directement filtrer pour une catégorie de produit spécifique dans la
-                                    boutique.</p>
-                                <div class="mbr-section mt-1 mb-3">
-                                    @foreach ($categories as $categorie)
-                                    <span style="position: initial; white-space: nowrap; border-radius: 25%; padding: 10px 15px; border: 3px solid #1C73BA; margin-left: 10px;">
-                                        <a
-                                            href="{{ route('shop.categorie.show',compact('shop','categorie')) }}">{{ $categorie->nom }}</a>
-                                    </span>
-                                    @endforeach
+                            <div class="card-box align-left" style="font-size: 23px;">
+                                Retrouvez les articles dans la catégorie : <a
+                                    href="{{ route('shop.categorie.show',compact('shop','categorie')) }}"><strong> >>
+                                        {{$categorie->nom}} </strong></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section data-bs-version="5.1" class="gallery1 cid-sIpMwjCas3" id="gallery1-8">
+            <div class="container">
+                <div class="row content-margin">
+                    @foreach ($categorie->produits as $produit)
+                    <div class="item features-image сol-12 col-md-6 col-lg-3">
+                        <div class="item-wrapper">
+                            <div class="item-img">
+                                @if ($produit->inPromo)
+                                <span
+                                    class="category-badge">-{{round((1-($produit->prixPromo/$produit->prixUnitaire))*100)}}%</span>
+                                @endif
+                                <span
+                                    class="price-badge">{{ $produit->inPromo?$produit->prixPromo:$produit->prixUnitaire }}
+                                    FCFA</span>
+                                <a href="{{ route('shop.produit.display',compact('produit','shop')) }}">
+                                    <img src="{{ asset('uploads/produits/images/'.$produit->imageCouverture->nom) }}"
+                                        alt="">
+                                </a>
+                            </div>
+                            <div class="item-content">
+                                <a href="{{ route('shop.produit.display',compact('produit','shop')) }}">
+                                    <h5 title="{{ $produit->nom }}" class="item-title mbr-fonts-style display-4">
+                                        <b>{{ \Illuminate\Support\Str::limit($produit->nom, 16, '...') }}</b>
+                                    </h5>
+                                    <p class="mbr-text mbr-fonts-style display-7 pb-2">
+                                        <span style="font-weight: initial;">{{ $produit->categorie->nom }}</span>
+                                    </p>
+                                </a>
+                            </div>
+                            <div class="mbr-section-btn item-footer">
+                                @if (in_array($produit->id, $paProduits))
+                                <a style="background: green; color: white;" class="btn item-btn display-4">
+                                    Dans le panier <i class="fa fa-check"></i>
+                                </a>
+                                @else
+                                @if (count($produit->variants)<1) <a ng-click="initProductToPanier({{$produit}})"
+                                    class="btn btn-primary item-btn display-4">
+                                    AJOUTER AU PANIER
+                                    </a>
+                                    @else
+                                    <a href="{{ route('shop.produit.display',compact('produit','shop')) }}"
+                                        class="btn btn-primary item-btn display-4">
+                                        Afficher les variantes
+                                    </a>
+                                    @endif
+                                    @endif
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <div class="row">
+                    <div class="col-12 align-right">
+                        <a href="{{ route('shop.categorie.show',compact('shop','categorie')) }}"
+                            class="btn btn-secondary">Voir plus > </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        @endif
+        @endforeach
+        @endif
+        {{-- fin main category products list --}}
+
+        {{-- start all section products --}}
+
+        <section data-bs-version="5.1" class="info3 cid-sIvpc3K9D7" id="info3-1o">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="card col-12">
+                        <div class="card-wrapper">
+                            <div class="card-box">
+                                <div class="mbr-text mbr-fonts-style display-6">
+                                    Retrouvez tous nos articles disponibles. @if ($produits->currentPage()!=1)
+                                    <span>Page {{$produits->currentPage()}}</span>        
+                                    @endif
                                 </div>
-                                <br>
                             </div>
                         </div>
                     </div>
@@ -66,60 +145,74 @@
                 <div class="mbr-section-head">
 
                     <h5 class="mbr-section-subtitle mbr-fonts-style align-center mb-0 display-7">
-                        Découvrez notre catalogue de produits. Ajoutez vos produits dans le panier et validez votre panier.</h5>
+                        Découvrez notre catalogue de produits. Ajoutez vos produits dans le panier et validez votre
+                        panier.</h5>
                 </div>
                 <div class="row content-margin">
                     @foreach ($produits as $produit)
                     <div class="item features-image сol-12 col-md-6 col-lg-3">
                         <div class="item-wrapper">
                             <div class="item-img">
-                                <span class="category-badge">{{ $produit->categorie->nom }}</span>
-                                <span class="price-badge">{{ $produit->prixUnitaire }} FCFA</span>
+                                @if ($produit->inPromo)
+                                <span
+                                    class="category-badge">-{{round((1-($produit->prixPromo/$produit->prixUnitaire))*100)}}%</span>
+                                @endif
+                                <span
+                                    class="price-badge">{{ $produit->inPromo?$produit->prixPromo:$produit->prixUnitaire }}
+                                    FCFA</span>
                                 <a href="{{ route('shop.produit.display',compact('produit','shop')) }}">
-                                    <img src="{{ asset('storage/produits/images/'.$produit->imageCouverture->nom) }}"
+                                    <img src="{{ asset('uploads/produits/images/'.$produit->imageCouverture->nom) }}"
                                         alt="">
                                 </a>
                             </div>
                             <div class="item-content">
                                 <a href="{{ route('shop.produit.display',compact('produit','shop')) }}">
                                     <h5 title="{{ $produit->nom }}" class="item-title mbr-fonts-style display-4">
-                                        {{ \Illuminate\Support\Str::limit($produit->nom, 16, '...') }}
+                                        <b>{{ \Illuminate\Support\Str::limit($produit->nom, 16, '...') }}</b>
                                     </h5>
-                                    <p style="min-height: 100px" class="mbr-text mbr-fonts-style display-7">
-                                        {{ \Illuminate\Support\Str::limit($produit->description, 100, '...') }}
+                                    <p class="mbr-text mbr-fonts-style display-7 pb-2">
+                                        <span style="font-weight: initial;">{{ $produit->categorie->nom }}</span>
                                     </p>
                                 </a>
                             </div>
-                            {{-- <div class="mbr-section-btn item-footer">
+                            <div class="mbr-section-btn item-footer">
                                 @if (in_array($produit->id, $paProduits))
-                                    <a style="background: green; color: white;"
-                                        class="btn item-btn display-4">
-                                        Dans le panier <i class="fa fa-check"></i>
-                                    </a>
+                                <a style="background: green; color: white;" class="btn item-btn display-4">
+                                    Dans le panier <i class="fa fa-check"></i>
+                                </a>
                                 @else
-                                <a ng-click="initProductToPanier({{$produit}})"
+                                @if (count($produit->variants)<1) <a ng-click="initProductToPanier({{$produit}})"
                                     class="btn btn-primary item-btn display-4">
                                     AJOUTER AU PANIER
-                                </a>
-                                @endif
-                            </div> --}}
+                                    </a>
+                                    @else
+                                    <a href="{{ route('shop.produit.display',compact('produit','shop')) }}"
+                                        class="btn btn-primary item-btn display-4">
+                                        Afficher les variantes
+                                    </a>
+                                    @endif
+                                    @endif
+                            </div>
                         </div>
                     </div>
                     @endforeach
                     <div class="col-12">
                         @if ($produits->currentPage()!=1)
-                        <a href="{{ $produits->previousPageUrl() }}" class="btn btn-secondary pull-left ml-2">Page précédente</a>
+                        <a href="{{ $produits->previousPageUrl() }}" class="btn btn-secondary pull-left ml-2">Page
+                            précédente</a>
                         @endif
                         @if ($produits->currentPage()!=$produits->lastPage())
-                        <a href="{{ $produits->nextPageUrl() }}" class="btn btn-secondary pull-right mr-2">Page suivante</a>
+                        <a href="{{ $produits->nextPageUrl() }}" class="btn btn-secondary pull-right mr-2">Page
+                            suivante</a>
                         @endif
                     </div>
-                    @if (count($produits)<1)
-                        <h3 class="text-center" style="background: white;">La boutique ne contient aucun produit pour le moment !</h3>
-                    @endif
+                    @if (count($produits)<1) <h3 class="text-center" style="background: white;">La boutique ne contient
+                        aucun produit pour le moment !</h3>
+                        @endif
                 </div>
             </div>
         </section>
+        {{-- end all product page --}}
         <section data-bs-version="5.1" class="social-buttons02 creativem4_social-buttons02 cid-sIpLx9ZEd5"
             id="social-buttons02-6">
             <div class="container">

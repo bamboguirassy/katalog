@@ -21,7 +21,8 @@ class Produit extends Model
         'produit_id',
         'configured',
         'inPromo',
-        'oldPrice'
+        'prixPromo',
+        'marque_id'
     ];
 
     protected $casts = [];
@@ -70,5 +71,13 @@ class Produit extends Model
 
     public function attributValues() {
         return $this->hasMany(VariantAttributeValue::class);
+    }
+
+    public function categorieProduits() {
+        return $this->hasMany(CategorieProduit::class);
+    }
+
+    public function marque() {
+        return $this->belongsTo(Marque::class);
     }
 }

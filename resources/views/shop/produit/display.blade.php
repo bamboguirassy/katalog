@@ -112,12 +112,12 @@
                     <div class="col-md-6">
                         <div class="images">
                             <div class="text-center p-4">
-                                <img id="main-image" src="/storage/produits/images/[[sProduit.images[0].nom]]"
+                                <img id="main-image" src="/uploads/produits/images/[[sProduit.images[0].nom]]"
                                     style="height: 400px; object-fit: fill;" />
                             </div>
                             <div class="thumbnail">
                                 <img ng-repeat="image in sProduit.images" onclick="change_image(this)"
-                                    src="/storage/produits/images/[[image.nom]]" style="width: 70px; display: inline;">
+                                    src="/uploads/produits/images/[[image.nom]]" style="width: 70px; display: inline;">
                             </div>
                         </div>
                     </div>
@@ -131,10 +131,10 @@
                                     class="text-uppercase text-muted brand">{{ $produit->categorie->nom }}</span>
                                 <h5 class="text-uppercase">{{ $produit->nom }}</h5>
                                 <div class="price d-flex flex-row align-items-center"> <span class="act-price"> [[
-                                        sProduit.prixUnitaire ]] FCFA</span>
-                                    <div class="ml-2">
-                                        <small class="dis-price">$59</small>
-                                        <span>40% OFF</span>
+                                        sProduit.inPromo?sProduit.prixPromo:sProduit.prixUnitaire ]] FCFA</span>
+                                    <div class="ml-2" ng-if="sProduit.inPromo" style="color: red;">
+                                        <small class="dis-price">{{$produit->prixUnitaire}} FCFA</small>
+                                        <span>-{{round((1-($produit->prixPromo/$produit->prixUnitaire))*100)}}%</span>
                                     </div>
                                 </div>
                             </div>
@@ -159,7 +159,7 @@
                                         <hr>
                                         <h3 class="mbr-text display-4">Sélectionner une variante pour commander</h3>
                                     </div>
-                                    <div ng-click="select(variant)" class="col-12 col-md-10 col-lg-8 variant-item"
+                                    <div ng-click="select(variant)" class="col-6 col-md-4 col-lg-3 variant-item"
                                         ng-class="{active:variant.id==sProduit.id}"
                                         ng-repeat="variant in produit.variants">
                                         <strong>[[
@@ -168,7 +168,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="cart mt-4 align-items-center" ng-show="produit.variants.length==0 || variantSelected">
+                            <div class="cart mt-4 align-items-center"
+                                ng-show="produit.variants.length==0 || variantSelected">
                                 @if (in_array($produit->id, $paProduits))
                                 <a style="background: green; color: white;" class="btn item-btn display-4">
                                     Dans le panier <i class="fa fa-check"></i>
@@ -185,6 +186,77 @@
         </div>
     </div>
 </div>
+
+{{-- variants details --}}
+@if (count($produit->variants)>0)
+<section data-bs-version="5.1" class="info3 cid-sIvpc3K9D7" id="info3-1o">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="card col-12">
+                <div class="card-wrapper">
+                    <div class="card-box">
+                        <div class="mbr-text mbr-fonts-style display-6">
+                            Les différentes variantes du produit.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section data-bs-version="5.1" class="gallery1 cid-sIpMwjCas3" id="gallery1-8">
+    <div class="container">
+        <div class="row content-margin">
+            @foreach ($produit->variants as $produit)
+            <div class="item features-image сol-12 col-md-6 col-lg-4">
+                <div class="item-wrapper">
+                    <div class="item-img">
+                        @if ($produit->inPromo)
+                        <span
+                            class="category-badge">-{{round((1-($produit->prixPromo/$produit->prixUnitaire))*100)}}%</span>
+                        @endif
+                        <span class="price-badge">{{ $produit->inPromo?$produit->prixPromo:$produit->prixUnitaire }}
+                            FCFA</span>
+                        <a href="{{ route('shop.produit.display',compact('produit','shop')) }}">
+                            <img src="{{ asset('uploads/produits/images/'.$produit->images[0]->nom) }}" alt="">
+                        </a>
+                    </div>
+                    <div class="item-content">
+                        <a href="{{ route('shop.produit.display',compact('produit','shop')) }}">
+                            <h5 title="{{ $produit->nom }}" class="item-title mbr-fonts-style display-4">
+                                <b>{{ \Illuminate\Support\Str::limit($produit->nom, 16, '...') }}</b>
+                            </h5>
+                            <p class="mbr-text mbr-fonts-style display-7 pb-2">
+                                <span style="font-weight: initial;">{{ $produit->categorie->nom }}</span>
+                            </p>
+                        </a>
+                    </div>
+                    <div class="mbr-section-btn item-footer">
+                        @if (in_array($produit->id, $paProduits))
+                        <a style="background: green; color: white;" class="btn item-btn display-4">
+                            Dans le panier <i class="fa fa-check"></i>
+                        </a>
+                        @else
+                        @if (count($produit->variants)<1) <a ng-click="initProductToPanier({{$produit}})"
+                            class="btn btn-primary item-btn display-4">
+                            AJOUTER AU PANIER
+                            </a>
+                            @else
+                            <a href="{{ route('shop.produit.display',compact('produit','shop')) }}"
+                                class="btn btn-primary item-btn display-4">
+                                Afficher les variantes
+                            </a>
+                            @endif
+                            @endif
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
+{{-- end variant details --}}
 
 <section data-bs-version="5.1" class="social1 cid-sIrHQR2e1u" id="share1-1d">
     <div class="container">

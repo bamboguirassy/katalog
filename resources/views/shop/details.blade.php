@@ -15,7 +15,7 @@
             <div class="col-lg-8">
                 <div class="card-img">
                     <span class="category-item">{{ $shop->categorie->nom }}</span>
-                    <img style="max-height: 500px; object-fit: cover;" src="{{ asset('storage/shops/'.$shop->logo) }}"
+                    <img style="max-height: 500px; object-fit: cover;" src="{{ asset('uploads/shops/'.$shop->logo) }}"
                         alt="">
                 </div>
                 <form action="{{route('shop.update.shop.logo',compact('shop'))}}" method="POST" class="mbr-form form-with-styler"

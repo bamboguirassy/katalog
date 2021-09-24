@@ -16,7 +16,7 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                             <br>
                             <h1 class="mbr-section-title align-left mbr-fonts-style mb-4"
                                 data-app-selector=".mbr-section-title" mbr-theme-style="display-2" mbr-if="showTitle">
-                                Bienvenue sur<br><b>{{ config('app.name') }}</b></h1>
+                                Bienvenue sur <b>{{ config('app.name') }}</b></h1>
                             <p class="mbr-text align-left mbr-fonts-style display-5">
                                 Votre plateforme de vente pour booster votre commerce et augmenter votre visibilité.
                                 Simplifiez vos statuts WhatsApp,
@@ -170,7 +170,7 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                                         style="border: 2px solid #1c73ba; border-bottom: 2px solid white;">
                                         <div class="image-wrapper">
                                             <a href="{{route('shop.home',['shop'=>$shopItem])}}">
-                                                <img src="{{ asset('storage/shops/'.$shopItem->logo) }}" alt="">
+                                                <img src="{{ asset('uploads/shops/'.$shopItem->logo) }}" alt="">
                                             </a>
                                         </div>
                                     </div>

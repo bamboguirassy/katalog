@@ -5,13 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Attribut;
 use App\Models\AttributProduit;
 use App\Models\Categorie;
+use App\Models\CategorieProduit;
 use App\Models\Image;
+use App\Models\Marque;
 use App\Models\Panier;
 use App\Models\Paproduit;
 use App\Models\Produit;
 use App\Models\Shop;
 use App\Models\ValeurAttributProduit;
 use App\Models\VariantAttributeValue;
+use Error;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,13 +39,18 @@ class ProduitController extends Controller
      */
     public function create(Shop $shop)
     {
-        $categories = Categorie::where('shop_id',$shop->id)->orderby('nom')->get();
+        $categories = Categorie::where('shop_id',$shop->id)
+        ->where('categorie_id',null)
+        ->orderby('nom')
+        ->get();
+        $marques = Marque::where('shop_id',$shop->id)
+        ->get();
         $attributs = Attribut::where('shop_id',$shop->id)
         ->has('valeurs')
         ->with(['valeurs'])
         ->orderby('nom')
         ->get();
-        return view('shop.produit.new',compact('shop','categories','attributs'));
+        return view('shop.produit.new',compact('shop','categories','attributs','marques'));
     }
 
     /**
@@ -56,7 +64,7 @@ class ProduitController extends Controller
         $request->validate([
             'nom'=>'required',
             'description'=>'required',
-            'categorie_id'=>'required',
+            'categorie_id'=>'required|exists:categories,id',
             'prixUnitaire'=>'integer|required',
             'quantite'=>'integer',
             'photos'=>'required'
@@ -64,40 +72,53 @@ class ProduitController extends Controller
         $produit = new Produit($request->all());
         $produit->shop_id = $shop->id;
         $produit->visible = true;
+        /** manage categories */
+        $categorie = Categorie::find($request->get('categorie_id'));
         DB::beginTransaction();
         try {
-        $produit->save();
-        if($request->get('hasMoreAttributes')) {
-            foreach ($request->get('selectedAttrs') as $selectedAttr) {
-                $attribut = Attribut::find($selectedAttr);
-                $attributProduit = new AttributProduit();
-                $attributProduit->produit_id = $produit->id;
-                $attributProduit->attribut_id = $selectedAttr;
-                $attributProduit->save();
-                // for each attribut, find values
-                $attributValueIds = $request->get($attribut->nom);
-                foreach ($attributValueIds as $attributValueId) {
-                    $valeurAttributProduit = new ValeurAttributProduit();
-                    $valeurAttributProduit->attribut_produit_id = $attributProduit->id;
-                    $valeurAttributProduit->valeur_attribut_id = $attributValueId;
-                    $valeurAttributProduit->save();
+            $produit->save();
+            $catProd = new CategorieProduit();
+            $catProd->produit_id = $produit->id;
+            $catProd->categorie_id = $categorie->id;
+            $catProd->save();
+            while ($categorie->categorie_id!=null) {
+                $categorie = Categorie::find($categorie->categorie_id);
+                $catProd = new CategorieProduit();
+                $catProd->produit_id = $produit->id;
+                $catProd->categorie_id = $categorie->id;
+                $catProd->save();
+            }
+            if($request->get('hasMoreAttributes')) {
+                foreach ($request->get('selectedAttrs') as $selectedAttr) {
+                    $attribut = Attribut::find($selectedAttr);
+                    $attributProduit = new AttributProduit();
+                    $attributProduit->produit_id = $produit->id;
+                    $attributProduit->attribut_id = $selectedAttr;
+                    $attributProduit->save();
+                    // for each attribut, find values
+                    $attributValueIds = $request->get($attribut->nom);
+                    foreach ($attributValueIds as $attributValueId) {
+                        $valeurAttributProduit = new ValeurAttributProduit();
+                        $valeurAttributProduit->attribut_produit_id = $attributProduit->id;
+                        $valeurAttributProduit->valeur_attribut_id = $attributValueId;
+                        $valeurAttributProduit->save();
+                    }
                 }
             }
-        }
-        $i=0;
-            foreach($request->file('photos') as $photoFile) {
-                $image = new Image();
-                // Filename To store
-                $image->nom = $shop->pseudonyme.'_'.$produit->nom.'_'.uniqid().'.'.$photoFile->getClientOriginalExtension();
-                $image->produit_id = $produit->id;
-                if($i==0) {
-                    $image->couverture = true;
+                $i=0;
+                foreach($request->file('photos') as $photoFile) {
+                    $image = new Image();
+                    // Filename To store
+                    $image->nom = $shop->pseudonyme.'_'.$produit->nom.'_'.uniqid().'.'.$photoFile->getClientOriginalExtension();
+                    $image->produit_id = $produit->id;
+                    if($i==0) {
+                        $image->couverture = true;
+                    }
+                    $photoFile->storeAs('uploads/produits/images/',$image->nom);
+                    $image->save();
+                    $i++;
                 }
-                $photoFile->storeAs('storage/produits/images/',$image->nom);
-                $image->save();
-                $i++;
-            }
-            DB::commit();
+                DB::commit();
         } catch(Exception $e) {
             DB::rollback();
             throw $e;
@@ -135,7 +156,8 @@ class ProduitController extends Controller
     public function edit(Shop $shop, Produit $produit)
     {
         $categories = Categorie::where('shop_id',$shop->id)->orderby('nom')->get();
-        return view('shop.produit.edit',compact('shop','produit','categories'));
+        $marques = Marque::where('shop_id',$shop->id)->orderby('nom')->get();
+        return view('shop.produit.edit',compact('shop','produit','categories','marques'));
     }
 
     /**
@@ -150,11 +172,17 @@ class ProduitController extends Controller
         $request->validate([
             'nom'=>'required',
             'description'=>'required',
-            'categorie_id'=>'required',
             'prixUnitaire'=>'integer|required',
             'quantite'=>'integer',
-            'visible'=>'required'
+            'visible'=>'required',
+            'inPromo'=>'boolean|required',
+            'prixPromo'=>'numeric|min:1|required_if:inPromo,true'
         ]);
+        if($request->get('inPromo')) {
+            if($request->get('prixPromo')>=$request->get('prixUnitaire')) {
+                throw new Error("En promotion, le prix doit être inférieur au prix normal...");
+            }
+        }
         $data = $request->all();
         $data['visible']=($request->get('visible')=='Oui');
         $produit->update($data);
@@ -206,7 +234,7 @@ class ProduitController extends Controller
                 // Filename To store
                 $image->nom = $shop->pseudonyme.'_'.$produit->nom.'_'.uniqid().'.'.$photoFile->getClientOriginalExtension();
                 $image->produit_id = $produit->id;
-                $photoFile->storeAs('storage/produits/images/',$image->nom);
+                $photoFile->storeAs('uploads/produits/images/',$image->nom);
                 $image->save();
             }
         DB::commit();
@@ -239,6 +267,8 @@ class ProduitController extends Controller
                 $sousProduit = new Produit();
                 $sousProduit->produit_id = $produit->id;
                 $sousProduit->nom = $produit->nom.'-variant-'.$i;
+                $sousProduit->prixUnitaire = $produit->prixUnitaire;
+                $sousProduit->categorie_id = $produit->categorie_id;
                 $sousProduit->save();
                 foreach($valeurTab as $valeur) {
                     $variantAttributValue = new VariantAttributeValue();

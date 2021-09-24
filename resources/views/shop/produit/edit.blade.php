@@ -44,12 +44,25 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 form-group" data-for="category">
                                 <label for="category-formbuilder-14"
                                     class="form-control-label mbr-fonts-style display-7">Catégorie de produit</label>
-                                <select value="{{ old('categorie_id') ?? $produit->categorie_id }}}" name="categorie_id"
-                                    data-form-field="category" class="form-control display-7"
+                                <select disabled value="{{ old('categorie_id') ?? $produit->categorie_id }}}"
+                                    name="categorie_id" data-form-field="category" class="form-control display-7"
                                     id="category-formbuilder-14">
                                     @foreach ($categories as $categorie)
                                     <option @if($categorie->id==$produit->categorie_id) selected="selected" @endif
                                         value="{{$categorie->id}}">{{ $categorie->nom }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 form-group" data-for="marque">
+                                <label for="marque-formbuilder-14"
+                                    class="form-control-label mbr-fonts-style display-7">Marque de produit</label>
+                                <select value="{{ old('marque_id') ?? $produit->marque_id }}}"
+                                    name="marque_id" data-form-field="marque" class="form-control display-7"
+                                    id="marque-formbuilder-14">
+                                    <option value="" disabled>Selectionner la marque (optionnel)</option>
+                                    @foreach ($marques as $marque)
+                                    <option @if($marque->id==$produit->marque_id) selected="selected" @endif
+                                        value="{{$marque->id}}">{{ $marque->nom }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -60,6 +73,25 @@
                                     placeholder="Nom du produit" data-form-field="nom" class="form-control display-7"
                                     required="required" value="" id="nom-formbuilder-14">
                             </div>
+                            <div ng-init="inPromo = {{$produit->inPromo}}" class="col-lg-12 col-md-12 col-sm-12 form-group" data-for="inPromo">
+                                <div class="form-control-label">
+                                    <label for="inPromo-formbuilder-14" class="mbr-fonts-style display-7">En promotion
+                                        ?</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input ng-click="inPromo = 0" type="radio" name="inPromo" data-form-field="inPromo" @if(!$produit->inPromo)
+                                    checked="" @endif
+                                    class="form-check-input display-7" value="0" id="inPromo-formbuilder-14">
+                                    <label class="form-check-label display-7">Non</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input ng-click="inPromo = 1" type="radio" name="inPromo" data-form-field="inPromo"
+                                        class="form-check-input display-7" value="1" @if($produit->inPromo) checked=""
+                                    @endif
+                                    id="inPromo-formbuilder-14">
+                                    <label class="form-check-label display-7">Oui</label>
+                                </div>
+                            </div>
                             <div data-for="prixUnitaire" class="col form-group">
                                 <label for="prixUnitaire-formbuilder-14"
                                     class="form-control-label mbr-fonts-style display-7">Prix Unitaire</label>
@@ -67,6 +99,14 @@
                                     name="prixUnitaire" placeholder="Prix Unitaire" data-form-field="prixUnitaire"
                                     class="form-control display-7" min="5" step="1" required="required" value=""
                                     id="prixUnitaire-formbuilder-14">
+                            </div>
+                            <div data-for="prixPromo" class="col form-group" ng-if="inPromo">
+                                <label for="prixPromo-formbuilder-14"
+                                    class="form-control-label mbr-fonts-style display-7">Prix Promo</label>
+                                <input value="{{ old('prixPromo') ?? $produit->prixPromo }}" type="number"
+                                    name="prixPromo" placeholder="Prix Unitaire" data-form-field="prixPromo"
+                                    class="form-control display-7" min="5" step="1" required="required" value=""
+                                    id="prixPromo-formbuilder-14">
                             </div>
                             <div data-for="quantite" class="col form-group">
                                 <label for="quantite-formbuilder-14"
@@ -90,19 +130,20 @@
                                         boutique ?</label>
                                 </div>
                                 <div class="form-check form-check-inline">
+                                    <input type="radio" name="visible" data-form-field="visible" @if(!$produit->visible)
+                                    checked="" @endif
+                                    class="form-check-input display-7" value="Non" id="visible-formbuilder-14">
+                                    <label class="form-check-label display-7">Non</label>
+                                </div>
+                                <div class="form-check form-check-inline">
                                     <input type="radio" name="visible" data-form-field="visible"
                                         class="form-check-input display-7" value="Oui" @if($produit->visible) checked=""
                                     @endif
                                     id="visible-formbuilder-14">
                                     <label class="form-check-label display-7">Oui</label>
                                 </div>
-                                <div class="form-check form-check-inline">
-                                    <input type="radio" name="visible" data-form-field="visible" @if(!$produit->visible)
-                                    checked="" @endif
-                                    class="form-check-input display-7" value="Non" id="visible-formbuilder-14">
-                                    <label class="form-check-label display-7">Non</label>
-                                </div>
                             </div>
+
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <hr>
                             </div>

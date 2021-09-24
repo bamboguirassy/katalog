@@ -9,6 +9,7 @@ use App\Models\Produit;
 use App\Models\Shop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CategorieController extends Controller
 {
@@ -61,10 +62,15 @@ class CategorieController extends Controller
      */
     public function show(Shop $shop, Categorie $categorie)
     {
-        $produits = Produit::where('categorie_id',$categorie->id)
+        $produitRaws = DB::select('select produit_id from categorie_produits where categorie_id='.$categorie->id);
+        $produitIds = [];
+        foreach ($produitRaws as $produitRaw) {
+            $produitIds[] = $produitRaw->produit_id;
+        }
+        $produits = Produit::whereIn('id',$produitIds)
         ->where('quantite','>',0)
         ->where('visible',true)
-        ->paginate(9);
+        ->paginate(10);
         $paProduits = [];
         if(Auth::user()) {
             $panier = Panier::where('user_id',Auth::user()->id)

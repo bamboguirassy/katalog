@@ -51,20 +51,24 @@
                 <div class="item features-image сol-12 col-md-6 col-lg-4">
                     <div class="item-wrapper">
                         <div class="item-img">
-                            <span class="category-badge">{{ $produit->categorie->nom }}</span>
-                            <span class="price-badge">{{ $produit->prixUnitaire }} FCFA</span>
+                            @if ($produit->inPromo)
+                            <span
+                                class="category-badge">-{{round((1-($produit->prixPromo/$produit->prixUnitaire))*100)}}%</span>
+                            @endif
+                            <span class="price-badge">{{ $produit->inPromo?$produit->prixPromo:$produit->prixUnitaire }}
+                                FCFA</span>
                             <a href="{{ route('shop.produit.show',compact('produit','shop')) }}">
-                                <img src="{{ asset('storage/produits/images/'.$produit->imageCouverture->nom) }}"
+                                <img src="{{ asset('uploads/produits/images/'.$produit->imageCouverture->nom) }}"
                                     alt="{{ $produit->nom }} Photo">
                             </a>
                         </div>
                         <div class="item-content">
-                            <h5 title="{{ $produit->nom }}" class="item-title mbr-fonts-style display-5">
+                            <h5 title="{{ $produit->nom }}" class="item-title mbr-fonts-style display-4">
                                 <a
                                     href="{{ route('shop.produit.show',compact('produit','shop')) }}">{{ \Illuminate\Support\Str::limit($produit->nom, 20, '...') }}</a>
                             </h5>
-                            <p style="min-height: 100px" class="mbr-text mbr-fonts-style display-7">
-                                {{ \Illuminate\Support\Str::limit($produit->description, 100, '...') }}</p>
+                            <p class="mbr-text mbr-fonts-style display-7">
+                                {{ $produit->categorie->nom }}</p>
                         </div>
                         <div class="mbr-section-btn item-footer">
                             <a href="{{ route('shop.produit.edit',compact('shop','produit')) }}" class="btn btn-primary"

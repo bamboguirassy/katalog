@@ -50,20 +50,22 @@
         }
     }
 </style>
-<section ng-controller="ProduitShowController" ng-init="init({{$produit}},{{$attributs}})">
+<section ng-cloak ng-controller="ProduitShowController" ng-init="init({{$produit}},{{$attributs}})">
     <div class="container mt-3">
         <div class="col-lg-12 border p-3 main-section bg-white">
             <div class="row m-0">
                 <div class="col-lg-4 left-side-product-box pb-3">
-                    <img src="{{ asset('storage/produits/images/'.$produit->imageCouverture->nom) }}"
+                    <img src="{{ asset('uploads/produits/images/'.$produit->imageCouverture->nom) }}"
                         class="border p-3">
                 </div>
                 <div class="col-lg-8">
                     <div class="right-side-pro-detail border p-3 m-0" ng-init="addAttribut=false">
                         <div class="row">
                             <div class="col-lg-12">
-                                <span>[[produit.categorie.nom]]</span>
-                                <p class="m-0 p-0">[[ produit.nom ]]</p>
+                                @foreach ($produit->categorieProduits as $categorieProd)
+                                <span style="font-size: 22px;"><a href="{{ route('shop.categorie.show',['categorie'=>$categorieProd,'shop'=>$shop]) }}">{{$categorieProd->categorie->nom}}</a> >></span>
+                                @endforeach
+                                <p class="m-0 p-0 mt-3">[[ produit.nom ]]</p>
                             </div>
                             <div class="col-lg-12">
                                 <p class="m-0 p-0 price-pro">[[produit.prixUnitaire]] FCFA</p>
@@ -265,7 +267,7 @@
                                                                     id="produitVariantImageInput">
                                                             </div>
                                                             <div class="col-12 col-lg-6">
-                                                                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                                                <button type="submit" class="btn btn-primary">Téléverser</button>
                                                             </div>
                                                         </div>
 
@@ -275,7 +277,7 @@
                                         </div>
                                         <div class="row" ng-show="variant.configured">
                                             <div class="col-12 col-md-6 col-lg-3" ng-repeat="image in variant.images">
-                                                <img style="height: 210px;" src="/storage/produits/images/[[image.nom]]"
+                                                <img style="height: 210px;" src="/uploads/produits/images/[[image.nom]]"
                                                     alt="" srcset="">
                                             </div>
                                         </div>
@@ -324,7 +326,7 @@
                 <div class="item features-image сol-12 col-md-4 col-lg-3">
                     <div class="item-wrapper">
                         <div class="item-img">
-                            <img src="{{ asset('storage/produits/images/'.$image->nom) }}">
+                            <img src="{{ asset('uploads/produits/images/'.$image->nom) }}">
                         </div>
                         <div class="mbr-section-btn item-footer mt-2">
                             @if ($image->id!=$produit->imageCouverture->id)
@@ -386,7 +388,7 @@
     <div class="image-wrapper">
         <span class="price-badge">{{ $produit->prixUnitaire }} FCFA</span>
         <span class="category-badge">{{ $produit->categorie->nom }}</span>
-        <img style="height: 400px;" src="{{ asset('storage/produits/images/'.$produit->imageCouverture->nom) }}"
+        <img style="height: 400px;" src="{{ asset('uploads/produits/images/'.$produit->imageCouverture->nom) }}"
             alt="Image de couverture">
     </div>
 </div>

@@ -42,4 +42,12 @@ class Shop extends Model
     {
         return $this->belongsTo(Type::class,'categorie_id');
     }
+
+    public function categories() {
+        return $this->hasMany(Categorie::class)->where('categorie_id',null);
+    }
+
+    public function marques() {
+        return $this->hasMany(Marque::class)->has('produits');
+    }
 }

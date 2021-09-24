@@ -91,18 +91,17 @@
                                     role="tablist" aria-multiselectable="true">
                                     <div class="card" ng-repeat="attribut in attributs">
                                         <div class="card-header" role="tab" id="heading[[$index]]">
-                                            <a role="button" class="panel-title collapsed text-info"
+                                            <a role="button" class="panel-title text-info"
                                                 data-toggle="collapse" data-bs-toggle="collapse" data-core=""
-                                                href="#collapse[[$index]]_84" aria-expanded="false"
+                                                href="#collapse[[$index]]_84" aria-expanded="true"
                                                 aria-controls="collapse[[$index]]">
                                                 <div class="col">
                                                     <h5 class="mbr-fonts-style mbr-info display-5">
                                                         [[attribut.nom]] <span>([[attribut.type]])</span></h5>
                                                 </div>
-                                                <span class="sign mbr-iconfont mbri-arrow-next inactive"></span>
                                             </a>
                                         </div>
-                                        <div id="collapse[[$index]]_84" class="panel-collapse noScroll collapse "
+                                        <div id="collapse[[$index]]_84" class="panel-collapse noScroll collapse show"
                                             role="tabpanel" aria-labelledby="heading[[$index]]"
                                             data-parent="#bootstrap-accordion_84" data-bs-parent="#accordion">
                                             <div class="panel-body ">
@@ -114,7 +113,7 @@
                                                     <hr>
                                                     <button ng-click="openAttributValueModal(attribut)"
                                                         title="Ajouter valeur"
-                                                        class="sign mbr-iconfont mbri-plus inactive"></button>
+                                                        class="sign mbr-iconfont fa fa-2x fa-plus inactive"></button>
                                                     <hr>
                                                     <table class="table">
                                                         <thead>

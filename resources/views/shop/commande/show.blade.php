@@ -11,7 +11,7 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-4 image-wrapper">
-                        <img class="w-100" src="{{ asset('storage/shops/'.$shop->logo) }}" alt="{{ $shop->logo }}">
+                        <img class="w-100" src="{{ asset('uploads/shops/'.$shop->logo) }}" alt="{{ $shop->logo }}">
                     </div>
                     <div class="col-12 col-md">
                         <div class="text-wrapper align-left">

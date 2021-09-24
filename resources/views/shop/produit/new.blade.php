@@ -51,8 +51,33 @@
                                 <select value="{{ old('categorie_id') }}}" name="categorie_id"
                                     data-form-field="category" class="form-control display-7"
                                     id="category-formbuilder-14">
+                                    <option selected value="" disabled>Selectionner une catégorie</option>
                                     @foreach ($categories as $categorie)
+                                    @if(count($categorie->subs)<1)
                                     <option value="{{$categorie->id}}">{{ $categorie->nom }}</option>
+                                    @else
+                                    @while (count($categorie->subs))
+                                    <optgroup label="{{$categorie->nom}}">
+                                        @foreach ($categorie->subs as $sub)
+                                        <option value="{{$sub->id}}">{{ $sub->nom }}</option>
+                                        @endforeach
+                                    </optgroup>
+                                    <?php $categorie = $sub ?>
+                                    @endwhile
+                                    @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 form-group" data-for="marque">
+                                <label for="marque-formbuilder-14"
+                                    class="form-control-label mbr-fonts-style display-7">Marque de produit</label>
+                                <select
+                                    name="marque_id" data-form-field="marque" class="form-control display-7"
+                                    id="marque-formbuilder-14">
+                                    <option selected value="" disabled>Selectionner la marque (optionnel)</option>
+                                    @foreach ($marques as $marque)
+                                    <option @if(old('marque_id')==$marque->id) selected="selected" @endif
+                                        value="{{$marque->id}}">{{ $marque->nom }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -107,36 +132,45 @@
                                 <div class="form-control-label">
                                     <label for="visible-formbuilder-14" class="mbr-fonts-style display-7">Voulez-vous
                                         ajouter d'autres attributs ?</label>
-                                        <span>Si vous ne retrouvez pas certains attributs, merci de les créer en suivant ce lien: <a href="{{ route('shop.attribut.index', compact('shop')) }}">Ajouter de nouveaux attributs</a></span>
+                                    <span>Si vous ne retrouvez pas certains attributs, merci de les créer en suivant ce
+                                        lien: <a href="{{ route('shop.attribut.index', compact('shop')) }}">Ajouter de
+                                            nouveaux attributs</a></span>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input ng-model="hasMoreAttr" checked type="radio" name="hasMoreAttributes" data-form-field="moreAttributes"
-                                        class="form-check-input display-7" value="0" id="visible-formbuilder-14no">
+                                    <input ng-model="hasMoreAttr" checked type="radio" name="hasMoreAttributes"
+                                        data-form-field="moreAttributes" class="form-check-input display-7" value="0"
+                                        id="visible-formbuilder-14no">
                                     <label class="form-check-label display-7">Non</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input ng-model="hasMoreAttr" type="radio" name="hasMoreAttributes" data-form-field="moreAttributes"
-                                        class="form-check-input display-7" id="visible-formbuilder-14yes" value="1">
+                                    <input ng-model="hasMoreAttr" type="radio" name="hasMoreAttributes"
+                                        data-form-field="moreAttributes" class="form-check-input display-7"
+                                        id="visible-formbuilder-14yes" value="1">
                                     <label class="form-check-label display-7">Oui</label>
                                 </div>
                             </div>
-                            <div ng-if="hasMoreAttr==1" class="col-lg-12 col-md-12 col-sm-12 form-group" data-for="selectedAttr">
+                            <div ng-if="hasMoreAttr==1" class="col-lg-12 col-md-12 col-sm-12 form-group"
+                                data-for="selectedAttr">
                                 <div class="form-control-label">
-                                    <label for="visible-formbuilder-14[[$index]]" class="mbr-fonts-style display-7">Selectionner les attributs</label>
+                                    <label for="visible-formbuilder-14[[$index]]"
+                                        class="mbr-fonts-style display-7">Selectionner les attributs</label>
                                 </div>
                                 <div ng-repeat="attr in attributs" class="form-check form-check-inline">
-                                    <input ng-click="toggleAttrSelection(attr)" type="checkbox" name="selectedAttrs[]" data-form-field="selectedAttr"
-                                        class="form-check-input display-7" value="[[attr.id]]" id="visible-formbuilder-14[[$index]]">
+                                    <input ng-click="toggleAttrSelection(attr)" type="checkbox" name="selectedAttrs[]"
+                                        data-form-field="selectedAttr" class="form-check-input display-7"
+                                        value="[[attr.id]]" id="visible-formbuilder-14[[$index]]">
                                     <label class="form-check-label display-7">[[attr.nom]]</label>
                                 </div>
                             </div>
-                            <div ng-repeat="selectedAttr in selectedAttrs" class="col-lg-12 col-md-12 col-sm-12 form-group" data-for="category">
+                            <div ng-repeat="selectedAttr in selectedAttrs"
+                                class="col-lg-12 col-md-12 col-sm-12 form-group" data-for="category">
                                 <label for="category-formbuilder-14[[selectedAttr.id]]"
                                     class="form-control-label mbr-fonts-style display-7">[[selectedAttr.nom]]</label>
                                 <select required="required" name="[[selectedAttr.nom]][]" multiple="multiple"
                                     data-form-field="category" class="form-control display-7"
                                     id="category-formbuilder-14[[selectedAttr.id]]">
-                                    <option ng-repeat="valeur in selectedAttr.valeurs" value="[[valeur.id]]">[[valeur.nom]]</option>
+                                    <option ng-repeat="valeur in selectedAttr.valeurs" value="[[valeur.id]]">
+                                        [[valeur.nom]]</option>
                                 </select>
                             </div>
                             <div class="col">

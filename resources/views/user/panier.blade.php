@@ -29,7 +29,7 @@
                     </div>
                     <div class="col-12 col-md-12 col-lg-4">
                         <div class="image-wrapper">
-                            <img class="w-100" src="{{ asset('storage/shops/'.$shop->logo) }}" alt="">
+                            <img class="w-100" src="{{ asset('uploads/shops/'.$shop->logo) }}" alt="">
                         </div>
                     </div>
                 </div>

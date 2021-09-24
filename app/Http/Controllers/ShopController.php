@@ -66,7 +66,7 @@ class ShopController extends Controller
             Validator::validate($request->only('logo'),['logo'=>'image']);
             // Filename To store
             $filename = $request->get('pseudonyme').'.'.$request->file('logo')->getClientOriginalExtension();
-            $request->file('logo')->storeAs('storage/shops', $filename);
+            $request->file('logo')->storeAs('uploads/shops', $filename);
             $shop->logo = $filename;
         }
         
@@ -146,7 +146,7 @@ class ShopController extends Controller
             Validator::validate($request->only('logo'),['logo'=>'image']);
             // Filename To store
             $filename = $shop->pseudonyme.'.'.$request->file('logo')->getClientOriginalExtension();
-            $request->file('logo')->storeAs('storage/shops', $filename);
+            $request->file('logo')->storeAs('uploads/shops', $filename);
             $shop->update(['logo'=>$filename]);
         }
         return back();

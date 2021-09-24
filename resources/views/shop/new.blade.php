@@ -68,7 +68,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-lg-6 col-md-12 col-sm-12 form-group" style="" data-for="logo">
+                        <div class="col-lg-12 col-md-12 col-sm-12 form-group" style="" data-for="logo">
                             <label for="logo-formbuilder-q"
                                 class="form-control-label mbr-fonts-style display-7">Téléverser le logo (si vous en
                                 avez)</label>

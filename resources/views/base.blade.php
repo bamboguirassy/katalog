@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     @if (isset($shop))
-    <link rel="shortcut icon" href="{{ asset('storage/shops/'.$shop->logo) }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('uploads/shops/'.$shop->logo) }}" type="image/x-icon">
     @else
     <link rel="shortcut icon" href="{{ asset('assets/images/bambogroup.jpg') }}" type="image/x-icon">
     @endif
@@ -63,7 +63,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Katalog">
     @if (isset($shop))
-    <link rel="apple-touch-icon" href="{{ asset('storage/shops/'.$shop->logo) }}">
+    <link rel="apple-touch-icon" href="{{ asset('uploads/shops/'.$shop->logo) }}">
     @else
     <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
     @endif
@@ -81,10 +81,12 @@
             <div class="menu-tite mbr-fonts-style display-4 text-white">
                 <div>
                     @isset($shop)
-                    <input ng-model="produitName" auto-complete="produitAutoCompleteOptions" style="max-width: 500px; display: inline;" class="form-control" type="text" name="saerch"
+                    <input ng-model="produitName" auto-complete="produitAutoCompleteOptions"
+                        style="max-width: 500px; display: inline;" class="form-control" type="text" name="saerch"
                         id="searchProduit" placeholder="Rechercher un produit">
                     @else
-                    <input ng-model="shopName" auto-complete="shopAutoCompleteOptions" style="max-width: 500px; display: inline;" class="form-control" type="text" name="saerch"
+                    <input ng-model="shopName" auto-complete="shopAutoCompleteOptions"
+                        style="max-width: 500px; display: inline;" class="form-control" type="text" name="saerch"
                         id="searchShop" placeholder="Rechercher une boutique">
                     @endisset
                 </div>
@@ -100,7 +102,7 @@
                     <span class="navbar-logo">
                         @isset($shop)
                         <a href="{{route('shop.home',compact('shop'))}}">
-                            <img src="{{ asset('storage/shops/'.$shop->logo) }}" alt="{{$shop->nom}}"
+                            <img src="{{ asset('uploads/shops/'.$shop->logo) }}" alt="{{$shop->nom}}"
                                 style="height: 3rem;">
                         </a>
                         @else
@@ -145,6 +147,59 @@
                             </a>
                             @endisset
                         </li>
+                        @isset($shop)
+                        @if (count($shop->categories)>0)
+                        <li class="nav-item dropdown">
+                            <a class="nav-link link text-primary dropdown-toggle display-4" href="#"
+                                data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside"
+                                aria-expanded="false">
+                                <span class="mobi-mbri mobi-mbri-add-submenu mbr-iconfont mbr-iconfont-btn"></span>
+                                Catégories&nbsp;</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown-undefined">
+                                @foreach ($shop->categories as $categorie)
+                                <div class="dropdown">
+                                    @if (count($categorie->subs)>0)
+                                    <a class="text-primary dropdown-item dropdown-toggle display-4" href="{{ route('shop.categorie.show',['shop'=>$shop,'categorie'=>$categorie]) }}"
+                                        data-toggle="dropdown-submenu" data-bs-toggle="dropdown"
+                                        data-bs-auto-close="outside" aria-expanded="false">{{$categorie->nom}}</a>
+                                    <div class="dropdown-menu dropdown-submenu" aria-labelledby="dropdown-undefined">
+                                        @foreach ($categorie->subs as $sub)
+                                        <a class="text-primary dropdown-item display-4" href="{{ route('shop.categorie.show',['shop'=>$shop,'categorie'=>$sub]) }}">{{$sub->nom}}</a>
+                                        @endforeach
+                                    </div>
+                                    @else
+                                    <a class="text-primary dropdown-item display-4"
+                                        href="{{ route('shop.categorie.show',['shop'=>$shop,'categorie'=>$categorie]) }}"
+                                        aria-expanded="false">
+                                        {{$categorie->nom}}
+                                    </a>
+                                    @endif
+                                </div>
+                                @endforeach
+                            </div>
+                        </li>
+                        @endif
+                        <!-- Menu des marques -->
+                        @if (count($shop->marques)>0)
+                        <li class="nav-item dropdown">
+                            <a class="nav-link link text-primary dropdown-toggle display-4" href="#"
+                                aria-expanded="false" data-toggle="dropdown-submenu" data-bs-toggle="dropdown"
+                                data-bs-auto-close="outside">
+                                <span class="mbrib-features mbr-iconfont mbr-iconfont-btn"></span>
+                                Marques
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown-undefined">
+                                @foreach ($shop->marques as $marque)
+                                <a class="text-primary dropdown-item display-4"
+                                    href="{{ route('shop.marque.show',compact('shop','marque')) }}" aria-expanded="false">
+                                    </span>{{$marque->nom}}
+                                </a>
+                                @endforeach
+                            </div>
+                        </li>
+                        @endif
+                        <!-- end menu marque -->
+                        @endisset
                         @auth
                         @isset($shop)
                         @if (auth()->user()->type=='owner' && $shop->user_id==auth()->user()->id)
@@ -160,6 +215,11 @@
                                     href="{{ route('shop.categorie.index',compact('shop')) }}" aria-expanded="false">
                                     <span class="mobi-mbri mobi-mbri-layers mbr-iconfont mbr-iconfont-btn">
                                     </span>Catégories
+                                </a>
+                                <a class="text-primary dropdown-item display-4"
+                                    href="{{ route('shop.marque.index',compact('shop')) }}" aria-expanded="false">
+                                    <span class="mobi-mbri mobi-mbri-target mbr-iconfont mbr-iconfont-btn">
+                                    </span>Marques
                                 </a>
                                 <a class="text-primary dropdown-item display-4"
                                     href="{{ route('shop.attribut.index',compact('shop')) }}" aria-expanded="false">

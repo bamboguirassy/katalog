@@ -1,5 +1,5 @@
 @component('mail::message')
-[![Logo {{$commande->shop->nom}}]({{asset('storage/shops/'.$commande->shop->logo)}} "Logo {{$commande->shop->nom}}")]({{asset('storage/shops/'.$commande->shop->logo)}})
+[![Logo {{$commande->shop->nom}}]({{asset('uploads/shops/'.$commande->shop->logo)}} "Logo {{$commande->shop->nom}}")]({{asset('uploads/shops/'.$commande->shop->logo)}})
 
 Bonjour ***{{$commande->user->name}}***,
 Bienvenue chez **{{$commande->shop->nom}}**.

@@ -5,6 +5,7 @@ use App\Http\Controllers\AttributProduitController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\MarqueController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
@@ -89,7 +90,7 @@ Route::group([
                $produits = Produit::where('shop_id',$shop->id)
                ->where('visible',true)
                ->where('quantite','>',0)
-               ->paginate(16);
+               ->paginate(8);
                // find user panier if exists
                $paProduits = [];
                if(Auth::user()) {
@@ -138,6 +139,10 @@ Route::group([
 
             Route::resource('/categorie', CategorieController::class,
                 ['only'=>['show']
+            ]);
+
+            Route::resource('marque', MarqueController::class,[
+                'except'=>['edit','update','create']
             ]);
 
             /** ws */

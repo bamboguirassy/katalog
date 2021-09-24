@@ -34,9 +34,9 @@ class Categorie extends Model
         return $this->belongsTo(Shop::class);
     }
 
-    public function produits() {
+    /*public function produits() {
         return $this->hasMany(Produit::class);
-    }
+    }*/
 
     /**
      * Get the parent that owns the Categorie
@@ -45,10 +45,18 @@ class Categorie extends Model
      */
     public function parent(): BelongsTo
     {
-        return $this->belongsTo(Categorie::class);
+        return $this->belongsTo(Categorie::class,'categorie_id');
     }
 
     public function subs() {
         return $this->hasMany(Categorie::class);
+    }
+
+    public function categorieProduits() {
+        return $this->hasMany(CategorieProduit::class);
+    }
+
+    public function produits() {
+        return $this->belongsToMany(Produit::class,'categorie_produits','categorie_id','produit_id')->take(4);
     }
 }

@@ -83,7 +83,7 @@ app.controller('MainController', ($rootScope, $http) => {
                 label: `
                 <div style="width: 100%; text-align: left;">
                     <div style="width: 30%; display: inline;">
-                        <img style="width: 80px; display:inline;" src="/storage/shops/[[item.logo]]">
+                        <img style="width: 50px; display:inline;" src="/uploads/shops/[[item.logo]]">
                     </div>
                     <div  style="width: 70%; display: inline;">
                         <span style="font-size: 25px; font-weight: bold;">[[entry.item.nom]]</span>
@@ -121,7 +121,7 @@ app.controller('MainController', ($rootScope, $http) => {
                 label: `
                 <div style="width: 100%; text-align: left;">
                     <div style="width: 30%; display: inline;">
-                        <img style="width: 80px; display: inline;" src="/storage/produits/images/[[entry.item.image_couverture.nom]]">
+                        <img style="width: 50px; display: inline;" src="/uploads/produits/images/[[entry.item.image_couverture.nom]]">
                     </div>
                     <div  style="width: 70%; display: inline;">
                         <span style="font-size: 20px; font-weight: bold;">[[entry.item.nom]]</span>
@@ -131,7 +131,7 @@ app.controller('MainController', ($rootScope, $http) => {
             };
         },
         itemSelected: function (e) {
-            if($rootScope.user.id==$rootScope.shop.user_id) {
+            if($rootScope.user && $rootScope.user.id==$rootScope.shop.user_id) {
                 window.location.href = `/${$rootScope.shop.pseudonyme}/produit/${e.item.id}`;
             } else {
                 window.location.href = `/${$rootScope.shop.pseudonyme}/produit/${e.item.id}/display`;

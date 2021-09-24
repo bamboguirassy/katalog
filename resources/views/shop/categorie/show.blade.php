@@ -31,7 +31,8 @@
                     <div class="col-lg-3 col-md-12 align-center">
                         <div class="img-box">
                             <a href="{{ route('shop.home',compact('shop')) }}">
-                                <img style="max-height: 300px; object-fit: cover;" src="{{ asset('storage/shops/'.$shop->logo) }}" alt="">
+                                <img style="max-height: 300px; object-fit: cover;"
+                                    src="{{ asset('uploads/shops/'.$shop->logo) }}" alt="">
                             </a>
                         </div>
                     </div>
@@ -44,8 +45,12 @@
                 <div class="row justify-content-center">
                     <div class="card col-12">
                         <div class="card-wrapper">
-                            <div class="card-box align-center" style="height: 20px;">
-
+                            <div class="card-box align-left" style="font-size: 25px; font-weight: bolder;">
+                                @foreach ($categorie->subs as $sub)
+                                <span><a
+                                        href="{{ route('shop.categorie.show',['shop'=>$shop,'categorie'=>$sub]) }}">{{ $sub->nom }}</a>
+                                    >></span>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -55,7 +60,6 @@
         <section data-bs-version="5.1" class="gallery1 cid-sIpMwjCas3" id="gallery1-8">
             <div class="container">
                 <div class="mbr-section-head">
-
                     <h5 class="mbr-section-subtitle mbr-fonts-style align-center mb-0 display-7">
                         Découvrez notre catalogue de produits. Identifiez les produits qui vous intéressent et
                         appelez-nous pour finaliser la commande.</h5>
@@ -65,34 +69,37 @@
                     <div class="item features-image сol-12 col-md-6 col-lg-4">
                         <div class="item-wrapper">
                             <div class="item-img">
-                                <span class="category-badge">{{ $produit->categorie->nom }}</span>
-                                <span class="price-badge">{{ $produit->prixUnitaire }} FCFA</span>
-                                <a href="{{ route('shop.produit.display',compact('produit','shop')) }}">
-                                    <img src="{{ asset('storage/produits/images/'.$produit->imageCouverture->nom) }}"
-                                        alt="">
+                                @if ($produit->inPromo)
+                                <span
+                                    class="category-badge">-{{round((1-($produit->prixPromo/$produit->prixUnitaire))*100)}}%</span>
+                                @endif
+                                <span
+                                    class="price-badge">{{ $produit->inPromo?$produit->prixPromo:$produit->prixUnitaire }}
+                                    FCFA</span>
+                                <a href="{{ route('shop.produit.display',['produit'=>$produit->id,'shop'=>$shop]) }}">
+                                    <img src="{{ asset('uploads/produits/images/'.$produit->images[0]->nom) }}" alt="">
                                 </a>
                             </div>
                             <div class="item-content">
                                 <a href="{{ route('shop.produit.display',compact('produit','shop')) }}">
-                                    <h5 title="{{ $produit->nom }}" class="item-title mbr-fonts-style display-5">
+                                    <h5 title="{{ $produit->nom }}" class="item-title mbr-fonts-style display-4">
                                         {{ \Illuminate\Support\Str::limit($produit->nom, 20, '...') }}
                                     </h5>
-                                    <p style="min-height: 100px" class="mbr-text mbr-fonts-style display-7">
-                                        {{ \Illuminate\Support\Str::limit($produit->description, 100, '...') }}
+                                    <p class="mbr-text mbr-fonts-style display-7">
+                                        <span style="font-weight: initial;">{{ $produit->categorie->nom }}</span>
                                     </p>
                                 </a>
                             </div>
                             <div class="mbr-section-btn item-footer">
                                 @if (in_array($produit->id, $paProduits))
-                                    <a style="background: green; color: white;"
-                                        class="btn item-btn display-4">
-                                        Dans le panier <i class="fa fa-check"></i>
-                                    </a>
+                                <a style="background: green; color: white;" class="btn item-btn display-4">
+                                    Dans le panier <i class="fa fa-check"></i>
+                                </a>
                                 @else
-                                    <a ng-click="initProductToPanier({{$produit}})"
-                                        class="btn btn-primary item-btn display-4">
-                                        AJOUTER AU PANIER
-                                    </a>
+                                <a ng-click="initProductToPanier({{$produit}})"
+                                    class="btn btn-primary item-btn display-4">
+                                    AJOUTER AU PANIER
+                                </a>
                                 @endif
                                 </a>
                             </div>

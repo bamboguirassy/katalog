@@ -82,7 +82,7 @@ class ImageController extends Controller
      */
     public function destroy(Shop $shop,Image $image)
     {
-        Storage::delete('storage/produits/images/'.$image->nom);
+        Storage::delete('uploads/produits/images/'.$image->nom);
         $image->delete();
         return redirect()->route('shop.produit.show',['shop'=>$shop,'produit'=>$image->produit]);
     }
