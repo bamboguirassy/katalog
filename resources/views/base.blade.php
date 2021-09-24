@@ -12,7 +12,8 @@
     @endif
     <meta name="description" content="@yield('description')">
     <title>@yield('title')</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('assets/web/assets/mobirise-icons2/mobirise2.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/web/assets/mobirise-icons-bold/mobirise-icons-bold.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/web/assets/mobirise-icons/mobirise-icons.css') }}">
@@ -148,6 +149,11 @@
                             @endisset
                         </li>
                         @isset($shop)
+                        @endisset
+
+                        {{-- afficher les menus public de la boutique --}}
+                        @guest
+                        @isset($shop)
                         @if (count($shop->categories)>0)
                         <li class="nav-item dropdown">
                             <a class="nav-link link text-primary dropdown-toggle display-4" href="#"
@@ -159,12 +165,14 @@
                                 @foreach ($shop->categories as $categorie)
                                 <div class="dropdown">
                                     @if (count($categorie->subs)>0)
-                                    <a class="text-primary dropdown-item dropdown-toggle display-4" href="{{ route('shop.categorie.show',['shop'=>$shop,'categorie'=>$categorie]) }}"
+                                    <a class="text-primary dropdown-item dropdown-toggle display-4"
+                                        href="{{ route('shop.categorie.show',['shop'=>$shop,'categorie'=>$categorie]) }}"
                                         data-toggle="dropdown-submenu" data-bs-toggle="dropdown"
                                         data-bs-auto-close="outside" aria-expanded="false">{{$categorie->nom}}</a>
                                     <div class="dropdown-menu dropdown-submenu" aria-labelledby="dropdown-undefined">
                                         @foreach ($categorie->subs as $sub)
-                                        <a class="text-primary dropdown-item display-4" href="{{ route('shop.categorie.show',['shop'=>$shop,'categorie'=>$sub]) }}">{{$sub->nom}}</a>
+                                        <a class="text-primary dropdown-item display-4"
+                                            href="{{ route('shop.categorie.show',['shop'=>$shop,'categorie'=>$sub]) }}">{{$sub->nom}}</a>
                                         @endforeach
                                     </div>
                                     @else
@@ -191,7 +199,8 @@
                             <div class="dropdown-menu" aria-labelledby="dropdown-undefined">
                                 @foreach ($shop->marques as $marque)
                                 <a class="text-primary dropdown-item display-4"
-                                    href="{{ route('shop.marque.show',compact('shop','marque')) }}" aria-expanded="false">
+                                    href="{{ route('shop.marque.show',compact('shop','marque')) }}"
+                                    aria-expanded="false">
                                     </span>{{$marque->nom}}
                                 </a>
                                 @endforeach
@@ -200,6 +209,67 @@
                         @endif
                         <!-- end menu marque -->
                         @endisset
+                        @endguest
+                        @auth
+                        @if (auth()->user()->type=='client')
+                        @if (count($shop->categories)>0)
+                        <li class="nav-item dropdown">
+                            <a class="nav-link link text-primary dropdown-toggle display-4" href="#"
+                                data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside"
+                                aria-expanded="false">
+                                <span class="mobi-mbri mobi-mbri-add-submenu mbr-iconfont mbr-iconfont-btn"></span>
+                                Catégories&nbsp;</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown-undefined">
+                                @foreach ($shop->categories as $categorie)
+                                <div class="dropdown">
+                                    @if (count($categorie->subs)>0)
+                                    <a class="text-primary dropdown-item dropdown-toggle display-4"
+                                        href="{{ route('shop.categorie.show',['shop'=>$shop,'categorie'=>$categorie]) }}"
+                                        data-toggle="dropdown-submenu" data-bs-toggle="dropdown"
+                                        data-bs-auto-close="outside" aria-expanded="false">{{$categorie->nom}}</a>
+                                    <div class="dropdown-menu dropdown-submenu" aria-labelledby="dropdown-undefined">
+                                        @foreach ($categorie->subs as $sub)
+                                        <a class="text-primary dropdown-item display-4"
+                                            href="{{ route('shop.categorie.show',['shop'=>$shop,'categorie'=>$sub]) }}">{{$sub->nom}}</a>
+                                        @endforeach
+                                    </div>
+                                    @else
+                                    <a class="text-primary dropdown-item display-4"
+                                        href="{{ route('shop.categorie.show',['shop'=>$shop,'categorie'=>$categorie]) }}"
+                                        aria-expanded="false">
+                                        {{$categorie->nom}}
+                                    </a>
+                                    @endif
+                                </div>
+                                @endforeach
+                            </div>
+                        </li>
+                        @endif
+                        <!-- Menu des marques -->
+                        @if (count($shop->marques)>0)
+                        <li class="nav-item dropdown">
+                            <a class="nav-link link text-primary dropdown-toggle display-4" href="#"
+                                aria-expanded="false" data-toggle="dropdown-submenu" data-bs-toggle="dropdown"
+                                data-bs-auto-close="outside">
+                                <span class="mbrib-features mbr-iconfont mbr-iconfont-btn"></span>
+                                Marques
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown-undefined">
+                                @foreach ($shop->marques as $marque)
+                                <a class="text-primary dropdown-item display-4"
+                                    href="{{ route('shop.marque.show',compact('shop','marque')) }}"
+                                    aria-expanded="false">
+                                    </span>{{$marque->nom}}
+                                </a>
+                                @endforeach
+                            </div>
+                        </li>
+                        @endif
+                        <!-- end menu marque -->
+                        @endif
+                        @endauth
+                        {{-- end afficher les menus public de la boutique --}}
+
                         @auth
                         @isset($shop)
                         @if (auth()->user()->type=='owner' && $shop->user_id==auth()->user()->id)
