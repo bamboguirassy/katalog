@@ -116,6 +116,19 @@
                                 <img id="main-image" src="/uploads/produits/images/[[images[0].nom]]"
                                     style="height: 400px; object-fit: fill;" />
                             </div>
+                            @if (count($produit->couleurProduits)>0)
+                            <div class="sizes mb-2 align-center">
+                                <label class="radio" ng-repeat="couleurProduit in produit.couleur_produits"
+                                    style="margin-right: 3px;">
+                                    <input ng-click="changeImages(couleurProduit.images)" type="radio"
+                                        name="couleur[[produit.nom]]" value="[[couleurProduit.id]]"
+                                        id="[[couleurProduit.id]]">
+                                    <div title="[[ couleurProduit.couleur.nom ]]"
+                                        style="height: 25px; width: 40px; background-color: [[ couleurProduit.couleur.color ]]; border: 1px solid gray;"></div>
+
+                                </label>
+                            </div>
+                            @endif
                             <div class="thumbnail">
                                 <img ng-repeat="image in images" onclick="change_image(this)"
                                     src="/uploads/produits/images/[[image.nom]]" style="width: 70px; display: inline;">
@@ -139,20 +152,6 @@
                                 </div>
                             </div>
                             <p class="about display-4">{{ $produit->description }}</p>
-                            @if (count($produit->couleurProduits)>0)
-                            <div class="sizes mt-2">
-                                <h6 class="text-uppercase">Couleur</h6>
-                                <label class="radio" ng-repeat="couleurProduit in produit.couleur_produits"
-                                    style="margin-right: 3px;">
-                                    <input ng-click="changeImages(couleurProduit.images)" type="radio"
-                                        name="couleur[[produit.nom]]" value="[[couleurProduit.id]]"
-                                        id="[[couleurProduit.id]]">
-                                    <span title="[[ couleurProduit.couleur.nom ]]"
-                                        style="height: 20px; width: 30px; background-color: [[ couleurProduit.couleur.color ]]"></span>
-
-                                </label>
-                            </div>
-                            @endif
                             <div ng-if="attributProduit.attribut.type!='couleur'" class="sizes mt-2"
                                 ng-repeat="attributProduit in produit.attributs">
                                 <h6 class="text-uppercase">[[ attributProduit.attribut.nom ]]</h6>

@@ -381,6 +381,7 @@
     <script src="{{ asset('angular/controllers/produit.show.controller.js') }}"></script>
     <script src="{{ asset('angular/controllers/produit.display.controller.js') }}"></script>
     <script src="{{ asset('angular/controllers/panier.controller.js') }}"></script>
+    <script src="{{ asset('angular/controllers/categorie.controller.js') }}"></script>
 </body>
 
 </html>

@@ -109,9 +109,13 @@ class CategorieController extends Controller
      * @param  \App\Models\Categorie  $categorie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categorie $categorie)
+    public function update(Request $request, Shop $shop, Categorie $categorie)
     {
-        //
+        $request->validate([
+            'nom'=>'required'
+        ]);
+        $categorie->update($request->all());
+        return back();
     }
 
     /**
