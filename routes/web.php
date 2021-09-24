@@ -4,6 +4,7 @@ use App\Http\Controllers\AttributController;
 use App\Http\Controllers\AttributProduitController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CommandeController;
+use App\Http\Controllers\CouleurProduitController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\MarqueController;
 use App\Http\Controllers\ProduitController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ValeurAttributController;
 use App\Models\Categorie;
+use App\Models\CouleurProduit;
 use App\Models\Panier;
 use App\Models\Paproduit;
 use App\Models\Produit;
@@ -154,6 +156,13 @@ Route::group([
             Route::post('/produit/add-images/{produit}', 'App\Http\Controllers\ProduitController@addImages')
             ->name('produit.add.images');
 
+            Route::post('/couleurproduit/add-images/{couleurProduit}', 'App\Http\Controllers\CouleurProduitController@addImages')
+            ->name('couleurproduit.add.images');
+
+            Route::resource('couleurproduit',CouleurProduitController::class,[
+                'only'=>['destroy']
+            ])->middleware('is.owner');
+
             Route::post('/produit/change/photo-couverture/{image}', 'App\Http\Controllers\ProduitController@updateCouvertureImage')
             ->name('produit.update.couverture.photo');
 
@@ -176,6 +185,15 @@ Route::group([
             Route::post('panier/addproduct','App\Http\Controllers\PanierController@addProduit')
                 ->middleware('auth')
                 ->name('panier.produit.save');
+                /** ws */
+            Route::get('panier/content','App\Http\Controllers\PanierController@getMyPanierContents')
+                ->middleware('auth');
+                /** ws */
+            Route::put('panier/update-product-quantite/{paproduit}','App\Http\Controllers\PanierController@updatePaproductQuantite')
+                ->middleware('auth');
+                /** ws */
+            Route::delete('panier/remove-product/{paproduit}','App\Http\Controllers\PanierController@removePaproductFromPanier')
+                ->middleware('auth');
 
             Route::get('panier/show','App\Http\Controllers\PanierController@showUserPanier')
                 ->middleware('auth')

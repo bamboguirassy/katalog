@@ -76,7 +76,7 @@ app.controller('ProduitShowController', ($scope, ProduitService) => {
                 } else {
                     $scope.refresh();
                 }
-            }).error(err => console.log(err));
+            }).error(err => alert(err.message));
         }
     }
 

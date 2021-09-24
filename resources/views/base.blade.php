@@ -12,12 +12,12 @@
     @endif
     <meta name="description" content="@yield('description')">
     <title>@yield('title')</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('assets/web/assets/mobirise-icons2/mobirise2.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/web/assets/mobirise-icons-bold/mobirise-icons-bold.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/web/assets/mobirise-icons/mobirise-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/Material-Design-Icons/css/material.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/FontAwesome/css/font-awesome.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap-grid.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap-reboot.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/chatbutton/floating-wpp.css') }}">
@@ -373,12 +373,14 @@
     <script src="{{ asset('angular/app.js') }}"></script>
     <script src="{{ asset('angular/services/attribut.service.js') }}"></script>
     <script src="{{ asset('angular/services/produit.service.js') }}"></script>
+    <script src="{{ asset('angular/services/panier.service.js') }}"></script>
     <script src="{{ asset('angular/controllers/main.controller.js') }}"></script>
     <script src="{{ asset('angular/controllers/shop.new.controller.js') }}"></script>
     <script src="{{ asset('angular/controllers/attribut.controller.js') }}"></script>
     <script src="{{ asset('angular/controllers/produit.new.controller.js') }}"></script>
     <script src="{{ asset('angular/controllers/produit.show.controller.js') }}"></script>
     <script src="{{ asset('angular/controllers/produit.display.controller.js') }}"></script>
+    <script src="{{ asset('angular/controllers/panier.controller.js') }}"></script>
 </body>
 
 </html>

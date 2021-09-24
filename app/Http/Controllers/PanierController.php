@@ -125,6 +125,7 @@ class PanierController extends Controller
     {
         $panier = Panier::where('shop_id',$shop->id)
         ->where('user_id',Auth::user()->id)
+        ->with(['produits.produit.attributValues.valeurAttributProduit.valeurAttribut.attribut'])
         ->first();
         $montant = 0;
         if($panier) {
@@ -133,6 +134,38 @@ class PanierController extends Controller
             }
         }
         return view('user.panier',compact('shop','panier','montant'));
+    }
+
+    /** ws */
+    public function getMyPanierContents(Shop $shop) {
+        $panier = Panier::where('shop_id',$shop->id)
+        ->where('user_id',Auth::user()->id)
+        ->with(['produits.produit.attributValues.valeurAttributProduit.valeurAttribut.attribut'])
+        ->first();
+        $montant = 0;
+        if($panier) {
+            foreach($panier->produits as $paproduit) {
+                $montant = $montant+($paproduit->quantite * $paproduit->produit->prixUnitaire);
+            }
+        }
+        return compact('shop','panier','montant');
+    }
+
+    /** ws */
+    public function updatePaproductQuantite(Shop $shop, Paproduit $paproduit, Request $request) {
+        $request->validate(['quantite'=>'required|min:1']);
+        if( $paproduit->update($request->only(['quantite']))){
+         return ['error'=>false];
+        } 
+        return ['error'=>true,'message'=>'Une erreur est survenue pendant la suppression du produit du panier.'];
+    }
+
+    /** ws */
+    public function removePaproductFromPanier(Shop $shop, Paproduit $paproduit) {
+        if($paproduit->delete()) {
+            return ['error'=>false];
+        } 
+        return ['error'=>true,'message'=>'Une erreur est survenue pendant la suppression du produit du panier.'];
     }
 
     /**

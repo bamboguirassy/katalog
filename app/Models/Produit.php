@@ -22,7 +22,8 @@ class Produit extends Model
         'configured',
         'inPromo',
         'prixPromo',
-        'marque_id'
+        'marque_id',
+        'isMulticolor'
     ];
 
     protected $casts = [];
@@ -79,5 +80,9 @@ class Produit extends Model
 
     public function marque() {
         return $this->belongsTo(Marque::class);
+    }
+
+    public function couleurProduits() {
+        return $this->hasMany(CouleurProduit::class);
     }
 }

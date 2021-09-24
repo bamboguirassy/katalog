@@ -83,10 +83,10 @@ app.controller('MainController', ($rootScope, $http) => {
                 label: `
                 <div style="width: 100%; text-align: left;">
                     <div style="width: 30%; display: inline;">
-                        <img style="width: 50px; display:inline;" src="/uploads/shops/[[item.logo]]">
+                        <img style="width: 30px; display:inline;" src="/uploads/shops/[[item.logo]]">
                     </div>
                     <div  style="width: 70%; display: inline;">
-                        <span style="font-size: 25px; font-weight: bold;">[[entry.item.nom]]</span>
+                        <span style="font-size: 20px; font-weight: bold;">[[entry.item.nom]]</span>
                     </div>    
                 </div>
                 `
@@ -110,8 +110,11 @@ app.controller('MainController', ($rootScope, $http) => {
 
                     return _.filter(response.data, function (produit) {
                         return produit.nom.toUpperCase() == searchText
-                            || produit.nom.toUpperCase().startsWith(searchText) 
-                            || produit.nom.toUpperCase().includes(searchText);
+                            || produit.nom.toUpperCase().includes(searchText) || 
+                            produit.categorie.nom.toUpperCase()==searchText 
+                            || produit.categorie.nom.toUpperCase().includes(searchText)
+                            || produit?.marque?.nom.toUpperCase()==searchText 
+                            || produit?.marque?.nom.toUpperCase().includes(searchText);
                     });
                 });
         },
@@ -121,7 +124,7 @@ app.controller('MainController', ($rootScope, $http) => {
                 label: `
                 <div style="width: 100%; text-align: left;">
                     <div style="width: 30%; display: inline;">
-                        <img style="width: 50px; display: inline;" src="/uploads/produits/images/[[entry.item.image_couverture.nom]]">
+                        <img style="width: 30px; display: inline;" src="/uploads/produits/images/[[entry.item.image_couverture.nom]]">
                     </div>
                     <div  style="width: 70%; display: inline;">
                         <span style="font-size: 20px; font-weight: bold;">[[entry.item.nom]]</span>

@@ -5,8 +5,8 @@
 @section('description',"Votre panier chez la boutique ".$shop->nom)
 
 @section('body')
-<div class="row">
-    <div class="col-12">
+<div class="row" ng-cloak>
+    <div class="col-12" ng-controller="PanierController" ng-init="initPanier({{$panier}},{{$montant}})">
         <section data-bs-version="5.1" class="content1 cid-sITwirkIJg" id="content01-38">
             <div class="container">
                 <div class="row justify-content-center">
@@ -46,53 +46,49 @@
                             <a href="{{ route('shop.home',compact('shop')) }}"
                                 class="text-primary"><strong><em>poursuivre vos
                                         achats</em></strong></a> si vous souhaitez ajouter plus de produits</h4>
-                        @foreach ($panier->produits as $produit)
-                        <div class="row icon first">
-                            <div class="col-lg-2">
-                                <form
-                                    action="{{route('shop.panier.produit.delete',['shop'=>$shop,'paproduit'=>$produit])}}"
-                                    method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <button class="btn btn-danger">Enlever</button>
-                                </form>
-                            </div>
-                            <div class="col-lg-2">
-                                <p class="mbr-text mbr-fonts-style display-4">
-                                    {{$produit->produit->nom}}
-                                </p>
-                                @if (count($produit->produit->attributValues)>0)
-                                <div class="pb-2">
-                                    @foreach ($produit->produit->attributValues as $attributValue)
-                                    <span>{{$attributValue->valeurAttributProduit->valeurAttribut->attribut->nom}} :</span>
-                                    @if ($attributValue->valeurAttributProduit->valeurAttribut->attribut->type=='couleur')
-                                     <span
-                                        style="border: 2px solid #1C73BA; background-color: {{$attributValue->valeurAttributProduit->valeurAttribut->valeur}}">
-                                    &nbsp; &nbsp;
-                                    </span>
-                                    @else
-                                    <span
-                                        style="padding: 2px; border: 2px solid #1C73BA;">{{$attributValue->valeurAttributProduit->valeurAttribut->valeur}}</span>
-                                    @endif
-                                    @endforeach
-                                </div>
-                                @endif
-                            </div>
-                            <div class="col-lg-2">
-                                <p class="mbr-text mbr-fonts-style display-4">
-                                    {{$produit->produit->prixUnitaire}} FCFA<br></p>
-                            </div>
+                        <div class="row first" ng-repeat="produit in panier.produits">
                             <div class="col-lg-4">
                                 <p class="mbr-text mbr-fonts-style display-4">
-                                    {{$produit->quantite}} unité(s)</p>
+                                    <a href="/[[shop.pseudonyme]]/produit/[[produit.produit.id]]/display">[[produit.produit.nom]]</a>
+                                </p>
+                                <div class="pb-2" ng-if="produit.produit.attribut_values.length>0">
+                                    <ng-container ng-repeat="attributValue in produit.produit.attribut_values">
+
+                                        <span>[[attributValue.valeur_attribut_produit.valeur_attribut.attribut.nom]]
+                                            :</span>
+                                        <span
+                                            ng-if="attributValue.valeur_attribut_produit.valeur_attribut.attribut.type=='couleur'"
+                                            style="border: 2px solid #1C73BA; background-color: [[attributValue.valeur_attribut_produit.valeur_attribut.valeur]]">
+                                            &nbsp; &nbsp;
+                                        </span>
+                                        <span
+                                            ng-if="attributValue.valeur_attribut_produit.valeur_attribut.attribut.type!='couleur'"
+                                            style="padding: 2px; border: 2px solid #1C73BA;">[[attributValue.valeur_attribut_produit.valeur_attribut.valeur]]</span>
+                                    </ng-container>
+                                </div>
                             </div>
                             <div class="col-lg-2">
                                 <p class="mbr-text mbr-fonts-style display-4">
-                                    {{$produit->produit->prixUnitaire*$produit->quantite}} FCFA</p>
+                                    [[ produit.produit.prixUnitaire ]] FCFA<br></p>
+                            </div>
+                            <div class="col-lg-2">
+                                    <div class="input-group mb-3">
+                                        <button ng-click="reduceProduct(produit)" class="btn btn-primary btn-outline-secondary" type="button" id="button-addon1">-</button>
+                                        <input ng-model="produit.quantite" type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                        <button ng-click="addMore(produit)" class="btn btn-primary btn-outline-secondary" type="button" id="button-addon2">+</button>
+                                      </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <p class="mbr-text mbr-fonts-style display-4">
+                                    [[ produit.produit.prixUnitaire * produit.quantite ]] FCFA</p>
+                            </div>
+                            <div class="col-lg-2">
+                                <button ng-click="removeProduit(produit)" class="btn btn-danger">
+                                    <span class="mbri-trash"></span>
+                                </button>
                             </div>
                         </div>
-                        @endforeach
-                        <div class="row icon">
+                        <div class="row">
                             <div class="col-lg-8">
 
                             </div>
@@ -101,7 +97,7 @@
                             </div>
                             <div class="col-lg-2">
                                 <p class="mbr-text mbr-fonts-style display-4">
-                                    {{$montant}} FCFA</p>
+                                    [[ montant ]] FCFA</p>
                             </div>
                         </div>
                     </div>

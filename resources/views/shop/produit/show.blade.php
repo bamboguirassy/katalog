@@ -63,7 +63,9 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 @foreach ($produit->categorieProduits as $categorieProd)
-                                <span style="font-size: 22px;"><a href="{{ route('shop.categorie.show',['categorie'=>$categorieProd,'shop'=>$shop]) }}">{{$categorieProd->categorie->nom}}</a> >></span>
+                                <span style="font-size: 22px;"><a
+                                        href="{{ route('shop.categorie.show',['categorie'=>$categorieProd,'shop'=>$shop]) }}">{{$categorieProd->categorie->nom}}</a>
+                                    >></span>
                                 @endforeach
                                 <p class="m-0 p-0 mt-3">[[ produit.nom ]]</p>
                             </div>
@@ -115,6 +117,79 @@
                                     </div>
                                 </p>
                             </div>
+                            @if (count($produit->couleurProduits))
+                            <div class="col-lg-12">
+                                <h4>Gérer les photos de produit par couleur</h4>
+                                <div class="row">
+                                    @foreach ($produit->couleurProduits as $couleurProduit)
+                                    <div class="col-12 mb-3" style="border-left: 2px solid darkgray;">
+                                        <strong>
+                                            <i>{{$loop->index+1}}.</i>
+                                            Couleur {{$couleurProduit->couleur->nom}}
+                                            <span
+                                                style="border: 2px solid gray; background-color: {{$couleurProduit->couleur->color}}">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                        </strong>
+                                        <form style="display: inline;"
+                                            action="{{ route('shop.couleurproduit.destroy',['couleurproduit'=>$couleurProduit,'shop'=>$shop]) }}"
+                                            method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button
+                                                title="Vous pouvez supprimer cette couleur et les photos..."
+                                                class="fa fa-2x fa-trash-o pull-right text-danger"
+                                                aria-hidden="true"></button>
+                                        </form>
+                                        <table class="table">
+                                            <tr>
+                                                <td colspan="4">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <label
+                                                                    class="form-control-label mbr-fonts-style display-7">Ajouter
+                                                                    des
+                                                                    photos</label>
+                                                                <form name="addCouleurProduitImageForm"
+                                                                    action="{{ route('shop.couleurproduit.add.images',compact('couleurProduit','shop')) }}"
+                                                                    method="POST" enctype="multipart/form-data">
+                                                                    @method('post')
+                                                                    @csrf
+                                                                    <div class="row">
+                                                                        <div class="col-12 col-lg-6">
+                                                                            <input required="required" type="file"
+                                                                                multiple="multiple" accept="image/*"
+                                                                                name="photos[]" required="required"
+                                                                                class="form-control display-7"
+                                                                                id="produitCouleurProduitImageInput{{$loop->index}}">
+                                                                        </div>
+                                                                        <div class="col-12 col-lg-6">
+                                                                            <button type="submit"
+                                                                                class="btn btn-primary">Téléverser</button>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        @foreach ($couleurProduit->images as $image)
+                                                        <div class="col-12 col-md-6 col-lg-3">
+                                                            <img style="height: 210px;"
+                                                                src="{{ asset('uploads/produits/images/'.$image->nom) }}"
+                                                                alt="">
+                                                        </div>
+                                                        @endforeach
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            @endif
                             <div class="col-12" ng-show="!addAttribut && produit.variants.length<1">
                                 <button ng-click="addAttribut = !addAttribut" type="button"
                                     class="btn btn-primary">Ajouter d'autres attributs</button>
@@ -201,7 +276,7 @@
                     <div class="row">
                         <div class="col-12 mb-3" ng-repeat="variant in produit.variants"
                             style="border-left: 2px solid darkgray;">
-                            <strong>
+                            <strong style="color: #1c73ba;">
                                 <i>[[$index+1]].</i> [[produit.nom]] -
                                 [[(variant.attribut_values|map:'valeur_attribut_produit.valeur_attribut.nom')|join:' x
                                 ']]
@@ -209,7 +284,7 @@
                             <button ng-click="removeVariant(variant)"
                                 title="Vous pouvez supprimer les variants qui n'ont pas d'importance pour le produit..."
                                 class="fa fa-2x fa-trash-o pull-right text-danger" aria-hidden="true"></button>
-                            <button ng-show="variant.configured" ng-click="variant.configured = false"
+                            <button style="color: orange;" ng-show="variant.configured" ng-click="variant.configured = false"
                                 class="fa fa-2x fa-pencil pull-right text-default" aria-hidden="true"></button>
                             <hr style="margin-top: 0px;">
                             <form ng-submit="updateVariant(variant)" ng-show="!variant.configured">
@@ -230,8 +305,8 @@
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <button type="submit"
-                                            class="btn btn-sm btn-primary pull-right" style="margin-left: 3px;">Enregistrer</button>
+                                        <button type="submit" class="btn btn-sm btn-primary pull-right"
+                                            style="margin-left: 3px;">Enregistrer</button>
                                         <button ng-click="variant.configured=true" type="submit"
                                             class="btn btn-sm btn-secondary pull-right">Annuler</button>
                                     </div>
@@ -243,45 +318,6 @@
                                     <td>[[variant.prixUnitaire]] FCFA</td>
                                     <th>Quantité</th>
                                     <td>[[variant.quantite]] élement(s)</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="4">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <label class="form-control-label mbr-fonts-style display-7">Ajouter
-                                                        des
-                                                        photos</label>
-                                                    <form name="addVariantImageForm"
-                                                        action="[['/'+shop.pseudonyme+'/produit/add-images/'+variant.id]]"
-                                                        method="POST" enctype="multipart/form-data">
-                                                        @method('post')
-                                                        @csrf
-                                                        <div class="row">
-                                                            <div class="col-12 col-lg-6">
-                                                                <input change="handleVariantImagesChange()"
-                                                                    ng-model="variant.photos" required="required"
-                                                                    type="file" multiple="multiple" accept="image/*"
-                                                                    name="photos[]" required="required"
-                                                                    class="form-control display-7"
-                                                                    id="produitVariantImageInput">
-                                                            </div>
-                                                            <div class="col-12 col-lg-6">
-                                                                <button type="submit" class="btn btn-primary">Téléverser</button>
-                                                            </div>
-                                                        </div>
-
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row" ng-show="variant.configured">
-                                            <div class="col-12 col-md-6 col-lg-3" ng-repeat="image in variant.images">
-                                                <img style="height: 210px;" src="/uploads/produits/images/[[image.nom]]"
-                                                    alt="" srcset="">
-                                            </div>
-                                        </div>
-                                    </td>
                                 </tr>
                             </table>
 

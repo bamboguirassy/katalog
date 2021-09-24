@@ -6,6 +6,8 @@ use App\Models\Attribut;
 use App\Models\AttributProduit;
 use App\Models\Categorie;
 use App\Models\CategorieProduit;
+use App\Models\Couleur;
+use App\Models\CouleurProduit;
 use App\Models\Image;
 use App\Models\Marque;
 use App\Models\Panier;
@@ -19,6 +21,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProduitController extends Controller
 {
@@ -50,7 +53,8 @@ class ProduitController extends Controller
         ->with(['valeurs'])
         ->orderby('nom')
         ->get();
-        return view('shop.produit.new',compact('shop','categories','attributs','marques'));
+        $couleurs = Couleur::all();
+        return view('shop.produit.new',compact('shop','categories','attributs','marques','couleurs'));
     }
 
     /**
@@ -67,7 +71,9 @@ class ProduitController extends Controller
             'categorie_id'=>'required|exists:categories,id',
             'prixUnitaire'=>'integer|required',
             'quantite'=>'integer',
-            'photos'=>'required'
+            'photos'=>'required',
+            'isMulticolor'=>'required',
+            'couleurs'=>'required_if:isMulticolor,1'
         ]);
         $produit = new Produit($request->all());
         $produit->shop_id = $shop->id;
@@ -87,6 +93,14 @@ class ProduitController extends Controller
                 $catProd->produit_id = $produit->id;
                 $catProd->categorie_id = $categorie->id;
                 $catProd->save();
+            }
+            if($request->get('isMulticolor')) {
+                foreach($request->get('couleurs') as $couleurId) {
+                    $couleurProduit = new CouleurProduit();
+                    $couleurProduit->couleur_id = $couleurId;
+                    $couleurProduit->produit_id = $produit->id;
+                    $couleurProduit->save();
+                }
             }
             if($request->get('hasMoreAttributes')) {
                 foreach ($request->get('selectedAttrs') as $selectedAttr) {
@@ -197,12 +211,34 @@ class ProduitController extends Controller
      */
     public function destroy(Shop $shop, Produit $produit)
     {
-        $produit->delete();
+        DB::beginTransaction();
+        try {
+            foreach ($produit->images as $image) {
+                if($image->delete()) {
+                    Storage::delete('uplaods/produits/images/'.$image->nom);
+                }
+            }
+            DB::commit();
+            $produit->delete();
+            DB::commit();
+        } catch(Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
         return redirect()->route('shop.catalogue',compact('shop','produit'));
     }
 
     public function display(Shop $shop, Produit $produit) {
-        $produit = Produit::with(['attributs.attribut','attributs.valeurs.valeurAttribut','imageCouverture','images','variants.images','variants.attributValues.valeurAttributProduit.valeurAttribut'])->find($produit->id);
+        $produit = Produit::with([
+            'attributs.attribut',
+            'attributs.valeurs.valeurAttribut',
+            'imageCouverture',
+            'images',
+            'variants.images',
+            'variants.attributValues.valeurAttributProduit.valeurAttribut',
+            'couleurProduits.couleur',
+            'couleurProduits.images'
+            ])->find($produit->id);
         // find user panier if exists
         $paProduits = [];
         if(Auth::user()) {
@@ -339,7 +375,7 @@ class ProduitController extends Controller
         return Produit::where('shop_id',$shop->id)
         ->where('visible',true)
         ->where('produit_id',null)
-        ->with(['categorie','imageCouverture'])
+        ->with(['categorie','imageCouverture','marque'])
         ->get();
     }
        

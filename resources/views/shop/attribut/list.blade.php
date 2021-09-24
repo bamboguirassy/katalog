@@ -14,7 +14,7 @@
                         <div class="col-12  col-md-12 pb-5 col-lg-12">
                             <h4 class="mbr-section-subtitle mbr-semibold align-left mbr-fonts-style display-7">Créez des
                                 attributs pour ajouter plus de propriétés aux produits de votre boutique.<br>Exemple:
-                                Couleur, taille, capacité, etc.</h4>
+                                Taille, capacité, etc.</h4>
                             <h3 class="mbr-section-title align-left mbr-bold mbr-fonts-style mbr-info display-2">
                                 Liste des attributs de produit</h3>
 
@@ -35,15 +35,6 @@
                                                     placeholder="Nom de l'attribut" data-form-field="nom"
                                                     class="form-control display-7" required="required" value=""
                                                     id="nom-formbuilder-42">
-                                            </div>
-                                            <div class="col-lg-6 col-md-12 col-sm-12 form-group" data-for="type">
-                                                <label for="type-formbuilder-42"
-                                                    class="form-control-label mbr-fonts-style display-7">Type</label>
-                                                <select ng-model="newAttribut.type" name="type" data-form-field="type"
-                                                    class="form-control display-7" id="type-formbuilder-42">
-                                                    <option value="texte" selected>texte</option>
-                                                    <option value="couleur">couleur</option>
-                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -97,7 +88,7 @@
                                                 aria-controls="collapse[[$index]]">
                                                 <div class="col">
                                                     <h5 class="mbr-fonts-style mbr-info display-5">
-                                                        [[attribut.nom]] <span>([[attribut.type]])</span></h5>
+                                                        [[attribut.nom]]</h5>
                                                 </div>
                                             </a>
                                         </div>
@@ -111,9 +102,12 @@
                                                     <span ng-if="attribut.changePrice"><b><u>Cet attribut change le prix du produit</u></b></span>
                                                     <span ng-if="!attribut.changePrice"><b><u>Cet attribut ne change pas le prix du produit</u></b></span>
                                                     <hr>
-                                                    <button ng-click="openAttributValueModal(attribut)"
+                                                    <button style="display: inline;" ng-click="openAttributValueModal(attribut)"
                                                         title="Ajouter valeur"
                                                         class="sign mbr-iconfont fa fa-2x fa-plus inactive"></button>
+                                                    <button style="display: inline;" ng-click="removeAttribut(attribut)"
+                                                        title="Supprimer l'attribut"
+                                                        class="btn btn-danger mbri-trash"></button>
                                                     <hr>
                                                     <table class="table">
                                                         <thead>
@@ -133,7 +127,6 @@
                                                             </tr>
                                                         </tbody>
                                                     </table>
-
                                                 </p>
                                             </div>
                                         </div>
@@ -175,13 +168,6 @@
                                 <div class="">
                                 </div>
                                 <div class="dragArea">
-                                    <div class="col-auto form-group" data-for="nom">
-                                        <label for="nom-mbr-popup-44"
-                                            class="form-control-label mbr-fonts-style display-7">Nom</label>
-                                        <input ng-model="newValue.nom" type="text" name="nom" placeholder="Nom"
-                                            data-form-field="nom" class="form-control display-7" required="required"
-                                            id="nom-mbr-popup-44">
-                                    </div>
                                     <div class="col-auto form-group" data-for="valeur">
                                         <label for="valeur-mbr-popup-44"
                                             class="form-control-label mbr-fonts-style display-7">Valeur</label>

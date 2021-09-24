@@ -4,14 +4,20 @@ app.controller('ProduitDisplayController', ($scope) => {
     $scope.filteredVariants = [];
     $scope.selectedFilters = [];
     $scope.variantSelected =false;
+    $scope.images = [];
     $scope.init = (produit) => {
         $scope.produit = produit;
         $scope.sProduit = produit;
+        $scope.images = produit.images;
     };
 
     $scope.select = (variant) => {
         $scope.sProduit = variant;
         $scope.variantSelected = true;
+    }
+
+    $scope.changeImages = (images) => {
+        $scope.images = images;
     }
 
    /* $scope.filter = (valeurAttribut, key) => {

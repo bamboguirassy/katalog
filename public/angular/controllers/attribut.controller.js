@@ -48,14 +48,16 @@ app.controller('AttributListController',($scope, AttributService)=> {
     }
     
     $scope.removeAttribut = (attribut) => {
-        AttributService.destroy($scope.newAttribut)
-        .success((response)=>{
-            if(response.error) {
-                alert(response.mmessage);
-            } else {
-                $scope.findAll();
-            }
-        }).error(err=>console.log(err));
+        if(confirm("Etes-vous sûr de vouloir supprimer cet attribut et toutes ses valeurs ?")) {
+            AttributService.destroy(attribut)
+            .success((response)=>{
+                if(response.error) {
+                    alert(response.mmessage);
+                } else {
+                    $scope.findAll();
+                }
+            }).error(err=>alert(err.message));
+        }
     }
     
     $scope.addNewValue = () => {

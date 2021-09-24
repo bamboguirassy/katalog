@@ -53,26 +53,25 @@
                                     id="category-formbuilder-14">
                                     <option selected value="" disabled>Selectionner une catégorie</option>
                                     @foreach ($categories as $categorie)
-                                    @if(count($categorie->subs)<1)
-                                    <option value="{{$categorie->id}}">{{ $categorie->nom }}</option>
-                                    @else
-                                    @while (count($categorie->subs))
-                                    <optgroup label="{{$categorie->nom}}">
-                                        @foreach ($categorie->subs as $sub)
-                                        <option value="{{$sub->id}}">{{ $sub->nom }}</option>
+                                    @if(count($categorie->subs)<1) <option value="{{$categorie->id}}">
+                                        {{ $categorie->nom }}</option>
+                                        @else
+                                        @while (count($categorie->subs))
+                                        <optgroup label="{{$categorie->nom}}">
+                                            @foreach ($categorie->subs as $sub)
+                                            <option value="{{$sub->id}}">{{ $sub->nom }}</option>
+                                            @endforeach
+                                        </optgroup>
+                                        <?php $categorie = $sub ?>
+                                        @endwhile
+                                        @endif
                                         @endforeach
-                                    </optgroup>
-                                    <?php $categorie = $sub ?>
-                                    @endwhile
-                                    @endif
-                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 form-group" data-for="marque">
                                 <label for="marque-formbuilder-14"
                                     class="form-control-label mbr-fonts-style display-7">Marque de produit</label>
-                                <select
-                                    name="marque_id" data-form-field="marque" class="form-control display-7"
+                                <select name="marque_id" data-form-field="marque" class="form-control display-7"
                                     id="marque-formbuilder-14">
                                     <option selected value="" disabled>Selectionner la marque (optionnel)</option>
                                     @foreach ($marques as $marque)
@@ -110,6 +109,36 @@
                                 <textarea name="description" placeholder="Description du produit"
                                     data-form-field="description" class="form-control display-7" required="required"
                                     id="description-formbuilder-14">{{ old('description') }}</textarea>
+                            </div>
+                            <div ng-init="isMulticolor=0" class="col-lg-12 col-md-12 col-sm-12 form-group"
+                                data-for="multicolor">
+                                <div class="form-control-label">
+                                    <label for="visible-formbuilder-14" class="mbr-fonts-style display-7">Le produit
+                                        a-t-il différentes couleurs ?</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input ng-model="isMulticolor" checked="checked" type="radio" name="isMulticolor"
+                                        data-form-field="multicolor" class="form-check-input display-7" value="0"
+                                        id="visible-formbuilder-14no">
+                                    <label class="form-check-label display-7">Non</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input ng-model="isMulticolor" type="radio" name="isMulticolor"
+                                        data-form-field="multicolor" class="form-check-input display-7"
+                                        id="visible-formbuilder-14yes" value="1">
+                                    <label class="form-check-label display-7">Oui</label>
+                                </div>
+                            </div>
+                            <div class="col-12" ng-if="isMulticolor">
+                                <div class="form-group">
+                                    <label for="couleurs">Merci de choisir les couleurs</label>
+                                    @foreach ($couleurs as $couleur)
+                                    <label for="couleur{{$couleur->id}}">
+                                        <input value="{{$couleur->id}}" type="checkbox" name="couleurs[]" id="couleur{{$couleur->id}}"
+                                        class="form-check-input"> <span class="mt-1" style=" width: 20px; height: 10px; background-color: {{$couleur->color}}; border: 2px solid gray;">&nbsp; &nbsp;</span> - 
+                                    </label>
+                                    @endforeach
+                                </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <hr>

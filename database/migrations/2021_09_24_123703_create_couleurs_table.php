@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddMarqueFieldToProduitsTable extends Migration
+class CreateCouleursTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class AddMarqueFieldToProduitsTable extends Migration
      */
     public function up()
     {
-        Schema::table('produits', function (Blueprint $table) {
-            //
-            $table->foreignId('marque_id')->constrained()->nullable();
+        Schema::create('couleurs', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->string('nom')->require()->unique();
+            $table->string('color')->require()->unique();
         });
     }
 
@@ -26,8 +28,6 @@ class AddMarqueFieldToProduitsTable extends Migration
      */
     public function down()
     {
-        Schema::table('produits', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('couleurs');
     }
 }

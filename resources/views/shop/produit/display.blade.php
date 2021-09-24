@@ -7,7 +7,8 @@
 @section('body')
 <style>
     .product {
-        background-color: #eee
+        background-color: #eee;
+        padding: 5px;
     }
 
     .brand {
@@ -108,15 +109,15 @@
     <div class="row d-flex justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                <div class="row">
+                <div class="row mt-2" style="background-color: #eee;">
                     <div class="col-md-6">
                         <div class="images">
                             <div class="text-center p-4">
-                                <img id="main-image" src="/uploads/produits/images/[[sProduit.images[0].nom]]"
+                                <img id="main-image" src="/uploads/produits/images/[[images[0].nom]]"
                                     style="height: 400px; object-fit: fill;" />
                             </div>
                             <div class="thumbnail">
-                                <img ng-repeat="image in sProduit.images" onclick="change_image(this)"
+                                <img ng-repeat="image in images" onclick="change_image(this)"
                                     src="/uploads/produits/images/[[image.nom]]" style="width: 70px; display: inline;">
                             </div>
                         </div>
@@ -124,7 +125,6 @@
                     <div class="col-md-6">
                         <div class="product p-4">
                             <div class="d-flex justify-content-between align-items-center">
-
                                 <i class="fa fa-shopping-cart text-muted"></i>
                             </div>
                             <div class="mt-4 mb-3"> <span
@@ -139,15 +139,27 @@
                                 </div>
                             </div>
                             <p class="about display-4">{{ $produit->description }}</p>
-                            <div class="sizes mt-2" ng-repeat="attributProduit in produit.attributs">
+                            @if (count($produit->couleurProduits)>0)
+                            <div class="sizes mt-2">
+                                <h6 class="text-uppercase">Couleur</h6>
+                                <label class="radio" ng-repeat="couleurProduit in produit.couleur_produits"
+                                    style="margin-right: 3px;">
+                                    <input ng-click="changeImages(couleurProduit.images)" type="radio"
+                                        name="couleur[[produit.nom]]" value="[[couleurProduit.id]]"
+                                        id="[[couleurProduit.id]]">
+                                    <span title="[[ couleurProduit.couleur.nom ]]"
+                                        style="height: 20px; width: 30px; background-color: [[ couleurProduit.couleur.color ]]"></span>
+
+                                </label>
+                            </div>
+                            @endif
+                            <div ng-if="attributProduit.attribut.type!='couleur'" class="sizes mt-2"
+                                ng-repeat="attributProduit in produit.attributs">
                                 <h6 class="text-uppercase">[[ attributProduit.attribut.nom ]]</h6>
                                 <label class="radio" ng-repeat="attrProdVal in attributProduit.valeurs"
                                     style="margin-right: 3px;">
                                     <input disabled type="radio" name="[[attributProduit.attribut.nom]]"
                                         value="[[attrProdVal.id]]">
-                                    <span ng-if="attributProduit.attribut.type=='couleur'"
-                                        title="[[ attrProdVal.valeur_attribut.nom ]]"
-                                        style="height: 20px; width: 30px; background-color: [[ attrProdVal.valeur_attribut.valeur ]]"></span>
                                     <span ng-if="attributProduit.attribut.type!='couleur'"
                                         title="[[ attrProdVal.valeur_attribut.nom ]]">[[
                                         attrProdVal.valeur_attribut.valeur ]]</span>

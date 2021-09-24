@@ -37,11 +37,11 @@ class ValeurAttributController extends Controller
     public function store(Shop $shop, Request $request)
     {
         $request->validate([
-            'nom'=>'required',
             'valeur'=>'required',
             'attribut_id'=>'required|exists:attributs,id'
         ]);
         $valeurAttribut = new ValeurAttribut($request->all());
+        $valeurAttribut->nom = $request->get('valeur'); 
         if($valeurAttribut->save()) {
             return ['error'=>false,'data'=>$valeurAttribut];
         }
@@ -80,7 +80,6 @@ class ValeurAttributController extends Controller
     public function update(Request $request, Shop $shop, ValeurAttribut $valeurAttribut)
     {
         $request->validate([
-            'nom'=>'required',
             'valeur'=>'required',
             'attribut_id'=>'required|exists:attributs,id'
         ]);
