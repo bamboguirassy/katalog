@@ -11,6 +11,7 @@ use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ValeurAttributController;
+use App\Mail\ResetPassword;
 use App\Models\Categorie;
 use App\Models\CouleurProduit;
 use App\Models\Panier;
@@ -18,10 +19,15 @@ use App\Models\Paproduit;
 use App\Models\Produit;
 use App\Models\Shop;
 use App\Models\Type;
+use App\Models\User;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -35,30 +41,75 @@ use Illuminate\Support\Facades\Validator;
 */
 
 Route::get('/', function () {
-    $shops = Shop::with(['categorie'])->paginate(20);
+    $shops = Shop::with(['categorie'])->where('enabled',true)->paginate(20);
     return view('home',compact('shops'));
 })->name('home');
 
 Route::post('login', function (Request $request) {
-    $validator = Validator::make($request->all(),['password'=>'required',
-        'email'=>'email|required']);
-    if(Auth::attempt($request->only(['email','password'],$request->get('remember')=='Oui'))) {
-        if(Auth::user()->type=='owner') {
-            return redirect()->route('shop.home', ['shop'=>Auth::user()->shop]);
-        } else {
-            return back();
+    $users = User::where('email',$request->get('email'))->get();
+        if(count($users)<1) {
+            return ['error'=>true,'message'=>"Vos identifiants de connexion sont invalides."];
         }
+    $request->validate([
+        'password'=>'required',
+        'email'=>'email|required|exists:users,email'
+    ]);
+    if(Auth::attempt($request->only(['email','password'],$request->get('remember')=='Oui'))) {
+        $user = User::with(['shop'])->find(auth()->user()->id);
+        return ['error'=>false,'data'=>$user];
     }
-    $validator->after(function ($validator) {
-        $validator->errors()->add('idenfiants',"Vos identifiants de connexion sont incorrects, merci de vérifier !");
-    });
-    $validator->validate();
-})->name('login');
+    return ['error'=>true,'message'=>'Identifiants de connexion invalides.'];
+});
+
+Route::get('/forgot-password',function() {
+    return view('user.forgot-password');
+})->middleware('guest')->name('password.request');
+
+Route::post('/forgot-password',function(Request $request) {
+    $request->validate(['email'=>'email|exists:users,email']);
+    /*$user = User::where('email',$request->get('email'))->first();
+    Mail::to($user)->send(new ResetPassword($user));*/
+    $status = Password::sendResetLink(
+        $request->only('email')
+    );
+    return back()->with(['message'=>"Un mail de réinitialisation est envoyé à l'adresse indiquée. Merci de le consulter"]);
+})->middleware('guest')->name('password.email');
+
+Route::get('/reset-password/{token}',function($token) {
+    return view('user.reset-password',['token' => $token]);
+})->middleware('guest')->name('password.reset');
+
+Route::post('/reset-password', function (Request $request) {
+    $request->validate([
+        'token' => 'required',
+        'email' => 'required|email',
+        'password' => 'required|min:8|confirmed',
+    ]);
+
+    $status = Password::reset(
+        $request->only('email', 'password', 'password_confirmation', 'token'),
+        function ($user, $password) {
+            $user->forceFill([
+                'password' => Hash::make($password)
+            ])->setRememberToken(Str::random(60));
+            $user->save();
+            event(new PasswordReset($user));
+        }
+    );
+
+    return $status === Password::PASSWORD_RESET
+                ? redirect()->route('home')->with('status', __($status))
+                : back()->withErrors(['email' => [__($status)]]);
+})->middleware('guest')->name('password.update');
 
 Route::get('logout', function () {
     Auth::logout();
     return redirect()->route('home');
-})->name('logout');
+})->name('logout')->middleware('auth');
+
+Route::get('profil',function() {
+return view('user.profil',['user'=>Auth::user()]);
+})->middleware('auth')->name('user.profil');
 
 Route::get('/new-shop', function () {
     $types = Type::all();
@@ -68,6 +119,9 @@ Route::get('/new-shop', function () {
 Route::resource('shop', ShopController::class,
 ['except'=>['create']
 ]);
+
+Route::post('update-password','App\Http\Controllers\UserController@updatePassword')
+->name('user.update.password')->middleware('auth');
 
 Route::resource('user', UserController::class,[
     'only'=>['store','update']
@@ -118,7 +172,7 @@ Route::group([
            ->name('update.shop.logo')->middleware('is.owner');
 
            Route::get('/infos',function(Shop $shop) {
-                return view('shop.details',compact('shop'));
+                return view('shop.show',compact('shop'));
            })->name('details');
    
            Route::get('/catalogue', function(Shop $shop) {

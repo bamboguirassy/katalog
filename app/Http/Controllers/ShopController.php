@@ -132,7 +132,10 @@ class ShopController extends Controller
 
     public function search(Request $request) {
         $request->validate(['pseudonyme'=>'required|exists:shops,pseudonyme']);
-        $shop = Shop::where('pseudonyme',$request->get('pseudonyme'))->first();
+        $shop = Shop::where('pseudonyme',$request->get('pseudonyme'))->where('enabled',true)->first();
+        if(!$shop) {
+            return back()->withErrors(['error'=>'La boutique recherchée est en mode hors ligne !']);
+        }
         return redirect()->route('shop.home', compact('shop'));
     }
 
@@ -154,6 +157,6 @@ class ShopController extends Controller
 
     /** for autocomplete search WS */
     public function filterAutocomplete() {
-        return Shop::all();
+        return Shop::where('enabled',true)->get();
     }
 }

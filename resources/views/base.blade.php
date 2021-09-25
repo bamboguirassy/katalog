@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-    @if (isset($shop))
+    @isset($shop)
     <link rel="shortcut icon" href="{{ asset('uploads/shops/'.$shop->logo) }}" type="image/x-icon">
     @else
     <link rel="shortcut icon" href="{{ asset('assets/images/bambogroup.jpg') }}" type="image/x-icon">
-    @endif
+    @endisset
     <meta name="description" content="@yield('description')">
     <title>@yield('title')</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -212,6 +212,7 @@
                         @endguest
                         @auth
                         @if (auth()->user()->type=='client')
+                        @isset($shop)
                         @if (count($shop->categories)>0)
                         <li class="nav-item dropdown">
                             <a class="nav-link link text-primary dropdown-toggle display-4" href="#"
@@ -265,6 +266,7 @@
                             </div>
                         </li>
                         @endif
+                        @endisset
                         <!-- end menu marque -->
                         @endif
                         @endauth
@@ -341,7 +343,7 @@
                                 Mon compte
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdown-undefined">
-                                <a class="text-primary dropdown-item display-4" href="#">
+                                <a class="text-primary dropdown-item display-4" href="{{ route('user.profil') }}">
                                     <span class="mobi-mbri mobi-mbri-user-2 mbr-iconfont mbr-iconfont-btn">
                                     </span>Mon profil
                                 </a>
@@ -444,6 +446,7 @@
     <script src="{{ asset('angular/services/attribut.service.js') }}"></script>
     <script src="{{ asset('angular/services/produit.service.js') }}"></script>
     <script src="{{ asset('angular/services/panier.service.js') }}"></script>
+    <script src="{{ asset('angular/services/user.service.js') }}"></script>
     <script src="{{ asset('angular/controllers/main.controller.js') }}"></script>
     <script src="{{ asset('angular/controllers/shop.new.controller.js') }}"></script>
     <script src="{{ asset('angular/controllers/attribut.controller.js') }}"></script>
@@ -452,6 +455,12 @@
     <script src="{{ asset('angular/controllers/produit.display.controller.js') }}"></script>
     <script src="{{ asset('angular/controllers/panier.controller.js') }}"></script>
     <script src="{{ asset('angular/controllers/categorie.controller.js') }}"></script>
+    <script src="{{ asset('angular/controllers/user.controller.js') }}"></script>
+    <div id="scrollToTop" class="scrollToTop mbr-arrow-up">
+        <a style="text-align: center;">
+            <i class="mbr-arrow-up-icon mbr-arrow-up-icon-cm cm-icon cm-icon-smallarrow-up"></i>
+        </a>
+    </div>
 </body>
 
 </html>

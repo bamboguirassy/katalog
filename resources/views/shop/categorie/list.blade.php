@@ -120,7 +120,7 @@
                                                     <option value="" disabled style="text-align: center;">---</option>
                                                     <option ng-selected="selected.categorie_id==categorie.id"
                                                         ng-repeat="categorie in categories"
-                                                        value="{{ $categorie->id }}">{{ $categorie->nom }}</option>
+                                                        ng-value="categorie.id ">[[categorie.nom]]</option>
                                                 </select>
                                             </div>
                                             <div data-for="description"

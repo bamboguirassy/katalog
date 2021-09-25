@@ -18,8 +18,11 @@
                     <img style="max-height: 500px; object-fit: cover;" src="{{ asset('uploads/shops/'.$shop->logo) }}"
                         alt="">
                 </div>
-                <form action="{{route('shop.update.shop.logo',compact('shop'))}}" method="POST" class="mbr-form form-with-styler"
-                    data-form-title="boutiqueNewForm" enctype="multipart/form-data" id="shopLogoUpdate">
+                @auth
+                @if (auth()->user()->type=='owner' && auth()->user()->shop->id==$shop->id)
+                <form action="{{route('shop.update.shop.logo',compact('shop'))}}" method="POST"
+                    class="mbr-form form-with-styler" data-form-title="boutiqueNewForm" enctype="multipart/form-data"
+                    id="shopLogoUpdate">
                     @method('post')
                     @csrf
                     <div class="form-row">
@@ -38,6 +41,8 @@
                         </div>
                     </div>
                 </form>
+                @endif
+                @endauth
             </div>
             <div class="col-lg-4">
                 <h4 class="card-title mbr-semibold pb-2 align-left mbr-fonts-style display-5"><br>
@@ -169,6 +174,21 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</section>
+
+<section data-bs-version="5.1" class="map1 cid-sK221ge3Dr" id="map1-5f">
+    <div class="container">
+        <div class="mbr-section-head mb-4">
+            <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-5">
+                <strong>Notre position sur la carte</strong></h3>
+        </div>
+        <div class="google-map">
+            <iframe frameborder="0" style="border:0"
+                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCNveGQ9bfpKFwWzQLLftrR9hNiHwdqQG8&amp;q={{ $shop->adresse }}"
+                allowfullscreen="">
+            </iframe>
         </div>
     </div>
 </section>

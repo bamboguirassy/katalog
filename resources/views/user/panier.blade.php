@@ -15,7 +15,7 @@
                             <h3 class="mbr-section-title align-left mbr-fonts-style mb-5 display-1">Mon panier chez
                                 {{$shop->nom}}.</h3>
                             <p class="mbr-text mbr-fonts-style align-left mb-5 display-7">
-                                Retrouvez l'ensemble des produits que vous avez ajouter à votre panier afin de finaliser
+                                Retrouvez l'ensemble des produits ajoutés à votre panier afin de finaliser
                                 la commande.</p>
                             <div class="link-wrap pt-2">
                                 <a href="{{ route('shop.home',compact('shop')) }}">

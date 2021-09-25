@@ -1,4 +1,4 @@
-<div class="modal mbr-popup cid-sIs2cxiwgM fade" tabindex="-1" role="dialog" data-overlay-color="#000000"
+<div ng-controller="UserController" class="modal mbr-popup cid-sIs2cxiwgM fade" tabindex="-1" role="dialog" data-overlay-color="#000000"
             data-overlay-opacity="0.8" id="mbr-popup-1f" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -24,20 +24,13 @@
                         <div>
                             <div class="form-wrapper">
                                 <!--Formbuilder Form-->
-                                <form action="{{route('login')}}" method="POST" class="mbr-form form-with-styler"
-                                    data-form-title="loginForm">
-                                    @method('post')
-                                    @csrf
-                                    @foreach ($errors->all() as $message)
-                                    <div data-form-alert-danger="" class="alert alert-danger col-12">
-                                        {{$message}}
-                                    </div>
-                                    @endforeach
+                                <form ng-submit="login()" method="POST" class="mbr-form form-with-styler"
+                                    data-form-title="loginForm" name="loginForm">
                                     <div class="dragArea">
                                         <div class="col form-group " data-for="email">
                                             <label for="email-mbr-popup-1f"
                                                 class="form-control-label mbr-fonts-style display-7">Email</label>
-                                            <input type="email" name="email" placeholder="Email" data-form-field="Email"
+                                            <input ng-model="userData.email" type="email" name="email" placeholder="Email" data-form-field="Email"
                                                 required="required" class="form-control display-7" value=""
                                                 id="email-mbr-popup-1f">
                                         </div>
@@ -45,7 +38,7 @@
                                             <label for="password-mbr-popup-1f"
                                                 class="form-control-label mbr-fonts-style display-7">Mot de
                                                 passe</label>
-                                            <input type="password" name="password" placeholder="Mot de passe"
+                                            <input minlength="6" ng-model="userData.password" type="password" name="password" placeholder="Mot de passe"
                                                 data-form-field="password" required="required"
                                                 class="form-control display-7" value="" id="password-mbr-popup-1f">
                                         </div>
@@ -68,8 +61,11 @@
                                             </div>
                                         </div>
                                         <div class="col-md-auto input-group-btn">
-                                            <button type="submit" class="btn btn-primary display-4">Se
+                                            <button ng-disabled="loginForm.$invalid" type="submit" class="btn btn-primary display-4">Se
                                                 connecter&nbsp;</button>
+                                        </div>
+                                        <div class="col-12 mt-3" style="font-weight: bold; font-size: 18px;">
+                                            <a href="{{ route('password.request') }}">Mot de passe oublié ? Cliquez ici !</a>
                                         </div>
                                     </div>
                                 </form>
