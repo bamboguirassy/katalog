@@ -35,7 +35,6 @@
 
             </div>
         </section>
-
         {{-- start main categories products list --}}
         @if ($produits->currentPage()==1)
         @foreach ($shop->categories as $categorie)
@@ -95,7 +94,6 @@
                 </div>
             </div>
         </section>
-
         <section data-bs-version="5.1" class="gallery1 cid-sIpMwjCas3 pt-1" id="gallery1-8">
             <div class="container">
                 <div class="mbr-section-head mb-0">
