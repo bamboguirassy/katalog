@@ -175,7 +175,6 @@
                                             <label for="valeur-mbr-popup-44"
                                                 class="form-control-label mbr-fonts-style display-7">Ajouter des valeurs</label>
                                         </div>
-                                        @{{newValues}}
                                         <div class="col-12" ng-repeat="newValue in newValues">
                                             <input ng-model="newValue.valeur"
                                                 type="text"
