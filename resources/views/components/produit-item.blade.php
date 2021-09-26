@@ -19,9 +19,9 @@
         </a>
         <div class="card-footer align-center">
             @if (in_array($produit->id, $paProduits))
-            <a style="background: green; color: white;" class="btn item-btn display-4">
-                Dans le panier <i class="fa fa-check"></i>
-            </a>
+            <span style="background: green; color: white; font-size:13px;" class="btn item-btn">
+                Panier &nbsp;<i class="fa fa-check"></i>
+            </span>
             @else
             @if (count($produit->variants)<1) <a ng-click="initProductToPanier({{$produit}})"
                 class="btn btn-sm btn-primary item-btn display-4 mt-0">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\ShopCreated;
 use App\Models\Shop;
+use App\Models\Type;
 use App\Models\User;
 use Error;
 use Exception;
@@ -104,7 +105,8 @@ class ShopController extends Controller
      */
     public function edit(Shop $shop)
     {
-        //
+        $types = Type::all();
+        return view('shop.edit',compact('shop','types'));
     }
 
     /**
@@ -116,7 +118,20 @@ class ShopController extends Controller
      */
     public function update(Request $request, Shop $shop)
     {
-        //
+        $request->validate([
+            'nom'=>'required',
+            'pseudonyme'=>'required',
+            'categorie_id'=>'exists:types,id',
+            'telephonePrimaire'=>'required|min:9',
+            'description'=>'required'
+        ]);
+        // verifier si le nouveau pseudo n'est pas utilisé
+        $shopVerif = Shop::where('pseudonyme',$request->get('pseudonyme'))->where('id','!=',$shop->id)->get();
+        if(count($shopVerif)>0) {
+            return back()->withErrors(['error'=>"Ce pseudonyme est déja utilisé par une autre boutique..."]);
+        }
+        $shop->update($request->all());
+        return redirect()->route('shop.details',compact('shop'));
     }
 
     /**

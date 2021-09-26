@@ -1,6 +1,6 @@
 @isset($shop)
-<div class="modal mbr-popup cid-sITulK6G2k fade" tabindex="-1" role="dialog" data-overlay-color="#000000"
-    data-overlay-opacity="0.8" id="mbr-popup-34" aria-hidden="true">
+<div class="modal mbr-popup cid-sITulK6G2k fade" ng-init="quantite=1" tabindex="-1" role="dialog"
+    data-overlay-color="#000000" data-overlay-opacity="0.8" id="mbr-popup-34" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header pb-0">
@@ -22,7 +22,7 @@
                     <div class="form-wrapper">
                         <!--Formbuilder Form-->
                         <form action="{{ route('shop.panier.produit.save',compact('shop')) }}" method="POST"
-                            class="mbr-form form-with-styler" data-form-title="addProductToCart">
+                            class="mbr-form form-with-styler" data-form-title="addProductToCart" name="addToPanierForm">
                             @csrf
                             @method('post')
                             @foreach ($errors->all() as $message)
@@ -36,12 +36,25 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 form-group" data-for="quantite">
                                     <label for="quantite-mbr-popup-34"
                                         class="form-control-label mbr-fonts-style display-7">Saisir la quantité</label>
-                                    <input type="number" name="quantite" placeholder="Quantité" max="" min="1" step="1"
-                                        data-form-field="quantite" required="required" class="form-control display-7"
-                                        value="" id="quantite-mbr-popup-34">
+                                    <div class="input-group mb-3">
+                                        <button ng-disabled="quantite<2" ng-click="quantite=quantite-1"
+                                            class="btn btn-outline-primary" type="button" id="button-addon1">-</button>
+                                        <input style="width: auto;" type="number" name="quantite" placeholder="Quantité"
+                                            ng-model="quantite" value="1" min="1" max="@{{selectedProduct.quantite}}"
+                                            step="1" data-form-field="quantite" required="required"
+                                            class="form-control display-7" value="" id="quantite-mbr-popup-34">
+                                        <button ng-disabled="quantite>=selectedProduct.quantite"
+                                            ng-click="quantite = quantite+1" class="btn btn-outline-primary"
+                                            type="button" id="button-addon2">+</button>
+                                    </div>
                                 </div>
-                                <div class="col-md-auto input-group-btn"><button type="submit"
-                                        class="btn btn-primary display-4"><span
+                                <div class="col-12" ng-if="selectedProduct.quantite<20">
+                                        <strong class="text-danger">@{{selectedProduct.quantite}} produit(s) disponible(s) en stock</strong>
+                                </div>
+                                <div class="col-md-auto input-group-btn">
+                                    <button ng-disabled="addToPanierForm.$invalid" type="submit"
+                                        class="btn btn-primary display-4 pull-right">
+                                        <span
                                             class="mdi-toggle-check-box mbr-iconfont mbr-iconfont-btn"></span>VALIDER</button>
                                 </div>
                             </div>

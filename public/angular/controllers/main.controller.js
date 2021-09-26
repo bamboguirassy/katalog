@@ -83,7 +83,7 @@ app.controller('MainController', ($rootScope, $http) => {
                 label: `
                 <div style="width: 100%; text-align: left;">
                     <div style="width: 30%; display: inline;">
-                        <img style="width: 30px; display:inline;" src="/uploads/shops/[[item.logo]]">
+                        <img style="width: 30px; display:inline;" src="/uploads/shops/{{item.logo}}">
                     </div>
                     <div  style="width: 70%; display: inline;">
                         <span style="font-size: 20px; font-weight: bold;">{{entry.item.nom}}</span>

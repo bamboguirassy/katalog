@@ -52,7 +52,7 @@
                         <div data-for="pseudonyme" class="col-lg-12 col-md-12 col-sm-12 form-group">
                             <label for="pseudonyme-formbuilder-q"
                                 class="form-control-label mbr-fonts-style display-7">Pseudonyme (Ceci est l'identifiant de la boutique)</label>
-                            <input style="color: blue;" ng-model="pseudonyme" value="{{old('pseudonyme')}}" type="text" name="pseudonyme" placeholder="Pseudonyme de votre boutique"
+                            <input hidden="hidden" style="color: blue;" ng-model="pseudonyme" value="{{old('pseudonyme')}}" type="text" name="pseudonyme" placeholder="Pseudonyme de votre boutique"
                                 data-form-field="pseudonyme" class="form-control display-7" required="required" value=""
                                 id="pseudonyme-formbuilder-q">
                                 <span style="margin-top: 3px;" ng-if="pseudonyme!=''">Le lien de votre boutique sera : <b style="color: blue;">{{request()->getHttpHost()}}/@{{pseudonyme}}</b></span>
