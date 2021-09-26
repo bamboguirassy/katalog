@@ -84,7 +84,7 @@
                     <div class="card col-12">
                         <div class="card-wrapper">
                             <div class="card-box">
-                                <div class="mbr-text mbr-fonts-style display-6">
+                                <div class="mbr-text mbr-fonts-style display-4">
                                     Retrouvez tous nos articles disponibles. @if ($produits->currentPage()!=1)
                                     <span>Page {{$produits->currentPage()}}</span>
                                     @endif
@@ -96,15 +96,14 @@
             </div>
         </section>
 
-        <section data-bs-version="5.1" class="gallery1 cid-sIpMwjCas3" id="gallery1-8">
+        <section data-bs-version="5.1" class="gallery1 cid-sIpMwjCas3 pt-1" id="gallery1-8">
             <div class="container">
-                <div class="mbr-section-head">
-
+                <div class="mbr-section-head mb-0">
                     <h5 class="mbr-section-subtitle mbr-fonts-style align-center mb-0 display-7">
                         Découvrez notre catalogue de produits. Ajoutez vos produits dans le panier et validez votre
                         panier.</h5>
                 </div>
-                <div class="row content-margin">
+                <div class="row mt-0 content-margin">
                     @foreach ($produits as $produit)
                     <x-produit-item :produit="$produit" :paProduits="$paProduits" :shop="$shop" />
                     @endforeach

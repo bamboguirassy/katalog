@@ -82,10 +82,9 @@
                                     role="tablist" aria-multiselectable="true">
                                     <div class="card" ng-repeat="attribut in attributs">
                                         <div class="card-header" role="tab" id="heading@{{$index}}">
-                                            <a role="button" class="panel-title text-info"
-                                                data-toggle="collapse" data-bs-toggle="collapse" data-core=""
-                                                href="#collapse@{{$index}}_84" aria-expanded="true"
-                                                aria-controls="collapse@{{$index}}">
+                                            <a role="button" class="panel-title text-info" data-toggle="collapse"
+                                                data-bs-toggle="collapse" data-core="" href="#collapse@{{$index}}_84"
+                                                aria-expanded="true" aria-controls="collapse@{{$index}}">
                                                 <div class="col">
                                                     <h5 class="mbr-fonts-style mbr-info display-5">
                                                         @{{attribut.nom}}</h5>
@@ -97,12 +96,15 @@
                                             data-parent="#bootstrap-accordion_84" data-bs-parent="#accordion">
                                             <div class="panel-body ">
                                                 <p class="mbr-fonts-style panel-text display-7">
-                                                    @{{attribut.description}} 
+                                                    @{{attribut.description}}
                                                     <br>
-                                                    <span ng-if="attribut.changePrice"><b><u>Cet attribut change le prix du produit</u></b></span>
-                                                    <span ng-if="!attribut.changePrice"><b><u>Cet attribut ne change pas le prix du produit</u></b></span>
+                                                    <span ng-if="attribut.changePrice"><b><u>Cet attribut change le prix
+                                                                du produit</u></b></span>
+                                                    <span ng-if="!attribut.changePrice"><b><u>Cet attribut ne change pas
+                                                                le prix du produit</u></b></span>
                                                     <hr>
-                                                    <button style="display: inline;" ng-click="openAttributValueModal(attribut)"
+                                                    <button style="display: inline;"
+                                                        ng-click="openAttributValueModal(attribut)"
                                                         title="Ajouter valeur"
                                                         class="sign mbr-iconfont fa fa-2x fa-plus inactive"></button>
                                                     <button style="display: inline;" ng-click="removeAttribut(attribut)"
@@ -163,19 +165,35 @@
                     <div>
                         <div class="form-wrapper">
                             <!--Formbuilder Form-->
-                            <form ng-submit="addNewValue()" method="POST" class="mbr-form form-with-styler"
+                            <form ng-submit="addNewValues()" method="POST" class="mbr-form form-with-styler"
                                 data-form-title="attributValueForm">
                                 <div class="">
                                 </div>
                                 <div class="dragArea">
-                                    <div class="col-auto form-group" data-for="valeur">
-                                        <label for="valeur-mbr-popup-44"
-                                            class="form-control-label mbr-fonts-style display-7">Valeur</label>
-                                        <input ng-model="newValue.valeur"
-                                            type="@{{currentAttribut.type=='couleur'?'color':'texte'}}" name="valeur"
-                                            placeholder="Valeur" data-form-field="valeur" required="required"
-                                            class="form-control display-7" id="valeur-mbr-popup-44">
+                                    <div class="row">
+                                        <div class="col-auto form-group" data-for="valeur">
+                                            <label for="valeur-mbr-popup-44"
+                                                class="form-control-label mbr-fonts-style display-7">Ajouter des valeurs</label>
+                                        </div>
+                                        @{{newValues}}
+                                        <div class="col-12" ng-repeat="newValue in newValues">
+                                            <input ng-model="newValue.valeur"
+                                                type="text"
+                                                name="valeur@{{$index+1}}" placeholder="Valeur @{{$index+1}}" 
+                                                required="required" class="form-control display-7"
+                                                id="valeur-mbr-popup-44@{{$index}}">
+                                            <hr>
+                                        </div>
+                                        <div class="col-12">
+                                            <button ng-disabled="newValues.length<2" ng-click="addNewValueLine(false)" type="button" class="btn btn-danger pull-left">
+                                                <i class="fa-times"></i>
+                                            </button>
+                                            <button ng-click="addNewValueLine(true)" type="button" class="btn btn-primary pull-right">
+                                                <i class="mbri-plus"></i>
+                                            </button>
+                                        </div>
                                     </div>
+                                    <hr>
                                     <div class="col-md-auto input-group-btn">
                                         <button type="submit" class="btn btn-primary display-4">Enregistrer</button>
                                     </div>

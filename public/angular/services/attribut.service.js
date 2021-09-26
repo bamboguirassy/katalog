@@ -12,8 +12,8 @@ app.factory('AttributService',($http, $rootScope)=>{
         destroy: (attribut) => {
             return $http.delete(`/${$rootScope.shop.pseudonyme}/attribut/${attribut.id}`)
         },
-        addValeur: (valeurAttribut) => {
-            return $http.post(`/${$rootScope.shop.pseudonyme}/valeurattribut`,valeurAttribut);
+        addValeur: (valeurAttributs) => {
+            return $http.post(`/${$rootScope.shop.pseudonyme}/valeurattribut`,valeurAttributs);
         },
         updateValeur: (valeurAttribut) => {
             return $http.put(`/${$rootScope.shop.pseudonyme}/valeurattribut/${valeurAttribut.id}`);

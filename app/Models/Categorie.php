@@ -57,6 +57,6 @@ class Categorie extends Model
     }
 
     public function produits() {
-        return $this->belongsToMany(Produit::class,'categorie_produits','categorie_id','produit_id')->take(4);
+        return $this->belongsToMany(Produit::class,'categorie_produits','categorie_id','produit_id')->take(6);
     }
 }

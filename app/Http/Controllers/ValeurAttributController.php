@@ -37,15 +37,20 @@ class ValeurAttributController extends Controller
     public function store(Shop $shop, Request $request)
     {
         $request->validate([
-            'valeur'=>'required',
+            'valeurs'=>'required|array',
             'attribut_id'=>'required|exists:attributs,id'
         ]);
-        $valeurAttribut = new ValeurAttribut($request->all());
-        $valeurAttribut->nom = $request->get('valeur'); 
-        if($valeurAttribut->save()) {
-            return ['error'=>false,'data'=>$valeurAttribut];
+        $valeurAttributs = [];
+        foreach ($request->get('valeurs') as $value) {
+            $valeurAttribut = new ValeurAttribut();
+            $valeurAttribut->attribut_id = $request->get('attribut_id');
+            $valeurAttribut->valeur = $value;
+            if(!$valeurAttribut->save()) {
+                return ['error'=>true,'message'=>"Erreur lors de l'enregistrement de la valeur ".$value];
+            }
+            $valeurAttributs[] = $valeurAttribut; 
         }
-        return ['error'=>true, 'message'=>"Une erreur est survenue pendant l'enregistrement..."];
+        return ['false'=>true, 'data'=>$valeurAttributs];
     }
 
     /**

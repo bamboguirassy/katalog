@@ -20,7 +20,7 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-8 py-4 m-auto">
                         <br>
-                        <h1 class="mbr-section-title mbr-regular pb-3 align-left mbr-fonts-style display-1">
+                        <h1 class="mbr-section-title mbr-regular pb-3 align-left mbr-fonts-style display-2">
                             {{$shop->nom}} -> {{$categorie->nom}}
                         </h1>
 
@@ -40,6 +40,7 @@
 
             </div>
         </section>
+        <hr style="color: #fff" class="m-0 pt-2 mt-2">
         <section data-bs-version="5.1" class="info3 cid-sIvpc3K9D7" id="info3-1o">
             <div class="container">
                 <div class="row justify-content-center">

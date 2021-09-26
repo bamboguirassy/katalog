@@ -1,15 +1,25 @@
-app.controller('AttributListController',($scope, AttributService)=> {
+app.controller('AttributListController', ($scope, AttributService) => {
     $scope.attributs = [];
-    $scope.newAttribut = {type:'texte'};
+    $scope.newAttribut = { type: 'texte' };
     $scope.currentAttribut = null;
-    $scope.newValue = {};
-    
+    $scope.newValues = [{ valeur: '' }];
+
+    $scope.addNewValueLine = (addOrRemove) => {
+        if (addOrRemove) {
+            $scope.newValues.push({ valeur: '' });
+        } else {
+            if ($scope.newValues.length > 1) {
+                $scope.newValues.pop();
+            }
+        }
+    };
+
 
     $scope.findAll = () => {
         AttributService.findAll()
-        .success((data)=>{
-            $scope.attributs = data;
-        }).error(err=>console.log(err));
+            .success((data) => {
+                $scope.attributs = data;
+            }).error(err => console.log(err));
     }
 
     $scope.findAll();
@@ -25,53 +35,53 @@ app.controller('AttributListController',($scope, AttributService)=> {
 
     $scope.addAttribut = () => {
         AttributService.store($scope.newAttribut)
-        .success((response)=>{
-            if(response.error) {
-                alert(response.mmessage);
-            } else {
-                $scope.attributs = response.data;
-                $scope.newAttribut = {type:'texte'};
-                $scope.findAll();
-            }
-        }).error(err=>console.log(err));
+            .success((response) => {
+                if (response.error) {
+                    alert(response.mmessage);
+                } else {
+                    $scope.attributs = response.data;
+                    $scope.newAttribut = { type: 'texte' };
+                    $scope.findAll();
+                }
+            }).error(err => console.log(err));
     }
-    
+
     $scope.updateAttribut = () => {
         AttributService.update($scope.newAttribut)
-        .success((response)=>{
-            if(response.error) {
-                alert(response.mmessage);
-            } else {
-                $scope.findAll();
-            }
-        }).error(err=>console.log(err));
-    }
-    
-    $scope.removeAttribut = (attribut) => {
-        if(confirm("Etes-vous sûr de vouloir supprimer cet attribut et toutes ses valeurs ?")) {
-            AttributService.destroy(attribut)
-            .success((response)=>{
-                if(response.error) {
+            .success((response) => {
+                if (response.error) {
                     alert(response.mmessage);
                 } else {
                     $scope.findAll();
                 }
-            }).error(err=>alert(err.message));
+            }).error(err => console.log(err));
+    }
+
+    $scope.removeAttribut = (attribut) => {
+        if (confirm("Etes-vous sûr de vouloir supprimer cet attribut et toutes ses valeurs ?")) {
+            AttributService.destroy(attribut)
+                .success((response) => {
+                    if (response.error) {
+                        alert(response.mmessage);
+                    } else {
+                        $scope.findAll();
+                    }
+                }).error(err => alert(err.message));
         }
     }
-    
-    $scope.addNewValue = () => {
-        $scope.newValue.attribut_id = $scope.currentAttribut.id;
-        AttributService.addValeur($scope.newValue)
-        .success((response)=>{
-            if(response.error) {
-                alert(response.mmessage);
-            } else {
-                $('#mbr-popup-44').modal('toggle');
-                $scope.newValue = {};
-                $scope.currentAttribut.valeurs.push(response.data);
-            }
-        }).error(err=>console.log(err));
+
+    $scope.addNewValues = () => {
+        let valeurs = $scope.newValues.map(newVal => newVal.valeur);
+        AttributService.addValeur({ attribut_id: $scope.currentAttribut.id, valeurs })
+            .success((response) => {
+                if (response.error) {
+                    alert(response.mmessage);
+                } else {
+                    $('#mbr-popup-44').modal('toggle');
+                    $scope.newValue = {};
+                    $scope.currentAttribut.valeurs = $scope.currentAttribut.valeurs.concat(response.data);
+                }
+            }).error(err => console.log(err));
     }
-    
+
 });
