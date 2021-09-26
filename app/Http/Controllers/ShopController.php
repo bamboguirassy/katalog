@@ -6,6 +6,7 @@ use App\Mail\ShopCreated;
 use App\Models\Shop;
 use App\Models\Type;
 use App\Models\User;
+use App\Notifications\ShopCreated as NotificationsShopCreated;
 use Error;
 use Exception;
 use Illuminate\Http\Request;
@@ -83,6 +84,7 @@ class ShopController extends Controller
             throw $e;
         }
         Auth::attempt($request->only(['email','password'],true));
+        $user->notify(new NotificationsShopCreated($shop));
         return redirect()->route('shop.categorie.index',['shop'=>$shop]);
     }
 

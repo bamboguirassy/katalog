@@ -47,4 +47,15 @@ class User extends Authenticatable
     public function shop() {
         return $this->hasOne(Shop::class);
     }
+
+    /**
+     * Route notifications for the Slack channel.
+     *
+     * @param  \Illuminate\Notifications\Notification  $notification
+     * @return string
+     */
+    public function routeNotificationForSlack($notification)
+    {
+        return 'https://hooks.slack.com/services/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';
+    }
 }
