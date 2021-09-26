@@ -45,6 +45,7 @@ class ValeurAttributController extends Controller
             $valeurAttribut = new ValeurAttribut();
             $valeurAttribut->attribut_id = $request->get('attribut_id');
             $valeurAttribut->valeur = $value;
+            $valeurAttribut->nom = $value;
             if(!$valeurAttribut->save()) {
                 return ['error'=>true,'message'=>"Erreur lors de l'enregistrement de la valeur ".$value];
             }
