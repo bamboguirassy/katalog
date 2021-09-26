@@ -73,7 +73,7 @@
                                     class="form-control-label mbr-fonts-style display-7">Marque de produit</label>
                                 <select name="marque_id" data-form-field="marque" class="form-control display-7"
                                     id="marque-formbuilder-14">
-                                    <option selected value="" disabled>Selectionner la marque (optionnel)</option>
+                                    <option selected value="">Selectionner la marque (optionnel)</option>
                                     @foreach ($marques as $marque)
                                     <option @if(old('marque_id')==$marque->id) selected="selected" @endif
                                         value="{{$marque->id}}">{{ $marque->nom }}</option>
