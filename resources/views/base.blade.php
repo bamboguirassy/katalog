@@ -5,11 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-    @isset($shop)
-    <link rel="shortcut icon" href="{{ asset('uploads/shops/'.$shop->logo) }}" type="image/x-icon">
-    @else
+    {{-- <link rel="shortcut icon" href="{{ asset('uploads/shops/'.$shop->logo) }}" type="image/x-icon"> --}}
     <link rel="shortcut icon" href="{{ asset('assets/images/bambogroup.jpg') }}" type="image/x-icon">
-    @endisset
     <meta name="description" content="@yield('description')">
     <title>@yield('title')</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
