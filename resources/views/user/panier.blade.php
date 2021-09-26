@@ -35,7 +35,7 @@
                 </div>
             </div>
         </section>
-        @isset($panier)
+        @if($panier && count($panier->produits)>0)
         <section data-bs-version="5.1" class="content3 cid-sITwhqEfMF" id="content03-37">
             <div class="container">
                 <div class="row justify-content-center">
@@ -49,7 +49,8 @@
                         <div class="row first" ng-repeat="produit in panier.produits">
                             <div class="col-lg-4">
                                 <p class="mbr-text mbr-fonts-style display-4">
-                                    <a href="/@{{shop.pseudonyme}}/produit/@{{produit.produit.id}}/display">@{{produit.produit.nom}}</a>
+                                    <a
+                                        href="/@{{shop.pseudonyme}}/produit/@{{produit.produit.id}}/display">@{{produit.produit.nom}}</a>
                                 </p>
                                 <div class="pb-2" ng-if="produit.produit.attribut_values.length>0">
                                     <ng-container ng-repeat="attributValue in produit.produit.attribut_values">
@@ -72,11 +73,15 @@
                                     @{{ produit.produit.prixUnitaire }} FCFA<br></p>
                             </div>
                             <div class="col-lg-2">
-                                    <div class="input-group mb-3">
-                                        <button ng-click="reduceProduct(produit)" class="btn btn-primary btn-outline-secondary" type="button" id="button-addon1">-</button>
-                                        <input ng-model="produit.quantite" type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                                        <button ng-click="addMore(produit)" class="btn btn-primary btn-outline-secondary" type="button" id="button-addon2">+</button>
-                                      </div>
+                                <div class="input-group mb-3">
+                                    <button ng-click="reduceProduct(produit)"
+                                        class="btn btn-primary btn-outline-secondary" type="button"
+                                        id="button-addon1">-</button>
+                                    <input ng-model="produit.quantite" type="text" class="form-control" placeholder=""
+                                        aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                    <button ng-click="addMore(produit)" class="btn btn-primary btn-outline-secondary"
+                                        type="button" id="button-addon2">+</button>
+                                </div>
                             </div>
                             <div class="col-lg-2">
                                 <p class="mbr-text mbr-fonts-style display-4">
@@ -120,7 +125,7 @@
         </section>
         @else
         <h3 class="text-center b">Votre panier est vide...</h3>
-        @endisset
+        @endif
 
         <section data-bs-version="5.1" class="info3 cid-sIYsC74kwn" id="info3-3c">
             <div class="container">

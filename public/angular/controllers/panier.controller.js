@@ -17,7 +17,7 @@ app.controller('PanierController', ($scope, PanierService) => {
         produit.quantite--;
         if (produit.quantite == 0) {
             if (confirm("Souhaitez-vous supprimer ce produit ?")) {
-                removeProduit();
+                $scope.removeProduit(produit);
             } else {
                 produit.quantite++;
             }
