@@ -55,7 +55,7 @@
                             <input style="color: blue;" ng-model="pseudonyme" value="{{old('pseudonyme')}}" type="text" name="pseudonyme" placeholder="Pseudonyme de votre boutique"
                                 data-form-field="pseudonyme" class="form-control display-7" required="required" value=""
                                 id="pseudonyme-formbuilder-q">
-                                <span style="margin-top: 3px;" ng-if="pseudonyme!=''">Le lien de votre boutique sera : <b style="color: blue;">{{request()->getHttpHost()}}/[[pseudonyme]]</b></span>
+                                <span style="margin-top: 3px;" ng-if="pseudonyme!=''">Le lien de votre boutique sera : <b style="color: blue;">{{request()->getHttpHost()}}/@{{pseudonyme}}</b></span>
                         </div>
                         <div data-for="categorie" class="col-lg-12 col-md-12 col-sm-12 form-group" style="">
                             <label for="categorie-formbuilder-q"

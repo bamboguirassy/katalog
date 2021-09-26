@@ -113,7 +113,7 @@
                     <div class="col-md-6">
                         <div class="images">
                             <div class="text-center p-4">
-                                <img id="main-image" src="/uploads/produits/images/[[images[0].nom]]"
+                                <img id="main-image" src="/uploads/produits/images/@{{images[0].nom}}"
                                     style="height: 400px; object-fit: fill;" />
                             </div>
                             @if (count($produit->couleurProduits)>0)
@@ -121,17 +121,17 @@
                                 <label class="radio" ng-repeat="couleurProduit in produit.couleur_produits"
                                     style="margin-right: 3px;">
                                     <input ng-click="changeImages(couleurProduit.images)" type="radio"
-                                        name="couleur[[produit.nom]]" value="[[couleurProduit.id]]"
-                                        id="[[couleurProduit.id]]">
-                                    <div title="[[ couleurProduit.couleur.nom ]]"
-                                        style="height: 25px; width: 40px; background-color: [[ couleurProduit.couleur.color ]]; border: 1px solid gray;"></div>
+                                        name="couleur@{{produit.nom}}" value="@{{couleurProduit.id}}"
+                                        id="@{{couleurProduit.id}}">
+                                    <div title="@{{ couleurProduit.couleur.nom }}"
+                                        style="height: 25px; width: 40px; background-color: @{{ couleurProduit.couleur.color }}; border: 1px solid gray;"></div>
 
                                 </label>
                             </div>
                             @endif
                             <div class="thumbnail">
                                 <img ng-repeat="image in images" onclick="change_image(this)"
-                                    src="/uploads/produits/images/[[image.nom]]" style="width: 70px; display: inline;">
+                                    src="/uploads/produits/images/@{{image.nom}}" style="width: 70px; display: inline;">
                             </div>
                         </div>
                     </div>
@@ -143,8 +143,8 @@
                             <div class="mt-4 mb-3"> <span
                                     class="text-uppercase text-muted brand">{{ $produit->categorie->nom }}</span>
                                 <h5 class="text-uppercase">{{ $produit->nom }}</h5>
-                                <div class="price d-flex flex-row align-items-center"> <span class="act-price"> [[
-                                        sProduit.inPromo?sProduit.prixPromo:sProduit.prixUnitaire ]] FCFA</span>
+                                <div class="price d-flex flex-row align-items-center"> <span class="act-price"> @{{
+                                        sProduit.inPromo?sProduit.prixPromo:sProduit.prixUnitaire }} FCFA</span>
                                     <div class="ml-2" ng-if="sProduit.inPromo" style="color: red;">
                                         <small class="dis-price">{{$produit->prixUnitaire}} FCFA</small>
                                         <span>-{{round((1-($produit->prixPromo/$produit->prixUnitaire))*100)}}%</span>
@@ -154,14 +154,14 @@
                             <p class="about display-4">{{ $produit->description }}</p>
                             <div ng-if="attributProduit.attribut.type!='couleur'" class="sizes mt-2"
                                 ng-repeat="attributProduit in produit.attributs">
-                                <h6 class="text-uppercase">[[ attributProduit.attribut.nom ]]</h6>
+                                <h6 class="text-uppercase">@{{ attributProduit.attribut.nom }}</h6>
                                 <label class="radio" ng-repeat="attrProdVal in attributProduit.valeurs"
                                     style="margin-right: 3px;">
-                                    <input disabled type="radio" name="[[attributProduit.attribut.nom]]"
-                                        value="[[attrProdVal.id]]">
+                                    <input disabled type="radio" name="@{{attributProduit.attribut.nom}}"
+                                        value="@{{attrProdVal.id}}">
                                     <span ng-if="attributProduit.attribut.type!='couleur'"
-                                        title="[[ attrProdVal.valeur_attribut.nom ]]">[[
-                                        attrProdVal.valeur_attribut.valeur ]]</span>
+                                        title="@{{ attrProdVal.valeur_attribut.nom }}">@{{
+                                        attrProdVal.valeur_attribut.valeur }}</span>
                                 </label>
                             </div>
                             <div class="col-12" ng-show="produit.variants.length>0">
@@ -173,9 +173,9 @@
                                     <div ng-click="select(variant)" class="col-6 col-md-4 col-lg-3 variant-item"
                                         ng-class="{active:variant.id==sProduit.id}"
                                         ng-repeat="variant in produit.variants">
-                                        <strong>[[
+                                        <strong>@{{
                                             (variant.attribut_values|map:'valeur_attribut_produit.valeur_attribut.nom')|join:'
-                                            x ' ]]</strong>
+                                            x ' }}</strong>
                                     </div>
                                 </div>
                             </div>
@@ -187,7 +187,7 @@
                                 </a>
                                 @else
                                 <button ng-click="initProductToPanier(sProduit)"
-                                    class="btn btn-primary text-uppercase mr-2 px-4">Ajouter au panier</button>
+                                    class="btn btn-primary text-uppercase mr-2 px-4">Acheter</button>
                                 @endif
                             </div>
                         </div>
@@ -250,7 +250,7 @@
                         @else
                         @if (count($produit->variants)<1) <a ng-click="initProductToPanier({{$produit}})"
                             class="btn btn-primary item-btn display-4">
-                            AJOUTER AU PANIER
+                            Acheter
                             </a>
                             @else
                             <a href="{{ route('shop.produit.display',compact('produit','shop')) }}"

@@ -124,6 +124,7 @@ class ProduitController extends Controller
                     $image = new Image();
                     // Filename To store
                     $image->nom = $shop->pseudonyme.'_'.$produit->nom.'_'.uniqid().'.'.$photoFile->getClientOriginalExtension();
+                    $image->nom = str_replace(" ","_",$image->nom);
                     $image->produit_id = $produit->id;
                     if($i==0) {
                         $image->couverture = true;
@@ -269,6 +270,7 @@ class ProduitController extends Controller
                 $image = new Image();
                 // Filename To store
                 $image->nom = $shop->pseudonyme.'_'.$produit->nom.'_'.uniqid().'.'.$photoFile->getClientOriginalExtension();
+                $image->nom = str_replace(" ","_",$image->nom);
                 $image->produit_id = $produit->id;
                 $photoFile->storeAs('uploads/produits/images/',$image->nom);
                 $image->save();

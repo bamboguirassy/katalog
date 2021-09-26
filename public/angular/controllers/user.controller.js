@@ -11,7 +11,7 @@ app.controller('UserController',($scope, UserService) => {
                 if(user.type=='owner') {
                     window.location.href=`/${user.shop.pseudonyme}`;
                 } else {
-                    window.location.reload();
+                    window.location.href=window.location.href;
                 }
             }
         }).error(err=>alert(err.message));

@@ -67,15 +67,15 @@
                                         href="{{ route('shop.categorie.show',['categorie'=>$categorieProd,'shop'=>$shop]) }}">{{$categorieProd->categorie->nom}}</a>
                                     >></span>
                                 @endforeach
-                                <p class="m-0 p-0 mt-3">[[ produit.nom ]]</p>
+                                <p class="m-0 p-0 mt-3">@{{ produit.nom }}</p>
                             </div>
                             <div class="col-lg-12">
-                                <p class="m-0 p-0 price-pro">[[produit.prixUnitaire]] FCFA</p>
+                                <p class="m-0 p-0 price-pro">@{{produit.prixUnitaire}} FCFA</p>
                                 <hr class="p-0 m-0">
                             </div>
                             <div class="col-lg-12 pt-2 pb-2">
                                 <h5>Détails Produit</h5>
-                                <span>[[ produit.description ]]</span>
+                                <span>@{{ produit.description }}</span>
                                 <hr class="m-0 pt-2 mt-2">
                             </div>
                             <div class="col-lg-12" ng-init="attribut.add=false"
@@ -86,11 +86,11 @@
                                         class="btn btn-danger btn-sm">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                     </button>
-                                    <strong>[[attribut.attribut.nom]] : </strong>
+                                    <strong>@{{attribut.attribut.nom}} : </strong>
                                     <span ng-repeat="valeur in attribut.valeurs"
-                                        title="[[ valeur.valeur_attribut.nom ]]"
+                                        title="@{{ valeur.valeur_attribut.nom }}"
                                         style="border: 2px solid #1c73ba; padding: 3px; margin-left: 3px;">
-                                        [[valeur.valeur_attribut.attribut.type=='texte'?valeur.valeur_attribut.valeur:valeur.valeur_attribut.nom]]
+                                        @{{valeur.valeur_attribut.attribut.type=='texte'?valeur.valeur_attribut.valeur:valeur.valeur_attribut.nom}}
                                         <b ng-show="produit.variants.length<1" ng-click="removeValue(valeur)"
                                             style="font-size: 20px; color: red;">x</b>
                                     </span>
@@ -100,13 +100,13 @@
                                     <div class="row">
                                         <div class="col-12 col-lg-8">
                                             <select ng-model="attribut.newValues" multiple="multiple"
-                                                class="form-control" ng-if="attribut.add" name="attribut[[attribut.id]]"
-                                                id="attribut[[attribut.id]]">
+                                                class="form-control" ng-if="attribut.add" name="attribut@{{attribut.id}}"
+                                                id="attribut@{{attribut.id}}">
                                                 <option
                                                     ng-hide="(attribut.valeurs|map:'valeur_attribut.id')|contains:originalVal.id"
                                                     ng-repeat="originalVal in attribut.original.valeurs"
-                                                    value="[[originalVal.id]]">[[
-                                                    originalVal.nom ]]</option>
+                                                    value="@{{originalVal.id}}">@{{
+                                                    originalVal.nom }}</option>
                                             </select>
                                         </div>
                                         <div class="col-12 col-lg-4">
@@ -201,7 +201,7 @@
                                 <div ng-if="addAttribut" class="col-lg-12 col-md-12 col-sm-12 form-group"
                                     data-for="selectedAttr">
                                     <div class="form-control-label">
-                                        <label for="visible-formbuilder-14[[$index]]"
+                                        <label for="visible-formbuilder-14@{{$index}}"
                                             class="mbr-fonts-style display-7">Selectionner les attributs</label>
                                     </div>
                                     <ng-container ng-repeat="attr in attributs">
@@ -209,21 +209,21 @@
                                             class="form-check form-check-inline">
                                             <input ng-click="toggleAttrSelection(attr)" type="checkbox"
                                                 name="selectedAttrs[]" data-form-field="selectedAttr"
-                                                class="form-check-input display-7" value="[[attr.id]]"
-                                                id="visible-formbuilder-14[[$index]]">
-                                            <label class="form-check-label display-7">[[attr.nom]]</label>
+                                                class="form-check-input display-7" value="@{{attr.id}}"
+                                                id="visible-formbuilder-14@{{$index}}">
+                                            <label class="form-check-label display-7">@{{attr.nom}}</label>
                                         </div>
                                     </ng-container>
                                 </div>
                                 <div ng-repeat="selectedAttr in selectedAttrs"
                                     class="col-lg-12 col-md-12 col-sm-12 form-group" data-for="category">
-                                    <label for="category-formbuilder-14[[selectedAttr.id]]"
-                                        class="form-control-label mbr-fonts-style display-7">[[selectedAttr.nom]]</label>
-                                    <select required="required" name="[[selectedAttr.nom]][]" multiple="multiple"
+                                    <label for="category-formbuilder-14@{{selectedAttr.id}}"
+                                        class="form-control-label mbr-fonts-style display-7">@{{selectedAttr.nom}}</label>
+                                    <select required="required" name="@{{selectedAttr.nom}}[]" multiple="multiple"
                                         data-form-field="category" class="form-control display-7"
-                                        id="category-formbuilder-14[[selectedAttr.id]]">
-                                        <option ng-repeat="valeur in selectedAttr.valeurs" value="[[valeur.id]]">
-                                            [[valeur.nom]]</option>
+                                        id="category-formbuilder-14@{{selectedAttr.id}}">
+                                        <option ng-repeat="valeur in selectedAttr.valeurs" value="@{{valeur.id}}">
+                                            @{{valeur.nom}}</option>
                                     </select>
                                 </div>
                                 <div class="col-12" ng-show="addAttribut && selectedAttrs.length>0">
@@ -235,7 +235,7 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <a href="{{ route('shop.produit.edit',compact('produit','shop')) }}"
-                                            class="btn btn-warning w-100 m-0 p-0">Modifier</a>
+                                            class="btn btn-warning w-100 m-0">Modifier</a>
                                     </div>
                                     <div class="col-lg-6">
                                         <form style="display: inline;"
@@ -277,9 +277,9 @@
                         <div class="col-12 mb-3" ng-repeat="variant in produit.variants"
                             style="border-left: 2px solid darkgray;">
                             <strong style="color: #1c73ba;">
-                                <i>[[$index+1]].</i> [[produit.nom]] -
-                                [[(variant.attribut_values|map:'valeur_attribut_produit.valeur_attribut.nom')|join:' x
-                                ']]
+                                <i>@{{$index+1}}.</i> @{{produit.nom}} -
+                                @{{(variant.attribut_values|map:'valeur_attribut_produit.valeur_attribut.nom')|join:' x
+                                '}}
                             </strong>
                             <button ng-click="removeVariant(variant)"
                                 title="Vous pouvez supprimer les variants qui n'ont pas d'importance pour le produit..."
@@ -291,17 +291,17 @@
                                 <div class="row">
                                     <div class="col-12 col-lg-6">
                                         <div class="form-group">
-                                            <label for="prixUnitaire[[$index]]">Prix Unitaire</label>
+                                            <label for="prixUnitaire@{{$index}}">Prix Unitaire</label>
                                             <input ng-model="variant.prixUnitaire" required="required" type="number"
-                                                name="prixUnitaire[[$index]]" id="prixUnitaire[[$index]]"
+                                                name="prixUnitaire@{{$index}}" id="prixUnitaire@{{$index}}"
                                                 class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-12 col-lg-6">
                                         <div class="form-group">
-                                            <label for="quantite[[$index]]">Quantité</label>
+                                            <label for="quantite@{{$index}}">Quantité</label>
                                             <input ng-model="variant.quantite" required="required" type="number"
-                                                name="quantite[[$index]]" id="quantite[[$index]]" class="form-control">
+                                                name="quantite@{{$index}}" id="quantite@{{$index}}" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -315,9 +315,9 @@
                             <table class="table">
                                 <tr ng-show="variant.configured">
                                     <th>Prix unitaire</th>
-                                    <td>[[variant.prixUnitaire]] FCFA</td>
+                                    <td>@{{variant.prixUnitaire}} FCFA</td>
                                     <th>Quantité</th>
-                                    <td>[[variant.quantite]] élement(s)</td>
+                                    <td>@{{variant.quantite}} élement(s)</td>
                                 </tr>
                             </table>
 

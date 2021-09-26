@@ -125,13 +125,13 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                             data-form-title="boutiqueSearchForm">
                             @csrf
                             @method('post')
-                            <div class="form-row">
+                            {{-- <div class="form-row">
                                 @foreach ($errors->all() as $message)
                                 <div data-form-alert-danger="" class="alert alert-danger col-12">
                                     {{$message}}
                                 </div>
                                 @endforeach
-                            </div>
+                            </div> --}}
                             <div class="dragArea form-row">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <h5 class="mbr-fonts-style display-5">Accéder à une boutique</h5>
@@ -367,6 +367,9 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
 </a>
 @endif
 @endauth
+@endsection
+
+@section('more')
 <div id="chatbutton-wa" data-phone="+221778224129" data-showpopup="true" data-headertitle="👋 Chatons sur WhatsApp !"
     data-popupmessage="Salut!👋
 Laisse nous un message si tu as besoin d'assistance ou de plus d'information ! 🔥

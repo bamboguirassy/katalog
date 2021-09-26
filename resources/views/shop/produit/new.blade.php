@@ -181,25 +181,25 @@
                             <div ng-if="hasMoreAttr==1" class="col-lg-12 col-md-12 col-sm-12 form-group"
                                 data-for="selectedAttr">
                                 <div class="form-control-label">
-                                    <label for="visible-formbuilder-14[[$index]]"
+                                    <label for="visible-formbuilder-14@{{$index}}"
                                         class="mbr-fonts-style display-7">Selectionner les attributs</label>
                                 </div>
                                 <div ng-repeat="attr in attributs" class="form-check form-check-inline">
                                     <input ng-click="toggleAttrSelection(attr)" type="checkbox" name="selectedAttrs[]"
                                         data-form-field="selectedAttr" class="form-check-input display-7"
-                                        value="[[attr.id]]" id="visible-formbuilder-14[[$index]]">
-                                    <label class="form-check-label display-7">[[attr.nom]]</label>
+                                        value="@{{attr.id}}" id="visible-formbuilder-14@{{$index}}">
+                                    <label class="form-check-label display-7">@{{attr.nom}}</label>
                                 </div>
                             </div>
                             <div ng-repeat="selectedAttr in selectedAttrs"
                                 class="col-lg-12 col-md-12 col-sm-12 form-group" data-for="category">
-                                <label for="category-formbuilder-14[[selectedAttr.id]]"
-                                    class="form-control-label mbr-fonts-style display-7">[[selectedAttr.nom]]</label>
-                                <select required="required" name="[[selectedAttr.nom]][]" multiple="multiple"
+                                <label for="category-formbuilder-14@{{selectedAttr.id}}"
+                                    class="form-control-label mbr-fonts-style display-7">@{{selectedAttr.nom}}</label>
+                                <select required="required" name="@{{selectedAttr.nom}}[]" multiple="multiple"
                                     data-form-field="category" class="form-control display-7"
-                                    id="category-formbuilder-14[[selectedAttr.id]]">
-                                    <option ng-repeat="valeur in selectedAttr.valeurs" value="[[valeur.id]]">
-                                        [[valeur.nom]]</option>
+                                    id="category-formbuilder-14@{{selectedAttr.id}}">
+                                    <option ng-repeat="valeur in selectedAttr.valeurs" value="@{{valeur.id}}">
+                                        @{{valeur.nom}}</option>
                                 </select>
                             </div>
                             <div class="col">

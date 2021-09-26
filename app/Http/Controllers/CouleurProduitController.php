@@ -109,6 +109,7 @@ class CouleurProduitController extends Controller
                 $image = new Image();
                 // Filename To store
                 $image->nom = $shop->pseudonyme.'_'.$couleurProduit->produit->nom.'_'.$couleurProduit->couleur->nom.'_'.uniqid().'.'.$photoFile->getClientOriginalExtension();
+                $image->nom = str_replace(" ","_",$image->nom);
                 $image->couleur_produit_id = $couleurProduit->id;
                 $photoFile->storeAs('uploads/produits/images/',$image->nom);
                 $image->save();

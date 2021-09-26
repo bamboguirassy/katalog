@@ -66,45 +66,7 @@
                 </div>
                 <div class="row content-margin">
                     @foreach ($produits as $produit)
-                    <div class="item features-image сol-12 col-md-6 col-lg-4">
-                        <div class="item-wrapper">
-                            <div class="item-img">
-                                @if ($produit->inPromo)
-                                <span
-                                    class="category-badge">-{{round((1-($produit->prixPromo/$produit->prixUnitaire))*100)}}%</span>
-                                @endif
-                                <span
-                                    class="price-badge">{{ $produit->inPromo?$produit->prixPromo:$produit->prixUnitaire }}
-                                    FCFA</span>
-                                <a href="{{ route('shop.produit.display',['produit'=>$produit->id,'shop'=>$shop]) }}">
-                                    <img src="{{ asset('uploads/produits/images/'.$produit->images[0]->nom) }}" alt="">
-                                </a>
-                            </div>
-                            <div class="item-content">
-                                <a href="{{ route('shop.produit.display',compact('produit','shop')) }}">
-                                    <h5 title="{{ $produit->nom }}" class="item-title mbr-fonts-style display-4">
-                                        {{ \Illuminate\Support\Str::limit($produit->nom, 20, '...') }}
-                                    </h5>
-                                    <p class="mbr-text mbr-fonts-style display-7">
-                                        <span style="font-weight: initial;">{{ $produit->categorie->nom }}</span>
-                                    </p>
-                                </a>
-                            </div>
-                            <div class="mbr-section-btn item-footer">
-                                @if (in_array($produit->id, $paProduits))
-                                <a style="background: green; color: white;" class="btn item-btn display-4">
-                                    Dans le panier <i class="fa fa-check"></i>
-                                </a>
-                                @else
-                                <a ng-click="initProductToPanier({{$produit}})"
-                                    class="btn btn-primary item-btn display-4">
-                                    AJOUTER AU PANIER
-                                </a>
-                                @endif
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    <x-produit-item :produit="$produit" :paProduits="$paProduits" :shop="$shop" />
                     @endforeach
                     @if ($produits->currentPage()!=$produits->lastPage())
                     <div class="col-12">

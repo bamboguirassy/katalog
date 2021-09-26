@@ -81,23 +81,23 @@
                                 <div id="bootstrap-accordion_84" class="panel-group accordionStyles accordion"
                                     role="tablist" aria-multiselectable="true">
                                     <div class="card" ng-repeat="attribut in attributs">
-                                        <div class="card-header" role="tab" id="heading[[$index]]">
+                                        <div class="card-header" role="tab" id="heading@{{$index}}">
                                             <a role="button" class="panel-title text-info"
                                                 data-toggle="collapse" data-bs-toggle="collapse" data-core=""
-                                                href="#collapse[[$index]]_84" aria-expanded="true"
-                                                aria-controls="collapse[[$index]]">
+                                                href="#collapse@{{$index}}_84" aria-expanded="true"
+                                                aria-controls="collapse@{{$index}}">
                                                 <div class="col">
                                                     <h5 class="mbr-fonts-style mbr-info display-5">
-                                                        [[attribut.nom]]</h5>
+                                                        @{{attribut.nom}}</h5>
                                                 </div>
                                             </a>
                                         </div>
-                                        <div id="collapse[[$index]]_84" class="panel-collapse noScroll collapse show"
-                                            role="tabpanel" aria-labelledby="heading[[$index]]"
+                                        <div id="collapse@{{$index}}_84" class="panel-collapse noScroll collapse show"
+                                            role="tabpanel" aria-labelledby="heading@{{$index}}"
                                             data-parent="#bootstrap-accordion_84" data-bs-parent="#accordion">
                                             <div class="panel-body ">
                                                 <p class="mbr-fonts-style panel-text display-7">
-                                                    [[attribut.description]] 
+                                                    @{{attribut.description}} 
                                                     <br>
                                                     <span ng-if="attribut.changePrice"><b><u>Cet attribut change le prix du produit</u></b></span>
                                                     <span ng-if="!attribut.changePrice"><b><u>Cet attribut ne change pas le prix du produit</u></b></span>
@@ -118,10 +118,10 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr ng-repeat="valeur in attribut.valeurs">
-                                                                <td scope="row">[[valeur.nom]]</td>
-                                                                <td>[[ valeur.valeur ]]
+                                                                <td scope="row">@{{valeur.nom}}</td>
+                                                                <td>@{{ valeur.valeur }}
                                                                     <div ng-if="attribut.type=='couleur'"
-                                                                        style="width: 50px; height: 10px; background-color: [[valeur.valeur]]">
+                                                                        style="width: 50px; height: 10px; background-color: @{{valeur.valeur}}">
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -159,7 +159,7 @@
 
                 <div class="modal-body">
                     <p class="mbr-text mbr-fonts-style display-7">
-                        Ajouter des valeurs à l'attribut (<b> [[currentAttribut.nom]]</b>)</p>
+                        Ajouter des valeurs à l'attribut (<b> @{{currentAttribut.nom}}</b>)</p>
                     <div>
                         <div class="form-wrapper">
                             <!--Formbuilder Form-->
@@ -172,7 +172,7 @@
                                         <label for="valeur-mbr-popup-44"
                                             class="form-control-label mbr-fonts-style display-7">Valeur</label>
                                         <input ng-model="newValue.valeur"
-                                            type="[[currentAttribut.type=='couleur'?'color':'texte']]" name="valeur"
+                                            type="@{{currentAttribut.type=='couleur'?'color':'texte'}}" name="valeur"
                                             placeholder="Valeur" data-form-field="valeur" required="required"
                                             class="form-control display-7" id="valeur-mbr-popup-44">
                                     </div>

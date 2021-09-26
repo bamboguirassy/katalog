@@ -60,7 +60,7 @@ app.controller('MainController', ($rootScope, $http) => {
         minimumChars: 3,
         dropdownWidth: '500px',
         dropdownHeight: '200px',
-        noMatchTemplate: `<span>Aucun résultat pour '[[entry.searchText]]'</span>`,
+        noMatchTemplate: `<span>Aucun résultat pour '{{entry.searchText}}'</span>`,
         data: function (searchText) {
             return $http.get('/shop-autocomplete')
                 .then(function (response) {
@@ -86,7 +86,7 @@ app.controller('MainController', ($rootScope, $http) => {
                         <img style="width: 30px; display:inline;" src="/uploads/shops/[[item.logo]]">
                     </div>
                     <div  style="width: 70%; display: inline;">
-                        <span style="font-size: 20px; font-weight: bold;">[[entry.item.nom]]</span>
+                        <span style="font-size: 20px; font-weight: bold;">{{entry.item.nom}}</span>
                     </div>    
                 </div>
                 `
@@ -101,7 +101,7 @@ app.controller('MainController', ($rootScope, $http) => {
         minimumChars: 2,
         dropdownWidth: '350px',
         dropdownHeight: '200px',
-        noMatchTemplate: `<span>Aucun résultat pour '[[entry.searchText]]'</span>`,
+        noMatchTemplate: `<span>Aucun résultat pour '{{entry.searchText}}'</span>`,
         data: function (searchText) {
             return $http.get(`/${$rootScope.shop.pseudonyme}/produit-autocomplete`)
                 .then(function (response) {
@@ -124,10 +124,10 @@ app.controller('MainController', ($rootScope, $http) => {
                 label: `
                 <div style="width: 100%; text-align: left;">
                     <div style="width: 30%; display: inline;">
-                        <img style="width: 30px; display: inline;" src="/uploads/produits/images/[[entry.item.image_couverture.nom]]">
+                        <img style="width: 30px; display: inline;" src="/uploads/produits/images/{{entry.item.image_couverture.nom}}">
                     </div>
                     <div  style="width: 70%; display: inline;">
-                        <span style="font-size: 20px; font-weight: bold;">[[entry.item.nom]]</span>
+                        <span style="font-size: 20px; font-weight: bold;">{{entry.item.nom}}</span>
                     </div>    
                 </div>
                 `

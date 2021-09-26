@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{{ asset('assets/FontAwesome/css/font-awesome.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap-grid.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap-reboot.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/animatecss/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/chatbutton/floating-wpp.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/dropdown/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/socicon/css/styles.css') }}">
@@ -36,7 +37,7 @@
     <link rel="preload" as="style" href="{{ asset('assets/mobirise/css/mbr-additional.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/mobirise/css/mbr-additional.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('bower_components/angular-auto-complete/angular-auto-complete.css') }}">
-    <meta name="theme-color" content="#196b86">
+    <meta name="theme-color" content="#1c73ba">
     <link rel="manifest" href="{{ asset('manifest.json') }}">
     <script src="{{ asset('sw-connect.js') }}"></script>
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -389,7 +390,7 @@
             </div>
         </nav>
     </section>
-    <section ng-cloak>
+    <section>
         <div class="container">
             <div class="col-12">
                 @yield('body')
@@ -403,8 +404,8 @@
     {{-- panier client --}}
     @auth
     @if (auth()->user()->type=='client' && isset($shop))
-    <a href="/[[shop.pseudonyme]]/panier/show" class="btn btn-info" style="position: fixed; top: 25%; right: 2px;">
-        <span class="mbr-iconfont mbri-shopping-cart"></span> ([[panier?panier.produits_count:0]])
+    <a href="/@{{shop.pseudonyme}}/panier/show" class="btn btn-info" style="position: fixed; top: 25%; right: 2px;">
+        <span class="mbr-iconfont mbri-shopping-cart"></span> (@{{panier?panier.produits_count:0}})
         <!--PANIER-->
     </a>
     @endif
@@ -456,11 +457,9 @@
     <script src="{{ asset('angular/controllers/panier.controller.js') }}"></script>
     <script src="{{ asset('angular/controllers/categorie.controller.js') }}"></script>
     <script src="{{ asset('angular/controllers/user.controller.js') }}"></script>
-    <div id="scrollToTop" class="scrollToTop mbr-arrow-up">
-        <a style="text-align: center;">
-            <i class="mbr-arrow-up-icon mbr-arrow-up-icon-cm cm-icon cm-icon-smallarrow-up"></i>
-        </a>
-    </div>
+    <input name="animation" type="hidden">
+    <script>"use strict";if("loading"in HTMLImageElement.prototype){document.querySelectorAll('img[loading="lazy"],iframe[loading="lazy"]').forEach(e=>{e.src=e.dataset.src,e.style.paddingTop=100*e.getAttribute("data-aspectratio")+"%",e.style.height=0,e.onload=function(){e.removeAttribute("style")}})}else{const e=document.createElement("script");e.src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js",document.body.appendChild(e)}</script>
+    @yield('more')
 </body>
 
 </html>

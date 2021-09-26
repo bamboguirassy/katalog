@@ -1,15 +1,1 @@
-{
-    "name": "Katalog",
-    "short_name": "Katalog",
-    "start_url": "/",
-    "display": "standalone",
-    "theme_color": "#196b86",
-    "background_color": "#196b86",
-    "icons": [
-        {
-            "src": "assets/icons/512x512.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        }
-    ]
-}
+{"name":"Katalog","short_name":"Katalog","start_url":"/","display":"standalone","theme_color":"#1c73ba","background_color":"#1c73ba","icons":[{"src":"assets/icons/512x512.png","sizes":"512x512","type":"image/png"}]}

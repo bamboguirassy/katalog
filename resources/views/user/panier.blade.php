@@ -49,27 +49,27 @@
                         <div class="row first" ng-repeat="produit in panier.produits">
                             <div class="col-lg-4">
                                 <p class="mbr-text mbr-fonts-style display-4">
-                                    <a href="/[[shop.pseudonyme]]/produit/[[produit.produit.id]]/display">[[produit.produit.nom]]</a>
+                                    <a href="/@{{shop.pseudonyme}}/produit/@{{produit.produit.id}}/display">@{{produit.produit.nom}}</a>
                                 </p>
                                 <div class="pb-2" ng-if="produit.produit.attribut_values.length>0">
                                     <ng-container ng-repeat="attributValue in produit.produit.attribut_values">
 
-                                        <span>[[attributValue.valeur_attribut_produit.valeur_attribut.attribut.nom]]
+                                        <span>@{{attributValue.valeur_attribut_produit.valeur_attribut.attribut.nom}}
                                             :</span>
                                         <span
                                             ng-if="attributValue.valeur_attribut_produit.valeur_attribut.attribut.type=='couleur'"
-                                            style="border: 2px solid #1C73BA; background-color: [[attributValue.valeur_attribut_produit.valeur_attribut.valeur]]">
+                                            style="border: 2px solid #1C73BA; background-color: @{{attributValue.valeur_attribut_produit.valeur_attribut.valeur}}">
                                             &nbsp; &nbsp;
                                         </span>
                                         <span
                                             ng-if="attributValue.valeur_attribut_produit.valeur_attribut.attribut.type!='couleur'"
-                                            style="padding: 2px; border: 2px solid #1C73BA;">[[attributValue.valeur_attribut_produit.valeur_attribut.valeur]]</span>
+                                            style="padding: 2px; border: 2px solid #1C73BA;">@{{attributValue.valeur_attribut_produit.valeur_attribut.valeur}}</span>
                                     </ng-container>
                                 </div>
                             </div>
                             <div class="col-lg-2">
                                 <p class="mbr-text mbr-fonts-style display-4">
-                                    [[ produit.produit.prixUnitaire ]] FCFA<br></p>
+                                    @{{ produit.produit.prixUnitaire }} FCFA<br></p>
                             </div>
                             <div class="col-lg-2">
                                     <div class="input-group mb-3">
@@ -80,7 +80,7 @@
                             </div>
                             <div class="col-lg-2">
                                 <p class="mbr-text mbr-fonts-style display-4">
-                                    [[ produit.produit.prixUnitaire * produit.quantite ]] FCFA</p>
+                                    @{{ produit.produit.prixUnitaire * produit.quantite }} FCFA</p>
                             </div>
                             <div class="col-lg-2">
                                 <button ng-click="removeProduit(produit)" class="btn btn-danger">
@@ -97,7 +97,7 @@
                             </div>
                             <div class="col-lg-2">
                                 <p class="mbr-text mbr-fonts-style display-4">
-                                    [[ montant ]] FCFA</p>
+                                    @{{ montant }} FCFA</p>
                             </div>
                         </div>
                     </div>

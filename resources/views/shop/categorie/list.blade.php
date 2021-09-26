@@ -105,7 +105,7 @@
                                             <div data-for="nom" class="col-lg-12 col-md-12 col-sm-12 form-group">
                                                 <label for="nom-formbuilder-1me"
                                                     class="form-control-label mbr-fonts-style display-7">Catégorie</label>
-                                                <input value="[[selected.nom]]" type="text" name="nom"
+                                                <input value="@{{selected.nom}}" type="text" name="nom"
                                                     placeholder="Nom catégorie" data-form-field="nom"
                                                     class="form-control display-7" required="required" value=""
                                                     id="nom-formbuilder-1me">
@@ -120,7 +120,7 @@
                                                     <option value="" disabled style="text-align: center;">---</option>
                                                     <option ng-selected="selected.categorie_id==categorie.id"
                                                         ng-repeat="categorie in categories"
-                                                        ng-value="categorie.id ">[[categorie.nom]]</option>
+                                                        ng-value="categorie.id ">@{{categorie.nom}}</option>
                                                 </select>
                                             </div>
                                             <div data-for="description"
@@ -129,7 +129,7 @@
                                                     class="form-control-label mbr-fonts-style display-7">Description</label>
                                                 <textarea name="description" placeholder="Description catégorie"
                                                     data-form-field="description" class="form-control display-7"
-                                                    id="description-formbuilder-1me">[[selected.description]]</textarea>
+                                                    id="description-formbuilder-1me">@{{selected.description}}</textarea>
                                             </div>
                                             <div class="col">
                                                 <button ng-click="submitEditForm()" id="catEditBtn" style="display: inline;background-color: orange; color: white;"

@@ -22,6 +22,7 @@ use App\Models\Type;
 use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
@@ -59,7 +60,7 @@ Route::post('login', function (Request $request) {
         return ['error'=>false,'data'=>$user];
     }
     return ['error'=>true,'message'=>'Identifiants de connexion invalides.'];
-});
+})->middleware('guest');
 
 Route::get('/forgot-password',function() {
     return view('user.forgot-password');
@@ -104,7 +105,7 @@ Route::post('/reset-password', function (Request $request) {
 
 Route::get('logout', function () {
     Auth::logout();
-    return redirect()->route('home');
+    return back();
 })->name('logout')->middleware('auth');
 
 Route::get('profil',function() {
@@ -122,10 +123,6 @@ Route::resource('shop', ShopController::class,
 
 Route::post('update-password','App\Http\Controllers\UserController@updatePassword')
 ->name('user.update.password')->middleware('auth');
-
-Route::resource('user', UserController::class,[
-    'only'=>['store','update']
-]);
 
 Route::get('/mes-commandes', 'App\Http\Controllers\CommandeController@getUserCommandes')
 ->name('user.commande.list');
@@ -293,4 +290,8 @@ Route::group([
                 ->middleware('auth')
                 ->name('panier.convert');
        });
+
+       Route::resource('user', UserController::class,[
+        'only'=>['store','update']
+    ]);
 });
