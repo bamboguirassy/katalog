@@ -1,6 +1,6 @@
 @extends('base')
 
-@section('title',"Accueil");
+@section('title',"Katalog");
 
 @section('description',"Bienvenue sur la plateforme Katalog.
 Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir plus de visibilité.")
