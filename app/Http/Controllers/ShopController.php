@@ -84,7 +84,7 @@ class ShopController extends Controller
             throw $e;
         }
         Auth::attempt($request->only(['email','password'],true));
-        $user->notify(new NotificationsShopCreated($shop));
+       // $user->notify(new NotificationsShopCreated($shop));
         return redirect()->route('shop.categorie.index',['shop'=>$shop]);
     }
 
