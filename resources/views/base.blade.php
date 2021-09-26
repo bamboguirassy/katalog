@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="{{ asset('assets/FontAwesome/css/font-awesome.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap-grid.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap-reboot.min.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('assets/animatecss/animate.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('assets/chatbutton/floating-wpp.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/dropdown/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/socicon/css/styles.css') }}">
