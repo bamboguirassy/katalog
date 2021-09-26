@@ -102,14 +102,6 @@
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <hr>
                                             </div>
-                                            <div data-for="nom" class="col-lg-12 col-md-12 col-sm-12 form-group">
-                                                <label for="nom-formbuilder-1me"
-                                                    class="form-control-label mbr-fonts-style display-7">Catégorie</label>
-                                                <input value="@{{selected.nom}}" type="text" name="nom"
-                                                    placeholder="Nom catégorie" data-form-field="nom"
-                                                    class="form-control display-7" required="required" value=""
-                                                    id="nom-formbuilder-1me">
-                                            </div>
                                             <div data-for="categorie_id"
                                                 class="col-lg-12 col-md-12 col-sm-12 form-group">
                                                 <label for="categorie_id-formbuilder-1me"
@@ -122,6 +114,14 @@
                                                         ng-repeat="categorie in categories"
                                                         ng-value="categorie.id ">@{{categorie.nom}}</option>
                                                 </select>
+                                            </div>
+                                            <div data-for="nom" class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                                <label for="nom-formbuilder-1me"
+                                                    class="form-control-label mbr-fonts-style display-7">Catégorie</label>
+                                                <input value="@{{selected.nom}}" type="text" name="nom"
+                                                    placeholder="Nom catégorie" data-form-field="nom"
+                                                    class="form-control display-7" required="required" value=""
+                                                    id="nom-formbuilder-1me">
                                             </div>
                                             <div data-for="description"
                                                 class="col-lg-12 col-md-12 col-sm-12 form-group">
