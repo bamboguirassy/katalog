@@ -132,7 +132,7 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                                 </div>
                                 @endforeach
                             </div> --}}
-                            <div class="dragArea form-row">
+                            {{-- <div class="dragArea form-row">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <h5 class="mbr-fonts-style display-5">Accéder à une boutique</h5>
                                 </div>
@@ -150,7 +150,7 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                                             class="mobi-mbri mobi-mbri-arrow-next mbr-iconfont mbr-iconfont-btn"></span>
                                         Ouvrir</button>
                                 </div>
-                            </div>
+                            </div> --}}
                         </form>
                         <!--Formbuilder Form-->
                     </div>
