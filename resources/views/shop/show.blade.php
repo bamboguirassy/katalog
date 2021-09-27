@@ -16,7 +16,7 @@
                 <div class="card-img">
                     <span class="category-item">{{ $shop->categorie->nom }}</span>
                     @isset($shop->logo)
-                    <img style="max-height: 300px; object-fit: cover;" src="{{ asset('uploads/shops/'.$shop->logo) }}"
+                    <img style="max-height: 500px; object-fit: cover;" src="{{ asset('uploads/shops/'.$shop->logo) }}"
                         alt="">
                     @else
                     <img style="max-height: 300px;" src="{{ asset('assets/images/votre-logo-ici.png') }}" alt="">
