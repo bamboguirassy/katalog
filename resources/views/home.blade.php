@@ -10,7 +10,7 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
     <div class="col-12">
         <section data-bs-version="5.1" class="header2 cid-sIq8h1uDBV" id="header02-d">
             <div class="container">
-                <div class="row row-bg justify-content-center">
+                <div class="row row-bg justify-content-center pt-1">
                     <div class="col-12 md-pb col-md-12 col-lg-6">
                         <div class="text-wrapper align-left">
                             <br>
@@ -23,6 +23,8 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                                 Instagram, Facebook et gérer votre catalogue et vos commandes en un seul et unique
                                 endroit. <br>
                                 L'ouverture des 20 premières boutiques reste gratuite et vous pouvez tester pendant un mois sans frais.
+                                <br>
+                                Si vous avez besoin d'aides pour mettre votre boutique en ligne, nous pouvons vous aider à publier vos articles et configurer votre boutique. Ecrivez nous sur WhatsApp au <a style="color: #25D366; font-weight: bolder;" href="https://wa.me/+221778224129">+221778224129</a>.
                             </p>
                             <div class="mbr-section-btn mt-4">
                                 @guest

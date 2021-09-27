@@ -137,6 +137,7 @@
                                 </span>{{ config('app.name') }}&nbsp;
                             </a>
                         </li>
+                        @isset($shop)
                         <li class="nav-item">
                             <a class="nav-link link text-primary display-4"
                                 href="{{ route('shop.home',compact('shop')) }}">
@@ -144,7 +145,6 @@
                                 </span>Accueil&nbsp;
                             </a>
                         </li>
-                        @isset($shop)
                         @endisset
 
                         {{-- afficher les menus public de la boutique --}}
