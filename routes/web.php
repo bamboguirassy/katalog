@@ -106,7 +106,7 @@ Route::get('logout', function () {
     $user = Auth::user();
     Auth::logout();
     if($user->type=='owner') {
-        return redirect()->route('shop.home',compact('shop'));
+        return redirect()->route('shop.home',['shop'=>$user->shop]);
     } 
     return redirect()->route('home');
 })->name('logout')->middleware('auth');
