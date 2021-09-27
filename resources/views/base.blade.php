@@ -96,8 +96,12 @@
                     <span class="navbar-logo">
                         @isset($shop)
                         <a href="{{route('shop.home',compact('shop'))}}">
+                            @isset($shop->logo)
                             <img src="{{ asset('uploads/shops/'.$shop->logo) }}" alt="{{$shop->nom}}"
                                 style="height: 3rem;">
+                            @else
+                            <img src="{{ asset('assets/images/votre-logo-ici.png') }}" alt="">
+                            @endisset
                         </a>
                         @else
                         <img src="{{ asset('assets/images/bambogroup.jpg') }}" alt="Logo {{config('app.name')}}">
@@ -409,8 +413,8 @@
             <div class="media-container-row align-center mbr-white">
                 <div class="col-12">
                     <p class="mbr-text mb-0 mbr-fonts-style display-7">
-                        © Copyright {{date_format(new DateTime(),'Y')}} <a rel="noreferrer" href="https://bambogroup.net"
-                            class="text-danger" target="_blank">Bambo
+                        © Copyright {{date_format(new DateTime(),'Y')}} <a rel="noreferrer"
+                            href="https://bambogroup.net" class="text-danger" target="_blank">Bambo
                             GROUP</a> - Tous droits réservés</p>
                 </div>
             </div>
