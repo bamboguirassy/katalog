@@ -409,7 +409,7 @@
             <div class="media-container-row align-center mbr-white">
                 <div class="col-12">
                     <p class="mbr-text mb-0 mbr-fonts-style display-7">
-                        © Copyright {{date_format(new DateTime(),'Y')}} <a href="https://bambogroup.net"
+                        © Copyright {{date_format(new DateTime(),'Y')}} <a rel="noreferrer" href="https://bambogroup.net"
                             class="text-danger" target="_blank">Bambo
                             GROUP</a> - Tous droits réservés</p>
                 </div>
