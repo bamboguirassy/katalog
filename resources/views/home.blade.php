@@ -178,7 +178,7 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                                 style="border: 2px solid #1c73ba; border-bottom: 2px solid white;">
                                 <div class="image-wrapper">
                                     <a href="{{route('shop.home',['shop'=>$shopItem])}}">
-                                        @isset($shop->logo)
+                                        @isset($shopItem->logo)
                                         <img src="{{ asset('uploads/shops/'.$shopItem->logo) }}" alt="">
                                         @else
                                         <img src="{{ asset('assets/images/votre-logo-ici.png') }}" alt="">
