@@ -103,8 +103,12 @@ Route::post('/reset-password', function (Request $request) {
 })->middleware('guest')->name('password.update');
 
 Route::get('logout', function () {
+    $user = Auth::user();
     Auth::logout();
-    return back();
+    if($user->type=='owner') {
+        return redirect()->route('shop.home',compact('shop'));
+    } 
+    return redirect()->route('home');
 })->name('logout')->middleware('auth');
 
 Route::get('profil',function() {
