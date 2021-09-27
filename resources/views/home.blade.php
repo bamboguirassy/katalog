@@ -196,28 +196,28 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                                                 style="border-top: 3px solid white; padding-top: 5px;">
                                                 @isset($shopItem->facebook)
                                                 <div class="soc-item">
-                                                    <a href="{{ $shopItem->facebook }}" target="_blank">
+                                                    <a rel="noreferrer" href="{{ $shopItem->facebook }}" target="_blank">
                                                         <span class="mbr-iconfont socicon socicon-facebook"></span>
                                                     </a>
                                                 </div>
                                                 @endisset
                                                 @isset($shopItem->twitter)
                                                 <div class="soc-item">
-                                                    <a href="{{ $shopItem->twitter }}" target="_blank">
+                                                    <a rel="noreferrer" href="{{ $shopItem->twitter }}" target="_blank">
                                                         <span class="mbr-iconfont socicon socicon-twitter"></span>
                                                     </a>
                                                 </div>
                                                 @endisset
                                                 @isset($shopItem->instagram)
                                                 <div class="soc-item">
-                                                    <a href="{{ $shopItem->instagram }}" target="_blank">
+                                                    <a rel="noreferrer" href="{{ $shopItem->instagram }}" target="_blank">
                                                         <span class="mbr-iconfont socicon socicon-instagram"></span>
                                                     </a>
                                                 </div>
                                                 @endisset
                                                 @isset($shopItem->linkedin)
                                                 <div class="soc-item">
-                                                    <a href="{{ $shopItem->linkedin }}" target="_blank">
+                                                    <a rel="noreferrer" href="{{ $shopItem->linkedin }}" target="_blank">
                                                         <span class="mbr-iconfont socicon-linkedin socicon"></span>
                                                     </a>
                                                 </div>

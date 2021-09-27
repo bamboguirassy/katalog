@@ -61,28 +61,28 @@
                     </p>
                     @isset($shop->twitter)
                     <div class="soc-item">
-                        <a href="{{ $shop->twitter }}" target="_blank">
+                        <a rel="noreferrer" href="{{ $shop->twitter }}" target="_blank">
                             <span class="mbr-iconfont mbr-iconfont-social socicon-twitter socicon"></span>
                         </a>
                     </div>
                     @endisset
                     @isset($shop->facebook)
                     <div class="soc-item">
-                        <a href="{{ $shop->facebook }}" target="_blank">
+                        <a rel="noreferrer" href="{{ $shop->facebook }}" target="_blank">
                             <span class="mbr-iconfont mbr-iconfont-social socicon-facebook socicon"></span>
                         </a>
                     </div>
                     @endisset
                     @isset($shop->instagram)
                     <div class="soc-item">
-                        <a href="{{ $shop->instagram }}" target="_blank">
+                        <a rel="noreferrer" href="{{ $shop->instagram }}" target="_blank">
                             <span class="mbr-iconfont mbr-iconfont-social socicon-instagram socicon"></span>
                         </a>
                     </div>
                     @endisset
                     @isset($shop->linkedin)
                     <div class="soc-item">
-                        <a href="{{ $shop->linkedin }}" target="_blank">
+                        <a rel="noreferrer" href="{{ $shop->linkedin }}" target="_blank">
                             <span class="mbr-iconfont mbr-iconfont-social socicon-linkedin socicon"></span>
                         </a>
                     </div>

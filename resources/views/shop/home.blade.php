@@ -130,17 +130,18 @@
                     <div class="card cardcolor p-3 col-12 col-md-6 col-lg-3">
                         <div class="card-wrapper">
                             <div class="card-img">
-                                <a href="{{$shop->facebook}}"><span class="mbr-iconfont ico1 socicon-facebook socicon"
+                                <a rel="noreferrer" href="{{$shop->facebook}}"><span class="mbr-iconfont ico1 socicon-facebook socicon"
                                         style="color: rgb(68, 121, 217); fill: rgb(68, 121, 217);"></span></a>
                             </div>
                             <div class="card-box">
-                                <h3 class="card-title align-left mbr-fonts-style display-5"><a
+                                <h3 class="card-title align-left mbr-fonts-style display-5">
+                                    <a rel="noreferrer"
                                         href="{{$shop->facebook}}" class="text-primary">Facebook</a></h3>
                                 <h4 class="mbr-text align-left mbr-fonts-style display-4">
                                     PAGE</h4>
                             </div>
                             <div class="card-img">
-                                <a href="{{$shop->facebook}}"><span
+                                <a rel="noreferrer" href="{{$shop->facebook}}"><span
                                         class="mbr-iconfont ico2 mobi-mbri-right mobi-mbri"></span></a>
                             </div>
                         </div>
@@ -150,17 +151,17 @@
                     <div class="card cardcolor p-3 col-12 col-md-6 col-lg-3">
                         <div class="card-wrapper">
                             <div class="card-img">
-                                <a href="{{$shop->linkedin}}"><span class="mbr-iconfont ico1 socicon-linkedin socicon"
+                                <a rel="noreferrer" href="{{$shop->linkedin}}"><span class="mbr-iconfont ico1 socicon-linkedin socicon"
                                         style="color: rgb(28, 115, 186); fill: rgb(28, 115, 186);"></span></a>
                             </div>
                             <div class="card-box">
-                                <h3 class="card-title align-left mbr-fonts-style display-5"><a
+                                <h3 class="card-title align-left mbr-fonts-style display-5"><a rel="noreferrer"
                                         href="{{$shop->linkedin}}" class="text-primary">LinkedIn</a></h3>
                                 <h4 class="mbr-text align-left mbr-fonts-style display-4">
                                     PAGE</h4>
                             </div>
                             <div class="card-img">
-                                <a href="{{$shop->linkedin}}"><span
+                                <a rel="noreferrer" href="{{$shop->linkedin}}"><span
                                         class="mbr-iconfont ico2 mobi-mbri-right mobi-mbri"></span></a>
                             </div>
                         </div>
@@ -170,18 +171,18 @@
                     <div class="card cardcolor p-3 col-12 col-md-6 col-lg-3">
                         <div class="card-wrapper">
                             <div class="card-img">
-                                <a href="{{$shop->twitter}}"><span class="mbr-iconfont ico1 socicon-twitter socicon"
+                                <a rel="noreferrer" href="{{$shop->twitter}}"><span class="mbr-iconfont ico1 socicon-twitter socicon"
                                         style="color: rgb(85, 128, 255); fill: rgb(85, 128, 255);"></span></a>
                             </div>
                             <div class="card-box">
-                                <h3 class="card-title align-left mbr-fonts-style display-5"><a href="{{$shop->twitter}}"
+                                <h3 class="card-title align-left mbr-fonts-style display-5"><a rel="noreferrer" href="{{$shop->twitter}}"
                                         class="text-primary">Twitter</a>
                                 </h3>
                                 <h4 class="mbr-text align-left mbr-fonts-style display-4">
                                     NEWS FEED</h4>
                             </div>
                             <div class="card-img">
-                                <a href="{{$shop->twitter}}"><span
+                                <a rel="noreferrer" href="{{$shop->twitter}}"><span
                                         class="mbr-iconfont ico2 mobi-mbri-right mobi-mbri"></span></a>
                             </div>
                         </div>
@@ -191,17 +192,17 @@
                     <div class="card cardcolor p-3 col-12 col-md-6 col-lg-3">
                         <div class="card-wrapper">
                             <div class="card-img">
-                                <a href="{{$shop->instagram}}"><span class="mbr-iconfont ico1 socicon-instagram socicon"
+                                <a rel="noreferrer" href="{{$shop->instagram}}"><span class="mbr-iconfont ico1 socicon-instagram socicon"
                                         style="color: rgb(255, 138, 115); fill: rgb(255, 138, 115);"></span></a>
                             </div>
                             <div class="card-box">
                                 <h3 class="card-title align-left mbr-fonts-style display-5"><a
-                                        href="{{$shop->instagram}}" class="text-primary">Instagram</a></h3>
+                                    rel="noreferrer" href="{{$shop->instagram}}" class="text-primary">Instagram</a></h3>
                                 <h4 class="mbr-text align-left mbr-fonts-style display-4">
                                     PHOTO</h4>
                             </div>
                             <div class="card-img">
-                                <a href="{{$shop->instagram}}"><span
+                                <a rel="noreferrer" href="{{$shop->instagram}}"><span
                                         class="mbr-iconfont ico2 mobi-mbri-right mobi-mbri"></span></a>
                             </div>
                         </div>
