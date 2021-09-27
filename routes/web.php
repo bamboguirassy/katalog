@@ -288,9 +288,9 @@ Route::group([
             Route::post('panier-convert/{panier}','App\Http\Controllers\PanierController@convertToCommande')
                 ->middleware('auth')
                 ->name('panier.convert');
-       });
-
-       Route::resource('user', UserController::class,[
-        'only'=>['store','update']
-    ]);
+       }); 
 });
+
+Route::resource('user', UserController::class,[
+    'only'=>['store','update']
+]);
