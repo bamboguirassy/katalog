@@ -15,8 +15,12 @@
             <div class="col-lg-8">
                 <div class="card-img">
                     <span class="category-item">{{ $shop->categorie->nom }}</span>
+                    @isset($shop->logo)
                     <img style="max-height: 500px; object-fit: cover;" src="{{ asset('uploads/shops/'.$shop->logo) }}"
                         alt="">
+                    @else
+                    <img style="max-height: 500px; object-fit: cover;" src="{{ asset('assets/images/votre-logo-ici.png') }}" alt="">
+                    @endisset
                 </div>
                 @auth
                 @if (auth()->user()->type=='owner' && auth()->user()->shop->id==$shop->id)
@@ -91,8 +95,8 @@
                 @auth
                 @if (auth()->user()->type=='owner' && auth()->user()->shop->id==$shop->id)
                 <div class="col-12">
-                    <a href="{{ route('shop.edit',compact('shop')) }}" class="btn mt-2 mbr-white" style="background: orange;">Modifier &nbsp; <i
-                            class="fa fa-edit"></i></a>
+                    <a href="{{ route('shop.edit',compact('shop')) }}" class="btn mt-2 mbr-white"
+                        style="background: orange;">Modifier &nbsp; <i class="fa fa-edit"></i></a>
                 </div>
                 @endif
                 @endauth
