@@ -31,7 +31,7 @@
                             @isset($shop->logo)
                             <img style="max-height: 300px" src="{{ asset('uploads/shops/'.$shop->logo) }}" alt="">
                             @else
-                            <img src="{{ asset('assets/images/votre-logo-ici.png') }}" alt="">
+                            <img style="max-height: 300px;" src="{{ asset('assets/images/votre-logo-ici.png') }}" alt="">
                             @endisset
                         </div>
                     </div>
