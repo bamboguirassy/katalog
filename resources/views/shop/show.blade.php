@@ -23,7 +23,7 @@
                     @endisset
                 </div>
                 @auth
-                @if (auth()->user()->type=='owner' && auth()->user()->shop->id==$shop->id)
+                @if ((auth()->user()->type=='owner' && auth()->user()->shop->id==$shop->id)  || auth()->user()->type=='admin')
                 <form action="{{route('shop.update.shop.logo',compact('shop'))}}" method="POST"
                     class="mbr-form form-with-styler" data-form-title="boutiqueNewForm" enctype="multipart/form-data"
                     id="shopLogoUpdate">
@@ -93,7 +93,7 @@
                     @endisset
                 </div>
                 @auth
-                @if ((auth()->user()->type=='owner' && auth()->user()->shop->id==$shop->id) || auth()->type=='admin')
+                @if ((auth()->user()->type=='owner' && auth()->user()->shop->id==$shop->id) || auth()->user()->type=='admin')
                 <div class="col-12">
                     <a href="{{ route('shop.edit',compact('shop')) }}" class="btn mt-2 mbr-white"
                         style="background: orange;">Modifier &nbsp; <i class="fa fa-edit"></i></a>
