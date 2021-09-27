@@ -132,18 +132,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true">
                         <li class="nav-item">
-                            @isset($shop)
+                            <a class="nav-link link text-primary display-4" href="{{route('home')}}">
+                                <span class="mobi-mbri mobi-mbri-home mbr-iconfont mbr-iconfont-btn">
+                                </span>{{ config('app.name') }}&nbsp;
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link link text-primary display-4"
                                 href="{{ route('shop.home',compact('shop')) }}">
                                 <span class="mobi-mbri mobi-mbri-shopping-bag mbr-iconfont mbr-iconfont-btn">
                                 </span>Accueil&nbsp;
                             </a>
-                            @else
-                            <a class="nav-link link text-primary display-4" href="{{route('home')}}">
-                                <span class="mobi-mbri mobi-mbri-home mbr-iconfont mbr-iconfont-btn">
-                                </span>Accueil&nbsp;
-                            </a>
-                            @endisset
                         </li>
                         @isset($shop)
                         @endisset
@@ -454,7 +453,9 @@
     <script src="{{ asset('angular/controllers/categorie.controller.js') }}"></script>
     <script src="{{ asset('angular/controllers/user.controller.js') }}"></script>
     <input name="animation" type="hidden">
-    <script>"use strict";if("loading"in HTMLImageElement.prototype){document.querySelectorAll('img[loading="lazy"],iframe[loading="lazy"]').forEach(e=>{e.src=e.dataset.src,e.style.paddingTop=100*e.getAttribute("data-aspectratio")+"%",e.style.height=0,e.onload=function(){e.removeAttribute("style")}})}else{const e=document.createElement("script");e.src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js",document.body.appendChild(e)}</script>
+    <script>
+        "use strict";if("loading"in HTMLImageElement.prototype){document.querySelectorAll('img[loading="lazy"],iframe[loading="lazy"]').forEach(e=>{e.src=e.dataset.src,e.style.paddingTop=100*e.getAttribute("data-aspectratio")+"%",e.style.height=0,e.onload=function(){e.removeAttribute("style")}})}else{const e=document.createElement("script");e.src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js",document.body.appendChild(e)}
+    </script>
     @yield('more')
 </body>
 

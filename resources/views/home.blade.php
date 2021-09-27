@@ -17,11 +17,13 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                             <h1 class="mbr-section-title align-left mbr-fonts-style mb-4"
                                 data-app-selector=".mbr-section-title" mbr-theme-style="display-2" mbr-if="showTitle">
                                 Bienvenue sur <b>{{ config('app.name') }}</b></h1>
-                            <p class="mbr-text align-left mbr-fonts-style display-5">
+                            <p class="mbr-text align-left mbr-fonts-style display-7">
                                 Votre plateforme de vente pour booster votre commerce et augmenter votre visibilité.
                                 Simplifiez vos statuts WhatsApp,
                                 Instagram, Facebook et gérer votre catalogue et vos commandes en un seul et unique
-                                endroit.</p>
+                                endroit. <br>
+                                L'ouverture des 20 premières boutiques reste gratuite et vous pouvez tester pendant un mois sans frais.
+                            </p>
                             <div class="mbr-section-btn mt-4">
                                 @guest
                                 <a class="btn btn-secondary display-7" href="{{ route('shop.new') }}"><span

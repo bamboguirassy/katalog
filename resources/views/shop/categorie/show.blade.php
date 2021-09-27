@@ -63,7 +63,7 @@
                 <div class="mbr-section-head">
                     <h5 class="mbr-section-subtitle mbr-fonts-style align-center mb-0 display-7">
                         Découvrez notre catalogue de produits. Identifiez les produits qui vous intéressent et
-                        appelez-nous pour finaliser la commande.</h5>
+                        ajoutez les à votre panier.</h5>
                 </div>
                 <div class="row content-margin">
                     @foreach ($produits as $produit)

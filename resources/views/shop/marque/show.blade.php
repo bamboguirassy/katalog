@@ -59,7 +59,7 @@
                     <h5 class="mbr-section-subtitle mbr-fonts-style align-center mb-0 display-7">
                         Découvrez notre catalogue de produits de la marque <b>{{ $marque->nom }}</b>. Identifiez les
                         produits qui vous intéressent et
-                        appelez-nous pour finaliser la commande.</h5>
+                        ajouter les à votre panier pour finaliser la commande.</h5>
                 </div>
                 <div class="row content-margin">
                     @foreach ($produits as $produit)
