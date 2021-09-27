@@ -38,13 +38,13 @@
                                         class="form-control-label mbr-fonts-style display-7">Saisir la quantité</label>
                                     <div class="input-group mb-3">
                                         <button ng-disabled="quantite<2" ng-click="quantite=quantite-1"
-                                            class="btn btn-outline-primary" type="button" id="button-addon1">-</button>
+                                            class="btn btn-primary" type="button" id="button-addon1">-</button>
                                         <input style="width: auto;" type="number" name="quantite" placeholder="Quantité"
                                             ng-model="quantite" value="1" min="1" max="@{{selectedProduct.quantite}}"
                                             step="1" data-form-field="quantite" required="required"
                                             class="form-control display-7" value="" id="quantite-mbr-popup-34">
                                         <button ng-disabled="quantite>=selectedProduct.quantite"
-                                            ng-click="quantite = quantite+1" class="btn btn-outline-primary"
+                                            ng-click="quantite = quantite+1" class="btn btn-primary"
                                             type="button" id="button-addon2">+</button>
                                     </div>
                                 </div>

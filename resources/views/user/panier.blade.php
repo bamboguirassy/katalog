@@ -75,11 +75,11 @@
                             <div class="col-lg-2">
                                 <div class="input-group mb-3">
                                     <button ng-click="reduceProduct(produit)"
-                                        class="btn btn-primary btn-outline-secondary" type="button"
+                                        class="btn btn-primary" type="button"
                                         id="button-addon1">-</button>
-                                    <input ng-model="produit.quantite" type="text" class="form-control" placeholder=""
+                                    <input style="width: auto; max-width: 60px;" ng-model="produit.quantite" type="text" class="form-control" placeholder=""
                                         aria-label="Example text with button addon" aria-describedby="button-addon1">
-                                    <button ng-click="addMore(produit)" class="btn btn-primary btn-outline-secondary"
+                                    <button ng-click="addMore(produit)" class="btn btn-primary"
                                         type="button" id="button-addon2">+</button>
                                 </div>
                             </div>

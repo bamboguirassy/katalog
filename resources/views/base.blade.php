@@ -5,17 +5,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-    {{-- <link rel="shortcut icon" href="{{ asset('uploads/shops/'.$shop->logo) }}" type="image/x-icon"> --}}
-    <link rel="shortcut icon" href="{{ asset('assets/images/bambogroup.jpg') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('assets/images/produits-meta.jpeg') }}" type="image/x-icon">
     <meta name="description" content="@yield('description')">
     <title>@yield('title')</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/web/assets/mobirise-icons2/mobirise2.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/web/assets/mobirise-icons-bold/mobirise-icons-bold.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/web/assets/mobirise-icons/mobirise-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/Material-Design-Icons/css/material.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/FontAwesome/css/font-awesome.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap-grid.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap-reboot.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/chatbutton/floating-wpp.css') }}">
@@ -32,7 +32,7 @@
     </noscript>
     <link rel="preload" as="style" href="{{ asset('assets/mobirise/css/mbr-additional.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/mobirise/css/mbr-additional.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('bower_components/angular-auto-complete/angular-auto-complete.css') }}">
+
     <meta name="theme-color" content="#1c73ba">
     <link rel="manifest" href="{{ asset('manifest.json') }}">
     <script src="{{ asset('sw-connect.js') }}"></script>
@@ -59,12 +59,8 @@
         media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
         href="{{ asset('assets/images/apple-launch-2048x2732.png') }}">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Katalog">
-    @if (isset($shop))
-    <link rel="apple-touch-icon" href="{{ asset('uploads/shops/'.$shop->logo) }}">
-    @else
+    <meta name="apple-mobile-web-app-title" content="">
     <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
-    @endif
 </head>
 
 <body ng-controller="MainController">
@@ -421,7 +417,9 @@
         </div>
     </section>
 
-    <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/smoothscroll/smooth-scroll.js') }}"></script>
     <script src="{{ asset('assets/ytplayer/index.js') }}"></script>
@@ -452,7 +450,6 @@
     <script src="{{ asset('angular/controllers/panier.controller.js') }}"></script>
     <script src="{{ asset('angular/controllers/categorie.controller.js') }}"></script>
     <script src="{{ asset('angular/controllers/user.controller.js') }}"></script>
-    <input name="animation" type="hidden">
     <script>
         "use strict";if("loading"in HTMLImageElement.prototype){document.querySelectorAll('img[loading="lazy"],iframe[loading="lazy"]').forEach(e=>{e.src=e.dataset.src,e.style.paddingTop=100*e.getAttribute("data-aspectratio")+"%",e.style.height=0,e.onload=function(){e.removeAttribute("style")}})}else{const e=document.createElement("script");e.src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js",document.body.appendChild(e)}
     </script>
