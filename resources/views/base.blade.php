@@ -270,7 +270,7 @@
 
                         @auth
                         @isset($shop)
-                        @if (auth()->user()->type=='owner' && $shop->user_id==auth()->user()->id)
+                        @if ((auth()->user()->type=='owner' && $shop->user_id==auth()->user()->id) || auth()->user()->type=='admin')
                         <li class="nav-item dropdown">
                             <a class="nav-link link text-primary dropdown-toggle display-4" href="#"
                                 aria-expanded="false" data-toggle="dropdown-submenu" data-bs-toggle="dropdown"

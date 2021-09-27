@@ -17,9 +17,9 @@ class EnsureIsShopOwner
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user() && Auth::user()->type=='owner') {
+        if(Auth::user()) {
             $shop = $request->route('shop');
-            if(Auth::user()->shop->id==$shop->id) {
+            if((Auth::user()->type=='owner' && Auth::user()->shop->id==$shop->id) || Auth::user()->type=='admin') {
                 return $next($request);
             }
         }
