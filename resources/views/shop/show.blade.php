@@ -19,7 +19,7 @@
                     <img style="max-height: 500px; object-fit: cover;" src="{{ asset('uploads/shops/'.$shop->logo) }}"
                         alt="">
                     @else
-                    <img style="max-height: 500px; object-fit: cover;" src="{{ asset('assets/images/votre-logo-ici.png') }}" alt="">
+                    <img style="max-height: 500px;" src="{{ asset('assets/images/votre-logo-ici.png') }}" alt="">
                     @endisset
                 </div>
                 @auth
@@ -93,7 +93,7 @@
                     @endisset
                 </div>
                 @auth
-                @if (auth()->user()->type=='owner' && auth()->user()->shop->id==$shop->id)
+                @if ((auth()->user()->type=='owner' && auth()->user()->shop->id==$shop->id) || auth()->type=='admin')
                 <div class="col-12">
                     <a href="{{ route('shop.edit',compact('shop')) }}" class="btn mt-2 mbr-white"
                         style="background: orange;">Modifier &nbsp; <i class="fa fa-edit"></i></a>
