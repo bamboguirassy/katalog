@@ -122,7 +122,7 @@
                             Téléphone Primaire
                         </h6>
                         <p class="mbr-text mbr-fonts-style display-7">
-                            <a href="wa.me/{{ $shop->telephonePrimaire }}"
+                            <a target="_blank" href="https://wa.me/{{ $shop->telephonePrimaire }}"
                                 class="text-success">{{ $shop->telephonePrimaire }}</a>
                         </p>
                     </div>
@@ -169,7 +169,7 @@
                         </h6>
                         <p class="mbr-text mbr-fonts-style display-7">
                             @isset($shop->telephoneSecondaire)
-                            <a href="tel:{{ $shop->telephoneSecondaire }}"
+                            <a target="_blank" href="https://wa.me/{{ $shop->telephoneSecondaire }}"
                                 class="text-success">{{ $shop->telephoneSecondaire }}</a>
                             @else
                             Non renseigné
