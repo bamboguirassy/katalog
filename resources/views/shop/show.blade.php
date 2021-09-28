@@ -122,7 +122,7 @@
                             Téléphone Primaire
                         </h6>
                         <p class="mbr-text mbr-fonts-style display-7">
-                            <a href="tel:{{ $shop->telephonePrimaire }}"
+                            <a href="wa.me/{{ $shop->telephonePrimaire }}"
                                 class="text-success">{{ $shop->telephonePrimaire }}</a>
                         </p>
                     </div>
