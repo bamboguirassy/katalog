@@ -24,7 +24,7 @@
                         <div>
                             <div class="form-wrapper">
                                 <!--Formbuilder Form-->
-                                <form ng-submit="login()" method="POST" class="mbr-form form-with-styler"
+                                <form ng-submit="login()" class="mbr-form form-with-styler"
                                     data-form-title="loginForm" name="loginForm">
                                     <div class="dragArea">
                                         <div class="col form-group " data-for="email">
