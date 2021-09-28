@@ -142,7 +142,7 @@ Route::group([
     // Tenant routes here
        Route::name('shop.')->group(function() {
            Route::get('/',function(Shop $shop) {
-               $categories = Categorie::where('shop_id',$shop->id)->has('produits')->orderby('nom')->get();
+               $categories = Categorie::where('shop_id',$shop->id)->where('categorie_id',null)->has('produits')->withCount('produits')->having('produits_count','>',2)->orderby('nom')->get();
                $produits = Produit::where('shop_id',$shop->id)
                ->where('visible',true)
                ->where('quantite','>',0)

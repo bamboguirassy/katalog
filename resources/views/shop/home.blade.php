@@ -43,7 +43,7 @@
         </section>
         {{-- start main categories products list --}}
         @if ($produits->currentPage()==1)
-        @foreach ($shop->categories as $categorie)
+        @foreach ($categories as $categorie)
         @if (count($categorie->produits)>0)
         <section data-bs-version="5.1" class="info3 cid-sIvpc3K9D7" id="info3-1o">
             <div class="container">
