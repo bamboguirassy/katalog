@@ -24,7 +24,8 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                                 Simplifiez vos statuts WhatsApp,
                                 Instagram, Facebook et gérer votre catalogue et vos commandes en un seul et unique
                                 endroit. <br>
-                                L'ouverture des boutiques reste gratuite jusqu'au 1er Novembre 2021 et vous pouvez tester pendant 2
+                                L'ouverture des boutiques reste gratuite jusqu'au 1er Novembre 2021 et vous pouvez
+                                tester pendant 2
                                 mois sans frais.
                                 <br>
                                 Si vous avez besoin d'aides pour mettre votre boutique en ligne, nous pouvons vous aider
@@ -114,7 +115,8 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                 </div>
             </div>
         </section>
-
+        @auth
+        @if (auth()->user()->type=='admin')
         <section data-bs-version="5.1" class="content4 cid-sIq8PMNs4P" id="content4-g">
             <div class="container">
                 <div class="row justify-content-center">
@@ -126,249 +128,217 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                 </div>
             </div>
         </section>
-        <section class="form cid-sIq8WSpK6D" id="formbuilder-h">
+
+
+        <section data-bs-version="5.1" class="team2 cid-sIq8MfDSMW" xmlns="http://www.w3.org/1999/html" id="team2-f">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-8 mx-auto mbr-form">
-                        <!--Formbuilder Form-->
-                        <form action="{{ route('shop.search') }}" method="POST" class="mbr-form form-with-styler"
-                            data-form-title="boutiqueSearchForm">
-                            @csrf
-                            @method('post')
-                            {{-- <div class="form-row">
-                                @foreach ($errors->all() as $message)
-                                <div data-form-alert-danger="" class="alert alert-danger col-12">
-                                    {{$message}}
-                    </div>
-                    @endforeach
-                </div> --}}
-                {{-- <div class="dragArea form-row">
-                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <h5 class="mbr-fonts-style display-5">Accéder à une boutique</h5>
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <hr>
-                                </div>
-                                <div data-for="pseudonyme" class="col-lg-12 col-md-12 col-sm-12 form-group">
-                                    <input type="text" name="pseudonyme" placeholder="Code ou pseudonyme de la boutique"
-                                        data-form-field="pseudonyme" class="form-control display-7" required="required"
-                                        value="" id="pseudonyme-formbuilder-h">
-                                </div>
-                                <div class="col-auto">
-                                    <button type="submit" class="btn btn-primary display-7">
-                                        <span
-                                            class="mobi-mbri mobi-mbri-arrow-next mbr-iconfont mbr-iconfont-btn"></span>
-                                        Ouvrir</button>
-                                </div>
-                            </div> --}}
-                </form>
-                <!--Formbuilder Form-->
-            </div>
-    </div>
-</div>
-</section>
-
-<section data-bs-version="5.1" class="team2 cid-sIq8MfDSMW" xmlns="http://www.w3.org/1999/html" id="team2-f">
-    <div class="container">
-        <div class="row">
-            @foreach ($shops as $shopItem)
-            <div class="col-12 col-lg-6 mt-2">
-                <div class="card">
-                    <div class="card-wrapper">
-                        <div class="row align-items-center">
-                            <div class="col-12 col-md-2"
-                                style="border: 2px solid #1c73ba; border-bottom: 2px solid white;">
-                                <div class="image-wrapper">
-                                    <a href="{{route('shop.home',['shop'=>$shopItem])}}">
-                                        @isset($shopItem->logo)
-                                        <img src="{{ asset('uploads/shops/'.$shopItem->logo) }}" alt="">
-                                        @else
-                                        <img src="{{ asset('assets/images/votre-logo-ici.png') }}" alt="">
-                                        @endisset
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md" style="border-left: 3px solid white;">
-                                <div class="card-box">
-                                    <a href="{{route('shop.home',['shop'=>$shopItem])}}">
-                                        <h5 class="card-title mbr-fonts-style m-0 display-5">
-                                            <strong>{{ $shopItem->nom }}</strong>
-                                        </h5>
-                                        <h6 class="card-subtitle mbr-fonts-style mt-2 mb-1 display-4">
-                                            <b class="category-badge">{{$shopItem->categorie->nom}}
-                                            </b>
-                                        </h6>
-                                        <p class="mbr-text mbr-fonts-style display-7">
-                                            {{ \Illuminate\Support\Str::limit($shopItem->description, 120, '...') }}
-                                        </p>
-                                    </a>
-                                    <div class="social-row display-7"
-                                        style="border-top: 3px solid white; padding-top: 5px;">
-                                        @isset($shopItem->facebook)
-                                        <div class="soc-item">
-                                            <a rel="noreferrer" href="{{ $shopItem->facebook }}" target="_blank">
-                                                <span class="mbr-iconfont socicon socicon-facebook"></span>
+                    @foreach ($shops as $shopItem)
+                    <div class="col-12 col-lg-6 mt-2">
+                        <div class="card">
+                            <div class="card-wrapper">
+                                <div class="row align-items-center">
+                                    <div class="col-12 col-md-2"
+                                        style="border: 2px solid #1c73ba; border-bottom: 2px solid white;">
+                                        <div class="image-wrapper">
+                                            <a href="{{route('shop.home',['shop'=>$shopItem])}}">
+                                                @isset($shopItem->logo)
+                                                <img src="{{ asset('uploads/shops/'.$shopItem->logo) }}" alt="">
+                                                @else
+                                                <img src="{{ asset('assets/images/votre-logo-ici.png') }}" alt="">
+                                                @endisset
                                             </a>
                                         </div>
-                                        @endisset
-                                        @isset($shopItem->twitter)
-                                        <div class="soc-item">
-                                            <a rel="noreferrer" href="{{ $shopItem->twitter }}" target="_blank">
-                                                <span class="mbr-iconfont socicon socicon-twitter"></span>
+                                    </div>
+                                    <div class="col-12 col-md" style="border-left: 3px solid white;">
+                                        <div class="card-box">
+                                            <a href="{{route('shop.home',['shop'=>$shopItem])}}">
+                                                <h5 class="card-title mbr-fonts-style m-0 display-5">
+                                                    <strong>{{ $shopItem->nom }}</strong>
+                                                </h5>
+                                                <h6 class="card-subtitle mbr-fonts-style mt-2 mb-1 display-4">
+                                                    <b class="category-badge">{{$shopItem->categorie->nom}}
+                                                    </b>
+                                                </h6>
+                                                <p class="mbr-text mbr-fonts-style display-7">
+                                                    {{ \Illuminate\Support\Str::limit($shopItem->description, 120, '...') }}
+                                                </p>
                                             </a>
+                                            <div class="social-row display-7"
+                                                style="border-top: 3px solid white; padding-top: 5px;">
+                                                @isset($shopItem->facebook)
+                                                <div class="soc-item">
+                                                    <a rel="noreferrer" href="{{ $shopItem->facebook }}"
+                                                        target="_blank">
+                                                        <span class="mbr-iconfont socicon socicon-facebook"></span>
+                                                    </a>
+                                                </div>
+                                                @endisset
+                                                @isset($shopItem->twitter)
+                                                <div class="soc-item">
+                                                    <a rel="noreferrer" href="{{ $shopItem->twitter }}" target="_blank">
+                                                        <span class="mbr-iconfont socicon socicon-twitter"></span>
+                                                    </a>
+                                                </div>
+                                                @endisset
+                                                @isset($shopItem->instagram)
+                                                <div class="soc-item">
+                                                    <a rel="noreferrer" href="{{ $shopItem->instagram }}"
+                                                        target="_blank">
+                                                        <span class="mbr-iconfont socicon socicon-instagram"></span>
+                                                    </a>
+                                                </div>
+                                                @endisset
+                                                @isset($shopItem->linkedin)
+                                                <div class="soc-item">
+                                                    <a rel="noreferrer" href="{{ $shopItem->linkedin }}"
+                                                        target="_blank">
+                                                        <span class="mbr-iconfont socicon-linkedin socicon"></span>
+                                                    </a>
+                                                </div>
+                                                @endisset
+                                            </div>
                                         </div>
-                                        @endisset
-                                        @isset($shopItem->instagram)
-                                        <div class="soc-item">
-                                            <a rel="noreferrer" href="{{ $shopItem->instagram }}" target="_blank">
-                                                <span class="mbr-iconfont socicon socicon-instagram"></span>
-                                            </a>
-                                        </div>
-                                        @endisset
-                                        @isset($shopItem->linkedin)
-                                        <div class="soc-item">
-                                            <a rel="noreferrer" href="{{ $shopItem->linkedin }}" target="_blank">
-                                                <span class="mbr-iconfont socicon-linkedin socicon"></span>
-                                            </a>
-                                        </div>
-                                        @endisset
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @endforeach
                 </div>
             </div>
-            @endforeach
-        </div>
-    </div>
-</section>
-<section data-bs-version="5.1" class="content12 cid-sIqcTJYywr" id="content12-l">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12 col-lg-4">
-                <div class="mbr-section-btn align-center">
-                    @if ($shops->currentPage()!=1)
-                    <a class="btn btn-success display-4" href="{{$shops->prevPage()}}"><span
-                            class="mbri-left mbr-iconfont mbr-iconfont-btn"
-                            style="color: rgb(220, 143, 29);"></span>Précédent</a>
-                    @endif
-                    @if ($shops->currentPage()!=$shops->lastPage())
-                    <a class="btn btn-success display-4" href="{{ $shops->nextPage() }}"><span
-                            class="mbri-right mbr-iconfont mbr-iconfont-btn"
-                            style="color: rgb(220, 143, 29);"></span>Suivant</a></div>
-                @endif
-            </div>
-        </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="content6 cid-sIqdBA3T3C" id="content6-m">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12 col-lg-10">
-                <hr class="line">
-                <p class="mbr-text align-center mbr-fonts-style my-4 display-5">
-                    <em>Envie d'en savoir davantage ? Prenez contact dès aujourd'hui en envoyant un message
-                        juste en
-                        remplissant le formulaire ci-dessous.</em></p>
-                <hr class="line">
-            </div>
-        </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="form1 cid-sIqbbpAaB5" id="form01-j">
-    <div class="container">
-        <div class="mbr-section-head">
-            <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-5">Envoyer un message</h3>
-        </div>
-        <div class="row justify-content-center mt-4">
-            <div class="col-lg-8 mx-auto" data-form-type="formoid">
-                <!--Formbuilder Form-->
-                <form action="https://mobirise.eu/" method="POST" class="mbr-form form-with-styler"
-                    data-form-title="Contact Form"><input type="hidden" name="email" data-form-email="true"
-                        value="RgLf7/b9VdMQzVt6GK3iwLM4ToNDUS1Le7ePU62b2qcU5vIqJNv6OIqN6Scn9DwoWe0Iek1HyXjlk67vr2z8OYyv7jcCMrURiaB+M1E8PFgw3h5qkKtXYdanXCf4PYgI.J+N4wtaV8x27zWuU98qu1V4oupNHSG/c6QxdB84bx0C5TR/eVuTLrhT07GAAtsYCFVZ9jpnYhYArD/ebKxft4EU2SZH5GuYead3gySjQfZgXOr06wi203qExqw+FCM//">
-                    <div class="row">
-                        <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Merci de nous
-                            avoir contacté, nous allons vous revenir.</div>
-                        <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">
-                            Oops...!
-                            some problem!</div>
-                    </div>
-                    <div class="dragArea row">
-                        <div class="col form-group mb-3" data-for="fullName">
-                            <label for="fullName-form01-j"
-                                class="form-control-label mbr-fonts-style display-7"><strong>Nom
-                                    complet</strong></label>
-                            <input type="text" name="fullName" placeholder="Nom Complet" data-form-field="fullName"
-                                required="required" class="form-control display-7" value="" id="fullName-form01-j">
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 form-group" data-for="emailOrPhone">
-                            <label for="emailOrPhone-form01-j"
-                                class="form-control-label mbr-fonts-style display-7"><strong>Email ou
-                                    téléphone</strong></label>
-                            <input type="text" name="emailOrPhone" placeholder="Email ou téléphone"
-                                data-form-field="emailOrPhone" required="required" class="form-control display-7"
-                                value="" id="emailOrPhone-form01-j">
-                        </div>
-                        <div data-for="objet" class="col-lg-12 col-md-12 col-sm-12 form-group">
-                            <label for="objet-form01-j"
-                                class="form-control-label mbr-fonts-style display-7"><strong>Objet</strong></label>
-                            <input type="text" name="objet" placeholder="Objet du message" data-form-field="objet"
-                                class="form-control display-7" required="required" value="" id="objet-form01-j">
-                        </div>
-                        <div data-for="message" class="col-12 form-group mb-3">
-                            <label for="message-form01-j"
-                                class="form-control-label mbr-fonts-style display-7"><strong>Message</strong></label>
-                            <textarea name="message" placeholder="Message" data-form-field="message" required="required"
-                                class="form-control display-7" id="message-form01-j"></textarea>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn"><button type="submit"
-                                class="btn btn-success display-4">Envoyer le message</button>
-                        </div>
-                    </div>
-                </form>
-                <!--Formbuilder Form-->
-            </div>
-        </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="social1 cid-sIqcmgx4Lt" id="share1-k">
-    <div class="container">
-        <div class="media-container-row">
-            <div class="col-12">
-                <h3 class="mbr-section-title mb-3 align-center mbr-fonts-style display-5">
-                    <strong>Partager cette page !</strong>
-                </h3>
-                <div>
-                    <div class="mbr-social-likes align-center">
-                        <span class="btn btn-social socicon-bg-facebook facebook m-2">
-                            <i class="socicon socicon-facebook"></i>
-                        </span>
-                        <span class="btn btn-social twitter socicon-bg-twitter m-2">
-                            <i class="socicon socicon-twitter"></i>
-                        </span>
-                        <span class="btn btn-social vkontakte socicon-bg-vkontakte m-2">
-                            <i class="socicon socicon-vkontakte"></i>
-                        </span>
-                        <span class="btn btn-social odnoklassniki socicon-bg-odnoklassniki m-2">
-                            <i class="socicon socicon-odnoklassniki"></i>
-                        </span>
-                        <span class="btn btn-social pinterest socicon-bg-pinterest m-2">
-                            <i class="socicon socicon-pinterest"></i>
-                        </span>
-                        <span class="btn btn-social mailru socicon-bg-mail m-2">
-                            <i class="socicon socicon-mail"></i>
-                        </span>
+        </section>
+        @endif
+        @endauth
+        <section data-bs-version="5.1" class="content12 cid-sIqcTJYywr" id="content12-l">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-12 col-lg-4">
+                        <div class="mbr-section-btn align-center">
+                            @if ($shops->currentPage()!=1)
+                            <a class="btn btn-success display-4" href="{{$shops->prevPage()}}"><span
+                                    class="mbri-left mbr-iconfont mbr-iconfont-btn"
+                                    style="color: rgb(220, 143, 29);"></span>Précédent</a>
+                            @endif
+                            @if ($shops->currentPage()!=$shops->lastPage())
+                            <a class="btn btn-success display-4" href="{{ $shops->nextPage() }}"><span
+                                    class="mbri-right mbr-iconfont mbr-iconfont-btn"
+                                    style="color: rgb(220, 143, 29);"></span>Suivant</a></div>
+                        @endif
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <section data-bs-version="5.1" class="content6 cid-sIqdBA3T3C" id="content6-m">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-12 col-lg-10">
+                        <hr class="line">
+                        <p class="mbr-text align-center mbr-fonts-style my-4 display-5">
+                            <em>Envie d'en savoir davantage ? Prenez contact dès aujourd'hui en envoyant un message
+                                juste en
+                                remplissant le formulaire ci-dessous.</em></p>
+                        <hr class="line">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section data-bs-version="5.1" class="form1 cid-sIqbbpAaB5" id="form01-j">
+            <div class="container">
+                <div class="mbr-section-head">
+                    <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-5">Envoyer un message</h3>
+                </div>
+                <div class="row justify-content-center mt-4">
+                    <div class="col-lg-8 mx-auto" data-form-type="formoid">
+                        <!--Formbuilder Form-->
+                        <form action="https://mobirise.eu/" method="POST" class="mbr-form form-with-styler"
+                            data-form-title="Contact Form"><input type="hidden" name="email" data-form-email="true"
+                                value="RgLf7/b9VdMQzVt6GK3iwLM4ToNDUS1Le7ePU62b2qcU5vIqJNv6OIqN6Scn9DwoWe0Iek1HyXjlk67vr2z8OYyv7jcCMrURiaB+M1E8PFgw3h5qkKtXYdanXCf4PYgI.J+N4wtaV8x27zWuU98qu1V4oupNHSG/c6QxdB84bx0C5TR/eVuTLrhT07GAAtsYCFVZ9jpnYhYArD/ebKxft4EU2SZH5GuYead3gySjQfZgXOr06wi203qExqw+FCM//">
+                            <div class="row">
+                                <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Merci de nous
+                                    avoir contacté, nous allons vous revenir.</div>
+                                <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">
+                                    Oops...!
+                                    some problem!</div>
+                            </div>
+                            <div class="dragArea row">
+                                <div class="col form-group mb-3" data-for="fullName">
+                                    <label for="fullName-form01-j"
+                                        class="form-control-label mbr-fonts-style display-7"><strong>Nom
+                                            complet</strong></label>
+                                    <input type="text" name="fullName" placeholder="Nom Complet"
+                                        data-form-field="fullName" required="required" class="form-control display-7"
+                                        value="" id="fullName-form01-j">
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 form-group" data-for="emailOrPhone">
+                                    <label for="emailOrPhone-form01-j"
+                                        class="form-control-label mbr-fonts-style display-7"><strong>Email ou
+                                            téléphone</strong></label>
+                                    <input type="text" name="emailOrPhone" placeholder="Email ou téléphone"
+                                        data-form-field="emailOrPhone" required="required"
+                                        class="form-control display-7" value="" id="emailOrPhone-form01-j">
+                                </div>
+                                <div data-for="objet" class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                    <label for="objet-form01-j"
+                                        class="form-control-label mbr-fonts-style display-7"><strong>Objet</strong></label>
+                                    <input type="text" name="objet" placeholder="Objet du message"
+                                        data-form-field="objet" class="form-control display-7" required="required"
+                                        value="" id="objet-form01-j">
+                                </div>
+                                <div data-for="message" class="col-12 form-group mb-3">
+                                    <label for="message-form01-j"
+                                        class="form-control-label mbr-fonts-style display-7"><strong>Message</strong></label>
+                                    <textarea name="message" placeholder="Message" data-form-field="message"
+                                        required="required" class="form-control display-7"
+                                        id="message-form01-j"></textarea>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn"><button
+                                        type="submit" class="btn btn-success display-4">Envoyer le message</button>
+                                </div>
+                            </div>
+                        </form>
+                        <!--Formbuilder Form-->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section data-bs-version="5.1" class="social1 cid-sIqcmgx4Lt" id="share1-k">
+            <div class="container">
+                <div class="media-container-row">
+                    <div class="col-12">
+                        <h3 class="mbr-section-title mb-3 align-center mbr-fonts-style display-5">
+                            <strong>Partager cette page !</strong>
+                        </h3>
+                        <div>
+                            <div class="mbr-social-likes align-center">
+                                <span class="btn btn-social socicon-bg-facebook facebook m-2">
+                                    <i class="socicon socicon-facebook"></i>
+                                </span>
+                                <span class="btn btn-social twitter socicon-bg-twitter m-2">
+                                    <i class="socicon socicon-twitter"></i>
+                                </span>
+                                <span class="btn btn-social vkontakte socicon-bg-vkontakte m-2">
+                                    <i class="socicon socicon-vkontakte"></i>
+                                </span>
+                                <span class="btn btn-social odnoklassniki socicon-bg-odnoklassniki m-2">
+                                    <i class="socicon socicon-odnoklassniki"></i>
+                                </span>
+                                <span class="btn btn-social pinterest socicon-bg-pinterest m-2">
+                                    <i class="socicon socicon-pinterest"></i>
+                                </span>
+                                <span class="btn btn-social mailru socicon-bg-mail m-2">
+                                    <i class="socicon socicon-mail"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-</section>
-</div>
 </div>
 @auth
 @if(auth()->user()->type=='owner')
