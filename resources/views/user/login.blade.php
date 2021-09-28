@@ -24,7 +24,7 @@
                         <div>
                             <div class="form-wrapper">
                                 <!--Formbuilder Form-->
-                                <form class="mbr-form form-with-styler"
+                                <form ng-submit="login()" class="mbr-form form-with-styler"
                                     data-form-title="loginForm" name="loginForm">
                                     <div class="dragArea">
                                         <div class="col form-group " data-for="email">
@@ -61,7 +61,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-auto input-group-btn">
-                                            <button ng-click="login()" ng-disabled="loginForm.$invalid" type="button" class="btn btn-primary display-4">Se
+                                            <button ng-disabled="loginForm.$invalid" type="submit" class="btn btn-primary display-4">Se
                                                 connecter&nbsp;</button>
                                         </div>
                                         <div class="col-12 mt-3" style="font-weight: bold; font-size: 18px;">
