@@ -68,7 +68,6 @@
         href="{{ asset('assets/images/apple-launch-2048x2732.png') }}">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="">
-    <script data-ad-client="ca-pub-1024803261208249" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
 
 <body ng-controller="MainController">
