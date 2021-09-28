@@ -132,18 +132,19 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true">
-                        <li class="nav-item">
-                            <a class="nav-link link text-primary display-4" href="{{route('home')}}">
-                                <span class="mobi-mbri mobi-mbri-home mbr-iconfont mbr-iconfont-btn">
-                                </span>{{ config('app.name') }}&nbsp;
-                            </a>
-                        </li>
                         @isset($shop)
                         <li class="nav-item">
                             <a class="nav-link link text-primary display-4"
                                 href="{{ route('shop.home',compact('shop')) }}">
                                 <span class="mobi-mbri mobi-mbri-shopping-bag mbr-iconfont mbr-iconfont-btn">
                                 </span>Accueil&nbsp;
+                            </a>
+                        </li>
+                        @else
+                        <li class="nav-item">
+                            <a class="nav-link link text-primary display-4" href="{{route('home')}}">
+                                <span class="mobi-mbri mobi-mbri-home mbr-iconfont mbr-iconfont-btn">
+                                </span>{{ config('app.name') }}&nbsp;
                             </a>
                         </li>
                         @endisset

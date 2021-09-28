@@ -124,7 +124,8 @@
                                         name="couleur@{{produit.nom}}" value="@{{couleurProduit.id}}"
                                         id="@{{couleurProduit.id}}">
                                     <div title="@{{ couleurProduit.couleur.nom }}"
-                                        style="height: 25px; width: 40px; background-color: @{{ couleurProduit.couleur.color }}; border: 1px solid gray;"></div>
+                                        style="height: 25px; width: 40px; background-color: @{{ couleurProduit.couleur.color }}; border: 1px solid gray;">
+                                    </div>
 
                                 </label>
                             </div>
@@ -226,7 +227,40 @@
 </section>
 @endif
 {{-- end variant details --}}
+{{-- produits similaires --}}
+@if (count($produitSimilaires)>0)
+<section data-bs-version="5.1" class="info3 cid-sIvpc3K9D7" id="info3-1o">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="card col-12">
+                <div class="card-wrapper">
+                    <div class="card-box align-left" style="font-size: 23px;">
+                        Produits similaires dans la catégorie <a href="{{ route('shop.categorie.show',['categorie'=>$produit->categorie,'shop'=>$shop]) }}"><strong> >>
+                                {{$produit->categorie->nom}} </strong></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
+<section data-bs-version="5.1" class="gallery1 cid-sIpMwjCas3" id="gallery1-8">
+    <div class="container">
+        <div class="row content-margin">
+            @foreach ($produitSimilaires as $produit)
+            <x-produit-item :produit="$produit" :paProduits="$paProduits" :shop="$shop" />
+            @endforeach
+        </div>
+        <div class="row">
+            <div class="col-12 align-right">
+                <a href="{{ route('shop.categorie.show',['shop'=>$shop,'categorie'=>$produit->categorie_id]) }}" class="btn btn-secondary">Voir
+                    plus > </a>
+            </div>
+        </div>
+    </div>
+</section>
+@endif
+{{-- end produit similaire page --}}
 <section data-bs-version="5.1" class="social1 cid-sIrHQR2e1u" id="share1-1d">
     <div class="container">
         <div class="media-container-row">

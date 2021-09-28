@@ -240,6 +240,14 @@ class ProduitController extends Controller
             'couleurProduits.couleur',
             'couleurProduits.images'
             ])->find($produit->id);
+            $categorieProduitIds = CategorieProduit::where('categorie_id',$produit->categorie_id)
+            ->where('produit_id','!=',$produit->id)->get('produit_id');
+            $produitSimilaireIds = [];
+            foreach ($categorieProduitIds as $categorieProduitId) {
+                $produitSimilaireIds[] = $categorieProduitId->produit_id;
+           }
+           $produitSimilaires = Produit::whereIn('id',$produitSimilaireIds)
+           ->where('quantite','>',0)->where('visible',true)->take(6)->get();
         // find user panier if exists
         $paProduits = [];
         if(Auth::user()) {
@@ -258,7 +266,7 @@ class ProduitController extends Controller
                  }
              }
         }
-        return view('shop.produit.display',compact('produit','shop','paProduits'));
+        return view('shop.produit.display',compact('produit','shop','paProduits','produitSimilaires'));
     }
 
     public function addImages(Request $request, Shop $shop, Produit $produit) {

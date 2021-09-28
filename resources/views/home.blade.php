@@ -22,7 +22,7 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                                 Simplifiez vos statuts WhatsApp,
                                 Instagram, Facebook et gérer votre catalogue et vos commandes en un seul et unique
                                 endroit. <br>
-                                L'ouverture des 20 premières boutiques reste gratuite et vous pouvez tester pendant un
+                                L'ouverture des boutiques reste gratuite jusqu'au 1er Novembre 2021 et vous pouvez tester pendant 2
                                 mois sans frais.
                                 <br>
                                 Si vous avez besoin d'aides pour mettre votre boutique en ligne, nous pouvons vous aider
