@@ -143,6 +143,7 @@ Route::group([
        Route::name('shop.')->group(function() {
            Route::get('/',function(Shop $shop) {
                $categories = Categorie::where('shop_id',$shop->id)->where('categorie_id',null)->has('produits')->withCount('produits')->orderby('nom')->get();
+               dump($categories);
                $produits = Produit::where('shop_id',$shop->id)
                ->where('visible',true)
                ->where('quantite','>',0)
