@@ -232,7 +232,7 @@
                 <div class="media-container-row">
                     <div class="col-12">
                         <h3 class="mbr-section-title mb-3 align-center mbr-fonts-style display-5">
-                            <strong>Partager cette page</strong></h3>
+                            <strong>Partager cette boutique sur</strong></h3>
                         <div>
                             <div class="mbr-social-likes align-center">
                                 <span class="btn btn-social socicon-bg-facebook facebook m-2">

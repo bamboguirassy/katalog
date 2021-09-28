@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{config('app.locale')}}" ng-app="Katalog">
+<html ng-app="Katalog">
 
 <head>
     <meta charset="UTF-8">
