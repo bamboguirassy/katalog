@@ -17,9 +17,9 @@ app.controller('AttributListController', ($scope, AttributService) => {
 
     $scope.findAll = () => {
         AttributService.findAll()
-            .success((data) => {
-                $scope.attributs = data;
-            }).error(err => console.log(err));
+            .then((response) => {
+                $scope.attributs = response.data;
+            },err => alert(err.data.message));
     }
 
     $scope.findAll();
@@ -35,7 +35,8 @@ app.controller('AttributListController', ($scope, AttributService) => {
 
     $scope.addAttribut = () => {
         AttributService.store($scope.newAttribut)
-            .success((response) => {
+            .then((response) => {
+                response = response.data;
                 if (response.error) {
                     alert(response.mmessage);
                 } else {
@@ -43,37 +44,40 @@ app.controller('AttributListController', ($scope, AttributService) => {
                     $scope.newAttribut = { type: 'texte' };
                     $scope.findAll();
                 }
-            }).error(err => console.log(err));
+            },err => alert(err.data.message));
     }
 
     $scope.updateAttribut = () => {
         AttributService.update($scope.newAttribut)
-            .success((response) => {
+            .then((response) => {
+                response = response.data;
                 if (response.error) {
                     alert(response.mmessage);
                 } else {
                     $scope.findAll();
                 }
-            }).error(err => console.log(err));
+            },err => alert(err.data.message));
     }
 
     $scope.removeAttribut = (attribut) => {
         if (confirm("Etes-vous sûr de vouloir supprimer cet attribut et toutes ses valeurs ?")) {
             AttributService.destroy(attribut)
-                .success((response) => {
+                .then((response) => {
+                    response = response.data;
                     if (response.error) {
                         alert(response.mmessage);
                     } else {
                         $scope.findAll();
                     }
-                }).error(err => alert(err.message));
+                },err => alert(err.data.message));
         }
     }
 
     $scope.addNewValues = () => {
         let valeurs = $scope.newValues.map(newVal => newVal.valeur);
         AttributService.addValeur({ attribut_id: $scope.currentAttribut.id, valeurs })
-            .success((response) => {
+            .then((response) => {
+                response = response.data;
                 if (response.error) {
                     alert(response.mmessage);
                 } else {
@@ -81,7 +85,7 @@ app.controller('AttributListController', ($scope, AttributService) => {
                     $scope.newValue = {};
                     $scope.currentAttribut.valeurs = $scope.currentAttribut.valeurs.concat(response.data);
                 }
-            }).error(err => console.log(err));
+            },err => alert(err.data.message));
     }
 
 });

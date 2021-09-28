@@ -29,7 +29,7 @@
                     </div>
                     <div class="col-12 col-md-12 col-lg-4">
                         <div class="image-wrapper">
-                            <img class="w-100" src="{{ asset('uploads/shops/'.$shop->logo) }}" alt="">
+                            <img style="max-height: 400px; object-fit: cover;" src="{{ asset('uploads/shops/'.$shop->logo) }}" alt="">
                         </div>
                     </div>
                 </div>
@@ -75,10 +75,10 @@
                             <div class="col-lg-2">
                                 <div class="input-group mb-3">
                                     <button ng-click="reduceProduct(produit)"
-                                        class="btn btn-primary" type="button"
+                                        class="btn btn-primary mr-0" type="button"
                                         id="button-addon1">-</button>
                                     <input style="width: auto; max-width: 60px;" ng-model="produit.quantite" type="text" class="form-control" placeholder=""
-                                        aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                        aria-label="Example text with button addon">
                                     <button ng-click="addMore(produit)" class="btn btn-primary"
                                         type="button" id="button-addon2">+</button>
                                 </div>

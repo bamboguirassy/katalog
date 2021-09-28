@@ -7,10 +7,11 @@ app.controller('PanierController', ($scope, PanierService) => {
 
     refreshPanier = () => {
         PanierService.getMyPanierContents()
-            .success((response) => {
+            .then((response) => {
+                response = response.data;
                 $scope.panier = response.panier;
                 $scope.montant = response.montant;
-            }).error(err => alert(err.message));
+            },err => alert(err.data.message));
     }
 
     $scope.reduceProduct = (produit) => {
@@ -33,23 +34,25 @@ app.controller('PanierController', ($scope, PanierService) => {
 
     updateProduct = (produit) => {
         PanierService.updatePaproductQuantite(produit)
-            .success((response) => {
+            .then((response) => {
+                response = response.data;
                 if (response.error) {
                     alert(response.message)
                 } else {
                     refreshPanier();
                 }
-            }).error(err => alert(err.message));
+            },err => alert(err.data.message));
     }
 
     $scope.removeProduit = (produit) => {
         PanierService.removePaproductFromPanier(produit)
-        .success((response) => {
+        .then((response) => {
+            response = response.data;
             if (response.error) {
                 alert(response.message)
             } else {
                 refreshPanier();
             }
-        }).error(err => alert(err.message));
+        },err => alert(err.data.message));
     }
 });

@@ -19,21 +19,22 @@ app.controller('ProduitShowController', ($scope, ProduitService) => {
 
     $scope.addNewValuesToAttribute = (attributProduit) => {
         ProduitService.addValeursToAttribut(attributProduit.id, attributProduit.newValues)
-            .success(() => {
+            .then(() => {
                 $scope.refresh();
-            }).error(err => console.log(err));
+            },err => alert(err.data.message));
     }
 
     $scope.removeAttribute = (attribut) => {
         if (confirm("Êtes-vous sûrs de vouloir supprimer cet attributs et toutes ses valeurs")) {
             ProduitService.removeAttribut(attribut.id)
-                .success(data => {
+                .then(response => {
+                    let data = response.data;
                     if (data.error) {
                         alert(data.message);
                     } else {
                         $scope.refresh();
                     }
-                }).error(err => console.log(err));
+                },err => alert(err.data.message));
         }
     }
 
@@ -41,53 +42,57 @@ app.controller('ProduitShowController', ($scope, ProduitService) => {
         console.log(valeur);
         if (confirm("Êtes-vous sûrs de vouloir supprimer cette valeur")) {
             ProduitService.removeValeurAttribut(valeur.id)
-                .success(data => {
+                .then(response => {
+                    let data = response.data;
                     if (data.error) {
                         alert(data.message);
                     } else {
                         $scope.refresh();
                     }
-                }).error(err => console.log(err));
+                },err => alert(err.data.message));
         }
 
     };
 
     $scope.refresh = () => {
         ProduitService.find($scope.produit.id)
-            .success(data => {
+            .then(response => {
+                let data = response.data;
                 $scope.produit = data.produit;
                 $scope.attributs = data.attributs;
-            }).error(err => console.log(err));
+            },err => alert(err.data.message));
     };
 
     $scope.generateCombination = () => {
         ProduitService.generateCombination($scope.produit.id)
-            .success(() => {
+            .then(() => {
                 $scope.refresh();
-            }).error(err => console.log(err))
+            },err => alert(err.data.message))
     }
 
     $scope.removeVariant = (variant) => {
         if (confirm("Êtes-vous sûrs de vouloir supprimer cette variante ? L'opération est irréversible...")) {
         ProduitService.remove(variant.id)
-            .success(data => {
+            .then(response => {
+                let data = response.data;
                 if (data.error) {
                     alert(data.message);
                 } else {
                     $scope.refresh();
                 }
-            }).error(err => alert(err.message));
+            },err => alert(err.data.message));
         }
     }
 
     $scope.updateVariant = (variant) => {
         ProduitService.update(variant)
-            .success(data => {
+            .then(response => {
+                let data = response.data;
                 if (data.error) {
                     alert(data.message);
                 } else {
                     variant.configured=true;
                 }
-            }).error(err => console.log(err));
+            },err => alert(err.data.message));
     }
 });

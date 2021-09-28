@@ -42,11 +42,12 @@ app.controller('MainController', ($rootScope, $http) => {
 
     $rootScope.getPanier = () => {
         $http.get(`/${$rootScope.shop.pseudonyme}/user/panier`)
-            .success((data) => {
+            .then((response) => {
+                let data = response.data;
                 if (data) {
                     $rootScope.panier = data[0];
                 }
-            }).error(err => console.log(err));
+            },err => alert(err.data.message));
     }
 
     $('#logo-formbuilder-q').change(() => {
