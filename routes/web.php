@@ -54,12 +54,12 @@ Route::post('login', function (Request $request) {
         'password'=>'required',
         'email'=>'email|required|exists:users,email'
     ]);
-    if(Auth::attempt($request->only(['email','password'],$request->get('remember')=='Oui'))) {
+    if(Auth::attempt($request->only(['email','password']))) {
         $user = User::with(['shop'])->find(auth()->user()->id);
         return ['error'=>false,'data'=>$user];
     }
     return ['error'=>true,'message'=>'Identifiants de connexion invalides.'];
-})->middleware('guest');
+});
 
 Route::get('/forgot-password',function() {
     return view('user.forgot-password');
