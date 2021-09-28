@@ -29,7 +29,7 @@
                     <div class="col-lg-6 col-md-12 align-center">
                         <div class="img-box">
                             @isset($shop->logo)
-                            <img style="max-height: 300px" src="{{ asset('uploads/shops/'.$shop->logo) }}" alt="">
+                            <img style="width: 250px; height: 250px;" src="{{ asset('uploads/shops/'.$shop->logo) }}" alt="">
                             @else
                             <img style="max-height: 300px;" src="{{ asset('assets/images/votre-logo-ici.png') }}" alt="">
                             @endisset

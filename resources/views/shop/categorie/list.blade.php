@@ -151,9 +151,9 @@
                             <thead>
                                 <tr class="table-heads">
                                     <th class="head-item mbr-fonts-style display-7">Nom</th>
-                                    <th class="head-item mbr-fonts-style display-7">Active</th>
+                                    {{-- <th class="head-item mbr-fonts-style display-7">Active</th> --}}
                                     <th class="head-item mbr-fonts-style display-7">Parent</th>
-                                    <th class="head-item mbr-fonts-style display-7">Description</th>
+                                    {{-- <th class="head-item mbr-fonts-style display-7">Description</th> --}}
                                     <th class="head-item mbr-fonts-style display-7">Actions</th>
                                 </tr>
                             </thead>
@@ -162,7 +162,7 @@
                             @foreach ($categories as $categorie)
                             <tr>
                                 <td class="body-item mbr-fonts-style display-7">{{ $categorie->nom }}</td>
-                                <td class="body-item mbr-fonts-style display-7">
+                                {{-- <td class="body-item mbr-fonts-style display-7">
                                     @if ($categorie->active)
                                     <b>Oui</b>
                                     @else
@@ -170,13 +170,13 @@
                                         <strong>Non</strong>
                                     </div>
                                     @endif
-                                </td>
+                                </td> --}}
                                 <td class="body-item mbr-fonts-style display-7">
                                     @if($categorie->parent!=null)
                                     {{ $categorie->parent->nom }}
                                     @endif
                                 </td>
-                                <td class="body-item mbr-fonts-style display-7">{{ $categorie->description }}</td>
+                                {{-- <td class="body-item mbr-fonts-style display-7">{{ $categorie->description }}</td> --}}
                                 <td class="body-item mbr-fonts-style display-7">
                                     <button ng-click="setSelected({{$categorie}})" type="button" class="btn"
                                         style="background: orange; color: white;">
