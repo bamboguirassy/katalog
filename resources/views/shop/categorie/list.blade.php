@@ -109,7 +109,7 @@
                                                     parente (optionnel)</label>
                                                 <select name="categorie_id" data-form-field="categorie_id"
                                                     class="form-control display-7" id="categorie_id-formbuilder-1me">
-                                                    <option value="" disabled style="text-align: center;">---</option>
+                                                    <option value="" style="text-align: center;">---</option>
                                                     <option ng-selected="selected.categorie_id==categorie.id"
                                                         ng-repeat="categorie in categories"
                                                         ng-value="categorie.id ">@{{categorie.nom}}</option>
