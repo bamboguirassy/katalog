@@ -61,7 +61,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-auto input-group-btn">
-                                            <button ng-click="login()" ng-disabled="loginForm.$invalid" type="submit" class="btn btn-primary display-4">Se
+                                            <button ng-click="login()" ng-disabled="loginForm.$invalid" type="button" class="btn btn-primary display-4">Se
                                                 connecter&nbsp;</button>
                                         </div>
                                         <div class="col-12 mt-3" style="font-weight: bold; font-size: 18px;">
