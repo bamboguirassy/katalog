@@ -20,7 +20,7 @@
                             <h5 class="card-title mbr-fonts-style mb-3 display-2">
                                 <strong>{{ $user->name }}</strong></h5>
                             <p class="mbr-text mbr-fonts-style pb-2 display-7">
-                                Type Compte: Client<br>
+                                Type Compte: {{$user->type=='owner'?'Propriétaire':'client'}}<br>
                                 Email:
                                 {{$user->email}}<br>
                                 Membre depuis {{date_format($user->created_at,'Y')}}<br>

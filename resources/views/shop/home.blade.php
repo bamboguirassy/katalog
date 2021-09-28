@@ -2,6 +2,8 @@
 
 @section('title',$shop->nom);
 
+@section('twitter-title', $shop->nom)
+
 @section('description',$shop->description)
 
 @section('body')

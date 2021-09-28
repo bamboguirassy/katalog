@@ -1,6 +1,8 @@
 @extends('base')
 
-@section('title',"Katalog");
+@section('title',config('app.name'));
+
+@section('twitter-title',config('app.name'))
 
 @section('description',"Bienvenue sur la plateforme Katalog.
 Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir plus de visibilité.")

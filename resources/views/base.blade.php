@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html ng-app="Katalog">
+<html lang="{{config('app.locale')}}" ng-app="Katalog">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image:src" content="{{ asset('assets/images/bambogroup.jpg') }}">
+    <meta property="og:image" content="{{ asset('assets/images/bambogroup.jpg') }}">
+    <meta name="twitter:title" content="@yield('twitter-title',config('app.name'))">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-    <link rel="shortcut icon" href="{{ asset('assets/images/produits-meta.jpeg') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('assets/images/bambogroup-50x50.jpg') }}" type="image/x-icon">
     <meta name="description" content="@yield('description')">
+
     <title>@yield('title')</title>
-    <meta name="theme-color" content="#1c73ba">
-    <link rel="manifest" href="{{ asset('manifest.json') }}">
-    <script src="{{ asset('sw-connect.js') }}"></script>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="">
+
     <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
@@ -40,7 +41,10 @@
     </noscript>
     <link rel="preload" as="style" href="{{ asset('assets/mobirise/css/mbr-additional.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/mobirise/css/mbr-additional.css') }}" type="text/css">
-
+    <meta name="theme-color" content="#1c73ba">
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
+    <script src="{{ asset('sw-connect.js') }}"></script>
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="apple-touch-startup-image"
         media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
         href="{{ asset('assets/images/apple-launch-640x1136.png') }}">
@@ -62,6 +66,8 @@
     <link rel="apple-touch-startup-image"
         media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
         href="{{ asset('assets/images/apple-launch-2048x2732.png') }}">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="">
 </head>
 
 <body ng-controller="MainController">
@@ -272,7 +278,8 @@
 
                         @auth
                         @isset($shop)
-                        @if ((auth()->user()->type=='owner' && $shop->user_id==auth()->user()->id) || auth()->user()->type=='admin')
+                        @if ((auth()->user()->type=='owner' && $shop->user_id==auth()->user()->id) ||
+                        auth()->user()->type=='admin')
                         <li class="nav-item dropdown">
                             <a class="nav-link link text-primary dropdown-toggle display-4" href="#"
                                 aria-expanded="false" data-toggle="dropdown-submenu" data-bs-toggle="dropdown"
