@@ -51,7 +51,7 @@
     }
 </style>
 <section ng-cloak ng-controller="ProduitShowController" ng-init="init({{$produit}},{{$attributs}})">
-    <div class="container mt-3">
+    <div class="container">
         <div class="col-lg-12 border p-3 main-section bg-white">
             <div class="row m-0">
                 <div class="col-lg-4 left-side-product-box pb-3">
