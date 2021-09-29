@@ -40,7 +40,7 @@
                 </div>
             </div>
         </section>
-        {{-- start main categories products list --}}
+        <!-- start main categories products list -->
         @if ($produits->currentPage()==1)
         @foreach ($categories as $categorie)
         @if ($categorie->produits_count>2)
