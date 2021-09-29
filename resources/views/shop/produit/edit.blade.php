@@ -95,9 +95,14 @@
                             <div data-for="prixUnitaire" class="col form-group">
                                 <label for="prixUnitaire-formbuilder-14"
                                     class="form-control-label mbr-fonts-style display-7">Prix Unitaire</label>
-                                <input value="{{ old('prixUnitaire') ?? $produit->prixUnitaire }}" type="number"
+                                    @if ($produit->prixSurDemande)
+                                    <div style="background-color: red; color: white; padding: 1px;" role="alert">
+                                        <strong>Actuellement le prix est sur demande, donner une valeur supérieure à 0 ici va changer ce statut.</strong>
+                                    </div>
+                                    @endif
+                                    <input value="{{ old('prixUnitaire') ?? $produit->prixUnitaire }}" type="number"
                                     name="prixUnitaire" placeholder="Prix Unitaire" data-form-field="prixUnitaire"
-                                    class="form-control display-7" min="5" step="1" required="required" value=""
+                                    class="form-control display-7" min="5" step="1" value=""
                                     id="prixUnitaire-formbuilder-14">
                             </div>
                             <div data-for="prixPromo" class="col form-group" ng-if="inPromo">

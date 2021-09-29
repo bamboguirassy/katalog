@@ -189,7 +189,6 @@ class ProduitController extends Controller
         $request->validate([
             'nom'=>'required',
             'description'=>'required',
-            'prixUnitaire'=>'integer|required',
             'quantite'=>'integer',
             'visible'=>'required',
             'inPromo'=>'boolean|required',
@@ -200,6 +199,8 @@ class ProduitController extends Controller
                 throw new Error("En promotion, le prix doit être inférieur au prix normal...");
             }
         }
+            $produit->prixSurDemande = ($request->get('prixUnitaire')<1);
+
         $data = $request->all();
         $data['visible']=($request->get('visible')=='Oui');
         $produit->update($data);
