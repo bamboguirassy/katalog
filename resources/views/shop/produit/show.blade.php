@@ -55,8 +55,14 @@
         <div class="col-lg-12 border p-3 main-section bg-white">
             <div class="row m-0">
                 <div class="col-lg-4 left-side-product-box pb-3">
+                    @isset($produit->imageCouverture)
                     <img src="{{ asset('uploads/produits/images/'.$produit->imageCouverture->nom) }}"
-                        class="border p-3">
+                    class="border p-3">
+                    @elseif (count($produit->images)>0)
+                    <img src="{{ asset('uploads/produits/images/'.$produit->images[0]->nom) }}"
+                    @else
+                    <img >
+                    @endisset
                 </div>
                 <div class="col-lg-8">
                     <div class="right-side-pro-detail border p-3 m-0" ng-init="addAttribut=false">
