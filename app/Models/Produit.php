@@ -23,7 +23,8 @@ class Produit extends Model
         'inPromo',
         'prixPromo',
         'marque_id',
-        'isMulticolor'
+        'isMulticolor',
+        'prixSurDemande'
     ];
 
     protected $casts = [];

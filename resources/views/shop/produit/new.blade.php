@@ -87,7 +87,20 @@
                                     data-form-field="nom" class="form-control display-7" required="required" value=""
                                     id="nom-formbuilder-14">
                             </div>
-                            <div data-for="prixUnitaire" class="col form-group">
+                            <div data-for="prixSurDemande" class="col form-group">
+                                <label for="prixSurDemande-formbuilder-14"
+                                    class="form-control-label mbr-fonts-style display-7">Prix sur demande</label>
+                                <div class="form-check form-switch">
+                                    <input name="prixSurDemande" ng-model="prixSurDemande" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                                    <label class="form-check-label" for="flexSwitchCheckChecked">
+                                        <span style="color: orange;">
+                                        Attention ! si vous activez cela, le client ne pourra pas ajouter le produit au panier. Il devra vous contacter pour connaitre le prix.
+                                    </span>
+                                        
+                                    </label>
+                                </div>
+                            </div>
+                            <div ng-if="!prixSurDemande" data-for="prixUnitaire" class="col form-group">
                                 <label for="prixUnitaire-formbuilder-14"
                                     class="form-control-label mbr-fonts-style display-7">Prix Unitaire</label>
                                 <input value="{{ old('prixUnitaire') }}" type="number" name="prixUnitaire"
@@ -110,22 +123,21 @@
                                     data-form-field="description" class="form-control display-7" required="required"
                                     id="description-formbuilder-14">{{ old('description') }}</textarea>
                             </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 form-group"
-                                data-for="multicolor">
+                            <div class="col-lg-12 col-md-12 col-sm-12 form-group" data-for="multicolor">
                                 <div class="form-control-label">
                                     <label for="visible-formbuilder-14" class="mbr-fonts-style display-7">Le produit
                                         a-t-il différentes couleurs ?</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input ng-click="toggleIsMulticolor(0)" ng-checked="isMulticolor==0" type="radio" name="isMulticolor"
-                                        data-form-field="multicolor" class="form-check-input display-7" value="0"
-                                        id="visible-formbuilder-14no">
+                                    <input ng-click="toggleIsMulticolor(0)" ng-checked="isMulticolor==0" type="radio"
+                                        name="isMulticolor" data-form-field="multicolor"
+                                        class="form-check-input display-7" value="0" id="visible-formbuilder-14no">
                                     <label class="form-check-label display-7">Non</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input ng-click="toggleIsMulticolor(1)" ng-checked="isMulticolor==1" type="radio" name="isMulticolor"
-                                        data-form-field="multicolor" class="form-check-input display-7"
-                                        id="visible-formbuilder-14yes" value="1">
+                                    <input ng-click="toggleIsMulticolor(1)" ng-checked="isMulticolor==1" type="radio"
+                                        name="isMulticolor" data-form-field="multicolor"
+                                        class="form-check-input display-7" id="visible-formbuilder-14yes" value="1">
                                     <label class="form-check-label display-7">Oui</label>
                                 </div>
                             </div>
@@ -134,8 +146,10 @@
                                     <label for="couleurs">Merci de choisir les couleurs</label>
                                     @foreach ($couleurs as $couleur)
                                     <label for="couleur{{$couleur->id}}">
-                                        <input value="{{$couleur->id}}" type="checkbox" name="couleurs[]" id="couleur{{$couleur->id}}"
-                                        class="form-check-input"> <span class="mt-1" style=" width: 20px; height: 10px; background-color: {{$couleur->color}}; border: 2px solid gray;">&nbsp; &nbsp;</span> - 
+                                        <input value="{{$couleur->id}}" type="checkbox" name="couleurs[]"
+                                            id="couleur{{$couleur->id}}" class="form-check-input"> <span class="mt-1"
+                                            style=" width: 20px; height: 10px; background-color: {{$couleur->color}}; border: 2px solid gray;">&nbsp;
+                                            &nbsp;</span> -
                                     </label>
                                     @endforeach
                                 </div>
@@ -166,15 +180,15 @@
                                             nouveaux attributs</a></span>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input ng-click="toggleHasMoreAttr(0)" ng-checked="hasMoreAttr==0" type="radio" name="hasMoreAttributes"
-                                        data-form-field="moreAttributes" class="form-check-input display-7" value="0"
-                                        id="visible-formbuilder-14no">
+                                    <input ng-click="toggleHasMoreAttr(0)" ng-checked="hasMoreAttr==0" type="radio"
+                                        name="hasMoreAttributes" data-form-field="moreAttributes"
+                                        class="form-check-input display-7" value="0" id="visible-formbuilder-14no">
                                     <label class="form-check-label display-7">Non</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input ng-click="toggleHasMoreAttr(1)" ng-checked="hasMoreAttr==1" type="radio" name="hasMoreAttributes"
-                                        data-form-field="moreAttributes" class="form-check-input display-7"
-                                        id="visible-formbuilder-14yes" value="1">
+                                    <input ng-click="toggleHasMoreAttr(1)" ng-checked="hasMoreAttr==1" type="radio"
+                                        name="hasMoreAttributes" data-form-field="moreAttributes"
+                                        class="form-check-input display-7" id="visible-formbuilder-14yes" value="1">
                                     <label class="form-check-label display-7">Oui</label>
                                 </div>
                             </div>

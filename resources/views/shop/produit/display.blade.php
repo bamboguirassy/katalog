@@ -144,12 +144,19 @@
                             <div class="mt-4 mb-3"> <span
                                     class="text-uppercase text-muted brand">{{ $produit->categorie->nom }}</span>
                                 <h5 class="text-uppercase">{{ $produit->nom }}</h5>
-                                <div class="price d-flex flex-row align-items-center"> <span class="act-price"> @{{
-                                        sProduit.inPromo?sProduit.prixPromo:sProduit.prixUnitaire }} FCFA</span>
+                                <div class="price d-flex flex-row align-items-center">
+                                    @if ($produit->prixSurDemande)
+                                    <div style="background-color: red; color: white; padding: 3px;" role="alert">
+                                        <strong>Prix sur demande</strong>
+                                    </div>
+                                    @else
+                                    <span class="act-price">
+                                        @{{sProduit.inPromo?sProduit.prixPromo:sProduit.prixUnitaire }} FCFA</span>
                                     <div class="ml-2" ng-if="sProduit.inPromo" style="color: red;">
                                         <small class="dis-price">{{$produit->prixUnitaire}} FCFA</small>
                                         <span>-{{round((1-($produit->prixPromo/$produit->prixUnitaire))*100)}}%</span>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                             <p class="about display-4">{{ $produit->description }}</p>
@@ -182,13 +189,17 @@
                             </div>
                             <div class="cart mt-4 align-items-center"
                                 ng-show="produit.variants.length==0 || variantSelected">
-                                @if (in_array($produit->id, $paProduits))
-                                <a style="background: green; color: white;" class="btn item-btn display-4">
-                                    Dans le panier <i class="fa fa-check"></i>
-                                </a>
-                                @else
-                                <button ng-click="initProductToPanier(sProduit)"
-                                    class="btn btn-primary text-uppercase mr-2 px-4">Acheter</button>
+                                @if ($produit->prixSurDemande)
+                                <a target="_blank" href="https://wa.me/{{$shop->telephonePrimaire}}" class="btn" style="background-color: #19da22; color: white;">Demander le prix &nbsp; <i class="fa fa-2x fa-whatsapp"></i> </a>
+                                    @else
+                                    @if (in_array($produit->id, $paProduits))
+                                    <a style="background: green; color: white;" class="btn item-btn display-4">
+                                        Dans le panier <i class="fa fa-check"></i>
+                                    </a>
+                                    @else
+                                    <button ng-click="initProductToPanier(sProduit)"
+                                        class="btn btn-primary text-uppercase mr-2 px-4">Acheter</button>
+                                    @endif
                                 @endif
                             </div>
                         </div>
@@ -235,7 +246,9 @@
             <div class="card col-12">
                 <div class="card-wrapper">
                     <div class="card-box align-left" style="font-size: 23px;">
-                        Produits similaires dans la catégorie <a href="{{ route('shop.categorie.show',['categorie'=>$produit->categorie,'shop'=>$shop]) }}"><strong> >>
+                        Produits similaires dans la catégorie <a
+                            href="{{ route('shop.categorie.show',['categorie'=>$produit->categorie,'shop'=>$shop]) }}"><strong>
+                                >>
                                 {{$produit->categorie->nom}} </strong></a>
                     </div>
                 </div>
@@ -253,7 +266,8 @@
         </div>
         <div class="row">
             <div class="col-12 align-right">
-                <a href="{{ route('shop.categorie.show',['shop'=>$shop,'categorie'=>$produit->categorie_id]) }}" class="btn btn-secondary">Voir
+                <a href="{{ route('shop.categorie.show',['shop'=>$shop,'categorie'=>$produit->categorie_id]) }}"
+                    class="btn btn-secondary">Voir
                     plus > </a>
             </div>
         </div>

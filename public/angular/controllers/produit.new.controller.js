@@ -3,6 +3,7 @@ app.controller('ProduitNewController', ($scope) => {
     $scope.hasMoreAttr = 0;
     $scope.selectedAttrs = [];
     $scope.isMulticolor = 0;
+    $scope.prixSurDemande = 0;
 
     $scope.toggleAttrSelection = (selected) => {
         if (!$scope.selectedAttrs.includes(selected)) {

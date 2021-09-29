@@ -70,7 +70,13 @@
                                 <p class="m-0 p-0 mt-3">@{{ produit.nom }}</p>
                             </div>
                             <div class="col-lg-12">
-                                <p class="m-0 p-0 price-pro">@{{produit.prixUnitaire}} FCFA</p>
+                                @if ($produit->prixSurDemande)
+                                <div style="background-color: red; color: white; padding: 3px;" role="alert">
+                                    <strong>Prix sur demande</strong>
+                                </div>
+                                @else
+                                    <p class="m-0 p-0 price-pro">@{{produit.prixUnitaire}} FCFA</p>
+                                @endif
                                 <hr class="p-0 m-0">
                             </div>
                             <div class="col-lg-12 pt-2 pb-2">

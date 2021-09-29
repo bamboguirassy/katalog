@@ -16,7 +16,13 @@
             @endisset
             <div class="card-body">
                 <h6 class="card-title">{{ \Illuminate\Support\Str::limit($produit->nom, 13, '...') }}</h6>
+                @if ($produit->prixSurDemande)
+                <div style="background-color: red; color: white; padding: 1px;" role="alert">
+                    <strong>Prix sur demande</strong>
+                </div>
+                @else
                 <b>{{ $produit->inPromo?$produit->prixPromo:$produit->prixUnitaire }} FCFA</b>
+                @endif
             </div>
         </a>
         <div class="card-footer align-center">
@@ -25,17 +31,17 @@
                 Panier &nbsp;<i class="fa fa-check"></i>
             </span>
             @else
-            @if (count($produit->variants)<1) <a ng-click="initProductToPanier({{$produit}})"
-                class="btn btn-sm btn-primary item-btn display-4 mt-0">
+            @if (count($produit->variants)>0 || $produit->prixSurDemande)
+            <a href="{{ route('shop.produit.display',compact('produit','shop')) }}"
+                class="btn btn-primary item-btn display-4 mt-0">
+                Afficher
+            </a>
+            @else
+            <a ng-click="initProductToPanier({{$produit}})" class="btn btn-sm btn-primary item-btn display-4 mt-0">
                 Acheter
-                </a>
-                @else
-                <a href="{{ route('shop.produit.display',compact('produit','shop')) }}"
-                    class="btn btn-primary item-btn display-4 mt-0">
-                    Afficher
-                </a>
-                @endif
-                @endif
+            </a>
+            @endif
+            @endif
         </div>
     </div>
 </div>

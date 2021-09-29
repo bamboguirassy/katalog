@@ -69,13 +69,15 @@ class ProduitController extends Controller
             'nom'=>'required',
             'description'=>'required',
             'categorie_id'=>'required|exists:categories,id',
-            'prixUnitaire'=>'integer|required',
+            'prixUnitaire'=>'required_if:prixSurDemande,false',
             'quantite'=>'integer',
             'photos'=>'required',
             'isMulticolor'=>'required',
-            'couleurs'=>'required_if:isMulticolor,1'
+            'couleurs'=>'required_if:isMulticolor,1',
+            'prixSurDemande'=>'required'
         ]);
         $produit = new Produit($request->all());
+        $produit->prixSurDemande= ($request->get('prixSurDemande')=='on');
         $produit->shop_id = $shop->id;
         $produit->visible = true;
         /** manage categories */
@@ -216,7 +218,7 @@ class ProduitController extends Controller
         try {
             foreach ($produit->images as $image) {
                 if($image->delete()) {
-                    Storage::delete('uplaods/produits/images/'.$image->nom);
+                    Storage::delete('uploads/produits/images/'.$image->nom);
                 }
             }
             DB::commit();

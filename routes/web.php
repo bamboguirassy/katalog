@@ -146,7 +146,7 @@ Route::group([
                $produits = Produit::where('shop_id',$shop->id)
                ->where('visible',true)
                ->where('quantite','>',0)
-               ->paginate(12);
+               ->paginate(18);
                // find user panier if exists
                $paProduits = [];
                if(Auth::user()) {
