@@ -298,3 +298,25 @@ Route::group([
 Route::resource('user', UserController::class,[
     'only'=>['store','update']
 ]);
+
+Route::group([
+    'prefix' => '/admin',
+], function () {
+    Route::name('admin.')->group(function() {
+        /** Liste des shops */
+        Route::get('shops', function () {
+            $shops = Shop::paginate(100);
+            return view('admin.shop-list',compact('shops'));
+        })->name('shops');
+        /** Liste des users */
+        Route::get('users', function() {
+            $users = User::paginate(100);
+            return view('admin.user-list', compact('users'));
+        })->name('users');
+        /** Autocomplete users */
+        Route::get('autocomplete-users', function() {
+            $users = User::all();
+            return $users;
+        })->name('autocomplete.users');
+    });
+});

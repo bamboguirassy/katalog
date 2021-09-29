@@ -1,9 +1,5 @@
 @extends('base')
 
-@section('icon')
-{{ asset('assets/images/produits-meta.jpeg') }}
-@endsection
-
 @section('title',"Catégorie de produit - ".$shop->nom);
 
 @section('description',"Paramétrer les catégories de produits de la boutique...")

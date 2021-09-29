@@ -1,9 +1,5 @@
 @extends('base')
 
-@section('icon')
-{{ asset('assets/images/produits-meta.jpeg') }}
-@endsection
-
 @section('title',"Mes commandes");
 
 @section('description',"Mes commandes sur ".config('app.name'))

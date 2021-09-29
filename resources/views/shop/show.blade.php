@@ -1,9 +1,5 @@
 @extends('base')
 
-@section('icon')
-{{ asset('assets/images/produits-meta.jpeg') }}
-@endsection
-
 @section('title',"Détails Boutique - ".$shop->nom);
 
 @section('description',$shop->description)

@@ -11,13 +11,13 @@
     <meta name="twitter:title" content="@yield('twitter-title',config('app.name'))">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     @isset($shop)
-        @if ($shop->logo)
-            <link rel="icon" href="{{ asset('uploads/shops/'.$shop->logo) }}" type="image/x-icon">
-        @else
-            <link rel="shortcut icon" href="{{ asset('assets/images/bambogroup-50x50.jpg') }}" type="image/x-icon">
-        @endif
+    @if ($shop->logo)
+    <link rel="icon" href="{{ asset('uploads/shops/'.$shop->logo) }}" type="image/x-icon">
     @else
-        <link rel="shortcut icon" href="{{ asset('assets/images/bambogroup-50x50.jpg') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('assets/images/bambogroup-50x50.jpg') }}" type="image/x-icon">
+    @endif
+    @else
+    <link rel="shortcut icon" href="{{ asset('assets/images/bambogroup-50x50.jpg') }}" type="image/x-icon">
     @endisset
     <meta name="description" content="@yield('description')">
 
@@ -108,7 +108,6 @@
             </strong>, votre plateforme de proximité pour mieux gérer les
             ventes.</h3> --}}
             <div class="container">
-
                 <div class="navbar-brand">
                     <span class="navbar-logo">
                         @isset($shop)
@@ -164,7 +163,6 @@
                             </a>
                         </li>
                         @endisset
-
                         {{-- afficher les menus public de la boutique --}}
                         @guest
                         @isset($shop)
@@ -399,6 +397,30 @@
                             </span>Se connecter&nbsp;
                         </a>
                         @endguest
+                        @auth
+                        @if(auth()->user()->type=='admin')
+                        <li class="nav-item dropdown">
+                            <a class="nav-link link text-primary dropdown-toggle display-4" href="#"
+                                aria-expanded="false" data-toggle="dropdown-submenu" data-bs-toggle="dropdown"
+                                data-bs-auto-close="outside">
+                                <span class="mobi-mbri mbri-setting mbr-iconfont mbr-iconfont-btn"></span>
+                                Admin
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown-undefined">
+                                <a class="text-primary dropdown-item display-4" href="{{ route('admin.shops') }}"
+                                    aria-expanded="false">
+                                    <span class="mobi-mbri mbri-file mbr-iconfont mbr-iconfont-btn"></span>
+                                    Shops
+                                </a>
+                                <a class="text-primary dropdown-item display-4" href="{{ route('admin.users') }}"
+                                    aria-expanded="false">
+                                    <span class="mobi-mbri mbri-users mbr-iconfont mbr-iconfont-btn"></span>
+                                    Users
+                                </a>
+                            </div>
+                        </li>
+                        @endif
+                        @endauth
                     </ul>
                 </div>
             </div>

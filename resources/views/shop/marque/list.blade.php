@@ -1,9 +1,5 @@
 @extends('base')
 
-@section('icon')
-{{ asset('assets/images/produits-meta.jpeg') }}
-@endsection
-
 @section('title',"Marque de produit - ".$shop->nom);
 
 @section('description',"Paramétrer les marques de produits de la boutique...")
