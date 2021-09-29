@@ -222,6 +222,15 @@ class ProduitController extends Controller
                     Storage::delete('uploads/produits/images/'.$image->nom);
                 }
             }
+            foreach($produit->couleurProduits as $couleurProduit) {
+                if($couleurProduit->delete()) {
+                    foreach ($couleurProduit->images as $image) {
+                        if($image->delete()) {
+                            Storage::delete('uploads/produits/images/'.$image->nom);
+                        }
+                    }
+                }
+            }
             DB::commit();
             $produit->delete();
             DB::commit();
