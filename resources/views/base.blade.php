@@ -10,7 +10,15 @@
     <meta property="og:image" content="{{ asset('assets/images/bambogroup.jpg') }}">
     <meta name="twitter:title" content="@yield('twitter-title',config('app.name'))">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-    <link rel="shortcut icon" href="{{ asset('assets/images/bambogroup-50x50.jpg') }}" type="image/x-icon">
+    @isset($shop)
+        @if ($shop->logo)
+            <link rel="icon" href="{{ asset('uploads/shops/'.$shop->logo) }}" type="image/x-icon">
+        @else
+            <link rel="shortcut icon" href="{{ asset('assets/images/bambogroup-50x50.jpg') }}" type="image/x-icon">
+        @endif
+    @else
+        <link rel="shortcut icon" href="{{ asset('assets/images/bambogroup-50x50.jpg') }}" type="image/x-icon">
+    @endisset
     <meta name="description" content="@yield('description')">
 
     <title>@yield('title')</title>
@@ -68,7 +76,8 @@
         href="{{ asset('assets/images/apple-launch-2048x2732.png') }}">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="">
-    <script data-ad-client="ca-pub-1024803261208249" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script data-ad-client="ca-pub-1024803261208249" async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
 
 <body ng-controller="MainController">
