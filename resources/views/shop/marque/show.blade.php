@@ -31,7 +31,7 @@
                     <div class="col-lg-3 col-md-12 align-center">
                         <div class="img-box">
                             <a href="{{ route('shop.home',compact('shop')) }}">
-                                <img style="max-height: 300px; object-fit: cover;"
+                                <img style="max-height: 300px; object-fit: fill;"
                                     src="{{ asset('uploads/shops/'.$shop->logo) }}" alt="">
                             </a>
                         </div>

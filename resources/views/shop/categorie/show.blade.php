@@ -18,9 +18,8 @@
 
             <div class="container align-center">
                 <div class="row">
-                    <div class="col-md-12 col-lg-8 py-4 m-auto">
-                        <br>
-                        <h1 class="mbr-section-title mbr-regular pb-3 align-left mbr-fonts-style display-2">
+                    <div class="col-md-12 col-lg-8 py-1 m-auto">
+                        <h1 class="mbr-section-title mbr-regular pb-1 align-left mbr-fonts-style display-2">
                             {{$shop->nom}} -> {{$categorie->nom}}
                         </h1>
 
@@ -31,7 +30,7 @@
                     <div class="col-lg-3 col-md-12 align-center">
                         <div class="img-box">
                             <a href="{{ route('shop.home',compact('shop')) }}">
-                                <img style="max-height: 300px; object-fit: cover;"
+                                <img style="max-height: 300px; object-fit: fill;"
                                     src="{{ asset('uploads/shops/'.$shop->logo) }}" alt="">
                             </a>
                         </div>
