@@ -58,8 +58,15 @@
                             <span class="price-badge">{{ $produit->inPromo?$produit->prixPromo:$produit->prixUnitaire }}
                                 FCFA</span>
                             <a href="{{ route('shop.produit.show',compact('produit','shop')) }}">
+                                @isset($produit->imageCouverture)
                                 <img src="{{ asset('uploads/produits/images/'.$produit->imageCouverture->nom) }}"
                                     alt="{{ $produit->nom }} Photo">
+                                    @else
+                                    @if (count($produit->images)>0)
+                                    <img src="{{ asset('uploads/produits/images/'.$produit->images[0]->nom) }}"
+                                        alt="{{ $produit->nom }} Photo">
+                                    @endif
+                                @endisset
                             </a>
                         </div>
                         <div class="item-content">

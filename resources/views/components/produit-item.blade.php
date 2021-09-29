@@ -9,8 +9,10 @@
             <img style="height: 150px; object-fit: content;" class="card-img-top"
                 src="{{ asset('uploads/produits/images/'.$produit->imageCouverture->nom) }}" alt="">
             @else
+            @if(count($produit->images)>0)
             <img style="height: 150px; object-fit: content;" class="card-img-top"
                 src="{{ asset('uploads/produits/images/'.$produit->images[0]->nom) }}" alt="">
+            @endif
             @endisset
             <div class="card-body">
                 <h6 class="card-title">{{ \Illuminate\Support\Str::limit($produit->nom, 13, '...') }}</h6>
@@ -19,7 +21,7 @@
         </a>
         <div class="card-footer align-center">
             @if (in_array($produit->id, $paProduits))
-            <span style="background: green; color: white; font-size:13px;" class="btn item-btn">
+            <span style="background: rgb(205, 243, 205); color: white; font-size:13px;" class="btn item-btn">
                 Panier &nbsp;<i class="fa fa-check"></i>
             </span>
             @else
