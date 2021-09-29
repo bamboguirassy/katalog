@@ -12,7 +12,7 @@
 <section data-bs-version="5.1" class="content5 cid-sIqITZHSZd" id="extContacts5-19">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-6">
                 <div class="card-img">
                     <span class="category-item">{{ $shop->categorie->nom }}</span>
                     @isset($shop->logo)
@@ -48,7 +48,7 @@
                 @endif
                 @endauth
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-6">
                 <h4 class="card-title mbr-semibold pb-2 align-left mbr-fonts-style display-5"><br>
                     {{ $shop->nom }}
                 </h4>
