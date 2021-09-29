@@ -61,7 +61,7 @@
                     @elseif (count($produit->images)>0)
                     <img src="{{ asset('uploads/produits/images/'.$produit->images[0]->nom) }}"
                     @else
-                    <img >
+                    <img alt="photo produit">
                     @endisset
                 </div>
                 <div class="col-lg-8">
