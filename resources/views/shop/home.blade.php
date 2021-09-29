@@ -38,7 +38,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
         {{-- start main categories products list --}}

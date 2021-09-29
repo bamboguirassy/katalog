@@ -22,7 +22,6 @@
                         <h1 class="mbr-section-title mbr-regular pb-1 align-left mbr-fonts-style display-2">
                             {{$shop->nom}} -> {{$categorie->nom}}
                         </h1>
-
                         <p class="mbr-text mbr-light pb-3 align-left mbr-fonts-style display-7">
                             {{$categorie->description}}
                         </p>
