@@ -87,25 +87,15 @@
                                     data-form-field="nom" class="form-control display-7" required="required" value=""
                                     id="nom-formbuilder-14">
                             </div>
-                            <div data-for="prixSurDemande" class="col form-group">
-                                <label for="prixSurDemande-formbuilder-14"
-                                    class="form-control-label mbr-fonts-style display-7">Prix sur demande</label>
-                                <div class="form-check form-switch">
-                                    <input name="prixSurDemande" ng-model="prixSurDemande" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                                    <label class="form-check-label" for="flexSwitchCheckChecked">
-                                        <span style="color: orange;">
-                                        Attention ! si vous activez cela, le client ne pourra pas ajouter le produit au panier. Il devra vous contacter pour connaitre le prix.
-                                    </span>
-                                        
-                                    </label>
-                                </div>
-                            </div>
-                            <div ng-if="!prixSurDemande" data-for="prixUnitaire" class="col form-group">
+                            <span style="color: orange;">
+                               Si le prix du produit est sur demande, vous pouvez ignorez le champ prix unitaire.
+                            </span>
+                            <div data-for="prixUnitaire" class="col form-group">
                                 <label for="prixUnitaire-formbuilder-14"
                                     class="form-control-label mbr-fonts-style display-7">Prix Unitaire</label>
                                 <input value="{{ old('prixUnitaire') }}" type="number" name="prixUnitaire"
                                     placeholder="Prix Unitaire" data-form-field="prixUnitaire"
-                                    class="form-control display-7" min="5" step="1" required="required" value=""
+                                    class="form-control display-7" min="5" step="1"
                                     id="prixUnitaire-formbuilder-14">
                             </div>
                             <div data-for="quantite" class="col form-group">

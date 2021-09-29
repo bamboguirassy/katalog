@@ -74,10 +74,9 @@ class ProduitController extends Controller
             'photos'=>'required',
             'isMulticolor'=>'required',
             'couleurs'=>'required_if:isMulticolor,1',
-            'prixSurDemande'=>'required'
         ]);
         $produit = new Produit($request->all());
-        $produit->prixSurDemande= ($request->get('prixSurDemande')=='on');
+        $produit->prixSurDemande= ($request->get('prixUnitaire')<1);
         $produit->shop_id = $shop->id;
         $produit->visible = true;
         /** manage categories */
@@ -223,13 +222,12 @@ class ProduitController extends Controller
                 }
             }
             foreach($produit->couleurProduits as $couleurProduit) {
-                if($couleurProduit->delete()) {
                     foreach ($couleurProduit->images as $image) {
                         if($image->delete()) {
                             Storage::delete('uploads/produits/images/'.$image->nom);
                         }
                     }
-                }
+                    $couleurProduit->delete();
             }
             DB::commit();
             $produit->delete();
