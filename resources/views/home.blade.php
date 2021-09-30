@@ -36,8 +36,9 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                             <div class="mbr-section-btn mt-4">
                                 @guest
                                 <a class="btn btn-secondary display-7" href="{{ route('shop.new') }}"><span
-                                        class="mobi-mbri mobi-mbri-arrow-next mbr-iconfont mbr-iconfont-btn"></span>Essayez
-                                    gratuitement</a>
+                                        class="mobi-mbri mobi-mbri-arrow-next mbr-iconfont mbr-iconfont-btn"></span>
+                                        Ouvrir une boutique
+                                    </a>
                                 <a class="btn btn-success display-7" href="#" data-toggle="modal" data-bs-toggle="modal"
                                     data-target="#mbr-popup-1f" data-bs-target="#mbr-popup-1f"><span
                                         class="mobi-mbri mobi-mbri-login mbr-iconfont mbr-iconfont-btn"></span>Se
@@ -69,7 +70,7 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                                 <div class="mbr-section-btn">
                                     <a class="btn btn-primary display-4" href="{{ route('shop.new') }}"><span
                                             class="mobi-mbri mobi-mbri-plus mbr-iconfont mbr-iconfont-btn"
-                                            style="color: #1C73BA;"></span>Essayez gratuitement votre boutique&nbsp;</a>
+                                            style="color: #1C73BA;"></span>Ouvrir gratuitement votre boutique&nbsp;</a>
                                 </div>
                                 @endguest
                             </div>
