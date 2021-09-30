@@ -37,7 +37,7 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                                 @guest
                                 <a class="btn btn-secondary display-7" href="{{ route('shop.new') }}"><span
                                         class="mobi-mbri mobi-mbri-arrow-next mbr-iconfont mbr-iconfont-btn"></span>
-                                        Ouvrir une boutique
+                                        Créer une boutique
                                     </a>
                                 <a class="btn btn-success display-7" href="#" data-toggle="modal" data-bs-toggle="modal"
                                     data-target="#mbr-popup-1f" data-bs-target="#mbr-popup-1f"><span
