@@ -118,7 +118,7 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
         </section>
         @auth
         @if (auth()->user()->type=='admin')
-        <section data-bs-version="5.1" class="content4 cid-sIq8PMNs4P" id="content4-g">
+        {{-- <section data-bs-version="5.1" class="content4 cid-sIq8PMNs4P" id="content4-g">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="title col-md-12 col-lg-10">
@@ -228,6 +228,7 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                 </div>
             </div>
         </section>
+         --}}
         @endif
         @endauth
 
