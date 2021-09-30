@@ -60,6 +60,25 @@
                         </tr>
                         @endforeach
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>#</th>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Téléphone</th>
+                            <th>Catégorie</th>
+                            <th>Date Création</th>
+                            <th>Produits</th>
+                            <th>Paniers</th>
+                            <th>Total Cmdes</th>
+                            <th>Cmdes En attente</th>
+                            <th>Cmdes Annulées</th>
+                            <th>Cmdes Acceptées</th>
+                            <th>Cmdes Rejetées</th>
+                            <th>Cmdes Livrées</th>
+                            <th>Actions</th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>

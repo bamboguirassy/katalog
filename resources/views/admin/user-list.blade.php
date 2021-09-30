@@ -47,6 +47,23 @@
                         </tr>
                         @endforeach
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>#</th>
+                            <th>Nom complet</th>
+                            <th>Email</th>
+                            <th>Téléphone</th>
+                            <th>Type</th>
+                            <th>Date Création</th>
+                            <th>Paniers</th>
+                            <th>Total Cmdes</th>
+                            <th>Cmdes En attente</th>
+                            <th>Cmdes Annulées</th>
+                            <th>Cmdes Acceptées</th>
+                            <th>Cmdes Rejetées</th>
+                            <th>Cmdes Livrées</th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
