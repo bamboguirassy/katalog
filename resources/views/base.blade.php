@@ -460,6 +460,14 @@
             </div>
         </div>
     </section>
+    @auth
+    @if(auth()->user()->type=='owner')
+    <a href="{{route('shop.home',['shop'=>auth()->user()->shop])}}" class="btn btn-secondary"
+        style="position: fixed; top: 25%; right: 50px;">
+        {{auth()->user()->shop->nom}}
+    </a>
+    @endif
+    @endauth
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

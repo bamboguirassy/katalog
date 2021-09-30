@@ -341,14 +341,6 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
         </section>
     </div>
 </div>
-@auth
-@if(auth()->user()->type=='owner')
-<a href="{{route('shop.home',['shop'=>auth()->user()->shop])}}" class="btn btn-secondary"
-    style="position: fixed; top: 25%; right: 50px;">
-    {{auth()->user()->shop->nom}}
-</a>
-@endif
-@endauth
 @endsection
 
 @section('more')
