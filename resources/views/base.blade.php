@@ -461,7 +461,7 @@
         </div>
     </section>
     @auth
-    @if(auth()->user()->type=='owner')
+    @if(auth()->user()->type=='owner' && !isset($shop))
     <a href="{{route('shop.home',['shop'=>auth()->user()->shop])}}" class="btn btn-secondary"
         style="position: fixed; top: 25%; right: 50px;">
         {{auth()->user()->shop->nom}}
