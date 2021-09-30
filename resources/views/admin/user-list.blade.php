@@ -19,6 +19,13 @@
                             <th>Téléphone</th>
                             <th>Type</th>
                             <th>Date Création</th>
+                            <th>Paniers</th>
+                            <th>Total Cmdes</th>
+                            <th>Cmdes En attente</th>
+                            <th>Cmdes Annulées</th>
+                            <th>Cmdes Acceptées</th>
+                            <th>Cmdes Rejetées</th>
+                            <th>Cmdes Livrées</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,6 +37,13 @@
                             <td>{{ $user->telephone }}</td>
                             <td>{{ $user->type }}</td>
                             <td>{{ date_format($user->created_at,'d M Y') }}</td>
+                            <td>{{$user->paniers_count}}</td>
+                            <td>{{$user->commandes_count}}</td>
+                            <td>{{$user->commande_en_attentes_count}}</td>
+                            <td>{{$user->commande_annulees_count}}</td>
+                            <td>{{$user->commande_acceptees_count}}</td>
+                            <td>{{$user->commande_rejetees_count}}</td>
+                            <td>{{$user->commande_livrees_count}}</td>
                         </tr>
                         @endforeach
                     </tbody>

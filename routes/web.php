@@ -311,7 +311,9 @@ Route::group([
         })->name('shops');
         /** Liste des users */
         Route::get('users', function() {
-            $users = User::paginate(100);
+            $users = User::withCount('paniers','commandes','commandeEnAttentes',
+            'commandeAcceptees','commandeLivrees','commandeRejetees','commandeAnnulees')
+            ->paginate(100);
             return view('admin.user-list', compact('users'));
         })->name('users');
         /** Autocomplete users */

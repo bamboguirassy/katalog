@@ -58,4 +58,32 @@ class User extends Authenticatable
     {
         return 'https://hooks.slack.com/services/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';
     }
+
+    public function paniers() {
+        return $this->hasMany(Panier::class)->has('produits');
+    }
+
+    public function commandes() {
+        return $this->hasMany(Commande::class);
+    }
+
+    public function commandeEnAttentes() {
+        return $this->hasMany(Commande::class)->where('etat','En attente');
+    }
+
+    public function commandeAcceptees() {
+        return $this->hasMany(Commande::class)->where('etat','Acceptée');
+    }
+
+    public function commandeRejetees() {
+        return $this->hasMany(Commande::class)->where('etat','Rejetée');
+    }
+
+    public function commandeLivrees() {
+        return $this->hasMany(Commande::class)->where('etat','Livrée');
+    }
+
+    public function commandeAnnulees() {
+        return $this->hasMany(Commande::class)->where('etat','Annulée');
+    }
 }
