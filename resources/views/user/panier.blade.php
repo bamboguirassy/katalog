@@ -51,6 +51,9 @@
                                 <p class="mbr-text mbr-fonts-style display-4">
                                     <a
                                         href="/@{{shop.pseudonyme}}/produit/@{{produit.produit.id}}/display">@{{produit.produit.nom}}</a>
+                                        <img ng-if="produit.produit.images.length>0" style="max-height: 100px; width: 100px; display: inline; margin-left: 25%;"
+                                            src="/uploads/produits/images/@{{produit.produit.images[0].nom}}"
+                                            alt="">
                                 </p>
                                 <div class="pb-2" ng-if="produit.produit.attribut_values.length>0">
                                     <ng-container ng-repeat="attributValue in produit.produit.attribut_values">

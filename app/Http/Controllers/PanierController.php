@@ -125,7 +125,7 @@ class PanierController extends Controller
     {
         $panier = Panier::where('shop_id',$shop->id)
         ->where('user_id',Auth::user()->id)
-        ->with(['produits.produit.attributValues.valeurAttributProduit.valeurAttribut.attribut'])
+        ->with(['produits.produit.attributValues.valeurAttributProduit.valeurAttribut.attribut','produits.produit.images'])
         ->first();
         $montant = 0;
         if($panier) {
@@ -140,7 +140,7 @@ class PanierController extends Controller
     public function getMyPanierContents(Shop $shop) {
         $panier = Panier::where('shop_id',$shop->id)
         ->where('user_id',Auth::user()->id)
-        ->with(['produits.produit.attributValues.valeurAttributProduit.valeurAttribut.attribut'])
+        ->with(['produits.produit.attributValues.valeurAttributProduit.valeurAttribut.attribut','produits.produit.images'])
         ->first();
         $montant = 0;
         if($panier) {

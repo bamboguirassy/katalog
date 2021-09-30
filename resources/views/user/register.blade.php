@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header pb-0">
-                <h5 class="modal-title mbr-fonts-style display-5">Formulaire de souscription</h5>
+                <h5 class="modal-title mbr-fonts-style display-5">Formulaire de souscription pour les clients</h5>
                 <button type="button" class="close" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close">
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"
                         fill="currentColor">

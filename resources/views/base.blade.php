@@ -440,7 +440,7 @@
     @auth
     @if (auth()->user()->type=='client' && isset($shop))
     <a href="/@{{shop.pseudonyme}}/panier/show" class="btn btn-info" style="position: fixed; top: 25%; right: 2px;">
-        <span class="mbr-iconfont mbri-shopping-cart"></span> (@{{panier?panier.produits_count:0}})
+        <span class="mbr-iconfont mbri-shopping-cart"></span> (<span ng-bind="panier?panier.produits_count:0"></span>)
         <!--PANIER-->
     </a>
     @endif

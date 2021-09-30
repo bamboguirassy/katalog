@@ -124,6 +124,9 @@
                                             <h3 class="title mbr-medium mbr-fonts-style display-7">
                                                 {{$produit->produit->nom}}</h3>
                                         </div>
+                                        @if (count($produit->produit->images)>0)
+                                            <img style="max-height: 100px; width: 100px; display: inline; margin-left: 25%;" src="{{ asset('uploads/produits/images/'.$produit->produit->images[0]->nom) }}" alt="">
+                                        @endif
                                         <div class="cell text-center text-sm-left border__bot">
                                             <p class="mbr-fonts-style mbr-text display-4">
                                                 {{$produit->prixUnitaire}} FCFA</p>
