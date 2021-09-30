@@ -209,8 +209,6 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                 </div>
             </div>
         </section>
-        @endif
-        @endauth
         <section data-bs-version="5.1" class="content12 cid-sIqcTJYywr" id="content12-l">
             <div class="container">
                 <div class="row justify-content-center">
@@ -230,6 +228,8 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                 </div>
             </div>
         </section>
+        @endif
+        @endauth
 
         <section data-bs-version="5.1" class="content6 cid-sIqdBA3T3C" id="content6-m">
             <div class="container">
