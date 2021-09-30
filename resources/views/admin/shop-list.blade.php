@@ -21,11 +21,12 @@
                             <th>Date Création</th>
                             <th>Produits</th>
                             <th>Paniers</th>
-                            <th>Total Commandes</th>
-                            <th>Commandes En attente</th>
-                            <th>Commandes Acceptées</th>
-                            <th>Commandes Rejetées</th>
-                            <th>Commandes Livrées</th>
+                            <th>Total Cmdes</th>
+                            <th>Cmdes En attente</th>
+                            <th>Cmdes Annulées</th>
+                            <th>Cmdes Acceptées</th>
+                            <th>Cmdes Rejetées</th>
+                            <th>Cmdes Livrées</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -44,6 +45,7 @@
                             <td>{{$shop->paniers_count}}</td>
                             <td>{{$shop->commandes_count}}</td>
                             <td>{{$shop->commande_en_attentes_count}}</td>
+                            <td>{{$shop->commande_annulees_count}}</td>
                             <td>{{$shop->commande_acceptees_count}}</td>
                             <td>{{$shop->commande_rejetees_count}}</td>
                             <td>{{$shop->commande_livrees_count}}</td>

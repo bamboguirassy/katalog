@@ -78,4 +78,8 @@ class Shop extends Model
     public function commandeLivrees() {
         return $this->hasMany(Commande::class)->where('etat','Livrée');
     }
+
+    public function commandeAnnulees() {
+        return $this->hasMany(Commande::class)->where('etat','Annulée');
+    }
 }

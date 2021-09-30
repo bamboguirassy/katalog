@@ -306,7 +306,7 @@ Route::group([
         /** Liste des shops */
         Route::get('shops', function () {
             $shops = Shop::withCount('produits','paniers','commandes','commandeEnAttentes',
-            'commandeAcceptees','commandeLivrees','commandeRejetees')->paginate(100);
+            'commandeAcceptees','commandeLivrees','commandeRejetees','commandeAnnulees')->paginate(100);
             return view('admin.shop-list',compact('shops'));
         })->name('shops');
         /** Liste des users */
