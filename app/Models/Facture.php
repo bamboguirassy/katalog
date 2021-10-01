@@ -18,7 +18,8 @@ class Facture extends Model
         'clientPhone',
         'delai',
         'description',
-        'lienPaiement'
+        'lienPaiement',
+        'numero'
     ];
 
     public function user() {

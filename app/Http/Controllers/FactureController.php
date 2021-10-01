@@ -50,6 +50,7 @@ class FactureController extends Controller
         $user = User::find($request->get('user_id'));
         $facture = new Facture($request->all());
         $facture->delai = new DateTime($request->get('delai'));
+        $facture->numero = uniqid();
 
         $baseUrl  = Config::get('app.env')=='local'?'https://katalog.tech':Config::get('app.url');
         
@@ -66,7 +67,7 @@ class FactureController extends Controller
             ])
                 ->setTestMode(true)
                 ->setCurrency('XOF')
-                ->setRefCommand($facture->id)
+                ->setRefCommand($facture->numero)
                 ->setNotificationUrl([
                     'ipn_url' => $baseUrl.'/facture/confirm', //only https
                     'success_url' => $baseUrl,
@@ -134,7 +135,7 @@ class FactureController extends Controller
         $payment_method = $request->input('payment_method');
         $client_phone = $request->input('client_phone');
         $ref_command = $request->input('ref_command');
-        $facture = Facture::find($ref_command);
+        $facture = Facture::where('numero',$ref_command)->first();
      
             //from PayTech
             if($type_event=='sale_complete') {
