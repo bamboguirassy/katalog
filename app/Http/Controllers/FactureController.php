@@ -72,6 +72,7 @@ class FactureController extends Controller
                     'success_url' => $baseUrl,
                     'cancel_url' =>   $baseUrl
                 ])->send();
+                dd($jsonResponse);
             if($jsonResponse['success']==1) {
                 $facture->update(['lienPaiement'=> $jsonResponse['redirect_url']]);
                 // send email to user
