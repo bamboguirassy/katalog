@@ -136,7 +136,6 @@ class FactureController extends Controller
         $client_phone = $request->input('client_phone');
         $ref_command = $request->input('ref_command');
         $facture = Facture::where('numero',$ref_command)->first();
-     
             //from PayTech
             if($type_event=='sale_complete') {
                 $facture->dateReglement = now();
