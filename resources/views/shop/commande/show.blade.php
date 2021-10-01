@@ -72,15 +72,22 @@
 
                                 @endif
                                 @if (auth()->user()->id!=$commande->user_id)
-                                <a class="btn btn-md btn-secondary display-4" href="https://wa.me/{{$commande->user->telephone}}">
+                                <a class="btn btn-md btn-secondary display-4"
+                                    href="https://wa.me/{{$commande->user->telephone}}">
                                     <span class="mobi-mbri mobi-mbri-phone mbr-iconfont mbr-iconfont-btn"></span>
                                     Contacter le client</a>
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h4 class="card-title">{{$commande->user->name}} - Tél: {{$commande->user->telephone}}, Email: {{$commande->user->email}}</h4>
-                                        </div>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">{{$commande->user->name}} - 
+                                            Tél: <a target="_blank" href="https://wa.me/{{$commande->user->telephone}}">
+                                                {{$commande->user->telephone}}</a>,
+                                            Email: <a
+                                                href="mailto:{{$commande->user->email}}">{{$commande->user->email}}</a>
+                                        </h4>
                                     </div>
-                                @elseif ($commande->etat=='En attente')
+                                </div>
+                                @else
+                                @if($commande->etat=='En attente')
                                 <form style="display: inline; float: right; margin-left: 3px;"
                                     action="{{ route('shop.commande.update',['commande'=>$commande,'shop'=>$commande->shop]) }}"
                                     method="post">
@@ -92,6 +99,17 @@
                                         </span>Annuler
                                     </button>
                                 </form>
+                                @endif
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Tél:
+                                            <a target="_blank"
+                                                href="https://wa.me/{{$commande->shop->telephonePrimaire}}">{{$commande->shop->telephonePrimaire}}</a>,
+                                            Email: <a
+                                                href="mailto:{{$commande->shop->email}}">{{$commande->shop->email}}</a>
+                                        </h4>
+                                    </div>
+                                </div>
                                 @endif
                             </div>
                         </div>
@@ -130,7 +148,9 @@
                                                 {{$produit->produit->nom}}</h3>
                                         </div>
                                         @if (count($produit->produit->images)>0)
-                                            <img style="max-height: 100px; width: 100px; display: inline; margin-left: 25%;" src="{{ asset('uploads/produits/images/'.$produit->produit->images[0]->nom) }}" alt="">
+                                        <img style="max-height: 100px; width: 100px; display: inline; margin-left: 25%;"
+                                            src="{{ asset('uploads/produits/images/'.$produit->produit->images[0]->nom) }}"
+                                            alt="">
                                         @endif
                                         <div class="cell text-center text-sm-left border__bot">
                                             <p class="mbr-fonts-style mbr-text display-4">
