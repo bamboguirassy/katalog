@@ -66,7 +66,7 @@ class FactureController extends Controller
             ])
                 ->setTestMode(true)
                 ->setCurrency('XOF')
-                ->setRefCommand(uniqid())
+                ->setRefCommand($facture->id)
                 ->setNotificationUrl([
                     'ipn_url' => $baseUrl.'/facture/'.$facture->id.'/confirm', //only https
                     'success_url' => $baseUrl,
@@ -128,10 +128,12 @@ class FactureController extends Controller
         //
     }
 
-    public function instantPaymentNotificate(Request $request, Facture $facture) {
+    public function instantPaymentNotificate(Request $request) {
         $type_event = $request->input('type_event');
         $payment_method = $request->input('payment_method');
         $client_phone = $request->input('client_phone');
+        $ref_command = $request->input('ref_command');
+        $facture = Facture::find($ref_command);
      
             //from PayTech
             if($type_event=='sale_complete') {
