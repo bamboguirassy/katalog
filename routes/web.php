@@ -337,7 +337,7 @@ Route::group([
         })->name('users')->middleware('admin');
         /** Liste des factures */
         Route::get('factures',function() {
-            $factures = Facture::all();
+            $factures = Facture::orderby('created_at','desc')->get();
             $users = User::all();
             return view('admin.facture-list',compact('factures','users'));
         })->name('factures')->middleware('admin');
