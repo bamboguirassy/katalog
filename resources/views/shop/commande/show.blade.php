@@ -72,9 +72,15 @@
 
                                 @endif
                                 @if (auth()->user()->id!=$commande->user_id)
-                                <a class="btn btn-md btn-secondary display-4" href="tel:{{$commande->user->telephone}}">
+                                <a class="btn btn-md btn-secondary display-4" href="https://wa.me/{{$commande->user->telephone}}">
                                     <span class="mobi-mbri mobi-mbri-phone mbr-iconfont mbr-iconfont-btn"></span>
                                     Contacter le client</a>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="card-title">{{$commande->user->name}}</h4>
+                                            <p class="card-text">Tél: {{$commande->user->telephone}}, Email: {{$commande->user->email}}</p>
+                                        </div>
+                                    </div>
                                 @elseif ($commande->etat=='En attente')
                                 <form style="display: inline; float: right; margin-left: 3px;"
                                     action="{{ route('shop.commande.update',['commande'=>$commande,'shop'=>$commande->shop]) }}"
