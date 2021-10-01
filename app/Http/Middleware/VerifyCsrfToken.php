@@ -12,6 +12,6 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'https://katalog.tech/facture/9/confirm'
+        'https://katalog.tech/facture/confirm'
     ];
 }

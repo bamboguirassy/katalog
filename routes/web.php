@@ -301,7 +301,7 @@ Route::resource('user', UserController::class,[
     'only'=>['store','update']
 ]);
 
-Route::post('facture/{facture}/confirm','App\Http\Controllers\FactureController@instantPaymentNotificate')
+Route::post('facture/confirm','App\Http\Controllers\FactureController@instantPaymentNotificate')
 ->name('facture.pin');
 
 Route::resource('facture', FactureController::class,[
