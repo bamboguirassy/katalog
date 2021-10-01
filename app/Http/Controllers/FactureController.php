@@ -138,8 +138,7 @@ class FactureController extends Controller
         $my_api_key = Config::get('app.paytech_api_key');
         $my_api_secret = Config::get('app.paytech_api_secret');
 
-        if(hash('sha256', $my_api_secret) === $api_secret_sha256 && hash('sha256', $my_api_key) === $api_key_sha256)
-        {
+     
             //from PayTech
             if($type_event=='sale_complete') {
                 $facture->dateReglement = now();
@@ -149,9 +148,5 @@ class FactureController extends Controller
             } else {
                 // notifier de paiement sale_canceled
             }
-        }
-        else{
-            //not from PayTech
-        }
     }
 }
