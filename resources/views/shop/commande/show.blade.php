@@ -77,8 +77,7 @@
                                     Contacter le client</a>
                                     <div class="card">
                                         <div class="card-body">
-                                            <h4 class="card-title">{{$commande->user->name}}</h4>
-                                            <p class="card-text">Tél: {{$commande->user->telephone}}, Email: {{$commande->user->email}}</p>
+                                            <h4 class="card-title">{{$commande->user->name}} - Tél: {{$commande->user->telephone}}, Email: {{$commande->user->email}}</h4>
                                         </div>
                                     </div>
                                 @elseif ($commande->etat=='En attente')
