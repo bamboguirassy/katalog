@@ -41,7 +41,7 @@
                     <td>{{ $facture->methodePaiement }}</td>
                     <td>
                         @isset($facture->dateReglement)
-                        {{ date_format($facture->dateReglement,'d/m/Y') }}
+                        {{ date_format(new DateTime($facture->dateReglement),'d/m/Y') }}
                         @endisset
                     </td>
                     <td>{{ $facture->clientPhone }}</td>
