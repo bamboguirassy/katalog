@@ -65,7 +65,7 @@ class FactureController extends Controller
                 'ip_user' => $_SERVER['REMOTE_ADDR'],
                 'lang' => $_SERVER['HTTP_ACCEPT_LANGUAGE']
             ])
-                ->setTestMode(true)
+                ->setTestMode(false)
                 ->setCurrency('XOF')
                 ->setRefCommand($facture->numero)
                 ->setNotificationUrl([
