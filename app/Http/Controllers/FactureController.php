@@ -129,15 +129,9 @@ class FactureController extends Controller
     }
 
     public function instantPaymentNotificate(Request $request, Facture $facture) {
-        $type_event = $request->get('type_event');
-        $payment_method = $request->get('payment_method');
-        $client_phone = $request->get('client_phone');
-        $api_key_sha256 = $request->get('api_key_sha256');
-        $api_secret_sha256 = $request->get('api_secret_sha256');
-
-        $my_api_key = Config::get('app.paytech_api_key');
-        $my_api_secret = Config::get('app.paytech_api_secret');
-
+        $type_event = $request->input('type_event');
+        $payment_method = $request->input('payment_method');
+        $client_phone = $request->input('client_phone');
      
             //from PayTech
             if($type_event=='sale_complete') {
