@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Classes\PayTech;
 use App\Mail\SendNewFacture;
 use App\Models\Facture;
+use App\Models\User;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
@@ -46,6 +47,7 @@ class FactureController extends Controller
             'montant'=>'numeric|min:5|required',
             'description'=>'required'
         ]);
+        $user = User::find($request->get('user_id'));
         $facture = new Facture($request->all());
         $facture->delai = new DateTime($request->get('delai'));
 
@@ -73,7 +75,7 @@ class FactureController extends Controller
             if($jsonResponse['success']==1) {
                 $facture->update(['lienPaiement'=> $jsonResponse['redirect_url']]);
                 // send email to user
-                Mail::to($facture->user)->cc(Config::get('mail.cc'))->send(new SendNewFacture($facture));
+                Mail::to($user->email)->cc(Config::get('mail.cc'))->send(new SendNewFacture($facture));
             } else {
                 return back()->withErrors(['error'=>'Une erreur est survenue lors de la génération du token de paiement']);
             }
