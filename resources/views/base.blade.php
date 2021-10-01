@@ -337,7 +337,7 @@
                                     href="{{ route('shop.commande.index',compact('shop')) }}" aria-expanded="false">
                                     <span
                                         class="mobi-mbri mobi-mbri-shopping-cart mbr-iconfont mbr-iconfont-btn"></span>
-                                    Commandes
+                                   Toutes les Commandes
                                 </a>
                                 <a class="text-primary dropdown-item display-4"
                                     href="{{ route('shop.commandes.en.attente',compact('shop')) }}" aria-expanded="false">
