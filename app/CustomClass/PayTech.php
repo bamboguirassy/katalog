@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Classes;
+namespace App\CustomClass;
 
 /**
  * Created by PhpStorm.

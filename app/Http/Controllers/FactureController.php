@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Classes\PayTech;
+use App\CustomClass\PayTech;
 use App\Mail\SendNewFacture;
 use App\Models\Facture;
 use App\Models\User;
