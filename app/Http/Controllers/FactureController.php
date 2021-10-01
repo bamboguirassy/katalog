@@ -68,7 +68,7 @@ class FactureController extends Controller
                 ->setCurrency('XOF')
                 ->setRefCommand($facture->id)
                 ->setNotificationUrl([
-                    'ipn_url' => $baseUrl.'/facture/'.$facture->id.'/confirm', //only https
+                    'ipn_url' => $baseUrl.'/facture/confirm', //only https
                     'success_url' => $baseUrl,
                     'cancel_url' =>   $baseUrl
                 ])->send();
