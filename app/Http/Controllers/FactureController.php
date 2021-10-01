@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\PayTech;
 use App\Mail\SendNewFacture;
 use App\Models\Facture;
 use App\Models\User;
@@ -53,7 +54,7 @@ class FactureController extends Controller
         $baseUrl  = Config::get('app.env')=='local'?'https://katalog.tech':Config::get('app.url');
         
         if($facture->save()) {
-            $jsonResponse = (new \App\Classes\PayTech(Config::get('app.paytech_api_key'), Config::get('app.paytech_api_secret')))->setQuery([
+            $jsonResponse = (new PayTech(Config::get('app.paytech_api_key'), Config::get('app.paytech_api_secret')))->setQuery([
                 'item_name' => $facture->titre,
                 'item_price' => $facture->montant,
                 'command_name' => "Facture {$facture->titre} - via PayTech",
