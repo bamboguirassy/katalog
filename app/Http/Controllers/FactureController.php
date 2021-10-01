@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CustomClass\PayTech;
+use App\Mail\ConfirmationReglementFacture;
 use App\Mail\SendNewFacture;
 use App\Models\Facture;
 use App\Models\User;
@@ -142,6 +143,9 @@ class FactureController extends Controller
                 $facture->methodePaiement = $payment_method;
                 $facture->clientPhone = $client_phone;
                 $facture->update();
+                Mail::to($facture->user->email)
+                ->cc(Config::get('mail.cc'))
+                ->send(new ConfirmationReglementFacture($facture));
             } else {
                 // notifier de paiement sale_canceled
             }
