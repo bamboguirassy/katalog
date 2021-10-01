@@ -13,6 +13,46 @@
         Générer facture&nbsp;
     </a>
 
+    <hr>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>N°</th>
+                    <th>Titre</th>
+                    <th>Client</th>
+                    <th>Montant</th>
+                    <th>Méthode Paiement</th>
+                    <th>Date réglement</th>
+                    <th>Client Phone</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($factures as $facture)
+                <tr>
+                    <td scope="row">{{ $loop->index+1 }}</td>
+                    <td>{{ $facture->numero }}</td>
+                    <td>{{ $facture->titre }}</td>
+                    <td>{{ $facture->user->name }}</td>
+                    <td>{{ $facture->montant }} FCFA</td>
+                    <td>{{ $facture->methodePaiement }}</td>
+                    <td>
+                        @isset($facture->dateReglement)
+                        {{ date_format($facture->dateReglement,'d/m/Y') }}
+                        @endisset
+                    </td>
+                    <td>{{ $facture->clientPhone }}</td>
+                    <td></td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+    </div>
+
 </section>
 
 <div class="modal mbr-popup cid-sITulK6G2k fade" tabindex="-1" role="dialog" data-overlay-color="#000000"
@@ -54,7 +94,8 @@
                                             <option value="">Selectionner le destinataire de la facture
                                             </option>
                                             @foreach ($users as $user)
-                                            <option @if(old('user_id')==$user->id) selected @endif value="{{$user->id}}">{{ $user->name }}</option>
+                                            <option @if(old('user_id')==$user->id) selected @endif
+                                                value="{{$user->id}}">{{ $user->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -62,8 +103,9 @@
                                 <div class="col-12">
                                     <div class="mb-3">
                                         <label for="titre" class="form-label">Titre</label>
-                                        <input value="{{old('titre')}}" required="required" type="text" class="form-control" name="titre" id="titre"
-                                            aria-describedby="helpTitre" placeholder="Titre de la facture">
+                                        <input value="{{old('titre')}}" required="required" type="text"
+                                            class="form-control" name="titre" id="titre" aria-describedby="helpTitre"
+                                            placeholder="Titre de la facture">
                                         <small id="helpTitre" class="form-text text-muted">Titre de la facture
                                             générée</small>
                                     </div>
@@ -71,30 +113,33 @@
                                 <div class="col-12">
                                     <div class="mb-3">
                                         <label for="montant" class="form-label">Montant (FCFA)</label>
-                                        <input value="{{old('montant')}}" required="required" type="number" min="0" class="form-control" name="montant" id="montant"
+                                        <input value="{{old('montant')}}" required="required" type="number" min="0"
+                                            class="form-control" name="montant" id="montant"
                                             aria-describedby="helpMontant" placeholder="Montant de la facture">
                                         <small id="helpMontant" class="form-text text-muted"></small>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="mb-3">
-                                      <label for="delai" class="form-label">Délai de paiement</label>
-                                      <input value="{{old('delai')}}" required="required" type="date"
-                                        class="form-control" name="delai" id="delai" aria-describedby="delaiHelp" placeholder="Délai">
-                                      <small id="delaiHelp" class="form-text text-muted">Date d'ici laquelle la facture doit être réglée</small>
+                                        <label for="delai" class="form-label">Délai de paiement</label>
+                                        <input value="{{old('delai')}}" required="required" type="date"
+                                            class="form-control" name="delai" id="delai" aria-describedby="delaiHelp"
+                                            placeholder="Délai">
+                                        <small id="delaiHelp" class="form-text text-muted">Date d'ici laquelle la
+                                            facture doit être réglée</small>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="mb-3">
                                         <label for="description" class="form-label">Description</label>
-                                        <textarea required="required" class="form-control" name="description" id="description"
-                                            rows="3"> {{old('description')}}</textarea>
+                                        <textarea required="required" class="form-control" name="description"
+                                            id="description" rows="3"> {{old('description')}}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <button type="submit" class="btn btn-primary pull-right">Générer</button>
                                 </div>
-                                
+
                             </div>
                         </form>
                         <!--Formbuilder Form-->
