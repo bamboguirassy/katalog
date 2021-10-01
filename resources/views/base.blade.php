@@ -340,6 +340,18 @@
                                     Commandes
                                 </a>
                                 <a class="text-primary dropdown-item display-4"
+                                    href="{{ route('shop.commandes.en.attente',compact('shop')) }}" aria-expanded="false">
+                                    <span
+                                        class="mobi-mbri mobi-mbri-shopping-cart mbr-iconfont mbr-iconfont-btn"></span>
+                                    Commandes en attente ({{count($shop->commandeEnAttentes)}})
+                                </a>
+                                <a class="text-primary dropdown-item display-4"
+                                    href="{{ route('shop.commandes.en.cours',compact('shop')) }}" aria-expanded="false">
+                                    <span
+                                        class="mobi-mbri mobi-mbri-shopping-cart mbr-iconfont mbr-iconfont-btn"></span>
+                                    Commandes en cours ({{count($shop->commandeAcceptees)}})
+                                </a>
+                                <a class="text-primary dropdown-item display-4"
                                     href="{{ route('shop.produit.create',compact('shop')) }}" aria-expanded="false">
                                     <span class="mobi-mbri mobi-mbri-plus mbr-iconfont mbr-iconfont-btn"></span>
                                     Ajouter un produit

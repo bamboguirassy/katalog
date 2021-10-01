@@ -187,6 +187,16 @@ Route::group([
                 ['except'=>['create','show','edit']
             ])->middleware('is.owner');
 
+            Route::get('/commande-en-attente',function(Shop $shop) {
+                $commandes = $shop->commandeEnAttentes;
+                return view('shop.commande.list',compact('commandes','shop'));
+            })->middleware('is.owner')->name('commandes.en.attente');
+
+            Route::get('/commande-en-cours',function(Shop $shop) {
+                $commandes = $shop->commandeAcceptees;
+                return view('shop.commande.list',compact('commandes','shop'));
+            })->middleware('is.owner')->name('commandes.en.cours');
+
            Route::resource('/commande', CommandeController::class,
                 ['only'=>['show','update']
             ])->middleware('auth');

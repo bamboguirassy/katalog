@@ -12,8 +12,17 @@
 
             <div class="counter-container col-12 col-md-12 m-auto col-lg-8">
                 <div class="card">
-                    <h2 class="mbr-section-title align-left mbr-fonts-style mb-3 display-7"><strong>Les
-                            commandes</strong></h2>
+                    <h2 class="mbr-section-title align-left mbr-fonts-style mb-3 display-7">
+                        <strong>
+                            @if (\Request::route()->getName()=='shop.commandes.en.attente')
+                            Les commandes en attente
+                            @elseif (\Request::route()->getName()=='shop.commandes.en.cours')
+                            Les commandes en cours
+                            @else
+                            Toutes les commandes
+                            @endif
+                        </strong>
+                    </h2>
 
                     <h3 class="mbr-section-subtitle align-left mbr-fonts-style mb-3 display-2">
                         <strong>Vous pouvez gérer les commandes directement sur votre
@@ -46,7 +55,13 @@
             <div class="col-xl-10">
                 <div class="text-center text-lg-left">
                     <h2 class="mbr-section-title mbr-bold mbr-fonts-style display-5">
-                        Liste des commandes</h2>
+                        Liste des @if (\Request::route()->getName()=='shop.commandes.en.attente')
+                        commandes en attente
+                        @elseif (\Request::route()->getName()=='shop.commandes.en.cours')
+                        commandes en cours
+                        @else
+                        commandes (toutes)
+                        @endif</h2>
                 </div>
                 <div class="row justify-content-between no-gutters">
                     <div class="col-lg-12 tables">
@@ -77,8 +92,7 @@
                                 </a>
                             </div>
                             @endforeach
-                            @if(count($commandes)<1)
-                            <h3>Aucune commande pour le moment !</h3>
+                            @if(count($commandes)<1) <h3>Aucune commande pour le moment !</h3>
                                 @endif
                         </div>
                     </div>
