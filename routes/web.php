@@ -308,18 +308,18 @@ Route::group([
             $shops = Shop::withCount('produits','paniers','commandes','commandeEnAttentes',
             'commandeAcceptees','commandeLivrees','commandeRejetees','commandeAnnulees')->paginate(100);
             return view('admin.shop-list',compact('shops'));
-        })->name('shops');
+        })->name('shops')->middleware('admin');
         /** Liste des users */
         Route::get('users', function() {
             $users = User::withCount('paniers','commandes','commandeEnAttentes',
             'commandeAcceptees','commandeLivrees','commandeRejetees','commandeAnnulees')
             ->paginate(100);
             return view('admin.user-list', compact('users'));
-        })->name('users');
+        })->name('users')->middleware('admin');
         /** Autocomplete users */
         Route::get('autocomplete-users', function() {
             $users = User::all();
             return $users;
-        })->name('autocomplete.users');
+        })->name('autocomplete.users')->middleware('admin');
     });
 });
