@@ -5,6 +5,7 @@ use App\Http\Controllers\AttributProduitController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\CouleurProduitController;
+use App\Http\Controllers\FactureController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\MarqueController;
 use App\Http\Controllers\ProduitController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\ValeurAttributController;
 use App\Mail\ResetPassword;
 use App\Models\Categorie;
 use App\Models\CouleurProduit;
+use App\Models\Facture;
 use App\Models\Panier;
 use App\Models\Paproduit;
 use App\Models\Produit;
@@ -299,6 +301,13 @@ Route::resource('user', UserController::class,[
     'only'=>['store','update']
 ]);
 
+Route::post('facture/{facture}/confirm','App\Http\Controllers\FactureController@instantPaymentNotificate')
+->name('facture.pin');
+
+Route::resource('facture', FactureController::class,[
+    'only'=>['store']
+])->middleware('admin');
+
 Route::group([
     'prefix' => '/admin',
 ], function () {
@@ -316,6 +325,12 @@ Route::group([
             ->paginate(100);
             return view('admin.user-list', compact('users'));
         })->name('users')->middleware('admin');
+        /** Liste des factures */
+        Route::get('factures',function() {
+            $factures = Facture::all();
+            $users = User::all();
+            return view('admin.facture-list',compact('factures','users'));
+        })->name('factures')->middleware('admin');
         /** Autocomplete users */
         Route::get('autocomplete-users', function() {
             $users = User::all();

@@ -416,6 +416,11 @@
                                     <span class="mobi-mbri mbri-users mbr-iconfont mbr-iconfont-btn"></span>
                                     Users
                                 </a>
+                                <a class="text-primary dropdown-item display-4" href="{{ route('admin.factures') }}"
+                                    aria-expanded="false">
+                                    <span class="mobi-mbri mbri-new-file mbr-iconfont mbr-iconfont-btn"></span>
+                                    Factures
+                                </a>
                             </div>
                         </li>
                         @endif

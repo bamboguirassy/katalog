@@ -231,4 +231,7 @@ return [
 
     ],
 
+    'paytech_api_key'=>env('PAYTECH_API_KEY'),
+    'paytech_api_secret'=>env('PAYTECH_API_SECRET')
+
 ];
