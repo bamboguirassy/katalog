@@ -15,7 +15,6 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                 <div class="row justify-content-center pt-1 card-primary">
                     <div class="col-12 md-pb col-md-12 col-lg-6">
                         <div class="text-wrapper align-left">
-                            {{colors.primary}}
                             <br>
                             <h1 class="mbr-section-title align-left mbr-fonts-style mb-4"
                                 data-app-selector=".mbr-section-title" mbr-theme-style="display-2" mbr-if="showTitle">
