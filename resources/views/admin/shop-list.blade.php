@@ -19,6 +19,7 @@
                             <th>Téléphone</th>
                             <th>Catégorie</th>
                             <th>Date Création</th>
+                            <th>Couleur</th>
                             <th>Produits</th>
                             <th>Paniers</th>
                             <th>Total Cmdes</th>
@@ -41,6 +42,9 @@
                             </td>
                             <td>{{$shop->categorie->nom}}</td>
                             <td>{{date_format($shop->created_at,'d/m/Y')}}</td>
+                            <td>
+                                <div style="height: 25; width: 50px; background: {{$shop->couleur}}"></div>
+                            </td>
                             <td>{{$shop->produits_count}}</td>
                             <td>{{$shop->paniers_count}}</td>
                             <td>{{$shop->commandes_count}}</td>
@@ -68,6 +72,7 @@
                             <th>Téléphone</th>
                             <th>Catégorie</th>
                             <th>Date Création</th>
+                            <th>Couleur</th>
                             <th>Produits</th>
                             <th>Paniers</th>
                             <th>Total Cmdes</th>
