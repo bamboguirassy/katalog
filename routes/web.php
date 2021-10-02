@@ -118,7 +118,7 @@ return view('user.profil',['user'=>Auth::user()]);
 })->middleware('auth')->name('user.profil');
 
 Route::get('/new-shop', function () {
-    $types = Type::all();
+    $types = Type::orderby('nom')->get();
     return view('shop.new',compact('types'));
 })->name('shop.new');
 

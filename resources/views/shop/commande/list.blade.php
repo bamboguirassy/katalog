@@ -36,7 +36,7 @@
     </div>
 </section>
 
-<section data-bs-version="5.1" class="info3 cid-sIYy7aHyFl" id="info3-3o">
+<section data-bs-version="5.1" class="info3 cid-sIYy7aHyFl card-primary" id="info3-3o">
     <div class="container">
         <div class="row justify-content-center">
             <div class="card col-12 col-lg-10">
@@ -68,8 +68,7 @@
                         <div class="row justify-content-center no-gutters">
                             @foreach ($commandes as $commande)
                             <div class="col-sm-4 col-10 column" style="border: 1px solid lightgray;">
-                                <a href="{{ route('shop.commande.show',compact('shop','commande')) }}">
-
+                                <a class="text-primary" href="{{ route('shop.commande.show',compact('shop','commande')) }}">
                                     <div class="table__title text-center text-sm-left border__bot px-3">
                                         <h3 class="title mbr-medium mbr-fonts-style display-7">
                                             {{$commande->numero}}</h3>

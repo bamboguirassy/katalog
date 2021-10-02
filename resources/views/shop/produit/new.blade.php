@@ -6,12 +6,11 @@
 
 @section('body')
 <section ng-controller="ProduitNewController">
-    <section data-bs-version="5.1" class="article1 cid-sIqERhONdL" id="content01-13">
+    <section data-bs-version="5.1" class="article1 cid-sIqERhONdL card-primary" id="content01-13">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-12">
-                    <h1 class="mbr-section-title align-left mbr-fonts-style mb-3 display-7">Nouveau produit ?</h1>
-
+                    <h1 class="mbr-section-title align-left mbr-fonts-style mb-3 display-7 text-white">Nouveau produit ?</h1>
                 </div>
                 <div class="col-lg-8">
                     <p class="mbr-text align-left mbr-fonts-style display-5">Ajoutez rapidement des produits à votre

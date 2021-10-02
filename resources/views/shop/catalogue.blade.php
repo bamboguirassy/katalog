@@ -8,7 +8,7 @@
 <div class="row">
     <div class="col-12">
         <section data-bs-version="5.1" class="info3 cid-sIqCr2MrZ5" id="info3-y">
-            <div class="mbr-overlay" style="opacity: 0.6; background-color: #1C73BA;">
+            <div class="mbr-overlay" style="opacity: 0.6; background-color: @{{colors.primary}};">
             </div>
             <div class="container">
                 <div class="row justify-content-center">
@@ -35,7 +35,7 @@
                 </div>
             </div>
         </section>
-        <section data-bs-version="5.1" class="gallery1 cid-sIpMwjCas3" id="gallery1-8">
+        <section data-bs-version="5.1" class="gallery1 cid-sIpMwjCas3 card-primary" id="gallery1-8">
             <div class="container">
                 <div class="mbr-section-head">
                     <h5 class="mbr-section-subtitle mbr-fonts-style align-center mb-0 display-7">

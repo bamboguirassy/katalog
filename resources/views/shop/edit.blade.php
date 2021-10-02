@@ -5,7 +5,7 @@
 @section('description',"Créer votre boutique dès aujourd'hui sur ".config('app.name'))
 
 @section('body')
-<section data-bs-version="5.1" class="header3 agencym4_header3 cid-sIqqheaqtl" id="header3-p">
+<section data-bs-version="5.1" class="header3 agencym4_header3 cid-sIqqheaqtl card-primary" id="header3-p">
     <div class="container align-center">
         <div class="row justify-content-center">
             <div class="media-container-column mbr-white col-md-10">
@@ -14,7 +14,6 @@
             </div>
         </div>
     </div>
-
 </section>
 
 <section ng-init="init({{$shop}})" class="form cid-sIqqPj8uvi" id="formbuilder-q" ng-controller="ShopNewController">
@@ -95,6 +94,13 @@
                             <textarea name="description" placeholder="Parlez nous un peu de votre boutique."
                                 data-form-field="description" required="required" class="form-control display-7"
                                 id="description-formbuilder-q">{{old('description') ?? $shop->description}}</textarea>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                              <label for="couleur">Couleur</label>
+                              <br>
+                              <input ng-model="colors.primary" type="color" name="couleur" id="couleur">
+                            </div>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <hr>

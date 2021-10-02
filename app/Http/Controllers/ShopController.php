@@ -56,6 +56,7 @@ class ShopController extends Controller
             'adresse'=>'required',
             'email'=>'required|unique:shops,email|unique:users,email',
             'password'=>'required|min:6|confirmed',
+            'couleur'=>'required'
         ]);
         $user = new User();
         $user->name = $request->get('nom');
@@ -126,7 +127,8 @@ class ShopController extends Controller
             'pseudonyme'=>'required',
             'categorie_id'=>'exists:types,id',
             'telephonePrimaire'=>'required|min:9',
-            'description'=>'required'
+            'description'=>'required',
+            'couleur'=>'required|min:7'
         ]);
         // verifier si le nouveau pseudo n'est pas utilisé
         $shopVerif = Shop::where('pseudonyme',$request->get('pseudonyme'))->where('id','!=',$shop->id)->get();

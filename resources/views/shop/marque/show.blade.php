@@ -7,7 +7,7 @@
 @section('body')
 <div class="row">
     <div class="col-12">
-        <section data-bs-version="5.1" class="extHeader cid-sIpKoQ30mN" id="extHeader21-3">
+        <section data-bs-version="5.1" class="extHeader cid-sIpKoQ30mN card-primary" id="extHeader21-3">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1380px"
                 height="760px" viewBox="0 0  1380 760" preserveAspectRatio="xMidYMid meet">
                 <rect id="svgEditorBackground" x="0" y="0" width="1380" height="760" style="fill: none; stroke: none;">
@@ -20,7 +20,7 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-8 py-4 m-auto">
                         <br>
-                        <h1 class="mbr-section-title mbr-regular pb-3 align-left mbr-fonts-style display-1">
+                        <h1 class="text-primary mbr-section-title mbr-regular pb-3 align-left mbr-fonts-style display-1">
                             {{$shop->nom}} -> {{$marque->nom}}
                         </h1>
                         <p class="mbr-text mbr-light pb-3 align-left mbr-fonts-style display-7">
@@ -51,7 +51,7 @@
                 </div>
             </div>
         </section>
-        <section data-bs-version="5.1" class="gallery1 cid-sIpMwjCas3" id="gallery1-8">
+        <section data-bs-version="5.1" class="gallery1 cid-sIpMwjCas3 card-primary" id="gallery1-8">
             <div class="container">
                 <div class="mbr-section-head">
                     <h5 class="mbr-section-subtitle mbr-fonts-style align-center mb-0 display-7">

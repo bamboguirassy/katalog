@@ -3,6 +3,10 @@ app.controller('MainController', ($rootScope, $http) => {
     $rootScope.shop = null;
     $rootScope.selectedProduct = null;
     $rootScope.panier = null;
+    $rootScope.colors = { 
+        primary: '#1c73ba',
+        color : 'white'
+    };
 
     $rootScope.setCurrentUser = (user) => {
         $rootScope.user = user;
@@ -10,6 +14,7 @@ app.controller('MainController', ($rootScope, $http) => {
 
     $rootScope.setCurrentShop = (shop) => {
         $rootScope.shop = shop;
+        $rootScope.colors.primary = shop.couleur;
         setTimeout(() => {
             if ($rootScope.user && $rootScope.user.type == 'client') {
                 $rootScope.getPanier();
@@ -47,7 +52,7 @@ app.controller('MainController', ($rootScope, $http) => {
                 if (data) {
                     $rootScope.panier = data[0];
                 }
-            },err => alert(err.data.message));
+            }, err => alert(err.data.message));
     }
 
     $('#logo-formbuilder-q').change(() => {
@@ -73,7 +78,7 @@ app.controller('MainController', ($rootScope, $http) => {
                             || shop.nom.toUpperCase().startsWith(searchText)
                             || shop.pseudonyme.toUpperCase() == searchText
                             || shop.pseudonyme.toUpperCase().startsWith(searchText)
-                            || shop.nom.toUpperCase().includes(searchText) 
+                            || shop.nom.toUpperCase().includes(searchText)
                             || shop.pseudonyme.toUpperCase().includes(searchText);
                     });
                 });
@@ -111,10 +116,10 @@ app.controller('MainController', ($rootScope, $http) => {
 
                     return _.filter(response.data, function (produit) {
                         return produit.nom.toUpperCase() == searchText
-                            || produit.nom.toUpperCase().includes(searchText) || 
-                            produit.categorie.nom.toUpperCase()==searchText 
+                            || produit.nom.toUpperCase().includes(searchText) ||
+                            produit.categorie.nom.toUpperCase() == searchText
                             || produit.categorie.nom.toUpperCase().includes(searchText)
-                            || produit?.marque?.nom.toUpperCase()==searchText 
+                            || produit?.marque?.nom.toUpperCase() == searchText
                             || produit?.marque?.nom.toUpperCase().includes(searchText);
                     });
                 });
@@ -135,7 +140,7 @@ app.controller('MainController', ($rootScope, $http) => {
             };
         },
         itemSelected: function (e) {
-            if($rootScope.user && $rootScope.user.id==$rootScope.shop.user_id) {
+            if ($rootScope.user && $rootScope.user.id == $rootScope.shop.user_id) {
                 window.location.href = `/${$rootScope.shop.pseudonyme}/produit/${e.item.id}`;
             } else {
                 window.location.href = `/${$rootScope.shop.pseudonyme}/produit/${e.item.id}/display`;

@@ -5,7 +5,7 @@
 @section('description',"Créer votre boutique dès aujourd'hui sur ".config('app.name'))
 
 @section('body')
-<section data-bs-version="5.1" class="header3 agencym4_header3 cid-sIqqheaqtl" id="header3-p">
+<section data-bs-version="5.1" class="header3 agencym4_header3 cid-sIqqheaqtl card-primary" id="header3-p">
     <div class="container align-center">
         <div class="row justify-content-center">
             <div class="media-container-column mbr-white col-md-10">
@@ -105,7 +105,7 @@
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <hr>
                         </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12">
+                        {{-- <div class="col-lg-12 col-md-12 col-sm-12">
                             <p class="mbr-fonts-style display-7">Lien réseaux sociaux</p>
                         </div>
                         <div data-for="facebook" class="col form-group">
@@ -138,13 +138,20 @@
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <hr>
-                        </div>
+                        </div> --}}
                         <div class="col-lg-12 col-md-12 col-sm-12 form-group" data-for="adresse">
                             <label for="adresse-formbuilder-q"
                                 class="form-control-label mbr-fonts-style display-7">Adresse ou emplacement</label>
                             <textarea name="adresse" placeholder="Adresse de votre boutique" data-form-field="adresse"
                                 required="required" class="form-control display-7"
                                 id="adresse-formbuilder-q">{{old('adresse')}}</textarea>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                              <label for="couleur">Couleur</label>
+                              <br>
+                              <input ng-model="colors.primary" type="color" name="couleur" id="couleur">
+                            </div>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <hr>
@@ -190,7 +197,7 @@
     <div class="container">
         <div class="media-container-row">
             <div class="col-12">
-                <h3 class="mbr-section-title mb-3 align-center mbr-fonts-style display-2">
+                <h3 class="mbr-section-title mb-3 align-center mbr-fonts-style display-5">
                     <strong>Partager cette page !</strong>
                 </h3>
                 <div>

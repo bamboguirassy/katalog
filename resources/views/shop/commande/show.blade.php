@@ -117,7 +117,7 @@
                 </div>
             </div>
         </section>
-        <section data-bs-version="5.1" class="info3 cid-sIYAlof4Zy" id="info3-3t">
+        <section data-bs-version="5.1" class="info3 cid-sIYAlof4Zy card-primary" id="info3-3t">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="card col-12 col-lg-10">
@@ -145,7 +145,8 @@
                                     <div class="col-sm-4 col-10 column" style="border: 2px solid gray;">
                                         <div class="table__title text-center text-sm-left border__bot px-3">
                                             <h3 class="title mbr-medium mbr-fonts-style display-7">
-                                                {{$produit->produit->nom}}</h3>
+                                                <b>{{$produit->produit->nom}}</b>
+                                            </h3>
                                         </div>
                                         @if (count($produit->produit->images)>0)
                                         <img style="max-height: 100px; width: 100px; display: inline; margin-left: 25%;"

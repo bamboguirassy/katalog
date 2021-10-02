@@ -12,7 +12,7 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
     <div class="col-12">
         <section data-bs-version="5.1" class="header2 cid-sIq8h1uDBV" id="header02-d">
             <div class="container">
-                <div class="row row-bg justify-content-center pt-1">
+                <div class="row justify-content-center pt-1 card-primary">
                     <div class="col-12 md-pb col-md-12 col-lg-6">
                         <div class="text-wrapper align-left">
                             <br>
@@ -34,11 +34,12 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                                     href="https://wa.me/+221778224129">+221778224129</a>.
                             </p>
                             <div class="mbr-section-btn mt-4">
+
                                 @guest
-                                <a class="btn btn-secondary display-7" href="{{ route('shop.new') }}"><span
-                                        class="mobi-mbri mobi-mbri-arrow-next mbr-iconfont mbr-iconfont-btn"></span>
-                                        Créer une boutique
-                                    </a>
+                                <a class="btn btn-secondary display-7" href="{{ route('shop.new') }}">
+                                    <span class="mobi-mbri mobi-mbri-arrow-next mbr-iconfont mbr-iconfont-btn"></span>
+                                    Créer une boutique
+                                </a>
                                 <a class="btn btn-success display-7" href="#" data-toggle="modal" data-bs-toggle="modal"
                                     data-target="#mbr-popup-1f" data-bs-target="#mbr-popup-1f"><span
                                         class="mobi-mbri mobi-mbri-login mbr-iconfont mbr-iconfont-btn"></span>Se
@@ -59,8 +60,8 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                     <div class="col-12 col-lg-6">
                         <div class="card-wrapper">
                             <div class="card-box align-left">
-                                <h4 class="card-title mbr-fonts-style mb-4 display-2"><strong>C'est quoi Katalog
-                                        ?</strong>
+                                <h4 class="card-title mbr-fonts-style mb-4 display-2">
+                                    <strong>C'est quoi Katalog ?</strong>
                                 </h4>
                                 <p class="mbr-text mbr-fonts-style mb-4 display-7">
                                     Votre plateforme d'exposition de produits en ligne pour une meilleure visibilité et
@@ -69,8 +70,8 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                                 @guest
                                 <div class="mbr-section-btn">
                                     <a class="btn btn-primary display-4" href="{{ route('shop.new') }}"><span
-                                            class="mobi-mbri mobi-mbri-plus mbr-iconfont mbr-iconfont-btn"
-                                            style="color: #1C73BA;"></span>Ouvrir gratuitement votre boutique&nbsp;</a>
+                                            class="mobi-mbri mobi-mbri-plus mbr-iconfont mbr-iconfont-btn"></span>Ouvrir
+                                        gratuitement votre boutique&nbsp;</a>
                                 </div>
                                 @endguest
                             </div>
@@ -116,121 +117,6 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                 </div>
             </div>
         </section>
-        @auth
-        @if (auth()->user()->type=='admin')
-        {{-- <section data-bs-version="5.1" class="content4 cid-sIq8PMNs4P" id="content4-g">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="title col-md-12 col-lg-10">
-                        <h4 class="mbr-section-subtitle align-center mbr-fonts-style mb-4 display-5">Découvrir les
-                            boutiques
-                            actuellement ouvertes sur Katalog.<br></h4>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <section data-bs-version="5.1" class="team2 cid-sIq8MfDSMW" xmlns="http://www.w3.org/1999/html" id="team2-f">
-            <div class="container">
-                <div class="row">
-                    @foreach ($shops as $shopItem)
-                    <div class="col-12 col-lg-6 mt-2">
-                        <div class="card">
-                            <div class="card-wrapper">
-                                <div class="row align-items-center">
-                                    <div class="col-12 col-md-2"
-                                        style="border: 2px solid #1c73ba; border-bottom: 2px solid white;">
-                                        <div class="image-wrapper">
-                                            <a href="{{route('shop.home',['shop'=>$shopItem])}}">
-                                                @isset($shopItem->logo)
-                                                <img src="{{ asset('uploads/shops/'.$shopItem->logo) }}" alt="">
-                                                @else
-                                                <img src="{{ asset('assets/images/votre-logo-ici.png') }}" alt="">
-                                                @endisset
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md" style="border-left: 3px solid white;">
-                                        <div class="card-box">
-                                            <a href="{{route('shop.home',['shop'=>$shopItem])}}">
-                                                <h5 class="card-title mbr-fonts-style m-0 display-5">
-                                                    <strong>{{ $shopItem->nom }}</strong>
-                                                </h5>
-                                                <h6 class="card-subtitle mbr-fonts-style mt-2 mb-1 display-4">
-                                                    <b class="category-badge">{{$shopItem->categorie->nom}}
-                                                    </b>
-                                                </h6>
-                                                <p class="mbr-text mbr-fonts-style display-7">
-                                                    {{ \Illuminate\Support\Str::limit($shopItem->description, 120, '...') }}
-                                                </p>
-                                            </a>
-                                            <div class="social-row display-7"
-                                                style="border-top: 3px solid white; padding-top: 5px;">
-                                                @isset($shopItem->facebook)
-                                                <div class="soc-item">
-                                                    <a rel="noreferrer" href="{{ $shopItem->facebook }}"
-                                                        target="_blank">
-                                                        <span class="mbr-iconfont socicon socicon-facebook"></span>
-                                                    </a>
-                                                </div>
-                                                @endisset
-                                                @isset($shopItem->twitter)
-                                                <div class="soc-item">
-                                                    <a rel="noreferrer" href="{{ $shopItem->twitter }}" target="_blank">
-                                                        <span class="mbr-iconfont socicon socicon-twitter"></span>
-                                                    </a>
-                                                </div>
-                                                @endisset
-                                                @isset($shopItem->instagram)
-                                                <div class="soc-item">
-                                                    <a rel="noreferrer" href="{{ $shopItem->instagram }}"
-                                                        target="_blank">
-                                                        <span class="mbr-iconfont socicon socicon-instagram"></span>
-                                                    </a>
-                                                </div>
-                                                @endisset
-                                                @isset($shopItem->linkedin)
-                                                <div class="soc-item">
-                                                    <a rel="noreferrer" href="{{ $shopItem->linkedin }}"
-                                                        target="_blank">
-                                                        <span class="mbr-iconfont socicon-linkedin socicon"></span>
-                                                    </a>
-                                                </div>
-                                                @endisset
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-        <section data-bs-version="5.1" class="content12 cid-sIqcTJYywr" id="content12-l">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-md-12 col-lg-4">
-                        <div class="mbr-section-btn align-center">
-                            @if ($shops->currentPage()!=1)
-                            <a class="btn btn-success display-4" href="{{$shops->prevPage()}}"><span
-                                    class="mbri-left mbr-iconfont mbr-iconfont-btn"
-                                    style="color: rgb(220, 143, 29);"></span>Précédent</a>
-                            @endif
-                            @if ($shops->currentPage()!=$shops->lastPage())
-                            <a class="btn btn-success display-4" href="{{ $shops->nextPage() }}"><span
-                                    class="mbri-right mbr-iconfont mbr-iconfont-btn"
-                                    style="color: rgb(220, 143, 29);"></span>Suivant</a></div>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </section>
-         --}}
-        @endif
-        @endauth
 
         <section data-bs-version="5.1" class="content6 cid-sIqdBA3T3C" id="content6-m">
             <div class="container">
@@ -255,7 +141,7 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
                 <div class="row justify-content-center mt-4">
                     <div class="col-lg-8 mx-auto" data-form-type="formoid">
                         <!--Formbuilder Form-->
-                        <form action="https://mobirise.eu/" method="POST" class="mbr-form form-with-styler"
+                        <form action="https://mobirise.eu/" method="POST" class="mbr-form form-with-styler card-primary"
                             data-form-title="Contact Form"><input type="hidden" name="email" data-form-email="true"
                                 value="RgLf7/b9VdMQzVt6GK3iwLM4ToNDUS1Le7ePU62b2qcU5vIqJNv6OIqN6Scn9DwoWe0Iek1HyXjlk67vr2z8OYyv7jcCMrURiaB+M1E8PFgw3h5qkKtXYdanXCf4PYgI.J+N4wtaV8x27zWuU98qu1V4oupNHSG/c6QxdB84bx0C5TR/eVuTLrhT07GAAtsYCFVZ9jpnYhYArD/ebKxft4EU2SZH5GuYead3gySjQfZgXOr06wi203qExqw+FCM//">
                             <div class="row">

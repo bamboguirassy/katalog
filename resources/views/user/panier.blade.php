@@ -7,7 +7,7 @@
 @section('body')
 <div class="row" ng-cloak>
     <div class="col-12" ng-controller="PanierController" ng-init="initPanier({{$panier}},{{$montant}})">
-        <section data-bs-version="5.1" class="content1 cid-sITwirkIJg" id="content01-38">
+        <section data-bs-version="5.1" class="content1 cid-sITwirkIJg card-primary" id="content01-38">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-12 col-lg md-pb text-white">
@@ -130,7 +130,7 @@
         <h3 class="text-center b">Votre panier est vide...</h3>
         @endif
 
-        <section data-bs-version="5.1" class="info3 cid-sIYsC74kwn" id="info3-3c">
+        <section data-bs-version="5.1" class="info3 cid-sIYsC74kwn card-primary" id="info3-3c">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="card col-12 col-lg-10">
@@ -144,7 +144,6 @@
         </section>
 
         <section data-bs-version="5.1" class="content4 cid-sIYrSkcD8K" id="extContacts4-3b">
-
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -152,14 +151,12 @@
                             {{$shop->nom}}
                         </h4>
                     </div>
-
-                    <div class="col-lg-8">
-
+                    <div class="col-lg-6">
                         <p class="mbr-text pb-2 align-left mbr-fonts-style display-4">
                             {{ $shop->description }}
                         </p>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-6">
                         <p class="items items-col align-left mbr-fonts-style display-4">
                             <strong>EMAIL:</strong> &nbsp;<a
                                 href="mailto:{{$shop->email}}">{{$shop->email}}</a><br><strong>CATEGORIE:</strong>

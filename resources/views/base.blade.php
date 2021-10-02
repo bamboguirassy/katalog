@@ -73,10 +73,30 @@
     <link rel="apple-touch-startup-image"
         media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
         href="{{ asset('assets/images/apple-launch-2048x2732.png') }}">
+        <style>
+            .btn-primary {
+                background-color: @{{colors.primary}} !important;
+            }
+            .card-primary {
+                background-color: @{{colors.primary}} !important;
+                color: @{{colors.color}} !important;
+            }
+            .btn-secondary {
+                color: @{{colors.primary}} !important;
+            }
+            .text-primary {
+                color: @{{colors.primary}} !important;
+            }
+            .icon-box {
+                background-color: @{{colors.primary}} !important;
+            }
+            .colorpick-eyedropper-input-trigger {
+                display: none;
+            }
+            .custom {}
+        </style>
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="">
-    <script data-ad-client="ca-pub-1024803261208249" async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
 
 <body ng-controller="MainController">
@@ -88,7 +108,7 @@
     @endisset
     <section data-bs-version="5.1" class="menu menu1 cid-sJc9pEj434" once="menu" id="menu1-3w">
         <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
-            <div class="menu-tite mbr-fonts-style display-4 text-white">
+            <div class="menu-tite mbr-fonts-style display-4 card-primary">
                 <div>
                     @isset($shop)
                     <input ng-model="produitName" auto-complete="produitAutoCompleteOptions"
@@ -106,7 +126,7 @@
                         <a href="{{ route('home') }}" class="mbr-white">{{config('app.name')}}</a>
             </strong>, votre plateforme de proximité pour mieux gérer les
             ventes.</h3> --}}
-            <div class="container">
+            <div class="container text-primary">
                 <div class="navbar-brand">
                     <span class="navbar-logo">
                         @isset($shop)
@@ -337,10 +357,11 @@
                                     href="{{ route('shop.commande.index',compact('shop')) }}" aria-expanded="false">
                                     <span
                                         class="mobi-mbri mobi-mbri-shopping-cart mbr-iconfont mbr-iconfont-btn"></span>
-                                   Toutes les Commandes
+                                    Toutes les Commandes
                                 </a>
                                 <a class="text-primary dropdown-item display-4"
-                                    href="{{ route('shop.commandes.en.attente',compact('shop')) }}" aria-expanded="false">
+                                    href="{{ route('shop.commandes.en.attente',compact('shop')) }}"
+                                    aria-expanded="false">
                                     <span
                                         class="mobi-mbri mobi-mbri-shopping-cart mbr-iconfont mbr-iconfont-btn"></span>
                                     Commandes en attente ({{count($shop->commandeEnAttentes)}})
@@ -465,14 +486,15 @@
     {{-- fin panier client --}}
 
 
-    <section data-bs-version="5.1" class="footer2 cid-sIpIi9d37Z" once="footers" id="footer02-c">
+    <section data-bs-version="5.1" class="footer2 cid-sIpIi9d37Z card-primary" once="footers" id="footer02-c">
         <div class="container">
             <div class="media-container-row align-center mbr-white">
                 <div class="col-12">
                     <p class="mbr-text mb-0 mbr-fonts-style display-7">
                         © Copyright {{date_format(new DateTime(),'Y')}} <a rel="noreferrer"
-                            href="https://bambogroup.net" class="text-danger" target="_blank">Bambo
-                            GROUP</a> - Tous droits réservés</p>
+                            href="https://bambogroup.net" class="text-white" target="_blank">
+                            <b><u>Bambo GROUP</u></b>
+                            </a> - Tous droits réservés</p>
                 </div>
             </div>
         </div>

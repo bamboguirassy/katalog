@@ -5,7 +5,7 @@
 @section('description',$shop->description)
 
 @section('body')
-<section data-bs-version="5.1" class="content5 cid-sIqITZHSZd" id="extContacts5-19">
+<section data-bs-version="5.1" class="content5 cid-sIqITZHSZd card-primary" id="extContacts5-19">
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
@@ -109,9 +109,9 @@
         </div>
         <div class="row justify-content-center mt-4">
             <div class="card col-12 col-md-6">
-                <div class="card-wrapper">
+                <div class="card-wrapper card-primary">
                     <div class="image-wrapper">
-                        <span class="mbr-iconfont mobi-mbri-phone mobi-mbri"></span>
+                        <span class="mbr-iconfont mobi-mbri-phone mobi-mbri text-white"></span>
                     </div>
                     <div class="text-wrapper">
                         <h6 class="card-title mbr-fonts-style mb-1 display-5">
@@ -125,9 +125,9 @@
                 </div>
             </div>
             <div class="card col-12 col-md-6">
-                <div class="card-wrapper">
+                <div class="card-wrapper card-primary">
                     <div class="image-wrapper">
-                        <span class="mbr-iconfont mobi-mbri-letter mobi-mbri"></span>
+                        <span class="mbr-iconfont mobi-mbri-letter mobi-mbri text-white"></span>
                     </div>
                     <div class="text-wrapper">
                         <h6 class="card-title mbr-fonts-style mb-1 display-5">
@@ -140,9 +140,9 @@
                 </div>
             </div>
             <div class="card col-12 col-md-6">
-                <div class="card-wrapper">
+                <div class="card-wrapper card-primary">
                     <div class="image-wrapper">
-                        <span class="mbr-iconfont mobi-mbri-globe mobi-mbri"></span>
+                        <span class="mbr-iconfont mobi-mbri-globe mobi-mbri text-white"></span>
                     </div>
                     <div class="text-wrapper">
                         <h6 class="card-title mbr-fonts-style mb-1 display-5">
@@ -155,9 +155,9 @@
                 </div>
             </div>
             <div class="card col-12 col-md-6">
-                <div class="card-wrapper">
+                <div class="card-wrapper card-primary">
                     <div class="image-wrapper">
-                        <span class="mbr-iconfont mobi-mbri-bulleted-list mobi-mbri"></span>
+                        <span class="mbr-iconfont mobi-mbri-bulleted-list mobi-mbri text-white"></span>
                     </div>
                     <div class="text-wrapper">
                         <h6 class="card-title mbr-fonts-style mb-1 display-5">

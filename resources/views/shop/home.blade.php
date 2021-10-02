@@ -10,18 +10,18 @@
 <div class="row">
     <div class="col-12" style="padding: 0px;">
         <section data-bs-version="5.1" class="extHeader cid-sIpKoQ30mN" id="extHeader21-3">
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1380px"
+            <svg class="card-primary" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1380px"
                 height="760px" viewBox="0 0  1380 760" preserveAspectRatio="xMidYMid meet">
                 <rect id="svgEditorBackground" x="0" y="0" width="1380" height="760" style="fill: none; stroke: none;">
                 </rect>
-                <ellipse id="e1_ellipse" cx="411" cy="-89" style="fill:khaki;stroke:black;stroke-width:0px;" rx="842"
+                <ellipse class="card-primary" id="e1_ellipse" cx="411" cy="-89" style="fill:khaki;stroke:black;stroke-width:0px;" rx="842"
                     ry="677" transform="matrix(1.10937 0 0 1.10937 -41.7954 -68.1567)"></ellipse>
             </svg>
 
             <div class="container align-center">
                 <div class="row">
                     <div class="col-md-12 col-lg-6 py-4 m-auto">
-                        <h1 class="mbr-section-title mbr-regular pb-3 align-left mbr-fonts-style display-1">
+                        <h1 class="mbr-section-title text-primary mbr-regular pb-3 align-left mbr-fonts-style display-1">
                             {{$shop->nom}}</h1>
 
                         <p class="mbr-text mbr-light pb-3 align-left mbr-fonts-style display-7">
@@ -50,7 +50,7 @@
                     <div class="card col-12">
                         <div class="card-wrapper">
                             <div class="card-box align-left" style="font-size: 23px;">
-                                <a
+                                <a style="color: black;"
                                     href="{{ route('shop.categorie.show',compact('shop','categorie')) }}"><strong> >>
                                         {{$categorie->nom}} </strong></a>
                             </div>
@@ -60,7 +60,7 @@
             </div>
         </section>
 
-        <section data-bs-version="5.1" class="gallery1 cid-sIpMwjCas3" id="gallery1-8">
+        <section data-bs-version="5.1" class="gallery1 cid-sIpMwjCas3 card-primary" id="gallery1-8">
             <div class="container">
                 <div class="row content-margin">
                     @foreach ($categorie->produits as $produit)
@@ -99,7 +99,7 @@
                 </div>
             </div>
         </section>
-        <section data-bs-version="5.1" class="gallery1 cid-sIpMwjCas3 pt-1" id="gallery1-8">
+        <section data-bs-version="5.1" class="gallery1 cid-sIpMwjCas3 pt-1 card-primary" id="gallery1-8">
             <div class="container">
                 <div class="mbr-section-head mb-0">
                     <h5 class="mbr-section-subtitle mbr-fonts-style align-center mb-0 display-7">
@@ -216,7 +216,7 @@
                 </div>
             </div>
         </section>
-        <section data-bs-version="5.1" class="info3 cid-sIYy7aHyFl" id="info3-3o">
+        <section data-bs-version="5.1" class="info3 cid-sIYy7aHyFl card-primary" id="info3-3o">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="card col-12 col-lg-10">

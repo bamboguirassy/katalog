@@ -8,7 +8,7 @@
 <section data-bs-version="5.1" class="team2 cid-sK1BN2qffr" xmlns="http://www.w3.org/1999/html" id="team02-4v">
     <div class="container">
         <div class="card">
-            <div class="card-wrapper">
+            <div class="card-wrapper card-primary">
                 <div class="row align-items-center">
                     <div class="col-12 col-md-12 col-lg-5">
                         <div class="image-wrapper">
@@ -49,7 +49,7 @@
         </div>
     </div>
 </section>
-<section class="form cid-sK1DHE7uCK" id="formbuilder-4w">
+<section class="form cid-sK1DHE7uCK card-primary" id="formbuilder-4w">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto mbr-form" data-form-type="formoid">

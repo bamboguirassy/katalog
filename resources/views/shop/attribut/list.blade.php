@@ -68,8 +68,7 @@
                                         <hr>
                                     </div>
                                     <div class="col">
-                                        <button type="submit" class="btn btn-primary display-7"><span
-                                                class="mobi-mbri mobi-mbri-save mbr-iconfont mbr-iconfont-btn"></span>
+                                        <button type="submit" class="btn btn-primary display-7">
                                             Enregistrer
                                         </button>
                                     </div>
@@ -173,21 +172,22 @@
                                     <div class="row">
                                         <div class="col-auto form-group" data-for="valeur">
                                             <label for="valeur-mbr-popup-44"
-                                                class="form-control-label mbr-fonts-style display-7">Ajouter des valeurs</label>
+                                                class="form-control-label mbr-fonts-style display-7">Ajouter des
+                                                valeurs</label>
                                         </div>
                                         <div class="col-12" ng-repeat="newValue in newValues">
-                                            <input ng-model="newValue.valeur"
-                                                type="text"
-                                                name="valeur@{{$index+1}}" placeholder="Valeur @{{$index+1}}" 
-                                                required="required" class="form-control display-7"
-                                                id="valeur-mbr-popup-44@{{$index}}">
+                                            <input ng-model="newValue.valeur" type="text" name="valeur@{{$index+1}}"
+                                                placeholder="Valeur @{{$index+1}}" required="required"
+                                                class="form-control display-7" id="valeur-mbr-popup-44@{{$index}}">
                                             <hr>
                                         </div>
                                         <div class="col-12">
-                                            <button ng-disabled="newValues.length<2" ng-click="addNewValueLine(false)" type="button" class="btn btn-danger pull-left">
+                                            <button ng-disabled="newValues.length<2" ng-click="addNewValueLine(false)"
+                                                type="button" class="btn btn-danger pull-left">
                                                 <i class="fa-times"></i>
                                             </button>
-                                            <button ng-click="addNewValueLine(true)" type="button" class="btn btn-primary pull-right">
+                                            <button ng-click="addNewValueLine(true)" type="button"
+                                                class="btn btn-primary pull-right">
                                                 <i class="mbri-plus"></i>
                                             </button>
                                         </div>

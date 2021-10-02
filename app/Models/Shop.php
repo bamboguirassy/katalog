@@ -25,7 +25,8 @@ class Shop extends Model
         'adresse',
         'email',
         'user_id',
-        'enabled'
+        'enabled',
+        'couleur'
     ];
 
     /**
