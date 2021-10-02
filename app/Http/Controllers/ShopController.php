@@ -145,6 +145,12 @@ class ShopController extends Controller
             $shop->user->email = $request->get('email');
             $shop->user->update();
         }
+        /** vérifier si le nom a changé et mettre à jour le user name */
+        if($shop->nom!=$request->get('nom')) {
+            /** mettre à jour le user name */
+            $shop->user->name = $request->get('nom');
+            $shop->user->update();
+        }
         $shop->update($request->all());
         DB::commit();
     } catch(Exception $e) {
