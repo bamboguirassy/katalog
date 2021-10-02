@@ -35,7 +35,7 @@
                         @foreach ($shops as $shopItem)
                         <tr>
                             <td scope="row">{{$loop->index+1}}</td>
-                            <td>
+                            <td style="white-space: nowrap">
                                 <a target="_blank" href="{{ route('shop.home',['shop'=>$shopItem]) }}">
                                     {{$shopItem->nom}}
                                 </a>

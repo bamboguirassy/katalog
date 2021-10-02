@@ -32,11 +32,11 @@
                         @foreach ($users as $user)
                         <tr>
                             <td scope="row">{{$loop->index+1}}</td>
-                            <td>{{ $user->name }}</td>
+                            <td style="white-space: nowrap">{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->telephone }}</td>
                             <td>{{ $user->type }}</td>
-                            <td>{{ date_format($user->created_at,'d M Y') }}</td>
+                            <td>{{ date_format($user->created_at,'d/m/Y') }}</td>
                             <td>{{$user->paniers_count}}</td>
                             <td>{{$user->commandes_count}}</td>
                             <td>{{$user->commande_en_attentes_count}}</td>
