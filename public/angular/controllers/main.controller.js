@@ -14,7 +14,9 @@ app.controller('MainController', ($rootScope, $http) => {
 
     $rootScope.setCurrentShop = (shop) => {
         $rootScope.shop = shop;
-        $rootScope.colors.primary = shop.couleur;
+        if(shop!=null) {
+            $rootScope.colors.primary = shop.couleur;
+        }
         setTimeout(() => {
             if ($rootScope.user && $rootScope.user.type == 'client') {
                 $rootScope.getPanier();
