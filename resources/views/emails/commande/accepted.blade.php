@@ -3,7 +3,7 @@
 
 Bonjour **Moussa FOFANA**,  
 Vous avez passé la commande numéro __125856658__ dans notre boutique.  
-Elle vient d'être confirmée. 
+Elle vient d'être confirmée, elle est en cours de préparation.  
 | Détails commande  
 |  Produit | Image | Quantité |
 |---|---|---|
