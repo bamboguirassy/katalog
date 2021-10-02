@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CommandeAccepted;
 use App\Models\Commande;
 use App\Models\Shop;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class CommandeController extends Controller
 {
@@ -82,7 +86,21 @@ class CommandeController extends Controller
         $request->validate([
             'etat'=>'in:Acceptée,Rejetée,Livrée,Annulée'
         ]);
+        DB::beginTransaction();
+        try {
+            /** vérifier si l'état de la commande a changé */
+            if($request->get('etat')!=$commande->etat) {
+                /** vérifier si commande acceptée */
+                if($request->get('etat')=='Acceptée') {
+                    Mail::to($commande->user)->send(new CommandeAccepted($commande));
+                }
+            }
         $commande->update($request->only(['etat']));
+        DB::commit();
+        } catch(Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
         return back();
     }
 
