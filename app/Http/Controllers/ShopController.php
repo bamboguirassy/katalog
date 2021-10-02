@@ -128,14 +128,29 @@ class ShopController extends Controller
             'categorie_id'=>'exists:types,id',
             'telephonePrimaire'=>'required|min:9',
             'description'=>'required',
-            'couleur'=>'required|min:7'
+            'couleur'=>'required|min:7',
+            'email'=>'required|email'
         ]);
+        DB::beginTransaction();
+        try {
         // verifier si le nouveau pseudo n'est pas utilisé
         $shopVerif = Shop::where('pseudonyme',$request->get('pseudonyme'))->where('id','!=',$shop->id)->get();
         if(count($shopVerif)>0) {
             return back()->withErrors(['error'=>"Ce pseudonyme est déja utilisé par une autre boutique..."]);
         }
+        /** Vérifier si le mail n'a pas changé */
+        if($shop->email!=$request->get('email')) {
+            /** vérifier si le nouveau mail n'est pas usé par une boutique  */
+            Validator::validate($request->only('email'),['email'=>'unique:shops,email|unique:users,email']);
+            $shop->user->email = $request->get('email');
+            $shop->user->update();
+        }
         $shop->update($request->all());
+        DB::commit();
+    } catch(Exception $e) {
+        DB::rollBack();
+        throw $e;
+    }
         return redirect()->route('shop.details',compact('shop'));
     }
 

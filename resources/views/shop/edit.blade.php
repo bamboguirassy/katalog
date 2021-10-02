@@ -45,6 +45,12 @@
                                 type="text" name="nom" placeholder="Nom de la boutique" data-form-field="nom"
                                 class="form-control display-7" required="required" id="nom-formbuilder-q">
                         </div>
+                        <div data-for="email" class="col-lg-12 col-md-12 col-sm-12 form-group">
+                            <label for="email-formbuilder-q"
+                                class="form-control-label mbr-fonts-style display-7">Email</label>
+                            <input value="{{old('email') ?? $shop->email}}" type="email" name="email" placeholder="Email" data-form-field="email"
+                                required="required" class="form-control display-7" value="" id="email-formbuilder-q">
+                        </div>
                         <div data-for="pseudonyme" class="col-lg-12 col-md-12 col-sm-12 form-group">
                             <label for="pseudonyme-formbuilder-q"
                                 class="form-control-label mbr-fonts-style display-7">Pseudonyme (Ceci est l'identifiant
