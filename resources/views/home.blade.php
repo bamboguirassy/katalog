@@ -12,7 +12,7 @@ Ouvrez dès aujourd'hui petite boutique de vente en ligne et commencer à avoir 
     <div class="col-12">
         <section data-bs-version="5.1" class="header2 cid-sIq8h1uDBV" id="header02-d">
             <div class="container">
-                <div class="row justify-content-center pt-1 card-primary">
+                <div class="row justify-content-center pt-1">
                     <div class="col-12 md-pb col-md-12 col-lg-6">
                         <div class="text-wrapper align-left">
                             <br>
