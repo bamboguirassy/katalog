@@ -115,15 +115,37 @@
                                                             <tr>
                                                                 <th>Nom</th>
                                                                 <th>Valeur</th>
+                                                                <th>Action</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr ng-repeat="valeur in attribut.valeurs">
-                                                                <td scope="row">@{{valeur.nom}}</td>
-                                                                <td>@{{ valeur.valeur }}
-                                                                    <div ng-if="attribut.type=='couleur'"
-                                                                        style="width: 50px; height: 10px; background-color: @{{valeur.valeur}}">
-                                                                    </div>
+                                                            <tr ng-repeat="valeur in attribut.valeurs" ng-init="valeur.edit=false">
+                                                                <td scope="row">
+                                                                    <span ng-if="!valeur.edit">@{{valeur.nom}}</span>
+                                                                    <input ng-if="valeur.edit" ng-model="valeur.nom" type="text">
+                                                                </td>
+                                                                <td>
+                                                                    <input ng-if="valeur.edit" ng-model="valeur.valeur" type="text">
+                                                                    <ng-container ng-if="!valeur.edit">
+                                                                        <span>@{{ valeur.valeur }}</span>
+                                                                        <div ng-if="attribut.type=='couleur'"
+                                                                            style="width: 50px; height: 10px; background-color: @{{valeur.valeur}}">
+                                                                        </div>
+                                                                    </ng-container>
+                                                                </td>
+                                                                <td>
+                                                                    <button ng-if="!valeur.edit" ng-click="removeValue(valeur)" type="button" class="text-danger">
+                                                                        <span class="fa fa-2x fa-trash"></span>
+                                                                    </button>
+                                                                    <button ng-click="valeur.edit=true" ng-if="!valeur.edit" type="button" class="text-warning">
+                                                                        <span class="fa fa-2x fa-edit"></span>
+                                                                    </button>
+                                                                    <button ng-click="valeur.edit=false" ng-if="valeur.edit" type="button" class="text-black">
+                                                                        <span class="fa fa-2x fa-times"></span>
+                                                                    </button>
+                                                                    <button ng-click="updateValue(valeur)" ng-if="valeur.edit" type="button" class="text-primary">
+                                                                        <span class="fa fa-2x fa-save"></span>
+                                                                    </button>
                                                                 </td>
                                                             </tr>
                                                         </tbody>
@@ -175,10 +197,17 @@
                                                 class="form-control-label mbr-fonts-style display-7">Ajouter des
                                                 valeurs</label>
                                         </div>
-                                        <div class="col-12" ng-repeat="newValue in newValues">
-                                            <input ng-model="newValue.valeur" type="text" name="valeur@{{$index+1}}"
-                                                placeholder="Valeur @{{$index+1}}" required="required"
-                                                class="form-control display-7" id="valeur-mbr-popup-44@{{$index}}">
+                                        <div class="row" ng-repeat="newValue in newValues">
+                                            <div class="col-6">
+                                                <input ng-model="newValue.nom" type="text" name="nom@{{$index+1}}"
+                                                    placeholder="Nom @{{$index+1}}" required="required"
+                                                    class="form-control display-7" id="nom-mbr-popup-44@{{$index}}">
+                                            </div>
+                                            <div class="col-6">
+                                                <input ng-model="newValue.valeur" type="text" name="valeur@{{$index+1}}"
+                                                    placeholder="Valeur @{{$index+1}}" required="required"
+                                                    class="form-control display-7" id="valeur-mbr-popup-44@{{$index}}">
+                                            </div>
                                             <hr>
                                         </div>
                                         <div class="col-12">

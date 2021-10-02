@@ -278,7 +278,7 @@ Route::group([
 
 
             Route::resource('valeurattribut', ValeurAttributController::class,[
-                'only'=>['store','update','delete']
+                'only'=>['store','update','destroy']
             ]);
            
             Route::post('attributproduit/{attributProduit}/add-valeurs','App\Http\Controllers\AttributProduitController@addValeursToAttribut')

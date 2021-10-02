@@ -16,7 +16,7 @@ app.factory('AttributService',($http, $rootScope)=>{
             return $http.post(`/${$rootScope.shop.pseudonyme}/valeurattribut`,valeurAttributs);
         },
         updateValeur: (valeurAttribut) => {
-            return $http.put(`/${$rootScope.shop.pseudonyme}/valeurattribut/${valeurAttribut.id}`);
+            return $http.put(`/${$rootScope.shop.pseudonyme}/valeurattribut/${valeurAttribut.id}`,valeurAttribut);
         },
         removeValeur: (valeurAttribut) => {
             return $http.delete(`/${$rootScope.shop.pseudonyme}/valeurattribut/${valeurAttribut.id}`)

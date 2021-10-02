@@ -41,13 +41,13 @@ class ValeurAttributController extends Controller
             'attribut_id'=>'required|exists:attributs,id'
         ]);
         $valeurAttributs = [];
-        foreach ($request->get('valeurs') as $value) {
+        foreach ($request->get('valeurs') as $valeur) {
             $valeurAttribut = new ValeurAttribut();
             $valeurAttribut->attribut_id = $request->get('attribut_id');
-            $valeurAttribut->valeur = $value;
-            $valeurAttribut->nom = $value;
+            $valeurAttribut->valeur = $valeur['valeur'];
+            $valeurAttribut->nom = $valeur['nom'];
             if(!$valeurAttribut->save()) {
-                return ['error'=>true,'message'=>"Erreur lors de l'enregistrement de la valeur ".$value];
+                return ['error'=>true,'message'=>"Erreur lors de l'enregistrement de la valeur ".$valeur['nom']];
             }
             $valeurAttributs[] = $valeurAttribut; 
         }
@@ -83,14 +83,14 @@ class ValeurAttributController extends Controller
      * @param  \App\Models\ValeurAttribut  $valeurAttribut
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Shop $shop, ValeurAttribut $valeurAttribut)
+    public function update(Request $request, Shop $shop, ValeurAttribut $valeurattribut)
     {
         $request->validate([
             'valeur'=>'required',
-            'attribut_id'=>'required|exists:attributs,id'
+            'nom'=>'required'
         ]);
-        if($valeurAttribut->update($request->all())) {
-            return ['error'=>false,'data'=>$valeurAttribut];
+        if($valeurattribut->update($request->all())) {
+            return ['error'=>false,'data'=>$valeurattribut];
         }
         return ['error'=>true, 'message'=>"Une erreur est survenue pendant la mise à jour..."];
     }
@@ -101,9 +101,9 @@ class ValeurAttributController extends Controller
      * @param  \App\Models\ValeurAttribut  $valeurAttribut
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Shop $shop, ValeurAttribut $valeurAttribut)
+    public function destroy(Shop $shop, ValeurAttribut $valeurattribut)
     {
-        if($valeurAttribut->delete()) {
+        if($valeurattribut->delete()) {
             return ['error'=>false];
         }
         return ['error'=>true,'message'=>"Une erreur est survenue lors de la suppression de l'attribut"];
