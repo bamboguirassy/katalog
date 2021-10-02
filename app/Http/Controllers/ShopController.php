@@ -79,8 +79,8 @@ class ShopController extends Controller
             $user->save();
             $shop->user_id = $user->id;
             $shop->save();
-            DB::commit();
             Mail::to($shop->email)->cc('contact@bambogroup.net')->send(new ShopCreated($shop, $request->get('password')));
+            DB::commit();
         } catch(Exception $e) {
             DB::rollBack();
             throw $e;

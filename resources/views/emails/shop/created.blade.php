@@ -10,13 +10,17 @@ Merci de faire les opérations suivantes afin de commencer à profiter pleinemen
 4. Et partager la boutique sur les réseaux sociaux, avec vos amis et vos clients
 5. Commencer à recevoir vos commande
 
-Vos informations sont les suivantes : 
-- Lien d'accès à la boutique : [{{request()->getHttpHost().'/'.$shop->pseudonyme}}]({{request()->getHttpHost().'/'.$shop->pseudonyme}})
-- Email : **{{$shop->email}}**
-- Mot de passe *(à ne surtout pas partager)* : **{{ $password }}** 
-> Pour tout besoin, n'hesitez pas à nous contacter sur <contact@bammbogroup.net>
+Vos informations sont les suivantes :  
+- Lien d'accès à la boutique : [{{request()->getHttpHost().'/'.$shop->pseudonyme}}]({{request()->getHttpHost().'/'.$shop->pseudonyme}})  
+- Email : **{{$shop->email}}**  
+- Mot de passe *(à ne surtout pas partager)* : **{{ $password }}**  
+> Pour tout besoin, n'hesitez pas à nous contacter sur <contact@bammbogroup.net>  
+@component('mail::button', ['url' => route('shop.home',compact('shop'))])
+Accédez à la boutique
+@endcomponent
 
-Cordialement.
+Cordialement,  
+**{{ config('app.name') }}**
 
 ---
 **{{ config('app.name') }}** est un produit de [Bambo GROUP](https://bambogroup.net)
