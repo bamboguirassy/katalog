@@ -3,9 +3,9 @@ app.controller('MainController', ($rootScope, $http) => {
     $rootScope.shop = null;
     $rootScope.selectedProduct = null;
     $rootScope.panier = null;
-    $rootScope.colors = { 
+    $rootScope.colors = {
         primary: '#1c73ba',
-        color : 'white'
+        color: 'white'
     };
 
     $rootScope.setCurrentUser = (user) => {
@@ -14,9 +14,7 @@ app.controller('MainController', ($rootScope, $http) => {
 
     $rootScope.setCurrentShop = (shop) => {
         $rootScope.shop = shop;
-        if(shop!=null) {
-            $rootScope.colors.primary = shop.couleur;
-        }
+        $rootScope.colors.primary = shop.couleur;
         setTimeout(() => {
             if ($rootScope.user && $rootScope.user.type == 'client') {
                 $rootScope.getPanier();

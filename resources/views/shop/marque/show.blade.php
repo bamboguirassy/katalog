@@ -7,7 +7,7 @@
 @section('body')
 <div class="row">
     <div class="col-12">
-        <section data-bs-version="5.1" class="extHeader cid-sIpKoQ30mN card-primary" id="extHeader21-3">
+        <section data-bs-version="5.1" class="extHeader cid-sIpKoQ30mN" id="extHeader21-3">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1380px"
                 height="760px" viewBox="0 0  1380 760" preserveAspectRatio="xMidYMid meet">
                 <rect id="svgEditorBackground" x="0" y="0" width="1380" height="760" style="fill: none; stroke: none;">
