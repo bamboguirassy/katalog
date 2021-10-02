@@ -257,7 +257,7 @@
     </div>
 </section>
 
-<section data-bs-version="5.1" class="gallery1 cid-sIpMwjCas3" id="gallery1-8">
+<section data-bs-version="5.1" class="gallery1 cid-sIpMwjCas3 card-primary" id="gallery1-8">
     <div class="container">
         <div class="row content-margin">
             @foreach ($produitSimilaires as $produit)
