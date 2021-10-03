@@ -1,5 +1,5 @@
 @component('mail::message')
-[![Logo Bambo GROUP](https://katalog.bambogroup.net/assets/images/bambogroup-50x50.jpg "Logo Bambo GROUP")](https://katalog.bambogroup.net/assets/images/bambogroup.jpg)
+[![Logo Bambo GROUP](https://katalog.bambogroup.net/assets/images/bambogroup-50x50.jpg "Logo Bambo GROUP")](https://katalog.bambogroup.net/assets/images/katalog.png)
 ___
 Bonjour **{{$facture->user->name}}**  
 Ceci est un mail de confirmation pour vous informer que la facture **{{$facture->titre}}** est réglée avec succès.  

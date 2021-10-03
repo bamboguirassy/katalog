@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image:src" content="{{ asset('assets/images/bambogroup.jpg') }}">
-    <meta property="og:image" content="{{ asset('assets/images/bambogroup.jpg') }}">
+    <meta name="twitter:image:src" content="{{ asset('assets/images/katalog.png') }}">
+    <meta property="og:image" content="{{ asset('assets/images/katalog.png') }}">
     <meta name="twitter:title" content="@yield('twitter-title',config('app.name'))">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     @isset($shop)
@@ -139,7 +139,7 @@
                             @endisset
                         </a>
                         @else
-                        <img src="{{ asset('assets/images/bambogroup.jpg') }}" alt="Logo {{config('app.name')}}">
+                        <img src="{{ asset('assets/images/katalog.png') }}" alt="Logo {{config('app.name')}}">
                         @endisset
                     </span>
                     <span class="navbar-caption-wrap">

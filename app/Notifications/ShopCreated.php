@@ -72,7 +72,7 @@ class ShopCreated extends Notification
     {
         return (new SlackMessage)
         ->from('Katalog', ':ghost:')
-        ->image('https://katalog.bambogroup.net/assets/images/bambogroup.jpg')
+        ->image('https://katalog.bambogroup.net/assets/images/katalog.png')
         ->to('#notifications')
                     ->content("Une nouvelle boutique vient d'être créée. Nom: {$this->shop->nom}, Pseudo : {$this->shop->pseudonyme} ");
     }
