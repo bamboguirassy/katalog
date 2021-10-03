@@ -14,7 +14,7 @@
                 <h1 class="mbr-section-title mbr-bold pb-1 mbr-fonts-style display-1">
                     Créez votre boutique !</h1>
                 <p class="mbr-text pb-2 mbr-fonts-style display-7">
-                    Et essayez <b>{{ config('app.name') }}</b> gratuitement pendant 1 mois...</p>
+                    Et essayez <b>{{ config('app.name') }}</b> gratuitement pendant 2 mois...</p>
             </div>
         </div>
     </div>
