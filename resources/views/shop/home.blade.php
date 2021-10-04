@@ -51,7 +51,7 @@
                         <div class="card-wrapper">
                             <div class="card-box align-left" style="font-size: 23px;">
                                 <a style="color: black;"
-                                    href=""><strong> >>
+                                    href="{{ route('shop.produit.nouveaute',compact('shop')) }}"><strong> >>
                                         Ajoutés récemment </strong></a>
                             </div>
                         </div>
