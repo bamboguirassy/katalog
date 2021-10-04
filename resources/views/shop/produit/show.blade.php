@@ -70,7 +70,7 @@
                             <div class="col-lg-12">
                                 @foreach ($produit->categorieProduits as $categorieProd)
                                 <span style="font-size: 22px;"><a
-                                        href="{{ route('shop.categorie.show',['categorie'=>$categorieProd,'shop'=>$shop]) }}">{{$categorieProd->categorie->nom}}</a>
+                                        href="{{ route('shop.categorie.show',['categorie'=>$categorieProd->categorie,'shop'=>$shop]) }}">{{$categorieProd->categorie->nom}}</a>
                                     >></span>
                                 @endforeach
                                 <p class="m-0 p-0 mt-3">@{{ produit.nom }}</p>

@@ -191,7 +191,8 @@ class ProduitController extends Controller
             'quantite'=>'integer',
             'visible'=>'required',
             'inPromo'=>'boolean|required',
-            'prixPromo'=>'numeric|min:1|required_if:inPromo,true'
+            'prixPromo'=>'numeric|min:1|required_if:inPromo,true',
+            'categorie_id'=>'required|exists:categories,id'
         ]);
         if($request->get('inPromo')) {
             if($request->get('prixPromo')>=$request->get('prixUnitaire')) {
@@ -202,7 +203,35 @@ class ProduitController extends Controller
 
         $data = $request->all();
         $data['visible']=($request->get('visible')=='Oui');
-        $produit->update($data);
+        DB::beginTransaction();
+        try {
+            /** Vérifier si la categorie a change */
+            if($produit->categorie_id!=$request->get('categorie_id')) {
+                /** Supprimer les anciennes associations de catégories du produit */
+                $categorieProduits = CategorieProduit::where('produit_id',$produit->id)->get();
+                foreach ($categorieProduits as $categorieProduit) {
+                    $categorieProduit->delete();
+                }
+                /** associer aux nouvelles catégories */
+                $categorie = Categorie::find($request->get('categorie_id'));
+                $catProd = new CategorieProduit();
+                $catProd->produit_id = $produit->id;
+                $catProd->categorie_id = $categorie->id;
+                $catProd->save();
+                while ($categorie->categorie_id!=null) {
+                    $categorie = Categorie::find($categorie->categorie_id);
+                    $catProd = new CategorieProduit();
+                    $catProd->produit_id = $produit->id;
+                    $catProd->categorie_id = $categorie->id;
+                    $catProd->save();
+                }
+            }
+            $produit->update($data);
+            DB::commit();
+        } catch(Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
         return redirect()->route('shop.catalogue',compact('shop'));
     }
 

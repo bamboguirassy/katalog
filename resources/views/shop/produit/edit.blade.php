@@ -44,7 +44,7 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 form-group" data-for="category">
                                 <label for="category-formbuilder-14"
                                     class="form-control-label mbr-fonts-style display-7">Catégorie de produit</label>
-                                <select disabled value="{{ old('categorie_id') ?? $produit->categorie_id }}}"
+                                <select value="{{ old('categorie_id') ?? $produit->categorie_id }}}"
                                     name="categorie_id" data-form-field="category" class="form-control display-7"
                                     id="category-formbuilder-14">
                                     @foreach ($categories as $categorie)
@@ -59,7 +59,7 @@
                                 <select value="{{ old('marque_id') ?? $produit->marque_id }}}"
                                     name="marque_id" data-form-field="marque" class="form-control display-7"
                                     id="marque-formbuilder-14">
-                                    <option value="" disabled>Selectionner la marque (optionnel)</option>
+                                    <option value="">Selectionner la marque (optionnel)</option>
                                     @foreach ($marques as $marque)
                                     <option @if($marque->id==$produit->marque_id) selected="selected" @endif
                                         value="{{$marque->id}}">{{ $marque->nom }}</option>
