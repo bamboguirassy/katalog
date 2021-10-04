@@ -153,7 +153,7 @@ Route::group([
                // il y'a 3 jours
                $date = new DateTime();
                $date->modify("-3 days");
-               $nouveauProduits = Produit::where('created_at','>=',$date)
+               $nouveauProduits = Produit::where('shop_id',$shop->id)->where('created_at','>=',$date)
                ->orderBy('created_at','desc')
                ->take(6)
                ->get();
