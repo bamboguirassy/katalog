@@ -180,7 +180,7 @@ Route::group([
            })->name('home');
 
            Route::get('nouveaute-produit',function(Shop $shop) {
-               $produits = Produit::where('created_at','>=',(new DateTime())->modify('-3 days'))
+               $produits = Produit::where('shop_id',$shop->id)->where('created_at','>=',(new DateTime())->modify('-3 days'))
                ->paginate(18);
                // find user panier if exists
                $paProduits = [];
