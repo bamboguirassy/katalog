@@ -42,6 +42,40 @@
         </section>
         <!-- start main categories products list -->
         @if ($produits->currentPage()==1)
+        <!-- Ajout recent -->
+        @if (count($nouveauProduits)>0)
+        <section data-bs-version="5.1" class="info3 cid-sIvpc3K9D7" id="info3-1o">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="card col-12">
+                        <div class="card-wrapper">
+                            <div class="card-box align-left" style="font-size: 23px;">
+                                <a style="color: black;"
+                                    href=""><strong> >>
+                                        Ajoutés récemment </strong></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section data-bs-version="5.1" class="gallery1 cid-sIpMwjCas3 card-primary" id="gallery1-8">
+            <div class="container">
+                <div class="row content-margin">
+                    @foreach ($nouveauProduits as $produit)
+                    <x-produit-item :produit="$produit" :paProduits="$paProduits" :shop="$shop" />
+                    @endforeach
+                </div>
+                <div class="row">
+                    <div class="col-12 align-right">
+                        <a href="{{ route('shop.produit.nouveaute',compact('shop')) }}"
+                            class="btn btn-secondary">Voir plus > </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        @endif
+        <!-- Fin jout recent -->
         @foreach ($categories as $categorie)
         @if ($categorie->produits_count>2)
         <section data-bs-version="5.1" class="info3 cid-sIvpc3K9D7" id="info3-1o">

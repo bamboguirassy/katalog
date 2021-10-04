@@ -148,6 +148,39 @@ Route::group([
                $produits = Produit::where('shop_id',$shop->id)
                ->where('visible',true)
                ->where('quantite','>',0)
+               ->inRandomOrder()
+               ->paginate(18);
+               // il y'a 3 jours
+               $date = new DateTime();
+               $date->modify("-3 days");
+               $nouveauProduits = Produit::where('created_at','>=',$date)
+               ->orderBy('created_at','desc')
+               ->take(6)
+               ->get();
+               // find user panier if exists
+               $paProduits = [];
+               if(Auth::user()) {
+                   $panier = Panier::where('user_id',Auth::user()->id)
+                    ->where('shop_id',$shop->id)
+                    ->with('produits')
+                    ->first();
+                    $paproduits = [];
+                    if(isset($panier)) {
+                        $paproduits = Paproduit::where('panier_id',$panier->id)
+                        ->get();
+                    }
+                    if(count($paproduits)>0) {
+                        foreach($paproduits as $paproduit) {
+                            $paProduits[] = $paproduit->produit_id;
+                        }
+                    }
+               }
+               return view('shop.home',compact('shop', 'produits','categories',
+               'paProduits','nouveauProduits'));
+           })->name('home');
+
+           Route::get('nouveaute-produit',function(Shop $shop) {
+               $produits = Produit::where('created_at','>=',(new DateTime())->modify('-3 days'))
                ->paginate(18);
                // find user panier if exists
                $paProduits = [];
@@ -167,8 +200,8 @@ Route::group([
                         }
                     }
                }
-               return view('shop.home',compact('shop', 'produits','categories','paProduits'));
-           })->name('home');
+               return view('shop.produit.nouveaute',compact('shop','produits','paProduits'));
+           })->name('produit.nouveaute');
 
            Route::post('/update-shop-photo','App\Http\Controllers\ShopController@uploadLogo')
            ->name('update.shop.logo')->middleware('is.owner');
