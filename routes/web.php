@@ -144,7 +144,8 @@ Route::group([
     // Tenant routes here
        Route::name('shop.')->group(function() {
            Route::get('/',function(Shop $shop) {
-               $categories = Categorie::where('shop_id',$shop->id)->where('categorie_id',null)->has('produits')->withCount('produits')->orderby('nom')->get();
+               return redirect()->away("https://{$shop->pseudonyme}.senjaba.com");
+               /*$categories = Categorie::where('shop_id',$shop->id)->where('categorie_id',null)->has('produits')->withCount('produits')->orderby('nom')->get();
                $produits = Produit::where('shop_id',$shop->id)
                ->where('visible',true)
                ->where('quantite','>',0)
@@ -176,7 +177,7 @@ Route::group([
                     }
                }
                return view('shop.home',compact('shop', 'produits','categories',
-               'paProduits','nouveauProduits'));
+               'paProduits','nouveauProduits'));*/
            })->name('home');
 
            Route::get('nouveaute-produit',function(Shop $shop) {
